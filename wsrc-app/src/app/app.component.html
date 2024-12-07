@@ -1,0 +1,42 @@
+<main>
+  <!-- Nav Bar -->
+  <div class="bg-cBlack h-36">
+    <div class="flex items-center justify-center h-full space-x-96">
+      <!--Logo/Socials-->
+      <div class="p-2">
+        <div class="mb-2">
+          <p class="text-cWhite text-3xl">WSRC</p>
+        </div>
+        <div class="flex space-x-4">
+          <img src="instagram-white-icon.png" alt="Instagram" class="h-6 w-6">
+          <img src="twitch-white-icon.png" alt="Twitch" class="h-6 w-6">
+          <img src="youtube-app-white-icon.png" alt="Youtube" class="h-6 w-6">
+        </div>
+      </div>
+      <!-- Links -->
+      <div class="flex space-x-6">
+        <a routerLink="/" class="text-cWhite text-xl">Home</a>
+        <a routerLink="/races" class="text-cWhite text-xl">Go Racing</a>
+        <a routerLink="/races" class="text-cWhite text-xl">Race Results</a>
+        <a routerLink="/races" class="text-cWhite text-xl">About Us</a>
+      </div>
+      <!-- User Icons -->
+      <div class="flex space-x6">
+        <span class="material-icons text-cWhite">notifications</span>
+        <div class="flex items-center bg-cWhite text-cBlack rounded-md px-3 py-1">
+          <span class="material-icons mr-1">attach_money</span>
+          <span>$0.00</span>
+        </div>
+        <div class="flex items-center justify-center bg-Black text-cWhite rounded-full h-8 w-8">
+          <span class="material-icons">person</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Page Content -->
+  <router-outlet></router-outlet>
+  <!-- Footer -->
+   <div class="bg-cBlack">
+      <p class="text-cWhite">Footer Content</p>
+   </div>
+</main>

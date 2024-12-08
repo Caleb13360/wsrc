@@ -4,27 +4,36 @@
         <div class="flex items-center justify-center h-full bg-black bg-opacity-15">
           <div  class="py-28 px-40 space-y-6">
             <span>Race begins in</span>
-            <div class="space-x-2">
+            <div class="flex items-center space-x-2">
                 <!-- Days -->
-                <div>
+                <div class="flex flex-col items-center">
                     <span>12</span>
                     <span>Days</span>
                 </div>
-                <span>:</span>
+                <div class="flex flex-col items-center">
+                    <span>:</span>
+                    <span>.</span>
+                </div>
                 <!-- Hours -->
-                <div>
+                <div class="flex flex-col items-center">
                     <span>10</span>
                     <span>Hours</span>
                 </div>
-                <span>:</span>
+                <div class="flex flex-col items-center">
+                    <span>:</span>
+                    <span>.</span>
+                </div>
                 <!-- Minutes -->
-                <div>
+                <div class="flex flex-col items-center">
                     <span>23</span>
                     <span>Minutes</span>
                 </div>
-                <span>:</span>
+                <div class="flex flex-col items-center">
+                    <span>:</span>
+                    <span>.</span>
+                </div>
                 <!-- Seconds -->
-                <div>
+                <div class="flex flex-col items-center">
                     <span>34</span>
                     <span>Seconds</span>
                 </div>
@@ -32,19 +41,56 @@
           </div>
         </div>
       </div>
-</div>>
+</div>
 <!-- Race Details -->
-<div></div>>
+<div></div>
 <!-- Average Times -->
-<div class="p-6 w-full">
-    <div>
+<div class="p-6 w-full flex space-x-4">
+    <div class="flex flex-col items-center">
         <span>Average Lap Time of Last Race in Same Conditions</span>
         <span>1:33.791</span>
     </div>
-    <div>
+    <div class="flex flex-col items-center">
         <span>Fastest Lap Time of Last Race in Same Conditions</span>
-        <span></span>
+        <span>1:29.520</span>
     </div>
-</div>>
+</div>
 <!-- Participants -->
-<div></div>>
+<div class="p-6 w-full">
+    <!-- Header and Sub-header -->
+    <div class="flex justify-between items-center mb-4">
+        <div>
+            <h1 class="text-2xl font-bold">Race Details</h1>
+            <h2 class="text-xl">Sub Header</h2>
+        </div>
+        <div class="text-lg">
+            18/20 Racers
+        </div>
+    </div>
+    
+    <!-- Table -->
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white">
+            <thead>
+                <tr>
+                    <th class="py-2 px-4 border-b text-center">No.</th>
+                    <th class="py-2 px-4 border-b text-center">Racer</th>
+                    <th class="py-2 px-4 border-b text-center">Country</th>
+                    <th class="py-2 px-4 border-b text-center">Last Competed</th>
+                    <th class="py-2 px-4 border-b text-center">Profile</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let racer of racers; let i = index">
+                    <td class="py-2 px-4 border-b text-center">{{ i + 1 }}</td>
+                    <td class="py-2 px-4 border-b text-center">{{ racer.name }}</td>
+                    <td class="py-2 px-4 border-b text-center">{{ racer.country }}</td>
+                    <td class="py-2 px-4 border-b text-center">{{ racer.lastCompeted }}</td>
+                    <td class="py-2 px-4 border-b text-center">
+                        <button class="bg-blue-500 text-white px-2 py-1 rounded">View Profile</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

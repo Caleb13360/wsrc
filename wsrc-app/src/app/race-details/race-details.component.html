@@ -42,8 +42,79 @@
         </div>
       </div>
 </div>
+<!-- Race Name -->
+<div class="flex justify-between items-center p-4">
+    <div>
+        <span>Race Name</span>
+    </div>
+    <div>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded">Enter</button>
+    </div>
+</div>
 <!-- Race Details -->
-<div></div>
+<div class="flex justify-between px-8">
+    <!-- Track -->
+    <div class="w-1/2 mr-4">
+        <div class="mb-4">
+            <img src="path/to/your/image.jpg" alt="Tracj Image" class="w-full h-auto">
+            <h2 class="text-xl mt-2">Track Name</h2>
+        </div>
+        
+        <!-- Weather -->
+        <div class="flex justify-between mb-4">
+            <!-- First Column: Temperature -->
+            <div class="flex flex-col items-start">
+                <span class="font-bold">Temperature</span>
+                <span>25°C</span>
+            </div>
+            <!-- Second Column: Weather Descriptors -->
+            <div class="flex flex-col items-start">
+                <span class="font-bold">Cloud Cover</span>
+                <span class="font-bold">Chance of Rain</span>
+                <span class="font-bold">Humidity</span>
+                <span class="font-bold">Wind</span>
+            </div>
+            <div class="flex flex-col items-start">
+                <span>50%</span>
+                <span>20%</span>
+                <span>60%</span>
+                <span>15 km/h</span>
+            </div>
+        </div>
+        <!-- Race Setup -->
+        <div>
+            <!-- Icons -->
+            <div class="flex justify-between mb-4">
+                <div class="flex items-center">
+                    <mat-icon>access_time</mat-icon>
+                    <span class="ml-2">20 min race</span>
+                </div>
+                <div class="flex items-center">
+                    <mat-icon>play_arrow</mat-icon>
+                    <span class="ml-2">2 quali lap</span>
+                </div>
+                <div class="flex items-center">
+                    <mat-icon>lock</mat-icon>
+                    <span class="ml-2">Fixed setup</span>
+                </div>
+                <div class="flex items-center">
+                    <mat-icon>attach_money</mat-icon>
+                    <span class="ml-2">Prizes for P1-P3</span>
+                </div>
+            </div>
+            <!-- Race Information -->
+            <div class="flex flex-col items-start">
+                <span class="font-bold">Race Name: Grand Prix</span>
+                <span class="font-bold">Track: Silverstone</span>
+                <span class="font-bold">Car: Ferrari</span>
+            </div>
+        </div>
+    </div>
+    <!-- Prize Pool -->
+    <div class="w-1/2 ml-4">
+        <span>Copy from other place, we should probably make this a reusable component</span>
+    </div>
+</div>
 <!-- Average Times -->
 <div class="p-6 w-full flex space-x-4">
     <div class="flex flex-col items-center">
@@ -67,7 +138,7 @@
             18/20 Racers
         </div>
     </div>
-    
+
     <!-- Table -->
     <div class="overflow-x-auto">
         <table class="min-w-full bg-white">

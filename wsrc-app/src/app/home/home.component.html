@@ -1,30 +1,32 @@
 <div>
     <!-- Landing Page Banner -->
-  <div class="w-full bg-cover bg-center" style="background-image: url('LandingPageBanner.jpg');">
-    <div class="flex items-start justify-start h-full bg-black bg-opacity-10">
-      <div  class="p-40 space-y-6">
-        <h1 class="text-cWhite text-6xl mb-4 font-bold">
+  <div class="w-full bg-cover bg-center " style="background-image: url('LandingPageBanner.jpg');">
+    <div class="flex items-start justify-start h-full bg-black bg-opacity-15">
+      <div  class="py-28 px-40 space-y-6">
+        <h1 class="text-cWhite text-6xl mb-4 font-roboto-condensed font-bold tracking-tighter">
             Welcome to the
             <br>
             World Sim Racing Competition
         </h1>
-        <h2 class="text-cWhite text-2xl mb-4">
-            The only iRacing competition where racers copete for money weekly :
+        <h2 class="text-cWhite text-2xl mb-4 font-roboto-condensed tracking-tighter">
+            The only iRacing competition where racers compete for money weekly:
             <br>
             No team needed, no minimum skill barrier to enter. Simply race, and
             <br>
             if you're fast enough, you'll win cash prizes!
         </h2>
-        <button class="bg-cBlue text-cWhite text-3xl py-5 px-14 rounded-lg font-bold">Start racing now!</button>
+        <button
+          class="bg-cBlue text-cWhite text-2xl py-3.5 px-10 rounded-md font-bold font-roboto hover:bg-cWhite hover:text-cBlack transition-all duration-300 ease-linear hover:rounded-xl">Start
+          racing now!</button>
       </div>
     </div>
   </div>
     <!-- Upcoming Races -->
     <div class="bg-cDarkBlue">
         <!-- Title -->
-         <div>
-            <p class="text-cWhite">Upcoming WSRC Races</p>
-            <p class="text-cWhite">The next 4 races are shown below.</p>
+         <div class="py-10 px-40 space-y-2">
+            <p class="text-cWhite text-5xl mb-4 font-roboto-condensed font-bold tracking-tighter">Upcoming WSRC Races</p>
+            <p class="text-cWhite text-2xl mb-4 font-roboto-condensed tracking-tighter">The next 4 races are shown below.</p>
          </div>
         <!-- Race Cards -->
         <div class="flex justify-center space-x-12">
@@ -38,69 +40,91 @@
          </div>
     </div>
     <!-- Total Won -->
-    <div class="bg-cGreen w-full h-72 flex items-center justify-center">
+    <div class="bg-cGreen w-full h-78 flex items-center justify-center">
       <div class="flex flex-col justify-center items-center ">
-        <div class="text-10xl font-bold">$102,122</div>
-        <div class="text-3xl mb-8">Total Cash Prizes Won By Racers</div>
+        <div class="text-10xl font-bold font-roboto-condensed tracking-tighter">$102,122</div>
+        <div class="text-2xl mb-8 font-roboto tracking-tighter">Total Cash Prizes Won By Racers</div>
       </div>
     </div>
     <!-- Cash Prizes -->
     <div class="bg-cDarkBlue flex">
         <!-- Left Side -->
-        <div class="w-1/2 flex flex-col justify-center items-center p-8">
-          <h1 class="text-cWhite text-4xl mb-2">Heading</h1>
-          <h2 class="text-cWhite text-2xl">Subheading</h2>
+        <div class="w-1/2 flex flex-col justify-center items-left pl-48 pr-20">
+          <h1 class="text-cWhite text-6xl mb-6 font-roboto-condensed tracking-tighter font-bold ">Cash prizes for winners</h1>
+          <h2 class="text-cWhite text-2xl mb-4 font-roboto-condensed tracking-tighter">
+            Our weekly races offer payouts to the top finishers, rewarding your speed and skill. Whether you're aiming for first
+            place or just striving to make the top 6, every race is an opportunity to earn. 
+            <br>
+            
+            With prize amounts scaled to the number
+            of participants, racing has never been more rewarding. Join now and put your talent to the test!
+          </h2>
         </div>
         <!-- Right Side -->
-        <div class="w-1/2 flex flex-col justify-center items-center p-8 space-y-4">
-          <div class="border border-cWhite w-full h-16 flex items-center justify-between px-4">
-            <span class="text-cWhite">1st</span>
-            <span class="text-cWhite mx-auto">$100 USD</span>
+        <div class="w-1/2 flex flex-col justify-center items-start p-10 space-y-4 pr-48 pl-40">
+          <div class="border border-cGreen bg-cGreen w-full h-16 flex items-center justify-between px-4 rounded-md ">
+            <span class="text-cDarkBlue font-roboto tracking-tighter">1st</span>
+            <span class="text-cDarkBlue mx-auto font-roboto tracking-tighter font-bold text-3xl">$100 USD</span>
           </div>
-          <div class="border border-cWhite w-full h-16 flex items-center justify-between px-4">
-            <span class="text-cWhite">2nd</span>
-            <span class="text-cWhite mx-auto">$75 USD</span>
+          <div
+            class="border border-cGreen w-full h-16 flex items-center justify-between px-4 rounded-md group hover:bg-cGreen transition-all duration-200 ease-linear">
+            <span
+              class="text-cGreen font-roboto tracking-tighter group-hover:text-cBlack">2nd</span>
+            <span
+              class="text-cGreen mx-auto font-roboto tracking-tighter font-bold text-3xl group-hover:text-cBlack ">$75
+              USD</span>
           </div>
-          <div class="border border-cWhite w-full h-16 flex items-center justify-between px-4">
-            <span class="text-cWhite">3rd</span>
-            <span class="text-cWhite mx-auto">$50 USD</span>
+          <div class="border border-cGreen w-full h-16 flex items-center justify-between px-4 rounded-md group hover:bg-cGreen transition-all duration-200 ease-linear">
+            <span class="text-cGreen font-roboto tracking-tighter group-hover:text-cBlack">3rd</span>
+            <span class="text-cGreen mx-auto font-roboto tracking-tighter font-bold text-3xl group-hover:text-cBlack">$50 USD</span>
           </div>
-          <div class="border border-cWhite w-full h-16 flex items-center justify-between px-4">
-            <span class="text-cWhite">4th</span>
-            <span class="text-cWhite mx-auto">$25 USD</span>
+          <div class="border border-cGrey w-full h-16 flex items-center justify-between px-4 rounded-md group hover:bg-cGrey transition-all duration-200 ease-linear">
+            <span class="text-cGrey font-roboto tracking-tighter group-hover:text-cBlack">4th</span>
+            <span class="text-cGrey mx-auto font-roboto tracking-tighter font-bold text-3xl group-hover:text-cBlack">$25 USD</span>
           </div>
-          <div class="border border-cWhite w-full h-16 flex items-center justify-between px-4">
-            <span class="text-cWhite">5th</span>
-            <span class="text-cWhite mx-auto">$10 USD</span>
+          <div class="border border-cGrey w-full h-16 flex items-center justify-between px-4 rounded-md group hover:bg-cGrey transition-all duration-200 ease-linear">
+            <span class="text-cGrey font-roboto tracking-tighter group-hover:text-cBlack">5th</span>
+            <span class="text-cGrey mx-auto font-roboto tracking-tighter font-bold text-3xl group-hover:text-cBlack">$10 USD</span>
           </div>
-          <div class="border border-cWhite w-full h-16 flex items-center justify-between px-4">
-            <span class="text-cWhite">6th</span>
-            <span class="text-cWhite mx-auto">$5 USD</span>
+          <div class="border border-cGrey w-full h-16 flex items-center justify-between px-4 rounded-md group hover:bg-cGrey transition-all duration-200 ease-linear">
+            <span class="text-cGrey font-roboto tracking-tighter group-hover:text-cBlack">6th</span>
+            <span class="text-cGrey mx-auto font-roboto tracking-tighter font-bold text-3xl group-hover:text-cBlack">$5 USD</span>
           </div>
-          <p class="text-cWhite mt-4">Small text underneath</p>
+          <p class="text-cWhite mt-4">If 20 racers are present in the race, the below prizes will be awarded, if less
+          racers are present it will scale accordingly.</p>
         </div>
       </div>
     <!-- Stream -->
-    <div class="bg-cDarkBlue">
-
+  <div class="bg-cDarkBlue flex justify-center pt-10 relative">
+    <img src="NotStreamingImageLT.jpg" alt="Not Streaming" class="w-full max-w-screen rounded-lg mx-10 px-10">
+  
+    <!-- Overlay -->
+    <div class="absolute top-0 left-0 w-full h-full bg-black opacity-50 rounded-xl"></div>
+  
+    <!-- Text -->
+    <div class="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-white gap-4">
+        <p class="text-cWhite text-8xl font-porscha pb-7">WSRC</p>
+      <p class="font-roboto-condensed font-bold text-7xl tracking-tighter">We aren't streaming right now.</p>
+      <p class="font-roboto-condensed tracking-tighter text-3xl text-center">Click here to check out our twitch channel <br>
+      and follow us</p>
     </div>
+    
+  </div>
     <!-- Sign up -->
     <div class="bg-cDarkBlue">
       <div class="flex justify-center">
         <div class="p-40 space-y-6 text-center">
-          <h1 class="text-cWhite text-6xl mb-4 font-bold">
+          <h1 class="text-cWhite text-6xl mb-6 font-roboto-condensed tracking-tighter font-bold">
             Sign-Up for Free and
             <br>
             Start Racing to Win Money!
           </h1>
-          <h2 class="text-cWhite text-2xl mb-4">
-            The only iRacing competition where racers compete for money weekly:
-            <br>
-            No team needed, no minimum skill barrier to enter. Simply race, and
-            <br>
-            if you're fast enough, you'll win cash prizes!
+          <h2 class="text-cWhite text-2xl mb-4 font-roboto-condensed tracking-tighter">
+          Sign up today and dive into the action. No team required, just your skills, the thrill of
+          <br>racing, 
+          and the chance to win cash prizes every week.
           </h2>
-          <button class="bg-cBlue text-cWhite text-3xl py-5 px-14 rounded-lg font-bold">Start racing now!</button>
+          <button class="bg-cBlue text-cWhite text-2xl py-3.5 px-10 rounded-md font-bold font-roboto hover:bg-cWhite hover:text-cBlack transition-all duration-300 ease-linear hover:rounded-xl">Start racing now!</button>
         </div>
       </div>
     </div>

@@ -12,8 +12,9 @@ module.exports = {
         cBlack: '#05050F',  // Dark Black
         cWhite: '#F2F2F3',   // Off White
         cBlue: '#006EFF', // Strong Blue
-        cGrey: '#F2F2F3',       // Grey
-      },
+        cGrey: '#B7B7B7',       // Grey
+        cHeaderGrey: '#C1CDC4'
+       },
       height: {
         '144': '32rem', // Custom height class
         '192': '48rem', // Custom height class
@@ -21,8 +22,16 @@ module.exports = {
       fontSize: {
         '10xl': '9rem', // Adjust the size as needed
       },
+       fontFamily: {
+        roboto: ['Roboto', 'sans-serif'],            // Default Roboto
+        'roboto-condensed': ['Roboto Condensed', 'sans-serif'], // Condensed version
+        porscha: ['porscha', 'sans-serif']
+      },
+     
     },
   },
-  plugins: [],
+  plugins: [
+   
+  ],
 }
 

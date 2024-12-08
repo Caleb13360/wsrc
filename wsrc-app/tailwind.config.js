@@ -13,7 +13,7 @@ module.exports = {
         cWhite: '#F2F2F3',   // Off White
         cBlue: '#006EFF', // Strong Blue
         cGrey: '#B7B7B7',       // Grey
-        cHeaderGrey: '#C1CDC4'
+        cDarkGrey: '#C1CDC4'
        },
       height: {
         '144': '32rem', // Custom height class

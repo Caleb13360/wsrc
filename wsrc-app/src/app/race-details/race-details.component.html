@@ -156,19 +156,19 @@
                 USD</span>
         </div>
         <div
-            class="border border-cGrey w-full h-16 flex items-center justify-between px-4 rounded-sm group hover:bg-cGrey transition-all duration-200 ease-linear">
+            class="border border-cBorderGrey w-full h-16 flex items-center justify-between px-4 rounded-sm group hover:bg-cGrey transition-all duration-200 ease-linear">
             <span class="text-cGrey font-roboto tracking-tighter group-hover:text-cBlack">4th</span>
             <span class="text-cGrey mx-auto font-roboto tracking-tighter font-bold text-3xl group-hover:text-cBlack">$25
                 USD</span>
         </div>
         <div
-            class="border border-cGrey w-full h-16 flex items-center justify-between px-4 rounded-sm group hover:bg-cGrey transition-all duration-200 ease-linear">
+            class="border border-cBorderGrey w-full h-16 flex items-center justify-between px-4 rounded-sm group hover:bg-cGrey transition-all duration-200 ease-linear">
             <span class="text-cGrey font-roboto tracking-tighter group-hover:text-cBlack">5th</span>
             <span class="text-cGrey mx-auto font-roboto tracking-tighter font-bold text-3xl group-hover:text-cBlack">$10
                 USD</span>
         </div>
         <div
-            class="border border-cGrey w-full h-16 flex items-center justify-between px-4 rounded-sm group hover:bg-cGrey transition-all duration-200 ease-linear">
+            class="border border-cBorderGrey w-full h-16 flex items-center justify-between px-4 rounded-sm group hover:bg-cGrey transition-all duration-200 ease-linear">
             <span class="text-cGrey font-roboto tracking-tighter group-hover:text-cBlack">6th</span>
             <span class="text-cGrey mx-auto font-roboto tracking-tighter font-bold text-3xl group-hover:text-cBlack">$5
                 USD</span>
@@ -195,38 +195,38 @@
 </div>
 
 <!-- Participants -->
-<div class="p-6 w-full">
+<div class="p-6 w-full ">
     <!-- Header and Sub-header -->
-    <div class="flex justify-between items-center mb-4">
+    <div class="flex justify-between items-center mb-6 mt-4 mx-52">
         <div>
-            <h1 class="text-2xl font-bold">Race Details</h1>
-            <h2 class="text-xl">Sub Header</h2>
+            <h1 class="text-5xl mb-2 font-roboto-condensed tracking-tighter font-bold ">Race Participants</h1>
+            <h2 class="text-cWhite text-2xl mb-4 font-roboto-condensed tracking-tighterl">All the racers who have registered are shown below</h2>
         </div>
-        <div class="text-lg">
+        <div class="text-2xl">
             18/20 Racers
         </div>
     </div>
 
     <!-- Table -->
-    <div class="overflow-x-auto">
-        <table class="min-w-full bg-cDarkBlue">
-            <thead>
+    <div class="mx-52">
+        <table class="min-w-full bg-cDarkBlue ">
+            <thead class="border border-cBorderGrey bg-cDarkBlue">
                 <tr>
-                    <th class="py-2 px-4 border-b text-center">No.</th>
-                    <th class="py-2 px-4 border-b text-center">Racer</th>
-                    <th class="py-2 px-4 border-b text-center">Country</th>
-                    <th class="py-2 px-4 border-b text-center">Last Competed</th>
-                    <th class="py-2 px-4 border-b text-center">Profile</th>
+                    <th class="py-2 px-4  text-center">No.</th>
+                    <th class="py-2 px-4 text-center">Racer</th>
+                    <th class="py-2 px-4  text-center">Country</th>
+                    <th class="py-2 px-4 text-center">Last Competed</th>
+                    <th class="py-2 px-4 text-center">Profile</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let racer of racers; let i = index">
-                    <td class="py-2 px-4 border-b text-center">{{ i + 1 }}</td>
-                    <td class="py-2 px-4 border-b text-center">{{ racer.name }}</td>
-                    <td class="py-2 px-4 border-b text-center">{{ racer.country }}</td>
-                    <td class="py-2 px-4 border-b text-center">{{ racer.lastCompeted }}</td>
-                    <td class="py-2 px-4 border-b text-center">
-                        <button class="bg-blue-500 text-white px-2 py-1 rounded">View Profile</button>
+                    <td class="py-2 px-4 text-center">{{ i + 1 }}</td>
+                    <td class="py-2 px-4 text-center">{{ racer.name }}</td>
+                    <td class="py-2 px-4 text-center">{{ racer.country }}</td>
+                    <td class="py-2 px-4  text-center">{{ racer.lastCompeted }}</td>
+                    <td class="py-2 text-center">
+                        <button class=" text-white font-bold px-8 py-1 rounded hover:bg-cBlue duration-100 transition-all ease-linear">View Profile</button>
                     </td>
                 </tr>
             </tbody>

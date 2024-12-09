@@ -4,6 +4,8 @@ import { RacesComponent } from './races/races.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { RaceResultsComponent } from './race-results/race-results.component';
 import { RaceDetailsComponent } from './race-details/race-details.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+
 
 export const routes: Routes = [
     {
@@ -22,6 +24,7 @@ export const routes: Routes = [
         title: 'About Us'
     },
     {
+
         path: 'results',
         component: RaceResultsComponent,
         title: 'Race Results'
@@ -30,5 +33,10 @@ export const routes: Routes = [
         path: 'details',
         component: RaceDetailsComponent,
         title: 'Race Details'
+    },
+    { 
+        path: 'profile',
+        component: UserProfileComponent,
+        title: 'Profile'
     }
 ];

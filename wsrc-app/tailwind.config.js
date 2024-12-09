@@ -14,6 +14,7 @@ module.exports = {
         cBlue: '#006EFF', // Strong Blue
         cGrey: '#B7B7B7',       // Grey
         cDarkGrey: '#C1CDC4',
+        cBorderGrey: '#4A4B4C',
         cDarkGradientGrey:'#2D2D2D',
         cLightGradientGrey:'#181818'
        },

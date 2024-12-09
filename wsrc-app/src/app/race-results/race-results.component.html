@@ -10,7 +10,36 @@
     
         </div>
     
-        <!-- Table -->
+    <div class="mx-52">
+        <table class="min-w-full bg-cDarkBlue ">
+            <thead class="border border-cBorderGrey bg-cDarkBlue">
+                <tr>
+                    <th class="py-2 px-4 text-center">Date</th>
+                    <th class="py-2 px-4 text-center">Start Time</th>
+                    <th class="py-2 px-4 text-center">Car</th>
+                    <th class="py-2 px-4 text-center">Track</th>
+                    <th class="py-2 px-4 text-center ">Prize Pool</th>
+                    <th class="py-2 px-4 text-center">Racers</th>
+                    <th class="py-2 px-4 text-center">Results</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let race of results; let i = index">
+                    <td class="py-2 px-4  text-center">{{ race.date }}</td>
+                    <td class="py-2 px-4 text-center">{{ race.start_time }}</td>
+                    <td class="py-2 px-4  text-center">{{ race.car }}</td>
+                    <td class="py-2 px-4 text-center">{{ race.track }}</td>
+                    <td class="py-2 px-4  text-center text-cGreen">{{ race.prize_pool }}</td>
+                    <td class="py-2 px-4 text-center">{{ race.racers }}</td>
+                    <td class="py-2 px-4  text-center">
+                        <button
+                            class=" text-white font-bold px-8 py-1 rounded hover:bg-cWhite bg-cBlue hover:text-cBlack duration-100 transition-all ease-linear">View Results</button>
+                    </td>
+                </tr>
+    
+            </tbody>
+        </table>
+    </div>
        
 
 </div>

@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import CryptoJS from 'crypto-js'
 import axios from 'axios'
 import { EMAIL, PASSWORD } from '../config.ts';
+import { error } from 'console';
 
 // #region Cookies
 var _cookie: string[] = [];
@@ -35,21 +36,27 @@ const hashPassword = (password: string, username: string): string => {
 };
 
 // #endregion
-// #region API
 
-export async function handleGetData(req: Request, res: Response) {
-    axios.get('https://members-ng.iracing.com/data/results/get?subsession_id=38280997', {
+// #region iracing Request
+
+async function iracingRequest(url:string):Promise<any>{
+    return await axios.get(url, {
         headers: {
             'Cookie': await getCookie()
         }
-    })
-    .then(resultResponse => {
-        if (resultResponse.data.link) {
-            console.log('Link:', resultResponse.data.link);
-            res.json({ message: 'worked'});
+    }).then(resultReponse => {
+        if(resultReponse.data.link){
+            return resultReponse.data.link
         }
-    })
-    .catch(error => {
-        res.json({ error: error });
-    });
+        return '';
+    }).catch(error => {return error})
+
 }
+// #endregion
+
+// #region API
+export function handleGetData(req: Request, res: Response) {
+    const dataLink = iracingRequest('https://members-ng.iracing.com/data/results/get?subsession_id=38280997')
+    res.json({'Link': dataLink})
+}
+// #endregion

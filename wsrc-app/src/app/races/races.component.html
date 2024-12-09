@@ -1,1 +1,41 @@
-<p>races works!</p>
+<!-- Countdown Banner -->
+<div>reuse from another page</div>
+<div>
+    <!-- Race summary -->
+    <div></div>
+    <!-- Prize pool -->
+    <div></div>
+</div>
+<!-- Sign up -->
+<div></div>
+<!-- Upcoming -->
+<span>Upcoming WSRC Races</span>
+<span>The next races are shown below, you can register from now.</span>
+<div class="overflow-x-auto">
+    <table class="min-w-full bg-white">
+        <thead>
+            <tr>
+                <th class="py-2 px-4 border-b text-center">Date</th>
+                <th class="py-2 px-4 border-b text-center">Start Time</th>
+                <th class="py-2 px-4 border-b text-center">Car</th>
+                <th class="py-2 px-4 border-b text-center">Track</th>
+                <th class="py-2 px-4 border-b text-center">Prize Pool</th>
+                <th class="py-2 px-4 border-b text-center">Racers</th>
+                <th class="py-2 px-4 border-b text-center">Register</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let race of races; let i = index">
+                <td class="py-2 px-4 border-b text-center">{{ race.date }}</td>
+                <td class="py-2 px-4 border-b text-center">{{ race.start_time }}</td>
+                <td class="py-2 px-4 border-b text-center">{{ race.car }}</td>
+                <td class="py-2 px-4 border-b text-center">{{ race.track }}</td>
+                <td class="py-2 px-4 border-b text-center">{{ race.prize_pool }}</td>
+                <td class="py-2 px-4 border-b text-center">{{ race.racers }}</td>
+                <td class="py-2 px-4 border-b text-center">
+                    <button class="bg-blue-500 text-white px-2 py-1 rounded">Register</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

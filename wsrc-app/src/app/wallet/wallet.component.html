@@ -1,0 +1,36 @@
+<!-- Money Header -->
+<div>
+    <span>$102,081</span>
+    <span>My Racing Balance</span>
+</div>
+<!-- Withdraw -->
+<div>Withdraw money</div>
+<!-- Header -->
+<div>Transaction History</div>
+<!-- Sub Header -->
+<div>All transactions in and out of wallet will be shown here</div>
+<!-- Transaction History -->
+<div class="overflow-x-auto">
+    <table class="min-w-full bg-white">
+        <thead>
+            <tr>
+                <th class="py-2 px-4 border-b text-center">Date</th>
+                <th class="py-2 px-4 border-b text-center">Time</th>
+                <th class="py-2 px-4 border-b text-center">Ref No.</th>
+                <th class="py-2 px-4 border-b text-center">Type</th>
+                <th class="py-2 px-4 border-b text-center">Status</th>
+                <th class="py-2 px-4 border-b text-center">Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let transaction of transactions;">
+                <td class="py-2 px-4 border-b text-center">{{ transaction.date }}</td>
+                <td class="py-2 px-4 border-b text-center">{{ transaction.time }}</td>
+                <td class="py-2 px-4 border-b text-center">{{ transaction.ref_number }}</td>
+                <td class="py-2 px-4 border-b text-center">{{ transaction.type }}</td>
+                <td class="py-2 px-4 border-b text-center">{{ transaction.status }}</td>
+                <td class="py-2 px-4 border-b text-center">${{ transaction.amount }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

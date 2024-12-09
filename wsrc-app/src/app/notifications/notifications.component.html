@@ -1,0 +1,28 @@
+<!-- Header -->
+<div>
+    <span>Notifications</span>
+</div>
+<!-- Sub Heading -->
+<div>
+    <span>All notifications from WSRC will be shown here</span>
+</div>
+
+<!-- Notification List -->
+<div class="overflow-x-auto">
+    <table class="min-w-full bg-white">
+        <thead>
+            <tr>
+                <th class="py-2 px-4 border-b text-center">Date</th>
+                <th class="py-2 px-4 border-b text-center">Time</th>
+                <th class="py-2 px-4 border-b text-center">Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let notification of notifications;">
+                <td class="py-2 px-4 border-b text-center">{{ notification.date }}</td>
+                <td class="py-2 px-4 border-b text-center">{{ notification.time }}</td>
+                <td class="py-2 px-4 border-b text-center">{{ notification.message }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

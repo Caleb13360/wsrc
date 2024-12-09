@@ -5,7 +5,7 @@ Comprises of all the apps and serices relating to wsrc
 Main site for users built on Angular 19
 ## Development
 ```bash
-cd wsrc-app; docker system prune -f; docker-compose up --build
+./run.bat
 ```
 Once the server is running, open your browser and navigate to [wsrc](http://localhost:4200/)
 # Production

@@ -1,56 +1,55 @@
 import { Request, Response } from 'express';
 import CryptoJS from 'crypto-js'
 import axios from 'axios'
+import { EMAIL, PASSWORD } from '../config.ts';
 
-// #region Auth Utility
+// #region Cookies
+var _cookie: string[] = [];
+async function getCookie():Promise<string>{
+    if(_cookie.length < 1){
+        _cookie = await fetchCookie(hashPassword(PASSWORD, EMAIL.toLowerCase()));
+    }
+    return _cookie.join('; ');
+}
+
+async function fetchCookie(password: string): Promise<string[]> {
+    try {
+        const response = await axios.post('https://members-ng.iracing.com/auth', {email: EMAIL, password: password}, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (response.headers['set-cookie']) {
+            return response.headers['set-cookie'];
+        }
+        return [];
+    } catch (error) {
+        return [];
+    }
+}
+
 const hashPassword = (password: string, username: string): string => {
     return CryptoJS.enc.Base64.stringify(
         CryptoJS.SHA256(password + username.toLowerCase())
     );
 };
+
 // #endregion
+// #region API
 
-
-// Example usage
-const email: string = 'x';
-const password: string = 'x';
-const encodedPassword = hashPassword(password, email.toLowerCase());
-var cookie: string[] = [];
-
-const body = {
-    email: email,
-    password: encodedPassword
-};
-
-axios.post('https://members-ng.iracing.com/auth', body, {
-    headers: {
-        'Content-Type': 'application/json'
-    }
-})
-.then(response => {
-    if (response.headers['set-cookie']) {
-        cookie = response.headers['set-cookie'];
-        console.log('Cookies:', response.headers['set-cookie']);
-        
-        // Retrieve session result data using the cookies
-        axios.get('https://members-ng.iracing.com/data/results/get?subsession_id=38280997', {
-            headers: {
-                'Cookie': cookie.join('; ')
-            }
-        })
-        .then(resultResponse => {
-            console.log('Session Result Data:', resultResponse.data);
-            if (resultResponse.data.link) {
-                console.log('Link:', resultResponse.data.link);
-            }
-        })
-        .catch(error => {
-            console.error('Error retrieving session result data:', error);
-        });
-    } else {
-        console.log('No cookies received');
-    }
-})
-.catch(error => {
-    console.error('Error:', error);
-});
+export async function handleGetData(req: Request, res: Response) {
+    axios.get('https://members-ng.iracing.com/data/results/get?subsession_id=38280997', {
+        headers: {
+            'Cookie': await getCookie()
+        }
+    })
+    .then(resultResponse => {
+        if (resultResponse.data.link) {
+            console.log('Link:', resultResponse.data.link);
+            res.json({ message: 'worked'});
+        }
+    })
+    .catch(error => {
+        res.json({ error: error });
+    });
+}

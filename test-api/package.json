@@ -1,14 +1,21 @@
 {
   "name": "test-api",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.ts",
+  "main": "src/server.ts",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node dist/server.js",
+    "build": "tsc"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "express": "^4.21.2"
+    "axios": "^1.7.9",
+    "crypto-js": "^4.0.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.2.2",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.1"
   }
 }

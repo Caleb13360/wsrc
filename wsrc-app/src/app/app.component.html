@@ -1,4 +1,4 @@
-<main>
+<main class="min-h-screen flex flex-col">
   <!-- Nav Bar -->
   <div class="bg-cBlack h-36">
     <div class="flex items-center justify-center h-full space-x-96">
@@ -8,34 +8,41 @@
           <p class="text-cWhite text-3xl font-porscha">WSRC</p>
         </div>
         <div class="flex justify-between items-center mx-2">
-          <img src="instagram-white-icon.png" alt="Instagram" class="h-6 w-6">
-          <img src="twitch-white-icon.png" alt="Twitch" class="h-6 w-6">
-          <img src="youtube-app-white-icon.png" alt="Youtube" class="h-6 w-6">
+          <a href="https://www.instagram.com/jimmy.grills" target="_blank">
+            <img src="instagram-white-icon.png" alt="Instagram" class="h-6 w-6">
+          </a>
+          <a href="https://www.twitch.tv" target="_blank">
+            <img src="twitch-white-icon.png" alt="Twitch" class="h-6 w-6">
+          </a>
+          <a href="https://www.youtube.com/@JimmyGrillsRacing" target="_blank">
+            <img src="youtube-app-white-icon.png" alt="Youtube" class="h-6 w-6">
+          </a>
         </div>
       </div>
       <!-- Links -->
       <div class="flex space-x-7">
         <a routerLink="/" class="text-cDarkGrey text-xl font-roboto-condensed hover:text-cWhite transition-all duration-200 ease-linear hover:font-bold">Home</a>   
         <a routerLink="/races" class="text-cDarkGrey text-xl font-roboto-condensed  hover:text-cWhite transition-all duration-200 ease-linear hover:font-bold">Go Racing</a>
-        <a routerLink="/races" class="text-cDarkGrey text-xl font-roboto-condensed  hover:text-cWhite transition-all duration-200 ease-linear hover:font-bold">Race Results</a>
-        <a routerLink="/races" class="text-cDarkGrey text-xl font-roboto-condensed  hover:text-cWhite transition-all duration-200 ease-linear hover:font-bold">About Us</a>
+        <a routerLink="/results" class="text-cDarkGrey text-xl font-roboto-condensed  hover:text-cWhite transition-all duration-200 ease-linear hover:font-bold">Race Results</a>
+        <a routerLink="/about" class="text-cDarkGrey text-xl font-roboto-condensed  hover:text-cWhite transition-all duration-200 ease-linear hover:font-bold">About Us</a>
       </div>
       <!-- User Icons -->
       <div class="flex space-x-6">
-        <span class="material-icons text-cWhite text-2xl hover:text-red-500 duration-200 ease-linear ">notifications</span>
-        <div class="flex items-center bg-cWhite text-cBlack rounded-md px-3 py-1 group hover:bg-cGreen transition-all duration-200 ease-linear">
+        <span routerLink="/notifications" class="material-icons text-cWhite text-2xl hover:text-red-500 duration-200 ease-linear ">notifications</span>
+        <div  routerLink="/wallet" class="flex items-center bg-cWhite text-cBlack rounded-md px-3 py-1 group hover:bg-cGreen transition-all duration-200 ease-linear">
           <span class="material-icons mr-1 group-hover:text-cBlack">local_atm</span>
           <span class = "font-roboto font-bold group-hover:text-cBlack" >$0.00</span>
         </div>
        
-        <div class="flex items-center justify-center bg-Black text-cWhite rounded-full h-8 w-8 hover:text-cBlue duration-200 ease-linear">
+        <div  routerLink="/profile" class="flex items-center justify-center bg-Black text-cWhite rounded-full h-8 w-8 hover:text-cBlue duration-200 ease-linear">
           <span class="material-icons text-3xl">person</span>
         </div>
       </div>
     </div>
   </div>
   <!-- Page Content -->
-  <router-outlet></router-outlet>
+   <div class="flex-grow bg-cDarkBlue"><router-outlet></router-outlet></div>
+ 
   <!-- Footer -->
    <div class="bg-cBlack">
       <p class="text-cWhite font-roboto tracking-tighter text-1xl align-middle py-3 text-center">Copyright © 2024 WSRC. All Rights Reserved.</p>

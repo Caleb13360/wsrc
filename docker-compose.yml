@@ -11,3 +11,10 @@ services:
       - /app/node_modules
     environment:
       - CHOKIDAR_USEPOLLING=true
+  wsrc-api:
+    build:
+      context: ./wsrc-api
+      dockerfile: Dockerfile
+    image: wsrc-api:dev
+    ports:
+      - "3000:3000"

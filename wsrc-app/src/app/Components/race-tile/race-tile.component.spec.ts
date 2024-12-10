@@ -1,19 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeComponent } from './home.component';
-import { MatIconModule } from '@angular/material/icon';
+import { RaceTileComponent } from './race-tile.component';
 
-describe('HomeComponent', () => {
-  let component: HomeComponent;
-  let fixture: ComponentFixture<HomeComponent>;
+describe('RaceTileComponent', () => {
+  let component: RaceTileComponent;
+  let fixture: ComponentFixture<RaceTileComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeComponent]
+      imports: [RaceTileComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(HomeComponent);
+    fixture = TestBed.createComponent(RaceTileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,4 +1,4 @@
-<main>
+<main class="min-h-screen flex flex-col">
   <!-- Nav Bar -->
   <div class="bg-cBlack h-36">
     <div class="flex items-center justify-center h-full space-x-96">
@@ -41,7 +41,8 @@
     </div>
   </div>
   <!-- Page Content -->
-  <router-outlet></router-outlet>
+   <div class="flex-grow bg-cDarkBlue"><router-outlet></router-outlet></div>
+ 
   <!-- Footer -->
    <div class="bg-cBlack">
       <p class="text-cWhite font-roboto tracking-tighter text-1xl align-middle py-3 text-center">Copyright © 2024 WSRC. All Rights Reserved.</p>

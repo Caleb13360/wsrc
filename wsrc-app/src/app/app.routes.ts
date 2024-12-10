@@ -5,6 +5,9 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { RaceResultsComponent } from './race-results/race-results.component';
 import { RaceDetailsComponent } from './race-details/race-details.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { WalletComponent } from './wallet/wallet.component';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 import { WithdrawComponent } from './withdraw/withdraw.component';
 import { ResultDetailsComponent } from './result-details/result-details.component';
 import { LoginComponent } from './login/login.component';
@@ -27,7 +30,6 @@ export const routes: Routes = [
         title: 'About Us'
     },
     {
-
         path: 'results',
         component: RaceResultsComponent,
         title: 'Race Results'
@@ -42,7 +44,22 @@ export const routes: Routes = [
         component: UserProfileComponent,
         title: 'Profile'
     },
+    {
+        path: 'wallet',
+        component: WalletComponent,
+        title: 'Wallet'
+    },
     { 
+        path: 'notifications',
+        component: NotificationsComponent,
+        title: 'Notifications'
+    },
+    {
+        path: 'checkout',
+        component: CheckoutComponent,
+        title: 'Checkout'
+    },
+    {
         path: 'withdraw',
         component: WithdrawComponent,
         title: 'Withdraw'

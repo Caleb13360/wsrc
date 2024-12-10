@@ -2,12 +2,11 @@ import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-checkout',
   imports: [MatIconModule],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  templateUrl: './checkout.component.html',
+  styleUrl: './checkout.component.css'
 })
-export class HomeComponent {
+export class CheckoutComponent {
 
 }
- 

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import CryptoJS from 'crypto-js'
 import axios from 'axios'
-import { EMAIL, PASSWORD } from '../config.ts';
+import { EMAIL, PASSWORD } from '../config.js';
 import { error } from 'console';
 
 // #region Cookies

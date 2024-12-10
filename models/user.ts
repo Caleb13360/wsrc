@@ -5,5 +5,5 @@ export interface User {
     email: string;
     name: string;
     country: string;
-    last_competed: ?Date;
+    last_competed: Date;
 }

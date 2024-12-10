@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import * as service from './Services/service.ts';
-import * as iracing from './Services/iracing.ts';
+import * as service from './Services/service.js';
+import * as iracing from './Services/iracing.js';
 
 const router = Router();
 

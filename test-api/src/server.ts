@@ -11,7 +11,9 @@ export const Main = () => {
     app.use(express.json());
     app.use('/', routes);
     httpServer = http.createServer(app);
-    httpServer.listen(PORT, () => {});
+    httpServer.listen(PORT, () => {
+        console.log(`Server is running on http://localhost:${PORT}`);
+    });
 }
 
 Main();

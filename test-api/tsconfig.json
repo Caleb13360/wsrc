@@ -7,8 +7,6 @@
     "strict": true,
     "skipLibCheck": true,
     "moduleResolution": "Node16",
-    "noEmit": true,
-    "allowImportingTsExtensions": true,
     "outDir": "./dist",
   },
   "exclude": ["node_modules/"],

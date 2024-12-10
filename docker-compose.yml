@@ -13,7 +13,7 @@ services:
       - CHOKIDAR_USEPOLLING=true
   wsrc-api:
     build:
-      context: ./test-api
+      context: ./wsrc-api
       dockerfile: Dockerfile
     image: wsrc-api:dev
     ports:

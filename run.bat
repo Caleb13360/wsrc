@@ -1,7 +1,7 @@
 @echo off
 setlocal
 echo Installing Dependencies...
-cd test-api
+cd wsrc-api
 call npm install
 cd ..
 cd wsrc-app

@@ -8,6 +8,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { WalletComponent } from './wallet/wallet.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { WithdrawComponent } from './withdraw/withdraw.component';
+import { ResultDetailsComponent } from './result-details/result-details.component';
+import { LoginComponent } from './login/login.component';
 
 
 export const routes: Routes = [
@@ -41,7 +44,7 @@ export const routes: Routes = [
         component: UserProfileComponent,
         title: 'Profile'
     },
-    { 
+    {
         path: 'wallet',
         component: WalletComponent,
         title: 'Wallet'
@@ -55,5 +58,20 @@ export const routes: Routes = [
         path: 'checkout',
         component: CheckoutComponent,
         title: 'Checkout'
+    },
+    {
+        path: 'withdraw',
+        component: WithdrawComponent,
+        title: 'Withdraw'
+    },
+    { 
+        path: 'result-details',
+        component: ResultDetailsComponent,
+        title: 'Result Details'
+    },
+    { 
+        path: 'login',
+        component: LoginComponent,
+        title: 'Login'
     }
 ];

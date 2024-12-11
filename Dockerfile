@@ -1,15 +1,14 @@
-FROM node:latest
+FROM node:latest as build
 WORKDIR /app
-COPY ./models ./models
-WORKDIR /app/wsrc-app
-COPY ./wsrc-app/package*.json ./
+COPY package*.json ./
 RUN npm ci
 RUN npm install -g @angular/cli
-COPY ./wsrc-app .
+COPY . ./wsrc-app
+COPY ./../models ./models
 RUN npm run build
 
 FROM nginx:latest
-COPY ./wsrc-app/nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/wsrc-app/dist/wsrc-app/browser /usr/share/nginx/html
 EXPOSE 8080
 

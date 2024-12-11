@@ -1,10 +1,12 @@
 FROM node:latest
-
 WORKDIR /app
-
-COPY package*.json ./
+COPY ./models ./models
+WORKDIR /app/wsrc-app
+COPY ./wsrc-app/package*.json ./
 RUN npm ci
-COPY . .
+RUN npm install -g @angular/cli
+COPY ./wsrc-app .
+RUN npm run build
 
 EXPOSE 4200
 

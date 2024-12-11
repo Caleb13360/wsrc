@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClient } from '@angular/common/http';
-import {Race} from '../../../../models/race.js';
+import type {Race} from '../../../../models/race.d.ts';
 import { RouterLink } from '@angular/router';
 
 @Component({

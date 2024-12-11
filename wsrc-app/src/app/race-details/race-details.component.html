@@ -220,7 +220,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let racer of racers; let i = index">
+                <tr *ngFor="let racer of racers; let i = index"  [ngClass]="{'bg-gray-800': i % 2 === 1}">
                     <td class="py-2 px-4 text-center">{{ i + 1 }}</td>
                     <td class="py-2 px-4 text-center">{{ racer.name }}</td>
                     <td class="py-2 px-4 text-center">{{ racer.country }}</td>

@@ -11,6 +11,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { WithdrawComponent } from './withdraw/withdraw.component';
 import { ResultDetailsComponent } from './result-details/result-details.component';
 import { LoginComponent } from './login/login.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 
 
 export const routes: Routes = [
@@ -73,5 +74,10 @@ export const routes: Routes = [
         path: 'login',
         component: LoginComponent,
         title: 'Login'
+    },
+     { 
+        path: 'leaderboard',
+        component: LeaderboardComponent,
+        title: 'Leaderboard'
     }
 ];

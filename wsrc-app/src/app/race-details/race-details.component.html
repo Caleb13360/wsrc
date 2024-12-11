@@ -2,15 +2,10 @@
 <div class="bg-cDarkBlue text-cWhite font-roboto tracking-tighter">
 <div class="w-full bg-cover bg-center " style="background-image: url('lambo1.jpg');">
     <div class="relative h-full bg-black bg-opacity-30">
-        <!-- Position the text in the top-left corner -->
        
-        <button class="flex items-center absolute top-8 left-12 text-cDarkGrey font-roboto-condensed font-bold tracking-tighter text-2xl  group hover:text-cWhite transition-all duration-200 ease-linear">
-            <mat-icon class=" transition-transform duration-200 ease-linear group-hover:scale-110">arrow_back_ios</mat-icon>
-            <span class="ml-1 transition-transform duration-200 ease-linear group-hover:scale-110">Go to previous page</span>
-        </button>
         <!-- Centered content -->
         <div class="flex items-center justify-center h-full">
-            <div class="text-center py-28 px-40">
+            <div class="text-center py-24 px-40">
                 <span class="block text-cWhite font-roboto text-3xl tracking-tighter">Race begins in</span>
                 <div class="flex items-center space-x-2">
                     <!-- Days -->
@@ -220,7 +215,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let racer of racers; let i = index">
+                <tr *ngFor="let racer of racers; let i = index"  [ngClass]="{'bg-gray-800': i % 2 === 1}">
                     <td class="py-2 px-4 text-center">{{ i + 1 }}</td>
                     <td class="py-2 px-4 text-center">{{ racer.name }}</td>
                     <td class="py-2 px-4 text-center">{{ racer.country }}</td>

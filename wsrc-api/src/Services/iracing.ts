@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import CryptoJS from 'crypto-js'
 import axios from 'axios'
 import { EMAIL, PASSWORD } from '../config.js';
-import { error } from 'console';
 
 // #region Cookies
 var _cookie: string[] = [];
@@ -55,8 +54,16 @@ async function iracingRequest(url:string):Promise<any>{
 // #endregion
 
 // #region API
-export function handleGetData(req: Request, res: Response) {
-    const dataLink = iracingRequest('https://members-ng.iracing.com/data/results/get?subsession_id=38280997')
-    res.json({'Link': dataLink})
-}
+export class IRacingService{
+    getData = async ()=> await iracingRequest('https://members-ng.iracing.com/data/results/get?subsession_id=38280997');
+    handleGetData(req: Request, res: Response) {
+        const dataLink = iracingRequest('https://members-ng.iracing.com/data/results/get?subsession_id=38280997')
+        res.json({'Link': dataLink})
+    }
+    // get race results
+    // get racer details
+    // get track/car?
+    // get request limit
+} 
+
 // #endregion

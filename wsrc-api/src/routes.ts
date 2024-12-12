@@ -1,6 +1,8 @@
 import { Router } from 'express';
-import * as service from './Services/service.js';
-import * as iracing from './Services/iracing.js';
+import { Service } from './Services/service.js';
+import { IRacingService} from './Services/iracing.js';
+const service: Service = new Service();
+const iRacingService: IRacingService = new IRacingService();
 //
 //#region RACES
 const router = Router();
@@ -42,6 +44,27 @@ router.get('/user/:ID', (_, res) => {
     const id = 'ID';
     res.json({user: service.getUserById(id)});
 });
-
+// Gets transacations for a user
+router.get('/user/:ID/transactions', (_, res) => {
+    const id = 'ID';
+    res.json({transactions: service.getTransactions(id)})
+});
+// Gets notifications for a user
+router.get('/user/:ID/notifications', (_, res) => {
+    const id = 'ID';
+    res.json({notifcations: service.getNotifications(id)})
+});
+// Gets the racerpoints leaderboard
+router.get('/racerpoints', (_, res) => {
+    res.json({racerPointStandings: service.getAllRacerPoints()})
+});
+// Gets the current events
+router.get('/events/current', (_, res) => {
+    res.json({events: service.getCurrentEvents()});
+});
+// Gets upcoming events
+router.get('/events/upcoming', (_,res) => {
+    res.json({events: service.getUpcomingEvents()});
+});
 
 export default router;

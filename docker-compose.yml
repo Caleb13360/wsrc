@@ -1,20 +1,20 @@
 services:
   wsrc-app:
     build:
-      context: ./wsrc-app
-      dockerfile: Dockerfile.dev
+      context: .
+      dockerfile: ./wsrc-app/Dockerfile.dev
     image: wsrc-app:dev
     ports:
       - "4200:4200"
     volumes:
-      - ./wsrc-app:/app
-      - /app/node_modules
+      - ./wsrc-app:/app/wsrc-app
+      - /app/wsrc-app/node_modules
     environment:
       - CHOKIDAR_USEPOLLING=true
   wsrc-api:
     build:
-      context: ./wsrc-api
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./wsrc-api/Dockerfile.dev
     image: wsrc-api:dev
     ports:
       - "3000:3000"

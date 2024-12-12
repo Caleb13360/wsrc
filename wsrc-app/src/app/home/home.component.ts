@@ -1,13 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { HttpClient } from '@angular/common/http';
+import type {Race} from '../../../../models/race.d.ts';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [MatIconModule],
+  imports: [MatIconModule, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
-
+export class HomeComponent implements OnInit {
+  // httpClient:HttpClient  = inject(HttpClient);
+  // latestRace: Race | undefined;
+  remainingTime: string = '';
+  ngOnInit(): void {
+    // this.getLatestRace();
+  }
+  // getLatestRace() {
+  //   this.httpClient.get('http://localhost:3000/race/latest').subscribe((data) => {
+  //     this.latestRace = data as Race;
+  //   });
+  // }
 }
  

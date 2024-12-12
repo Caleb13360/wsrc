@@ -15,6 +15,7 @@ import { EventsComponent } from './events/events.component';
 import { BigBlindComponent } from './big-blind/big-blind.component';
 import { WelcomeGiftComponent } from './welcome-gift/welcome-gift.component';
 import { DoubleRPComponent } from './double-rp/double-rp.component';
+import { RPRewardsComponent } from './rpRewards/rpRewards.component';
 
 
 export const routes: Routes = [
@@ -93,5 +94,9 @@ export const routes: Routes = [
     {
         path: 'events/doubleRP',
         component: DoubleRPComponent
+    },
+     { 
+        path: 'events/RPRewards',
+        component: RPRewardsComponent,
     }
 ];

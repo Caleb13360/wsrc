@@ -42,6 +42,19 @@ router.get('/user/:ID', (_, res) => {
     const id = 'ID';
     res.json({user: service.getUserById(id)});
 });
-
+// Gets transacations for a user
+router.get('/user/:ID/transactions', (_, res) => {
+    const id = 'ID';
+    res.json({transactions: service.getTransactions(id)})
+});
+// Gets notifications for a user
+router.get('/user/:ID/notifications', (_, res) => {
+    const id = 'ID';
+    res.json({notifcations: service.getNotifications(id)})
+});
+// Gets the racerpoints leaderboard
+router.get('/racerpoints', (_, res) => {
+    res.json({racerPointStandings: service.getAllRacerPoints()})
+});
 
 export default router;

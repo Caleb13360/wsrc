@@ -1,13 +1,8 @@
-import { Request, Response } from 'express';
 import type { Race } from '@models/race.d.ts';
 import type { User } from '@models/user.d.ts';
 
 export function getUserById(id: string): User {
     return user;
-}
-
-export function getUser(req: Request, res: Response) {
-    res.json({ message: 'This is some data' });
 }
 const user: User = {
     id: 1,
@@ -53,6 +48,21 @@ export function getFastestLapTime(raceId: string): number{
     return 89.520;
 }
 
-export function getTotalPrizeAmount(){
+export function getTotalPrizeAmount(): number{
     return 102168;
+}
+
+export function getTransactions(userId: string){
+    return 'transaction';
+}
+
+export function getNotifications(userId: string){
+    return 'notification';
+}
+
+export function getUserRacerPoints(userId: string){
+    return 'user points';
+}
+export function getAllRacerPoints(){
+    return 'all racer points';
 }

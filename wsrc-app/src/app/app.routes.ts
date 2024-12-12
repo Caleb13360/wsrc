@@ -11,7 +11,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { WithdrawComponent } from './withdraw/withdraw.component';
 import { ResultDetailsComponent } from './result-details/result-details.component';
 import { LoginComponent } from './login/login.component';
-import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { RPRewardsComponent } from './rpRewards/rpRewards.component';
 
 
 export const routes: Routes = [
@@ -76,8 +76,7 @@ export const routes: Routes = [
         title: 'Login'
     },
      { 
-        path: 'leaderboard',
-        component: LeaderboardComponent,
-        title: 'Leaderboard'
+        path: 'events/RPRewards',
+        component: RPRewardsComponent,
     }
 ];

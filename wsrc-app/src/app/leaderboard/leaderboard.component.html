@@ -1,1 +1,116 @@
-<p>leaderboard works!</p>
+<div class="bg-cDarkBlue text-cWhite font-roboto tracking-tighter">
+    <!-- Top Banner -->
+    <div class="w-full bg-cover bg-center " style="background-image: url('RPCN.png');">
+    <div class="flex items-start justify-start h-full bg-black bg-opacity-10">
+        <div class="py-28 px-40 space-y-6">
+            <h1 class="text-cWhite text-6xl mb-4 font-roboto-condensed font-bold tracking-tighter">
+                Introducing
+                <br>
+                <span class="text-cOrange">Racer Points</span> 
+            </h1>
+            <h2 class="text-cWhite text-2xl mb-4 font-roboto-condensed tracking-tighter w-1/2 pr-10">
+                The Racer Points Challenge is here to celebrate consistency, dedication,
+                and improvement! While the top 3 finishers in each race take home cash prizes,
+                positions 4-20 earn Racer Points, with higher points awarded to better placements.
+                <br>
+                <br>
+                Each week, the top 10 drivers on the Racer Points leaderboard win a free race entry,
+                giving everyone a chance to stay competitive and keep racing.
+
+            </h2>
+
+        </div>
+    </div>
+</div>
+<!-- Total Won -->
+<div class="bg-cOrange w-full h-78 flex items-center justify-center">
+    <!-- Centered content -->
+    <div class="flex items-center justify-center h-full">
+        <div class="text-center py-16 px-40">
+            <span class="block text-cBlack font-roboto text-2xl tracking-tighter">Prizes awarded in</span>
+            <div class="flex items-center space-x-2">
+                <!-- Days -->
+                <div class="flex flex-col items-center text-cBlack tracking-tighter">
+                    <span class="text-9xl font-bold font-roboto-condensed leading-none">12</span>
+                    <span class="text-2xl font-roboto">Days</span>
+                </div>
+                <div class="flex flex-col items-center text-cBlack tracking-tighter">
+                    <span class="text-9xl font-bold font-roboto-condensed leading-none">:</span>
+                    <span>.</span>
+                </div>
+                <!-- Hours -->
+                <div class="flex flex-col items-center text-cBlack tracking-tighter">
+                    <span class="text-9xl font-bold font-roboto-condensed leading-none">10</span>
+                    <span class="text-2xl font-roboto">Hours</span>
+                </div>
+                <div class="flex flex-col items-center text-cBlack tracking-tighter">
+                    <span class="text-9xl font-bold font-roboto-condensed leading-none">:</span>
+                    <span>.</span>
+                </div>
+                <!-- Minutes -->
+                <div class="flex flex-col items-center text-cBlack tracking-tighter">
+                    <span class="text-9xl font-bold font-roboto-condensed leading-none">23</span>
+                    <span class="text-2xl font-roboto">Minutes</span>
+                </div>
+                <div class="flex flex-col items-center text-cBlack tracking-tighter">
+                    <span class="text-9xl font-bold font-roboto-condensed leading-none">:</span>
+                    <span>.</span>
+                </div>
+                <!-- Seconds -->
+                <div class="flex flex-col items-center text-cBlack tracking-tighter">
+                    <span class="text-9xl font-bold font-roboto-condensed leading-none">34</span>
+                    <span class="text-2xl font-roboto">Seconds</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Upcoming -->
+<div class="p-6 w-full ">
+    <!-- Header and Sub-header -->
+    <div class="flex justify-between items-center mb-6 mt-12 mx-52">
+        <div>
+            <h1 class="text-5xl mb-2 font-roboto-condensed tracking-tighter font-bold ">Racer Points Rewards</h1>
+            <h2 class="text-cWhite text-2xl mb-4 font-roboto-condensed tracking-tighterl">Place in the top 10 at the end of the week and earn rewards!</h2>
+        </div>
+<div class="text-2xl font-roboto-condensed tracking-tighter text-center">
+   Your Position: 23rd
+   <br>
+Your Racer Points: 14
+</div>
+    </div>
+
+    <!-- Top 10 table -->
+    <div class="mx-52">
+        <table class="min-w-full bg-cDarkBlue ">
+            <thead class="border border-cBorderGrey bg-cDarkBlue">
+                <tr>
+                    <th class="py-2 px-4 text-center">Pos</th>
+                    <th class="py-2 px-4 text-center">Racer Points</th>
+                    <th class="py-2 px-4 text-center">Racer</th>
+                    <th class="py-2 px-4 text-center">Country</th>
+                    <th class="py-2 px-4 text-center ">Prize</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let racer of racePointRacers; let i = index">
+            <td class="py-2 px-4 text-center">
+                <div class="flex justify-center items-center">
+                    <div class="bg-cOrange w-10 h-10 flex items-center justify-center text-cBlack font-bold">{{ i + 1 }}</div>
+                </div>
+            </td>
+                    <td class="py-2 px-4 text-center">{{ racer.racerPoints }}</td>
+                    <td class="py-2 px-4 text-center">{{ racer.name }}</td>
+                    <td class="py-2 px-4 text-center">{{ racer.country }}</td>
+                    <td class="py-2 px-4 text-center text-cOrange font-bold">{{ racer.prize }}</td>
+                </tr>
+
+            </tbody>
+        </table>
+        <div class="bg-cOrange h-1 w-full my-4 px-20"></div>
+        <table class="min-w-full bg-cDarkBlue ">
+        </table>
+    </div>
+    
+</div>

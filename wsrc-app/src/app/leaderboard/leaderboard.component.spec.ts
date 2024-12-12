@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LeaderboardComponent } from './leaderboard.component';
+import { MatIconModule } from '@angular/material/icon';
 
 describe('LeaderboardComponent', () => {
   let component: LeaderboardComponent;
@@ -8,7 +9,7 @@ describe('LeaderboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LeaderboardComponent]
+      imports: [LeaderboardComponent, MatIconModule]
     })
     .compileComponents();
 

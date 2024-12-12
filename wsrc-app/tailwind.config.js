@@ -16,7 +16,8 @@ module.exports = {
         cDarkGrey: '#C1CDC4',
         cBorderGrey: '#4A4B4C',
         cDarkGradientGrey:'#2D2D2D',
-        cLightGradientGrey:'#181818'
+        cLightGradientGrey:'#181818',
+        cOrange:"#FF7700"
        },
       height: {
         '144': '32rem', // Custom height class

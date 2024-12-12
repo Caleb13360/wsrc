@@ -54,10 +54,16 @@ async function iracingRequest(url:string):Promise<any>{
 // #endregion
 
 // #region API
-export function getData(): Promise<any>{ return iracingRequest('https://members-ng.iracing.com/data/results/get?subsession_id=38280997')};
+export class IRacingService{
+    getData = async ()=> await iracingRequest('https://members-ng.iracing.com/data/results/get?subsession_id=38280997');
+    handleGetData(req: Request, res: Response) {
+        const dataLink = iracingRequest('https://members-ng.iracing.com/data/results/get?subsession_id=38280997')
+        res.json({'Link': dataLink})
+    }
+    // get race results
+    // get racer details
+    // get track/car?
+    // get request limit
+} 
 
-export function handleGetData(req: Request, res: Response) {
-    const dataLink = iracingRequest('https://members-ng.iracing.com/data/results/get?subsession_id=38280997')
-    res.json({'Link': dataLink})
-}
 // #endregion

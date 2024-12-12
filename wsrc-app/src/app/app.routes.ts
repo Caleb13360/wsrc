@@ -11,7 +11,11 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { WithdrawComponent } from './withdraw/withdraw.component';
 import { ResultDetailsComponent } from './result-details/result-details.component';
 import { LoginComponent } from './login/login.component';
-import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { EventsComponent } from './events/events.component';
+import { BigBlindComponent } from './big-blind/big-blind.component';
+import { WelcomeGiftComponent } from './welcome-gift/welcome-gift.component';
+import { DoubleRPComponent } from './double-rp/double-rp.component';
+import { RPRewardsComponent } from './rpRewards/rpRewards.component';
 
 
 export const routes: Routes = [
@@ -75,9 +79,24 @@ export const routes: Routes = [
         component: LoginComponent,
         title: 'Login'
     },
+    {
+        path: 'events',
+        component: EventsComponent
+    }, 
+    {
+        path: 'events/bigBlind',
+        component: BigBlindComponent
+    },
+    {
+        path: 'events/welcomeGift',
+        component: WelcomeGiftComponent
+    },
+    {
+        path: 'events/doubleRP',
+        component: DoubleRPComponent
+    },
      { 
-        path: 'leaderboard',
-        component: LeaderboardComponent,
-        title: 'Leaderboard'
+        path: 'events/RPRewards',
+        component: RPRewardsComponent,
     }
 ];

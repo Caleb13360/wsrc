@@ -14,7 +14,7 @@ services:
   wsrc-api:
     build:
       context: .
-      dockerfile: ./wsrc-api/Dockerfile
+      dockerfile: ./wsrc-api/Dockerfile.dev
     image: wsrc-api:dev
     ports:
       - "3000:3000"

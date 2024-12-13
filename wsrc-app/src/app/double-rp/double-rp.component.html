@@ -1,1 +1,65 @@
-<p>double-rp works!</p>
+<div class="bg-cDarkBlue text-cWhite font-roboto tracking-tighter">
+    <div class="w-full bg-cover bg-center " style="background-image: url('double.jpg');">
+        <div class="flex items-start justify-start h-full bg-black bg-opacity-50">
+            <div class="py-28 pl-40 space-y-6">
+            <h1 class="text-cWhite text-6xl mb-4 font-roboto-condensed font-bold tracking-tighter">
+                Double RP Weekend
+            
+            </h1>
+    
+    
+    
+    
+                <h2 class="text-cWhite text-2xl mb-2 font-roboto-condensed tracking-tighter pr-5 w-3/4">
+                    For every race you participate in, get double the amount of
+                    RP when you enter in specific races.
+                </h2>
+    
+            </div>
+        </div>
+    </div>
+    <!-- Upcoming -->
+    <div class="p-6 w-full ">
+        <!-- Header and Sub-header -->
+        <div class="flex justify-between items-center mb-6 mt-4 mx-52">
+            <div>
+                <h1 class="text-5xl mb-2 font-roboto-condensed tracking-tighter font-bold ">Upcoming Double RP Races</h1>
+                <h2 class="text-cWhite text-2xl mb-4 font-roboto-condensed tracking-tighterl">The next races are shown
+                    below, you can register from now.</h2>
+            </div>
+    
+        </div>
+    
+        <!-- Table -->
+        <div class="mx-52">
+            <table class="min-w-full bg-cDarkBlue ">
+                <thead class="border border-cBorderGrey bg-cDarkBlue">
+                    <tr>
+                        <th class="py-2 px-4 text-center">Date</th>
+                        <th class="py-2 px-4 text-center">Start Time</th>
+                        <th class="py-2 px-4 text-center">Car</th>
+                        <th class="py-2 px-4 text-center">Track</th>
+                        <th class="py-2 px-4 text-center ">Prize Pool</th>
+                        <th class="py-2 px-4 text-center">Racers</th>
+                        <th class="py-2 px-4 text-center">Register</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let race of races; let i = index">
+                        <td class="py-2 px-4  text-center">{{ race.date }}</td>
+                        <td class="py-2 px-4 text-center">{{ race.start_time }}</td>
+                        <td class="py-2 px-4  text-center">{{ race.car }}</td>
+                        <td class="py-2 px-4 text-center">{{ race.track }}</td>
+                        <td class="py-2 px-4  text-center text-cGreen">{{ race.prize_pool }}</td>
+                        <td class="py-2 px-4 text-center">{{ race.racers }}</td>
+                        <td class="py-2 px-4  text-center">
+                            <button routerLink="/details"
+                                class=" text-white font-bold px-8 py-1 rounded hover:bg-cWhite bg-cBlue hover:text-cBlack duration-100 transition-all ease-linear">Register</button>
+                        </td>
+                    </tr>
+    
+                </tbody>
+            </table>
+        </div>
+
+</div>  

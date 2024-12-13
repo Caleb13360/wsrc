@@ -3,17 +3,18 @@ import { MatIconModule } from '@angular/material/icon';
 import { HttpClient} from '@angular/common/http';
 import type {Race} from '../../../../models/race.d.ts';
 import { RouterLink } from '@angular/router';
+import { RaceTileComponent } from "../Components/race-tile/race-tile.component";
 
 @Component({
   selector: 'app-home',
-  imports: [MatIconModule, RouterLink],
+  imports: [MatIconModule, RouterLink, RaceTileComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
   constructor(private httpClient: HttpClient) {}
 
-  latestRace: Race | undefined;
+  latestRace!: Race;
   totalPrizeAmount: number = 0;
   remainingTime: string = '';
   ngOnInit(): void {
@@ -21,8 +22,8 @@ export class HomeComponent implements OnInit {
     this.getTotalMoney();
   }
   getLatestRace() {
-    this.httpClient.get('http://localhost:3000/race/latest').subscribe((data) => {
-      this.latestRace = data as Race;
+    this.httpClient.get<{race: Race}>('http://localhost:3000/race/latest').subscribe((data) => {
+      this.latestRace = data.race as Race;
     });
   }
 

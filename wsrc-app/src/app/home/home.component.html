@@ -33,71 +33,9 @@
         
           <!-- 1x3 Grid -->
           <div class="grid grid-cols-3 gap-4">
-
-            
-          
-              <!-- Card 1 -->
-              <div class="mb-4 relative  border border-cBorderGrey bg-cDarkBlue">
-                <div class="relative">
-                  <!-- Image -->
-                  <img src="GR86RaceImage.jpg" alt="Track Image" class="w-full h-1/2">
-                  <!-- Dark Overlay -->
-                  <div class="absolute inset-0 bg-black opacity-10"></div>
-                  <!-- image Text -->
-                  <div class="absolute inset-0 flex flex-col justify-start items-center text-white pt-5">
-                    <div class="text-md font-roboto-condensed">Total Prize Pool</div>
-                    <div class="text-5xl font-extrabold">$200 USD</div>
-                  </div>
-                  
-                  <div class="absolute inset-0 flex flex-col justify-end items-center text-white">
-                    <button routerLink="/details"
-                      class="bg-cBlue text-cWhite text-1xl py-2.5 px-10 rounded-md font-roboto-condensed hover:bg-cWhite hover:text-cBlack transition-all duration-300 
-                      ease-linear hover:px-14">View race details</button>
-                    <div class="text-md my-2">5 days, 12 hours, 10 minutes, 21 seconds until race</div>
-                  </div>
-                </div>
-            
-                <div class="flex justify-between pl-5 pr-5 pt-5 ">
-                  <div class="flex items-center text-[#62D1CC]">
-                    <mat-icon class="text-[1.4rem]">access_time</mat-icon>
-                    <span class="ml-1 font-bold text-sm">20 Min Race</span>
-                  </div>
-                  <div class="flex items-center text-sm text-[#FBE057]">
-                    <mat-icon>play_arrow</mat-icon>
-                    <span class="ml-1 font-bold">2 Quali Laps</span>
-                  </div>
-                  <div class="flex items-center justify-center text-sm text-[#FFA366]">
-                    <mat-icon class="text-[1.3rem]">lock</mat-icon>
-                    <span class=" ml-1 font-bold">Fixed Setup</span>
-                  </div>
-                  <div class="flex items-center text-sm text-cGreen">
-                    <mat-icon class="text-[1.4rem]">attach_money</mat-icon>
-                    <span class=" font-bold">P1 - P6</span>
-                  </div>
-                </div>
-                <!-- Race Information -->
-                <div class="flex flex-col items-start p-5 space-y-2 text-cDarkGrey">
-                  <div class="flex items-center space-x-2">
-                    <mat-icon>access_time</mat-icon>
-                    <span>6:15 pm Race Start on 24th December 2024</span>
-                  </div>
-                  <div class="flex items-center space-x-2">
-                    <mat-icon>flag</mat-icon>
-                    <span>Circuit of Spa-Francorchamps</span>
-                  </div>
-                  <div class="flex items-center space-x-2">
-                    <mat-icon>directions_car</mat-icon>
-                    <span>Toyota GR86</span>
-                  </div>
-                </div>
-                </div>
-                <!-- Card 1 -->
-          
-            <!-- Second White Box -->
-            <div class="border border-cBorderGrey bg-white rounded-lg h-[300px]"></div>
-        
-            <!-- Third White Box -->
-            <div class="border border-cBorderGrey bg-white rounded-lg h-[300px]"></div>
+            <app-race-tile [race]="latestRace"></app-race-tile>
+            <app-race-tile [race]="latestRace"></app-race-tile>
+            <app-race-tile [race]="latestRace"></app-race-tile>
           </div>
           
        

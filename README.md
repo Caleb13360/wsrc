@@ -1,9 +1,9 @@
 # WSRC Repository
 Comprises of all the apps and serices relating to wsrc
 ## Development
-Run from project directory (C:User/..../wsrc)
+Ensure Docker Desktop is running
 
-Ensure Docker Desktop is already running, then do
+Run from project directory (C:User/..../wsrc)
 ```bash
 ./run.bat
 ```

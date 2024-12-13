@@ -5,6 +5,7 @@ Comprises of all the apps and serices relating to wsrc
 ./run.bat
 ```
 Once the server is running, open your browser and navigate to [wsrc](http://localhost:4200/)
+
 *If encountering any issues try*
 ```bash
 ./safeRun.bat

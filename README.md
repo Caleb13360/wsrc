@@ -10,7 +10,7 @@ Once the server is running, open your browser and navigate to [wsrc](http://loca
 ```bash
 ./safeRun.bat
 ```
-# Production
+## Production
 [wsrc.live](http://wsrc.live/) is hosted on render using cloudflare dns
 
 # WSRC Web App

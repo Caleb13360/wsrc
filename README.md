@@ -14,8 +14,10 @@ Once the server is running, open your browser and navigate to [wsrc](http://loca
 [wsrc.live](http://wsrc.live/) is hosted on render using cloudflare dns
 
 # WSRC Web App
+*Port 4200*
+
 Main site for users built on Angular 19
-Runs on port 4200
 # WSRC API
+*Port 3000*
+
 Express REST api used to serve web app and interact with iracing api
-Runs on port 3000

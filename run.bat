@@ -1,11 +1,5 @@
 @echo off
 setlocal
-echo Installing Dependencies...
-cd wsrc-api
-call npm install
-cd ..
-cd wsrc-app
-call npm install
 echo Running development Environment...
 docker login
 docker system prune -f

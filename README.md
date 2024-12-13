@@ -1,15 +1,20 @@
 # WSRC Repository
 Comprises of all the apps and serices relating to wsrc
-
-# WSRC Web App
-Main site for users built on Angular 19
 ## Development
 ```bash
 ./run.bat
 ```
 Once the server is running, open your browser and navigate to [wsrc](http://localhost:4200/)
+*If encountering any issues try*
+```bash
+./safeRun.bat
+```
 # Production
 [wsrc.live](http://wsrc.live/) is hosted on render using cloudflare dns
 
-# Test API
-Express REST api used to test api connection
+# WSRC Web App
+Main site for users built on Angular 19
+Runs on port 4200
+# WSRC API
+Express REST api used to serve web app and interact with iracing api
+Runs on port 3000

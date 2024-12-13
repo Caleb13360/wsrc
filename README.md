@@ -1,6 +1,7 @@
 # WSRC Repository
 Comprises of all the apps and serices relating to wsrc
 ## Development
+Run from root directory (xyz/wsrc)
 ```bash
 ./run.bat
 ```

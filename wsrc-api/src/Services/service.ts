@@ -12,13 +12,15 @@ export class Service{
             name: '',
             country: '',
             last_competed: new Date('2024-01-01'),
+            
     };
     race: Race = {
             id: 1,
             racers: ['Racer1', 'Racer2', 'Racer3'],
             track: 'Silverstone Circuit',
+            track_config:'2012 GP',
             car: 'Formula 1',
-            startTime: new Date('2024-12-25T14:00:00Z'),
+            start_time: new Date('2024-12-25T14:00:00Z'),
             entry_fee: 100,
             name: 'Grand Prix 2024',
             // Weather
@@ -31,7 +33,13 @@ export class Service{
             // Details
             race_length: 300,
             quali_laps: 3,
-            max_racers: 20
+            max_racers: 20,
+             fixed_setup: true,
+    fastest_lap_last_race:3.01,
+    average_lap_last_race: 3.06,
+    first_pp:100,  // Prize pool amount for first place
+    second_pp:80, // Prize pool amount for second place
+    third_pp: 60, // Prize pool amount for third place
     }
     getUserById(id: string): User {
         return this.user;

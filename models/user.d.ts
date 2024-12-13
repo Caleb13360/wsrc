@@ -6,6 +6,5 @@ export interface User {
     name: string;
     country: string;
     last_competed: Date;
-    date_joined:Date;
     
 }

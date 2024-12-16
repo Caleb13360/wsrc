@@ -11,11 +11,11 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { WithdrawComponent } from './withdraw/withdraw.component';
 import { ResultDetailsComponent } from './result-details/result-details.component';
 import { LoginComponent } from './login/login.component';
-import { EventsComponent } from './events/events.component';
-import { BigBlindComponent } from './big-blind/big-blind.component';
-import { WelcomeGiftComponent } from './welcome-gift/welcome-gift.component';
-import { DoubleRPComponent } from './double-rp/double-rp.component';
-import { RPRewardsComponent } from './rpRewards/rpRewards.component';
+import { EventsComponent } from './events_pages/events/events.component';
+import { BigBlindComponent } from './events_pages/big-blind/big-blind.component';
+import { WelcomeGiftComponent } from './events_pages/welcome-gift/welcome-gift.component';
+import { DoubleRPComponent } from './events_pages/double-rp/double-rp.component';
+import { RPRewardsComponent } from './events_pages/rpRewards/rpRewards.component';
 
 
 export const routes: Routes = [

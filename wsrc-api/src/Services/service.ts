@@ -1,7 +1,9 @@
 import type { Race } from '@models/race.d.ts';
 import type { User } from '@models/user.d.ts';
 import { IRacingService} from './iracing.js';
+import { Supabase } from './supaBase.js';
 const iRacingService: IRacingService = new IRacingService();
+const db: Supabase = new Supabase();
 
 export class Service{
     user: User = {
@@ -44,11 +46,15 @@ export class Service{
     getUserById(id: string): User {
         return this.user;
     }
-    getLatestRace(startIndex: number, endIndex: number): Race[] {
+    async getLatestRace(startIndex: number, endIndex: number): Promise<Race[]> {
+        const result = await db.getUpcomingRaces(startIndex, endIndex);
+        console.log(result)
         return [this.race];
     }
-    getRace(id: string): Race {
-        return this.race;
+    async getRace(id: string): Promise<Race> {
+        const result = await db.getRace(id);
+        console.log(result);
+        return result[0] as Race;
     }
     getAverageLapTime(raceId: string): number{
         return 93.791;

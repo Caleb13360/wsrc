@@ -10,10 +10,9 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'wsrc-app';
-    menuVisible = false; // Tracks if the menu is open
+     menuVisible = false;
 
-  toggleMenu(): void {
-    this.menuVisible = !this.menuVisible; // Toggles the menu state
-    console.log('Menu toggled:', this.menuVisible); // Debugging
+  toggleMenu() {
+    this.menuVisible = !this.menuVisible;
   }
 }

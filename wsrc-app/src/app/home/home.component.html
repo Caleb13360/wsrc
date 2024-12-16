@@ -24,15 +24,15 @@
     <!-- Upcoming Races -->
     
         <!-- Race Cards -->
-        <div class="bg-cDarkBlue py-10 px-40">
+        <div class="bg-cDarkBlue py-6 lg:py-10 px-10  sm:py-6 lg:px-40">
           <!-- Title -->
           <div class="space-y-2 mb-8">
-            <p class="text-cWhite text-5xl font-roboto-condensed font-bold tracking-tighter">Upcoming WSRC Races</p>
-            <p class="text-cWhite text-2xl font-roboto-condensed tracking-tighter">The next 4 races are shown below.</p>
+            <p class="text-cWhite text-4xl sm:text-5xl font-roboto-condensed font-bold tracking-tighter">Upcoming WSRC Races</p>
+            <p class="text-cWhite text-xl sm:text-2xl font-roboto-condensed tracking-tighter">The next 4 races are shown below.</p>
           </div>
         
           <!-- 1x3 Grid -->
-          <div class="grid grid-cols-3 gap-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             <app-race-tile [race]="latestRace"></app-race-tile>
             <app-race-tile [race]="latestRace"></app-race-tile>
             <app-race-tile [race]="latestRace"></app-race-tile>
@@ -42,7 +42,7 @@
         
         <!-- View More Races Button -->
         <div class="flex justify-center mt-6">
-          <button routerLink="/races" class="bg-cBlue text-cWhite text-2xl py-4 px-28 rounded-md font-semibold font-roboto tracking-tighter hover:bg-cWhite hover:text-cBlack transition-all duration-300 
+          <button routerLink="/races" class="bg-cBlue text-cWhite text-1xl sm:text-2xl py-4 px-20 sm:px-28 rounded-md font-semibold font-roboto tracking-tighter hover:bg-cWhite hover:text-cBlack transition-all duration-300 
                           ease-linear hover:px-36">Show more races</button>
         </div>
     </div>

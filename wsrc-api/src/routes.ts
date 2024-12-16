@@ -7,12 +7,26 @@ const iRacingService: IRacingService = new IRacingService();
 //#region RACES
 const router = Router();
 // Get the next race to occur
-router.get('/race/next', (_, res) => {
-    res.json({ race: service.getLatestRace(0,1)});
+router.get('/race/next', async (_, res) => {
+    try {
+        const races = await service.getUpcomingRaces(new Date(), 1);
+        if (races.length > 0) {
+            res.json({ race: races[0] });
+        } else {
+            res.status(404).json({ error: 'No upcoming races found' });
+        }
+    } catch (err) {
+        if (err instanceof Error) {
+            res.status(500).json({ error: err.message });
+        } else {
+            res.status(500).json({ error: 'An unknown error occurred' });
+        }
+    }
 });
 // Get race by ID
-router.get('/race/:ID', (_, res) => {
-    res.json({ race: service.getRace('ID')});
+router.get('/race/:id', (req, res) => {
+    const { id } = req.params;
+    res.json({ race: service.getRace(id)});
 });
 // Get race lap statistics (average and fastest lap time)
 router.get('/race/:ID/lap_stats', (_, res) => {
@@ -24,16 +38,16 @@ router.get('/race/:ID/lap_stats', (_, res) => {
 });
 router.get('/race/:ID/fastest_lap')
 // Get the next x races to start
-router.get('/races/upcoming/:Start/:Stop', (_, res) => {
-    const startIndex = 0;
-    const endIndex = 0;
-    res.json({ races: service.getLatestRace(startIndex,endIndex)});
+router.get('/races/upcoming/:StartAfter/:NumberOfResults', (_, res) => {
+    const startAfter = new Date();
+    const numberOfResults = 0;
+    res.json({ races: service.getUpcomingRaces(startAfter, numberOfResults)});
 });
 //Get the next x races that have finished
-router.get('/races/finished/:Start/:Stop', (_, res) => {
-    const startIndex = 0;
-    const endIndex = 0;
-    res.json({ races: service.getLatestRace(startIndex,endIndex)});
+router.get('/races/finished/:StartAfter/:NumberOfResult', (_, res) => {
+    const startAfter = new Date();
+    const numberOfResults = 0;
+    res.json({ races: service.getFinishedRaces(startAfter, numberOfResults)});
 });
 // Get the total amount of prize money won by users
 router.get('/stats/total-prize-amount', (_, res) => {

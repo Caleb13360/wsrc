@@ -1,27 +1,43 @@
 export interface Race {
-    id: number;
-    racers: string[];
-    track: string;
-    track_config: string,
+    //race
+    race_id: number;
+    race_name: string;
+    max_racers: number;
+    race_time_of_day: string;
+    racing_discipline: string;
     car: string;
-    start_time: Date;
+    launch_time: Date;
+    server_location: string;
     entry_fee: number;
-    name: string;
-    // Weather
-    temperature: number;
-    forecast: string; 
-    cloud_cover: number;
-    rain_chance: number;
+    
+    //race details
+    race_details_id: number;
+    race_laps: number;
+    race_time: number;
+    event_type: string;
+    practice_time: number;
+    event_duration: number;
+    qualifier_laps: number;
+    qualifier_time: number;
+
+    //weather
+    weather_id: number;
+    weather_name: string;
     humidity: number;
     wind_speed: number;
-    // Details
-    race_length: number;
-    quali_laps: number;
-    max_racers: number;
-    fixed_setup: boolean;
-    fastest_lap_last_race:number;
-    average_lap_last_race: number;
-    first_pp:number;  // Prize pool amount for first place
-    second_pp:number; // Prize pool amount for second place
-    third_pp: number; // Prize pool amount for third place
+    cloud_cover: string;
+    fog_enabled: boolean;
+    temperature: number;
+    track_moisture: string;
+    wind_direction: string;
+
+    //track
+    track_id: number;
+    track_name: string;
+    track_config: string;
+
+    //prize pool
+    prize_pool_id: number;
+    cash_split: number[];
+    racer_points: number[];
 }

@@ -1,0 +1,79 @@
+<div class="bg-cDarkBlue text-cWhite font-roboto tracking-tighter">
+    <div class="relative h-full ">
+      
+        <div class="p-6 w-full ">
+            <!-- Header and Sub-header -->
+            <div class="flex justify-between items-center mt-8 mx-52">
+                <div>
+                    <h1 class="text-5xl mb-2 font-roboto-condensed tracking-tighter font-bold ">Withdraw money</h1>
+<h2 class="text-cWhite text-2xl mb-4 font-roboto-condensed tracking-tighterl">Transfer money from your WSRC account to your bank.</h2>
+                </div>
+
+            </div>
+        </div>
+        <div class="bg-cDarkBlue text-cWhite font-roboto tracking-tighter px-12 py-10">
+            <!-- Section Header -->
+            <div class="mx-auto max-w-4xl">
+                <h3 class="text-md mb-4">
+                    Please enter details of the bank account you wish to receive the funds into.
+                </h3>
+        
+                <!-- Bank Account Form -->
+                <div class="space-y-6">
+                    <!-- BSB -->
+                    <div>
+                        <label for="bsb" class="block text-sm font-bold mb-2">BSB</label>
+                        <input id="bsb" type="text" placeholder="Enter your BSB"
+                            class="w-full px-4 py-2 rounded-md border border-cBorderGrey bg-cDarkBlue text-cWhite placeholder-gray-400 outline-none focus:ring-2 focus:ring-cBlue" />
+                    </div>
+        
+                    <!-- Account Number -->
+                    <div>
+                        <label for="accountNumber" class="block text-sm font-bold mb-2">Account No.</label>
+                        <input id="accountNumber" type="text" placeholder="Enter your account number"
+                            class="w-full px-4 py-2 rounded-md  border border-cBorderGrey bg-cDarkBlue text-cWhite placeholder-gray-400 outline-none focus:ring-2 focus:ring-cBlue" />
+                    </div>
+        
+                    <!-- Account Holder Name -->
+                    <div>
+                        <label for="accountHolderName" class="block text-sm font-bold mb-2">Account Holder Name</label>
+                        <input id="accountHolderName" type="text" placeholder="Enter the account holder's name"
+                            class="w-full px-4 py-2 rounded-md  border border-cBorderGrey bg-cDarkBlue text-cWhite placeholder-gray-400 outline-none focus:ring-2 focus:ring-cBlue" />
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Withdrawal Section -->
+            <div class="mt-12 mx-auto max-w-4xl">
+               
+        
+                <div class="space-y-6">
+                    <!-- Current Balance -->
+                    <div class="flex items-center justify-between">
+                        <label class="text-2xl font-bold">Current WSRC Balance</label>
+                        <span class="text-lg font-bold text-cGreen">$123,999</span>
+                    </div>
+        
+                    <!-- Withdrawal Amount -->
+                    <div>
+                        <label for="withdrawalAmount" class="block text-sm font-bold mb-2">Withdrawal amount</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-3 flex items-center text-gray-400">$</span>
+                            <input id="withdrawalAmount" type="text" placeholder="Enter amount"
+                                class="w-full pl-8 px-4 py-2 rounded-md border border-cBorderGrey bg-cDarkBlue text-cWhite placeholder-gray-400 outline-none focus:ring-2 focus:ring-cBlue" />
+                        </div>
+                        <p class="text-sm mt-1 text-gray-500">Minimum withdrawal amount is $20 USD.</p>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Confirm Button -->
+            <div class="mt-8 mx-auto max-w-4xl">
+                <button
+                    class="w-full py-3 bg-cBlue text-cWhite font-bold text-lg rounded-md shadow-md hover:bg-cWhite hover:text-cBlack transition-colors duration-200">
+                    Confirm Withdrawal amount
+                </button>
+            </div>
+        </div>
+
+            </div>

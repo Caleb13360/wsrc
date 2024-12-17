@@ -1,0 +1,84 @@
+import { Router } from 'express';
+import { Service } from './Services/service.js';
+import { IRacingService} from './Services/iracing.js';
+const service: Service = new Service();
+const iRacingService: IRacingService = new IRacingService();
+//
+//#region RACES
+const router = Router();
+// Get the next race to occur
+router.get('/race/next', async (_, res) => {
+    try {
+        const races = await service.getUpcomingRaces(new Date(), 1);
+        if (races.length > 0) {
+            res.json({ race: races[0] });
+        } else {
+            res.status(404).json({ error: 'No upcoming races found' });
+        }
+    } catch (err) {
+        if (err instanceof Error) {
+            res.status(500).json({ error: err.message });
+        } else {
+            res.status(500).json({ error: 'An unknown error occurred' });
+        }
+    }
+});
+// Get race by ID
+router.get('/race/:id', (req, res) => {
+    const { id } = req.params;
+    res.json({ race: service.getRace(id)});
+});
+// Get race lap statistics (average and fastest lap time)
+router.get('/race/:ID/lap_stats', (_, res) => {
+    const raceId = 'ID';
+    res.json({
+        average_time: service.getAverageLapTime(raceId),
+        fastest_time: service.getFastestLapTime(raceId)
+    })
+});
+router.get('/race/:ID/fastest_lap')
+// Get the next x races to start
+router.get('/races/upcoming/:StartAfter/:NumberOfResults', (_, res) => {
+    const startAfter = new Date();
+    const numberOfResults = 0;
+    res.json({ races: service.getUpcomingRaces(startAfter, numberOfResults)});
+});
+//Get the next x races that have finished
+router.get('/races/finished/:StartAfter/:NumberOfResult', (_, res) => {
+    const startAfter = new Date();
+    const numberOfResults = 0;
+    res.json({ races: service.getFinishedRaces(startAfter, numberOfResults)});
+});
+// Get the total amount of prize money won by users
+router.get('/stats/total-prize-amount', (_, res) => {
+    res.json({totalPrizeAmount: service.getTotalPrizeAmount()})
+});
+// Gets user by id
+router.get('/user/:ID', (_, res) => {
+    const id = 'ID';
+    res.json({user: service.getUserById(id)});
+});
+// Gets transacations for a user
+router.get('/user/:ID/transactions', (_, res) => {
+    const id = 'ID';
+    res.json({transactions: service.getTransactions(id)})
+});
+// Gets notifications for a user
+router.get('/user/:ID/notifications', (_, res) => {
+    const id = 'ID';
+    res.json({notifcations: service.getNotifications(id)})
+});
+// Gets the racerpoints leaderboard
+router.get('/racerpoints', (_, res) => {
+    res.json({racerPointStandings: service.getAllRacerPoints()})
+});
+// Gets the current events
+router.get('/events/current', (_, res) => {
+    res.json({events: service.getCurrentEvents()});
+});
+// Gets upcoming events
+router.get('/events/upcoming', (_,res) => {
+    res.json({events: service.getUpcomingEvents()});
+});
+
+export default router;

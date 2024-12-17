@@ -1,0 +1,53 @@
+<div class="bg-cDarkBlue text-cWhite font-roboto tracking-tighter">
+<!-- Money Header -->
+<div class="bg-cGreen w-full h-78 flex items-center justify-center">
+    <div class="flex flex-col justify-center items-center ">
+        <div class="text-10xl font-bold font-roboto-condensed tracking-tighter text-cBlack">$102,122</div>
+        <div class="text-2xl mb-8 font-roboto tracking-tighter text-cBlack">Total Cash Prizes Won By Racers</div>
+    </div>
+</div>
+<!-- Withdraw -->
+<div class="p-4  px-60">
+    <div class="pt-3 flex justify-center">
+        <button routerLink="/withdraw" class="text-white text-2xl border border-cWhite font-roboto tracking-tighter px-14 py-4 rounded-md hover:px-20 hover:bg-cWhite hover:text-cBlack duration-200 transition-all ease-linear font-bold ">
+            Withdraw money
+        </button>
+    </div>
+</div>
+
+<div class="p-6 w-full ">
+    <!-- Header and Sub-header -->
+    <div class="flex justify-between items-center mb-6 mt-4 mx-52">
+        <div>
+            <h1 class="text-5xl mb-2 font-roboto-condensed tracking-tighter font-bold ">Transaction History</h1>
+            <h2 class="text-cWhite text-2xl mb-4 font-roboto-condensed tracking-tighterl">All transactions in and out of wallet will be shown here.</h2>
+        </div>
+
+    </div>
+
+<!-- Transaction History -->
+<div class="mx-52">
+    <table class="min-w-full bg-cDarkBlue ">
+        <thead class="border border-cBorderGrey bg-cDarkBlue">
+            <tr>
+                <th class="py-2 px-4 text-center">Date</th>
+                <th class="py-2 px-4 text-center">Time</th>
+                <th class="py-2 px-4 text-center">Ref No.</th>
+                <th class="py-2 px-4  text-center">Type</th>
+                <th class="py-2 px-4 text-center">Status</th>
+                <th class="py-2 px-4  text-center">Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let transaction of transactions;">
+                <td class="py-2 px-4  text-center">{{ transaction.date }}</td>
+                <td class="py-2 px-4 text-center">{{ transaction.time }}</td>
+                <td class="py-2 px-4 text-center">{{ transaction.ref_number }}</td>
+                <td class="py-2 px-4 text-center">{{ transaction.type }}</td>
+                <td class="py-2 px-4 text-center">{{ transaction.status }}</td>
+                <td class="py-2 px-4 text-center">${{ transaction.amount }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>

@@ -34,7 +34,7 @@
 
       <!-- Links (hidden on small screens, shown on larger screens) -->
     <div [ngClass]="{ 'hidden': !menuVisible, 'flex': menuVisible }"
-       class="absolute top-20 left-0 w-full bg-cBlack flex-col space-y-4 p-4 md:static md:flex md:space-y-0 md:space-x-7 md:p-0 md:flex-row md:items-center justify-center items-center hidden font-roboto-condensed">
+       class="absolute z-50 top-20 left-0 w-full bg-cBlack flex-col space-y-4 p-4 md:static md:flex md:space-y-0 md:space-x-7 md:p-0 md:flex-row md:items-center justify-center items-center hidden font-roboto-condensed">
       <a routerLink="/" class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">Home</a>
       <a routerLink="/races" class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">Races</a>
       <a routerLink="/events" class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">Events</a>

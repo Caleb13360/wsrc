@@ -53,14 +53,42 @@ export class Supabase {
         };
         return race;
     }
+    generateRacesFromData(data: any){
+        if (data.data) {
+            const races: Race[] = data.data.map(this.generateRaceFromData);
+            return races;
+        }
+        return [];
+    }
     async getFinishedRaces(startAfter: Date, numberOfResults: number): Promise<any> {
         const data = await this.sb
         .from('Races')
-        .select('*')
+        .select(`
+            *,
+            RaceWeather(*),
+            RaceDetails(*),
+            _Track(*),
+            PrizePool(*)
+        `)
         .lt('launch_time',  startAfter.toISOString())
         .order('launch_time', { ascending: false })
         .range(0, numberOfResults);
-        return data.data;
+        return this.generateRacesFromData(data);
+    }
+    async getFinishedRacesAfter(startAfterId: number, numberOfResults: number): Promise<any> {
+        const data = await this.sb
+        .from('Races')
+        .select(`
+            *,
+            RaceWeather(*),
+            RaceDetails(*),
+            _Track(*),
+            PrizePool(*)
+        `)
+        // .lt('launch_time',  startAfter.toISOString())
+        .order('launch_time', { ascending: false })
+        .range(0, numberOfResults);
+        return this.generateRacesFromData(data);
     }
     async getUpcomingRaces(startAfter: Date, numberOfResults: number): Promise<Race[]> {
         const data = await this.sb
@@ -75,21 +103,44 @@ export class Supabase {
         .gt('launch_time',  startAfter.toISOString())
         .order('launch_time', { ascending: true })
         .range(0, numberOfResults);
-        if (data.data) {
-            const races: Race[] = data.data.map(this.generateRaceFromData);
-            return races;
-        }
-        return [];
+        return this.generateRacesFromData(data);
+    }
+    async getUpcomingRacesAfter(startAfterId: number, numberOfResults: number): Promise<Race[]> {
+        const data = await this.sb
+        .from('Races')
+        .select(`
+            *,
+            RaceWeather(*),
+            RaceDetails(*),
+            _Track(*),
+            PrizePool(*)
+        `)
+        // .gt('launch_time',  startAfter.toISOString())
+        .order('launch_time', { ascending: true })
+        .range(0, numberOfResults);
+        return this.generateRacesFromData(data);
     }
 
     async getRace(id: string): Promise<Race | null> {
         const data = await this.sb
         .from('Races')
-        .select('*')
-        .eq('id', id)
+        .select(`
+            *,
+            RaceWeather(*),
+            RaceDetails(*),
+            _Track(*),
+            PrizePool(*)
+        `)
+        .eq('race_id', id)
         .single();
-        return data.data;
+        return this.generateRaceFromData(data);
     }
+
+    // async getTotalPrizeAmount(): Promise<Number | null>{
+    //     const data = await this.sb
+    //     .from('Transactions')
+    //     // sum all transacations of type prize money
+    // }
 
     // async getTransactions
 

@@ -16,6 +16,14 @@ export class ApiService {
     return this.httpClient.get<{ race: Race }>(`${this.apiUrl}/race/next`);
   }
 
+  getRace(id: string) {
+    return this.httpClient.get<{race: Race}>(`${this.apiUrl}/race/${id}`)
+  }
+
+  getLatestRaces(numberOfResults: number) {
+    return this.httpClient.get<{races: Race[]}>(`${this.apiUrl}/races/upcoming/${numberOfResults}`)
+  }
+
   getTotalMoney() {
     return this.httpClient.get<{ totalPrizeAmount: number }>(`${this.apiUrl}/stats/total-prize-amount`);
   }

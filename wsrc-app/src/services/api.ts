@@ -17,11 +17,11 @@ export class ApiService {
   }
 
   getRace(id: string) {
-    return this.httpClient.get<{race: Race}>(`http://localhost:3000/race/${id}`)
+    return this.httpClient.get<{race: Race}>(`${this.apiUrl}/race/${id}`)
   }
 
   getLatestRaces(numberOfResults: number) {
-    return this.httpClient.get<{races: Race[]}>(`http://localhost:3000/races/upcoming/${numberOfResults}`)
+    return this.httpClient.get<{races: Race[]}>(`${this.apiUrl}/races/upcoming/${numberOfResults}`)
   }
 
   getTotalMoney() {

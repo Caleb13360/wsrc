@@ -11,7 +11,7 @@
       </div>
       
       <div class="absolute inset-0 flex flex-col justify-end items-center text-white">
-        <button routerLink="/details"
+        <button [routerLink]="['/race', race.race_id]"
           class="bg-cBlue text-cWhite text-1xl py-2.5 px-10 rounded-md font-roboto-condensed hover:bg-cWhite hover:text-cBlack transition-all duration-300 
           ease-linear hover:px-14">View race details</button>
         <div class="text-md my-2">{{ race ? countdown : '?' }}</div>

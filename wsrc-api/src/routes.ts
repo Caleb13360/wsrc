@@ -16,17 +16,22 @@ router.get('/race/next', async (_, res) => {
             res.status(404).json({ error: 'No upcoming races found' });
         }
     } catch (err) {
-        if (err instanceof Error) {
-            res.status(500).json({ error: err.message });
-        } else {
-            res.status(500).json({ error: 'An unknown error occurred' });
-        }
+        res.status(500).json({ error: 'Error fetching next race' });
     }
 });
 // Get race by ID
-router.get('/race/:id', (req, res) => {
+router.get('/race/:id', async (req, res) => {
     const { id } = req.params;
-    res.json({ race: service.getRace(id)});
+    try {
+        const race = await service.getRace(id);
+        if (race!==null) {
+            res.json({ race: race});
+        } else {
+            res.status(404).json({ error: 'Race not found' });
+        }
+    } catch (err) {
+        res.status(500).json({ error: `Error fetching race ${id}`});
+    }
 });
 // Get race lap statistics (average and fastest lap time)
 router.get('/race/:ID/lap_stats', (_, res) => {
@@ -38,16 +43,60 @@ router.get('/race/:ID/lap_stats', (_, res) => {
 });
 router.get('/race/:ID/fastest_lap')
 // Get the next x races to start
-router.get('/races/upcoming/:StartAfter/:NumberOfResults', (_, res) => {
-    const startAfter = new Date();
-    const numberOfResults = 0;
-    res.json({ races: service.getUpcomingRaces(startAfter, numberOfResults)});
+router.get('/races/upcoming/:numberOfResults', async (req, res) => {
+    const { numberOfResults } = req.params;
+    try {
+        const races = await service.getUpcomingRaces(new Date(), Number(numberOfResults));
+        if (races.length > 0) {
+            res.json({ races: races});
+        } else {
+            res.status(404).json({ error: 'No upcoming races found' });
+        }
+    } catch (err) {
+        res.status(500).json({ error: 'Error fetching upcoming races' });
+    }
+});
+// Get the next x races to start
+router.get('/races/upcoming/:numberOfResults/afterId/:id', async (req, res) => {
+    const { numberOfResults, id } = req.params;
+    try {
+        const races = await service.getUpcomingRacesAfter(Number(id), Number(numberOfResults));
+        if (races.length > 0) {
+            res.json({ races: races});
+        } else {
+            res.status(404).json({ error: 'No upcoming races found' });
+        }
+    } catch (err) {
+        res.status(500).json({ error: 'Error fetching upcoming races' });
+    }
 });
 //Get the next x races that have finished
-router.get('/races/finished/:StartAfter/:NumberOfResult', (_, res) => {
-    const startAfter = new Date();
-    const numberOfResults = 0;
-    res.json({ races: service.getFinishedRaces(startAfter, numberOfResults)});
+router.get('/races/finished/:numberOfResults', async (req, res) => {
+    const { numberOfResults } = req.params;
+    try {
+        const races = await service.getFinishedRaces(new Date(), Number(numberOfResults));
+        if (races.length > 0) {
+            res.json({ races: races});
+        } else {
+            res.status(404).json({ error: 'No finished races found' });
+        }
+    } catch (err) {
+        res.status(500).json({ error: 'Error fetching finished races' });
+    }
+});
+//Get the next x races that have finished after a certain id
+router.get('/races/finished/:numberOfResults/afterId/:id', async (req, res) => {
+    const { numberOfResults, id } = req.params;
+    try {
+        const races = await service.getFinishedRacesAfter(Number(id), Number(numberOfResults));
+        if (races.length > 0) {
+            res.json({ races: races});
+        } else {
+            res.status(404).json({ error: 'No finished races found' });
+        }
+    } catch (err) {
+        res.status(500).json({ error: 'Error fetching finished races' });
+    }
 });
 // Get the total amount of prize money won by users
 router.get('/stats/total-prize-amount', (_, res) => {

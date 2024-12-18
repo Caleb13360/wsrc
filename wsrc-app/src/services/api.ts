@@ -7,10 +7,18 @@ import type {Race} from '../../../models/race.d.ts';
     providedIn: 'root'
   })
 export class ApiService {
-    constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
-    getLatestRace() {
+  getLatestRace() {
     return this.httpClient.get<{race: Race}>('http://localhost:3000/race/next')
+  }
+
+  getRace(id: string) {
+    return this.httpClient.get<{race: Race}>(`http://localhost:3000/race/${id}`)
+  }
+
+  getLatestRaces(numberOfResults: number) {
+    return this.httpClient.get<{races: Race[]}>(`http://localhost:3000/races/upcoming/${numberOfResults}`)
   }
 
   getTotalMoney() {

@@ -1,4 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import type {Race} from '../../../../models/race.d.ts';
 import { RouterLink } from '@angular/router';
@@ -7,18 +8,18 @@ import { ApiService } from './../../services/api';
 
 @Component({
   selector: 'app-home',
-  imports: [MatIconModule, RouterLink, RaceTileComponent],
+  imports: [MatIconModule, RouterLink, RaceTileComponent, CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
   providers: [ApiService]
 })
 export class HomeComponent implements OnInit {
   constructor(private apiService: ApiService) {}
-  latestRace!: Race;
+  latestRaces!: Race[];
   totalPrizeAmount: number = 0;
   remainingTime: string = '';
   ngOnInit(): void {
-    this.apiService.getLatestRace().subscribe((data)=> {this.latestRace=data.race});
+    this.apiService.getLatestRaces(3).subscribe((data)=> {this.latestRaces=data.races});
     this.apiService.getTotalMoney().subscribe((data)=> {this.totalPrizeAmount=data.totalPrizeAmount});
   }
 }

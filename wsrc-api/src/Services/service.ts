@@ -50,9 +50,17 @@ export class Service{
         const result = await db.getUpcomingRaces(startAfter, numberOfResults);
         return result;
     }
+    async getUpcomingRacesAfter(startAfterId: number, numberOfResults: number): Promise<Race[]> {
+        const result = await db.getUpcomingRacesAfter(startAfterId, numberOfResults);
+        return result;
+    }
     async getFinishedRaces(startAfter: Date, numberOfResults: number): Promise<Race[]> {
         const result = await db.getFinishedRaces(startAfter, numberOfResults);
         console.log(result)
+        return [];
+    }
+    async getFinishedRacesAfter(startAfterId: number, numberOfResults: number): Promise<Race[]> {
+        const result = await db.getFinishedRacesAfter(startAfterId, numberOfResults);
         return [];
     }
     async getRace(id: string): Promise<Race> {

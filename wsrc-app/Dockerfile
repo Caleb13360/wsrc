@@ -6,7 +6,7 @@ COPY ./wsrc-app/package*.json ./
 RUN npm ci
 RUN npm install -g @angular/cli
 COPY ./wsrc-app .
-RUN ng build --configuration=prod
+RUN ng build --prod
 
 FROM nginx:latest
 COPY ./wsrc-app/nginx.conf /etc/nginx/conf.d/default.conf

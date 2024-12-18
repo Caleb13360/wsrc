@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
+import { environment } from '../environments/environment';
 
 import type {Race} from '../../../models/race.d.ts';
 
@@ -7,10 +8,12 @@ import type {Race} from '../../../models/race.d.ts';
     providedIn: 'root'
   })
 export class ApiService {
+  private apiUrl = environment.apiUrl;
+
   constructor(private httpClient: HttpClient) {}
 
   getLatestRace() {
-    return this.httpClient.get<{race: Race}>('http://localhost:3000/race/next')
+    return this.httpClient.get<{ race: Race }>(`${this.apiUrl}/race/next`);
   }
 
   getRace(id: string) {
@@ -22,6 +25,6 @@ export class ApiService {
   }
 
   getTotalMoney() {
-    return this.httpClient.get<{ totalPrizeAmount: number }>('http://localhost:3000/stats/total-prize-amount')
-  } 
+    return this.httpClient.get<{ totalPrizeAmount: number }>(`${this.apiUrl}/stats/total-prize-amount`);
+  }
 }

@@ -24,8 +24,8 @@ jobs:
       # Step 3: Build and push the wsrc-app image
       - name: Build and push wsrc-app
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/wsrc:app -f ./wsrc-app/Dockerfile .
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/wsrc:app
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/wsrc:app -f ./wsrc-app/Dockerfile .
+          docker push ${{ secrets.DOCKER_USERNAME }}/wsrc:app
 
       # # Step 4: Build and push the wsrc-api image
       # - name: Build and push wsrc-api

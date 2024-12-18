@@ -27,8 +27,8 @@ jobs:
           docker build -t ${{ secrets.DOCKER_USERNAME }}/wsrc:app -f ./wsrc-app/Dockerfile .
           docker push ${{ secrets.DOCKER_USERNAME }}/wsrc:app
 
-      # # Step 4: Build and push the wsrc-api image
-      # - name: Build and push wsrc-api
-      #   run: |
-      #     docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/wsrc-api:dev -f ./wsrc-api/Dockerfile.dev .
-      #     docker push ${{ secrets.DOCKERHUB_USERNAME }}/wsrc-api:dev
+      # Step 4: Build and push the wsrc-api image
+      - name: Build and push wsrc-api
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/wsrc:api -f ./wsrc-api/Dockerfile .
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/wsrc:api

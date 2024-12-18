@@ -15,4 +15,11 @@ export class AppComponent {
   toggleMenu() {
     this.menuVisible = !this.menuVisible;
   }
+
+  pressToggleMenu() {
+    if(this.menuVisible){
+        this.menuVisible = !this.menuVisible;
+    }
+    
+  }
 }

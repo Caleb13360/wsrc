@@ -52,7 +52,6 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "fileReplacements": true
               "outputHashing": "all"
             },
             "development": {

@@ -9,6 +9,7 @@ export let httpServer: ReturnType<typeof http.createServer>;
 export const Main = () => {
     const allowedOrigins = ['http://localhost:4200', 'http://170.64.251.251:8080'];
     app.use((req, res, next) => {
+        const origin = req.headers.origin;
         if (allowedOrigins.includes(origin)) {
             res.header('Access-Control-Allow-Origin', origin);
         }

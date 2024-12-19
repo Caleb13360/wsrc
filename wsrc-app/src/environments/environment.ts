@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://wsrc.live'
+  apiUrl: 'http://wsrc.live/api'
 };

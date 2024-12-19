@@ -35,3 +35,8 @@ jobs:
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/wsrc:api -f ./wsrc-api/Dockerfile .
           docker push ${{ secrets.DOCKER_USERNAME }}/wsrc:api
+          
+      - name: Build and push wsrc-nginx
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/wsrc:nginx -f ./wsrc-nginx/Dockerfile .
+          docker push ${{ secrets.DOCKER_USERNAME }}/wsrc:nginx

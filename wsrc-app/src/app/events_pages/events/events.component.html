@@ -25,16 +25,16 @@
                 <div class="py-4 sm:py-8 px-4 sm:px-8 lg:pb-12 lg:px-12">
                     <div class="flex flex-col lg:flex-row lg:justify-between items-start lg:items-center">
                         <h1
-                            class="text-cOrange text-3xl sm:text-4xl lg:text-6xl font-roboto-condensed font-bold tracking-tighter">
+                            class="text-cOrange text-4xl sm:text-4xl lg:text-6xl font-roboto-condensed font-bold tracking-tighter">
                             Racer Points <span class="text-cWhite">Event</span>
                         </h1>
-                        <div class="text-cWhite text-sm sm:text-base lg:text-xl font-roboto-condensed mt-4 lg:mt-0">
+                        <div class="text-cWhite text-md sm:text-base lg:text-xl font-roboto-condensed mt-4 lg:mt-0 hidden sm:block">
                             Current Rank: 5th<br>
                             Current RP: 25
                         </div>
                     </div>
                     <h2
-                        class="text-cWhite text-sm sm:text-lg lg:text-2xl mt-4 font-roboto-condensed tracking-tighter lg:w-1/2">
+                        class="text-cWhite text-md sm:text-lg lg:text-2xl mt-4 font-roboto-condensed tracking-tighter lg:w-1/2">
                         Place 4-20th to earn racer points (RP). If you make it into the top 10 before the end of the week,
                         you'll win exclusive prizes.
                     </h2>
@@ -77,7 +77,7 @@
                 </div>
                 <div class="text-center">
                     <button routerLink="/events/RPRewards"
-                        class="bg-cOrange text-center text-cBlack text-sm sm:text-xl py-2 px-10 sm:py-3.5 sm:px-20 rounded-md font-bold font-roboto-condensed hover:bg-cWhite hover:text-cBlack transition-all duration-300 ease-linear">
+                        class="bg-cOrange text-center text-cBlack text-md sm:text-xl py-2 px-10 sm:py-3.5 sm:px-20 rounded-md font-bold font-roboto-condensed hover:bg-cWhite hover:text-cBlack transition-all duration-300 ease-linear">
                         View Details
                     </button>
                     <p class="text-cWhite mt-4 pb-6 text-sm sm:text-base">
@@ -95,11 +95,11 @@
         <div class=" h-full  bg-cBlack bg-opacity-40 ">
             <div class="py-4 sm:py-8 px-4 sm:px-8 lg:pb-12 lg:px-12">
                 <div class="flex flex-col lg:flex-row lg:justify-between items-start lg:items-center">
-                    <h1 class="text-cWhite text-3xl sm:text-4xl lg:text-6xl  mb-4 font-roboto-condensed font-bold tracking-tighter">
+                    <h1 class="text-cWhite text-4xl sm:text-4xl lg:text-6xl  mb-4 font-roboto-condensed font-bold tracking-tighter">
                         Welcoming
                         <span class="text-[#00EEFF]">Race Gift</span>
                     </h1>
-                    <div class="text-cWhite text-sm sm:text-base lg:text-xl font-roboto-condensed">
+                    <div class="text-cWhite text-sm sm:text-base lg:text-xl font-roboto-condensed hidden sm:block">
                         0/5 races complete
                        <br>
                        <br>
@@ -107,8 +107,8 @@
 
                 </div>
 
-
-                <h2 class="text-cWhite text-sm sm:text-lg lg:text-2xl mb-2 font-roboto-condensed tracking-tighter pr-5 lg:w-1/3">
+<!-- desktop text -->
+                <h2 class="text-cWhite text-md sm:text-lg lg:text-2xl mb-2 font-roboto-condensed tracking-tighter pr-5 lg:w-1/3 hidden sm:block">
                 Welcome to WSRC! We are so happy you decided to give us
                 a shot. As a way of saying thanks if you participate in 5 races
                 we'll give you a free race entry on us!
@@ -116,12 +116,21 @@
                 Keep Racing!
                 </h2>
 
+                <!-- mobile text -->
+
+                <h2 class="text-cWhite text-md sm:text-lg lg:text-2xl mb-2 font-roboto-condensed tracking-tighter pr-5 lg:w-1/3 block sm:hidden">
+                    Welcome to WSRC! We are so happy you decided to give us
+                    a shot. As a way of saying thanks if you participate in 5 races
+                    we'll give you a free race entry on us!
+                  
+                </h2>
+
                
 
             </div>
             <div class="text-center">
                 <button routerLink="/events/welcomeGift"
-                    class="bg-[#00EEFF] text-center text-cBlack text-sm sm:text-xl py-2 px-10 sm:py-3.5 sm:px-20 rounded-md font-bold font-roboto-condensed hover:bg-cWhite hover:text-cBlack transition-all duration-300 ease-linear">
+                    class="bg-[#00EEFF] text-center text-cBlack text-md sm:text-xl py-2 px-10 sm:py-3.5 sm:px-20 rounded-md font-bold font-roboto-condensed hover:bg-cWhite hover:text-cBlack transition-all duration-300 ease-linear">
                     View Details
                 </button>
                 <p class="text-cWhite mt-4 pb-6 text-sm sm:text-base">
@@ -137,14 +146,14 @@
 
 </div>
 <!-- Big Blind Streamed Race -->
-<div class="py-3 px-20 bg-cDarkBlue">
+<div class="pt-0 sm:pt-6 pb-3 px-6 sm:px-6 lg:px-20 bg-cDarkBlue">
     <div class="relative w-full bg-cover bg-center" style="background-image: url('BB1.jpg');">
         <!-- Overlay content -->
         <div class=" h-full  bg-cBlack bg-opacity-40 ">
             <div class="flex w-full justify-between items-start">
-                <div class="px-12 pt-6 flex flex-col justify-start items-start">
+                <div class="py-4 sm:py-8 px-4 sm:px-8 lg:pb-12 lg:px-12 flex flex-col justify-start items-start">
                 <div class="flex w-full justify-between items-center">
-                    <h1 class="text-cGreen text-6xl mb-4 font-roboto-condensed font-bold tracking-tighter">
+                    <h1 class="text-cGreen text-4xl sm:text-4xl lg:text-6xl  mb-4 font-roboto-condensed font-bold tracking-tighter">
                         Big Blind
                         <span class="text-cWhite">Streamed Race</span>
                     </h1>
@@ -152,11 +161,19 @@
             
                 </div>
             
-            
-                <h2 class="text-cWhite text-2xl mb-2 font-roboto-condensed tracking-tighter pr-5 w-5/6">
+            <!-- desktop -->
+                <h2 class="text-cWhite text-md sm:text-lg lg:text-2xl mb-2 font-roboto-condensed tracking-tighter pr-5 w-5/6 hidden sm:block">
                     Participate in the big blind streamed race. This will be hosted and
                     commentated by Sim-Racing influencer Jimmy Grills.
                     <br><br>
+                    Get ready for More Risk and More Reward, with elevated entry fees
+                    the prize pool for this race has reached an all time high. Are you
+                    good enough to take it home?
+                </h2>
+
+                <!-- mobile -->
+                <h2 class="text-cWhite text-md sm:text-lg lg:text-2xl mb-2 font-roboto-condensed tracking-tighter pr-5 w-5/6 sm:hidden block">
+                   
                     Get ready for More Risk and More Reward, with elevated entry fees
                     the prize pool for this race has reached an all time high. Are you
                     good enough to take it home?
@@ -165,7 +182,7 @@
             
             
             </div>
-        <div class="w-3/4 flex flex-col justify-center items-start pt-6 pb-12 space-y-4 pr-10 pl-20 relative">
+        <div class="w-3/4  flex-col justify-center items-start pt-6 pb-12 space-y-4 pr-10 pl-20 relative hidden xl:flex">
             <div class=" h-full  bg-cBlack bg-opacity-50 p-10 space-y-2 px-10 w-full">
                 <div class="flex flex-col items-center mb-6">
                     <span class="text-2xl font-roboto-condensed tracking-tighter leading-none">Total Prize Pool</span>
@@ -189,34 +206,34 @@
            
         </div>
         </div>
-           
-            <div class="text-center"><button routerLink="/events/bigBlind"
-                    class="bg-cGreen text-center text-cBlack text-2xl py-3.5 px-20 rounded-md font-bold font-roboto-condensed hover:bg-cWhite hover:text-cBlack transition-all duration-300 ease-linear hover:px-24">
-                    View Details
-                </button>
-                <p class="text-cWhite mt-4 pb-6 text-1xl">
-                    Event from 12th Nov - 20th Dec
-                </p>
+           <div  class = "text-center">
+            <button routerLink="/events/bigBlind"
+                class="bg-cGreen text-center text-cBlack text-md sm:text-xl py-2 px-10 sm:py-3.5 sm:px-20 rounded-md font-bold font-roboto-condensed hover:bg-cWhite hover:text-cBlack transition-all duration-300 ease-linear">
+                View Details
+            </button>
+            <p class="text-cWhite mt-4 pb-6 text-sm sm:text-base">
+                Event from 12th Nov - 20th Dec
+            </p>
             </div>
         </div>
     </div>
     
 
-    <div class="pt-12">
-        <h1 class="text-5xl mb-2 font-roboto-condensed tracking-tighter font-bold ">Upcoming Events</h1>
+    <div class=" pt-6 sm:pt-12">
+        <h1 class=" text-4xl sm:text-5xl mb-2 font-roboto-condensed tracking-tighter font-bold ">Upcoming Events</h1>
     
     </div>
         </div>
 
         <!-- Double RP Event -->
 
-    <div class="py-3 px-20 bg-cDarkBlue">
+    <div class="pt-0 sm:pt-6 pb-3 px-6 sm:px-6 lg:px-20 bg-cDarkBlue">
         <div class="relative w-full bg-cover bg-center" style="background-image: url('double.jpg');">
             <!-- Overlay content -->
             <div class=" h-full  bg-cBlack bg-opacity-50 ">
-                <div class="px-12 pt-6 pb-12 flex flex-col justify-start items-start">
+                <div class="py-4 sm:py-8 px-4 sm:px-8 lg:pb-12 lg:px-12 flex flex-col justify-start items-start">
                     <div class="flex w-full justify-between items-center">
-                        <h1 class="text-cWhite text-6xl mb-4 font-roboto-condensed font-bold tracking-tighter">
+                        <h1 class="text-cWhite  text-4xl sm:text-4xl lg:text-6xl mb-4 font-roboto-condensed font-bold tracking-tighter">
                             Double RP Weekend
                            
                         </h1>
@@ -225,7 +242,7 @@
                     </div>
     
     
-                    <h2 class="text-cWhite text-2xl mb-2 font-roboto-condensed tracking-tighter pr-5 w-1/3">
+                    <h2 class="text-cWhite text-md sm:text-lg lg:text-2xl mb-2 font-roboto-condensed tracking-tighter pr-5 lg:w-1/3">
                         For every race you participate in, get double the amount of
                         RP when you enter in specific races.
                     </h2>
@@ -233,11 +250,12 @@
     
     
                 </div>
-                <div class="text-center"><button routerLink="/events/doubleRP"
-                        class="bg-cWhite text-center text-cBlack text-2xl py-3.5 px-20 rounded-md font-bold font-roboto-condensed hover:bg-cWhite hover:text-cBlack transition-all duration-300 ease-linear hover:px-24">
+                <div class="text-center">
+                    <button routerLink="/events/doubleRP"
+                        class="bg-cWhite text-center text-cBlack text-md sm:text-xl py-2 px-10 sm:py-3.5 sm:px-20 rounded-md font-bold font-roboto-condensed hover:bg-cWhite hover:text-cBlack transition-all duration-300 ease-linear">
                         View Details
                     </button>
-                    <p class="text-cWhite mt-4 pb-6 text-1xl">
+                    <p class="text-cWhite mt-4 pb-6 text-sm sm:text-base">
                         Event from 12th Nov - 20th Dec
                     </p>
                 </div>

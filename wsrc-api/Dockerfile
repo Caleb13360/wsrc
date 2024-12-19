@@ -11,4 +11,4 @@ FROM nginx:latest
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app /app
 EXPOSE 8081
-CMD ["npm", "start"]
+CMD ["sh", "-c", "npm start & nginx -g 'daemon off;'"]

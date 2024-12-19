@@ -1,6 +1,6 @@
 <main class="min-h-screen flex flex-col">
   <!-- Nav Bar -->
-  <div class="bg-cBlack h-20 sm:h-24 md:32 lg:h-36">
+  <div class="bg-cBlack h-20 sm:h-24 md:32 lg:h-36 fixed z-50 w-full top-0 transition-transform duration-300 ease-in-out"  [ngClass]="{ '-translate-y-full': isHeaderHidden }">
     <div class="flex items-center justify-between h-full px-6 sm:px-4">
       <!-- Hamburger Menu (visible on small screens) -->
       <div class="md:hidden">

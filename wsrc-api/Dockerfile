@@ -1,12 +1,14 @@
-FROM node:latest
+FROM node:latest AS build
 WORKDIR /app
 COPY ./models ./models
 WORKDIR /app/wsrc-api
 COPY ./wsrc-api/package*.json ./
 RUN npm ci
 COPY ./wsrc-api .
-RUN npm run build
-
 EXPOSE 3000
 
-CMD ["npm", "start"]
+FROM nginx:latest
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app /app
+EXPOSE 8081
+CMD ["sh", "-c", "npm start & nginx -g 'daemon off;'"]

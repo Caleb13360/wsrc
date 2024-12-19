@@ -1,13 +1,13 @@
-<div class="bg-cDarkBlue text-cWhite font-roboto tracking-tighter">
+<div class="flex-grow bg-cDarkBlue pt-20 sm:pt-24 md:pt-32 lg:pt-36 text-cWhite font-roboto tracking-tighter">
 <!-- Money Header -->
 <div class="bg-cGreen w-full h-78 flex items-center justify-center">
     <div class="flex flex-col justify-center items-center ">
-        <div class="text-10xl font-bold font-roboto-condensed tracking-tighter text-cBlack">$102,122</div>
-        <div class="text-2xl mb-8 font-roboto tracking-tighter text-cBlack">Total Cash Prizes Won By Racers</div>
+        <div class="text-10xl font-bold font-roboto-condensed tracking-tighter text-cBlack ">$0</div>
+        <div class="text-2xl mb-8 font-roboto tracking-tighter  text-cBlack">My wallet balance</div>
     </div>
 </div>
 <!-- Withdraw -->
-<div class="p-4  px-60">
+<div class="p-4 px-10 md:px-60">
     <div class="pt-3 flex justify-center">
         <button routerLink="/withdraw" class="text-white text-2xl border border-cWhite font-roboto tracking-tighter px-14 py-4 rounded-md hover:px-20 hover:bg-cWhite hover:text-cBlack duration-200 transition-all ease-linear font-bold ">
             Withdraw money
@@ -17,16 +17,18 @@
 
 <div class="p-6 w-full ">
     <!-- Header and Sub-header -->
-    <div class="flex justify-between items-center mb-6 mt-4 mx-52">
+    <div class="flex justify-between items-center mb-6 mt-4 mx-0 lg:mx-52">
         <div>
             <h1 class="text-5xl mb-2 font-roboto-condensed tracking-tighter font-bold ">Transaction History</h1>
-            <h2 class="text-cWhite text-2xl mb-4 font-roboto-condensed tracking-tighterl">All transactions in and out of wallet will be shown here.</h2>
+            <h2 class="text-cWhite text-lg md:text-2xl mb-4 font-roboto-condensed tracking-tighterl">All transactions in and out of wallet will be shown here.</h2>
         </div>
-
+    
     </div>
 
-<!-- Transaction History -->
-<div class="mx-52">
+   
+
+<!-- Transaction History desktop-->
+<div class="mx-52 hidden lg:block">
     <table class="min-w-full bg-cDarkBlue ">
         <thead class="border border-cBorderGrey bg-cDarkBlue">
             <tr>
@@ -39,7 +41,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let transaction of transactions;">
+            <tr *ngFor="let transaction of transactions;let i = index "[ngClass]="{'bg-gray-800': i % 2 === 1}">
                 <td class="py-2 px-4  text-center">{{ transaction.date }}</td>
                 <td class="py-2 px-4 text-center">{{ transaction.time }}</td>
                 <td class="py-2 px-4 text-center">{{ transaction.ref_number }}</td>
@@ -50,4 +52,44 @@
         </tbody>
     </table>
 </div>
+
+<!-- Transaction History desktop -->
+<div class="lg:hidden">
+    <div *ngFor="let  transaction of transactions;let i = index "[ngClass]="{'bg-gray-800': i % 2 === 1}"
+        class="bg-cDarkBlue border border-cBorderGrey mb-4 px-4 pb-4 pt-4 rounded">
+<div class="flex justify-center text-cWhite font-bold font-roboto-condensed text-2xl text-center mb-4">
+    <span>Transaction No. {{i+1}}</span>
+</div>
+        <div class="flex justify-between text-cWhite mt-1">
+            <span class="font-bold">Ref No:</span>
+            <span>{{ transaction.ref_number }}</span>
+        </div>
+        <div class="flex justify-between text-cWhite">
+            <span class="font-bold">Date & Time:</span>
+            <span>{{ transaction.date }} &nbsp; {{ transaction.time }} </span>
+        </div>
+       
+        <!-- Track -->
+       
+        <!-- Prize Pool -->
+        <div class="flex justify-between text-cWhite mt-1">
+            <span class="font-bold">Type:</span>
+            <span>{{ transaction.type }}</span>
+        </div>
+        <div class="flex justify-between teext-cWhite mt-1">
+            <span class="font-bold">Status:</span>
+            <span>{{ transaction.status }}</span>
+        </div>
+
+        <div class="flex justify-between teext-cWhite mt-1">
+            <span class="font-bold">Amount:</span>
+            <span>{{ transaction.amount }}</span>
+        </div>
+        <!-- Racers -->
+
+        <!-- Register Button - Full Width -->
+       
+    </div>
+</div>
+
 </div>

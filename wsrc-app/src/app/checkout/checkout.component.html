@@ -1,17 +1,17 @@
-<div class="flex flex-row bg-gray-900 text-white min-h-screen font-roboto tracking-tighter">
+<div class="flex flex-col-reverse lg:flex-row bg-gray-900 text-white min-h-screen font-roboto tracking-tighter flex-grow pt-20 sm:pt-24 md:pt-32 lg:pt-36">
     <!-- Payment Information Section -->
-    <div class="lg:w-1/2 w-full p-8 bg-[#191919] pl-52">
-        <h1 class="text-7xl font-bold font-porscha mb-2 text-center pb-6">WSRC</h1>
-        <h2 class="text-3xl font-semibold font-roboto-condensed mb-4">Payment Information</h2>
-        <p class="text-gray-400 mb-6">All prices are listed in USD.</p>
+    <div class="lg:w-1/2 w-full p-6 sm:p-8 bg-[#191919] lg:order-1">
+        <h1 class="text-4xl sm:text-7xl font-bold font-porscha mb-4 text-center lg:block hidden">WSRC</h1>
+        <h2 class="text-2xl sm:text-3xl font-semibold font-roboto-condensed mb-4">Payment Information</h2>
+        <p class="text-gray-400 mb-6 text-sm sm:text-base">All prices are listed in USD.</p>
 
         <!-- Credit Card Information -->
-        <div class="space-y-4 border border-[#3B3B3B]  rounded-md bg-[#131313]">
+        <div class="space-y-4 border border-[#3B3B3B] rounded-md bg-[#131313]">
             <!-- Header Section -->
-            <div class="flex justify-start items-center pb-4 border-b border-[#3B3B3B] bg-[#191919] rounded">
+            <div
+                class="flex flex-col sm:flex-row justify-start items-start sm:items-center pb-4 border-b border-[#3B3B3B] bg-[#191919] rounded">
                 <h3 class="text-white text-lg font pt-4 pl-4">Credit Card (Stripe)</h3>
-                <div class="flex space-x-2 pt-4 pl-6">
-                    <!-- Add your icons here -->
+                <div class="flex space-x-2 pt-4 sm:pt-4 sm:pl-6 pl-4">
                     <img src="visa.svg" alt="Visa" class="h-6">
                     <img src="mastercard.svg" alt="MasterCard" class="h-6">
                     <img src="amex.svg" alt="American Express" class="h-6">
@@ -20,32 +20,30 @@
                     <img src="unionpay.svg" alt="UnionPay" class="h-6">
                 </div>
             </div>
-        <div class="p-4 space-y-4">
-            <h3 class="text-white text-lg font">Pay with your credit card via Stripe</h3>
-            <input type="text" placeholder="Full name on card *"
-                class="w-full p-3 bg-[#191919] text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-500 border border-[#3B3B3B]" />
-            <input type="text" placeholder="Card number *"
-                class="w-full p-3 bg-[#191919] text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-500 border border-[#3B3B3B]" />
-            <div class="flex space-x-4">
-                <input type="text" placeholder="MM / YY *"
-                    class="w-1/2 p-3 bg-[#191919] text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-500 border border-[#3B3B3B]" />
-                <input type="text" placeholder="CVC *"
-                    class="w-1/2 p-3 bg-[#191919] text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-500 border border-[#3B3B3B]" />
-        </div>
-            <!-- Credit Card Form -->
-           
+            <div class="p-4 space-y-4">
+                <h3 class="text-white text-lg font">Pay with your credit card via Stripe</h3>
+                <input type="text" placeholder="Full name on card *"
+                    class="w-full p-3 bg-[#191919] text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-500 border border-[#3B3B3B]" />
+                <input type="text" placeholder="Card number *"
+                    class="w-full p-3 bg-[#191919] text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-500 border border-[#3B3B3B]" />
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <input type="text" placeholder="MM / YY *"
+                        class="w-full sm:w-1/2 p-3 bg-[#191919] text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-500 border border-[#3B3B3B]" />
+                    <input type="text" placeholder="CVC *"
+                        class="w-full sm:w-1/2 p-3 bg-[#191919] text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-500 border border-[#3B3B3B]" />
+                </div>
             </div>
         </div>
 
         <!-- Privacy Notice -->
-        <p class="text-gray-400 mt-4 text-sm">
+        <p class="text-gray-400 mt-4 text-xs sm:text-sm">
             Your personal data will be used to process your order, support your experience throughout this website,
             and for other purposes described in our privacy policy.
         </p>
 
         <!-- Place Order Button -->
         <button
-            class="w-full mt-6 py-3 bg-[#4B61D1] rounded text-lg font-bold hover:bg-cWhite hover:text-cBlack transition-all duration-200 ease-linear focus:outline-none ">
+            class="w-full mt-6 py-3 bg-[#4B61D1] rounded text-lg font-bold hover:bg-cWhite hover:text-cBlack transition-all duration-200 ease-linear focus:outline-none">
             <span class="flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -58,15 +56,15 @@
     </div>
 
     <!-- Order Summary Section -->
-    <div class="lg:w-1/2 w-full p-8 bg-[#131313] pr-52">
-        <h2 class="text-3xl font-semibold font-roboto-condensed mb-4">Order Summary</h2>
+    <div class="lg:w-1/2 w-full p-6 sm:p-8 bg-[#131313] lg:order-2">
+        <h2 class="text-2xl sm:text-3xl font-semibold font-roboto-condensed mb-4">Order Summary</h2>
 
         <div class="flex items-center mb-4">
-            <img src="GR86RaceImage.jpg" alt="Race Image" class="h-16 w-16 object-cover rounded">
+            <img src="GR86RaceImage.jpg" alt="Race Image" class="h-12 w-12 sm:h-16 sm:w-16 object-cover rounded">
             <div class="ml-4">
                 <p class="text-lg font-bold">WSRC GR86 Challenge - Fixed</p>
-                <p class="text-gray-400">Dec 12, 18:15</p>
-                <p class="text-gray-400">Entry Ticket</p>
+                <p class="text-gray-400 text-sm sm:text-base">Dec 12, 18:15</p>
+                <p class="text-gray-400 text-sm sm:text-base">Entry Ticket</p>
             </div>
         </div>
 
@@ -76,7 +74,7 @@
             <p>Subtotal</p>
             <p>$49.95</p>
         </div>
-        <hr class="border-cBorderGrey 0 mb-4" />
+        <hr class="border-cBorderGrey mb-4" />
         <div class="flex justify-between text-xl font-bold">
             <p>Total</p>
             <p>$49.95</p>

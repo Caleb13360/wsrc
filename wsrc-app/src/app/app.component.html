@@ -1,9 +1,9 @@
 <main class="min-h-screen flex flex-col">
   <!-- Nav Bar -->
-  <div class="bg-cBlack h-20 sm:h-24 md:32 lg:h-36">
+  <div class="bg-cBlack h-20 sm:h-24 md:32 lg:h-36 fixed z-50 w-full top-0 transition-transform duration-300 ease-in-out"  [ngClass]="{ '-translate-y-full': isHeaderHidden }">
     <div class="flex items-center justify-between h-full px-6 sm:px-4">
       <!-- Hamburger Menu (visible on small screens) -->
-      <div class="block md:hidden order-1">
+      <div class="md:hidden">
         <button (click)="toggleMenu()" class="text-cWhite">
           <span class="material-icons text-3xl">menu</span>
         </button>
@@ -28,29 +28,25 @@
       </div>
 
       <!-- WSRC Logo (mobile-friendly, centered) -->
-      <div class="flex-grow flex md:hidden justify-center order-2 pl-14">
-        <p class="text-cWhite text-3xl font-porscha">WSRC</p>
+      <div class="flex-grow flex md:hidden justify-center order-2 pl-12">
+        <a routerLink="/" (click)="pressToggleMenu()" class="text-cWhite text-3xl font-porscha">WSRC</a>
       </div>
 
       <!-- Links (hidden on small screens, shown on larger screens) -->
-      <div class="hidden md:flex space-x-7">
-        <a routerLink="/"
-          class="text-cDarkGrey text-xl font-roboto-condensed hover:text-cWhite transition-all duration-200 ease-linear hover:font-bold">Home</a>
-        <a routerLink="/races"
-          class="text-cDarkGrey text-xl font-roboto-condensed hover:text-cWhite transition-all duration-200 ease-linear hover:font-bold">Races</a>
-        <a routerLink="/events"
-          class="text-cDarkGrey text-xl font-roboto-condensed hover:text-cWhite transition-all duration-200 ease-linear hover:font-bold">Events</a>
-        <a routerLink="/results"
-          class="text-cDarkGrey text-xl font-roboto-condensed hover:text-cWhite transition-all duration-200 ease-linear hover:font-bold">Results</a>
-        <a routerLink="/about"
-          class="text-cDarkGrey text-xl font-roboto-condensed hover:text-cWhite transition-all duration-200 ease-linear hover:font-bold">About</a>
-      </div>
+    <div [ngClass]="{ 'hidden': !menuVisible, 'flex': menuVisible }"
+       class="absolute z-50 top-20 left-0 w-full bg-cBlack flex-col space-y-4 p-4 md:static md:flex md:space-y-0 md:space-x-7 md:p-0 md:flex-row md:items-center justify-center items-center hidden font-roboto-condensed">
+      <a routerLink="/" (click)="toggleMenu()" class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">Home</a>
+      <a routerLink="/races" (click)="toggleMenu()" class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">Races</a>
+      <a routerLink="/events" (click)="toggleMenu()" class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">Events</a>
+      <a routerLink="/results" (click)="toggleMenu()" class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">Results</a>
+      <a routerLink="/about" (click)="toggleMenu()" class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">About</a>
+    </div>
 
       <!-- User Icons -->
       <div class="flex items-center space-x-4 lg:pr-32 pr-0 md:order-none order-3">
-        <span routerLink="/notifications"
+        <span routerLink="/notifications" (click)="pressToggleMenu()" 
           class="material-icons text-cWhite text-2xl hover:text-red-500 duration-200 ease-linear">notifications</span>
-        <div routerLink="/profile"
+        <div routerLink="/profile" (click)="pressToggleMenu()" 
           class="flex items-center justify-center bg-cBlack text-cWhite rounded-full h-8 w-8 hover:text-cBlue duration-200 ease-linear">
           <span class="material-icons text-3xl">person</span>
         </div>

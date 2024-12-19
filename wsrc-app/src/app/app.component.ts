@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
@@ -10,10 +10,39 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'wsrc-app';
-    menuVisible = false; // Tracks if the menu is open
+     menuVisible = false;
+      isHeaderHidden = false; // Tracks if the header is hidden
+  lastScrollY = 0; // Tracks the last scroll position
 
-  toggleMenu(): void {
-    this.menuVisible = !this.menuVisible; // Toggles the menu state
-    console.log('Menu toggled:', this.menuVisible); // Debugging
+  toggleMenu() {
+    this.menuVisible = !this.menuVisible;
+  }
+
+  pressToggleMenu() {
+    if(this.menuVisible){
+        this.menuVisible = !this.menuVisible;
+    }
+    
+  }
+   
+
+  @HostListener('window:scroll', [])
+  onWindowScroll(): void {
+    const currentScrollY = window.scrollY;
+
+      if (this.menuVisible) {
+    this.pressToggleMenu(); // Close the menu if it is open
+  }
+
+    if (currentScrollY > this.lastScrollY && currentScrollY > 100) {
+      // Scrolling down and past a threshold
+      this.isHeaderHidden = true;
+      
+    } else {
+      // Scrolling up
+      this.isHeaderHidden = false;
+    }
+
+    this.lastScrollY = currentScrollY;
   }
 }

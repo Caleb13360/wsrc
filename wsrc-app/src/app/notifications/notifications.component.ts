@@ -11,6 +11,16 @@ export class NotificationsComponent {
   notifications = [{
     date: '24 Dec',
     time: '18:15',
-    message: 'Notification message'
+    message: 'Notification messag Notification messageNotification messageNotification messageNotification messageNotification messageNotification messageNotification messageNotification messageNotification messageNotification messageNotification messageNotification messageNotification messagee'
+  },
+{
+    date: '24 Dec',
+    time: '18:15',
+    message: 'Notification messag Notification messageNotification messageNotification messageNotification messageNotification messageNotification messageNotification messageNotification messageNotification messageNotification messageNotification messageNotification messageNotification messagee'
+  },
+{
+    date: '24 Dec',
+    time: '18:15',
+    message: 'Notification messag Notification messageNotification messageNotification messageNotification messageNotification messageNotification messageNotification messageNotification messageNotification messageNotification messageNotification messageNotification messageNotification messagee'
   }];
 }

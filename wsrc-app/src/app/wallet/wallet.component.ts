@@ -16,5 +16,20 @@ export class WalletComponent {
     type: 'Withdraw',
     status: 'Pending',
     amount: '100'
+  },{
+    date: '24 Dec',
+    time: '18:15',
+    ref_number: '2ak2383bakbda',
+    type: 'Withdraw',
+    status: 'Pending',
+    amount: '100'
+  },
+{
+    date: '24 Dec',
+    time: '18:15',
+    ref_number: '2ak2383bakbda',
+    type: 'Withdraw',
+    status: 'Pending',
+    amount: '100'
   }];
 }

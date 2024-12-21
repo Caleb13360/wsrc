@@ -1,21 +1,21 @@
-<div>
+<div class="flex-grow bg-cDarkBlue pt-20 sm:pt-24 md:pt-32 lg:pt-36">
     <!-- Landing Page Banner -->
   <div class="w-full bg-cover bg-center " style="background-image: url('LandingPageBanner.jpg');">
-    <div class="flex items-start justify-start h-full bg-black bg-opacity-15">
-      <div  class="py-28 px-40 space-y-6">
-        <h1 class="text-cWhite text-6xl mb-4 font-roboto-condensed font-bold tracking-tighter">
+    <div class="flex items-start justify-start h-full bg-black lg:bg-opacity-15 bg-opacity-40">
+      <div  class="py-16 lg:py-28 px-10  sm:py-28 lg:px-40 space-y-6">
+        <h1 class="text-cWhite text-4xl sm:text-5xl lg:text-6xl mb-4 font-roboto-condensed font-bold tracking-tighter">
             Welcome to the
             <br>
             World Sim Racing Competition
         </h1>
-        <h2 class="text-cWhite text-2xl mb-4 font-roboto-condensed tracking-tighter">
+        <h2 class="text-cWhite text-xl sm:text-2xl mb-4 font-roboto-condensed tracking-tighter sm:w-3/4 md-w1/2 lg:w-1/3 w-full">
             The only iRacing competition where racers compete for money weekly:
-            <br>
+            
             No team needed, no minimum skill barrier to enter. Simply race, and
-            <br>
+            
             if you're fast enough, you'll win cash prizes!
         </h2>
-        <button routerLink="/races" class="bg-cBlue text-cWhite text-2xl py-3.5 px-10 rounded-md font-bold font-roboto hover:bg-cWhite hover:text-cBlack transition-all duration-300 ease-linear hover:px-14">
+        <button routerLink="/races" class="bg-cBlue text-cWhite text-lg sm:text-2xl py-3 px-8 sm:py-3.5 sm:px-10 rounded-sm font-bold font-roboto hover:bg-cWhite hover:text-cBlack transition-all duration-300 ease-linear hover:px-12 sm:hover:px-14">
           Start racing now!
         </button>
       </div>
@@ -24,15 +24,15 @@
     <!-- Upcoming Races -->
     
         <!-- Race Cards -->
-        <div class="bg-cDarkBlue py-10 px-40">
+        <div class="bg-cDarkBlue py-6 lg:py-10 px-4  sm:py-6 lg:px-40">
           <!-- Title -->
           <div class="space-y-2 mb-8">
-            <p class="text-cWhite text-5xl font-roboto-condensed font-bold tracking-tighter">Upcoming WSRC Races</p>
-            <p class="text-cWhite text-2xl font-roboto-condensed tracking-tighter">The next 4 races are shown below.</p>
+            <p class="text-cWhite text-4xl sm:text-5xl font-roboto-condensed font-bold tracking-tighter">Upcoming WSRC Races</p>
+            <p class="text-cWhite text-xl sm:text-2xl font-roboto-condensed tracking-tighter">The next 4 races are shown below.</p>
           </div>
         
           <!-- 1x3 Grid -->
-          <div class="grid grid-cols-3 gap-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             <div *ngFor="let race of latestRaces; let i = index">
               <app-race-tile [race]="latestRaces[i]"></app-race-tile>
             </div>
@@ -42,7 +42,7 @@
         
         <!-- View More Races Button -->
         <div class="flex justify-center mt-6">
-          <button routerLink="/races" class="bg-cBlue text-cWhite text-2xl py-4 px-28 rounded-md font-semibold font-roboto tracking-tighter hover:bg-cWhite hover:text-cBlack transition-all duration-300 
+          <button routerLink="/races" class="bg-cBlue text-cWhite text-1xl sm:text-2xl py-4 px-20 sm:px-28 rounded-md font-semibold font-roboto tracking-tighter hover:bg-cWhite hover:text-cBlack transition-all duration-300 
                           ease-linear hover:px-36">Show more races</button>
         </div>
     </div>
@@ -54,82 +54,101 @@
       </div>
     </div>
     <!-- Cash Prizes -->
-    <div class="bg-cDarkBlue flex">
-        <!-- Left Side -->
-        <div class="w-1/2 flex flex-col justify-center items-left pl-48 pr-20">
-          <h1 class="text-cWhite text-6xl mb-6 font-roboto-condensed tracking-tighter font-bold ">Cash prizes for winners</h1>
-          <h2 class="text-cWhite text-2xl mb-4 font-roboto-condensed tracking-tighter">
-            Our weekly races offer payouts to the top finishers, rewarding your speed and skill. Whether you're aiming for first
-            place or just striving to make the top 6, every race is an opportunity to earn. 
-            <br>
-            
-            With prize amounts scaled to the number
-            of participants, racing has never been more rewarding. Join now and put your talent to the test!
-          </h2>
-        </div>
-        <!-- Right Side -->
-        <div class="w-1/2 flex flex-col justify-center items-start p-10 space-y-4 pr-48 pl-40">
-          <div class="border border-cGreen bg-cGreen w-full h-16 flex items-center justify-between px-4 rounded-md ">
-            <span class="text-cDarkBlue font-roboto tracking-tighter">1st</span>
-            <span class="text-cDarkBlue mx-auto font-roboto tracking-tighter font-bold text-3xl">$100 USD</span>
-          </div>
-          <div
-            class="border border-cGreen w-full h-16 flex items-center justify-between px-4 rounded-md group hover:bg-cGreen transition-all duration-200 ease-linear">
-            <span
-              class="text-cGreen font-roboto tracking-tighter group-hover:text-cBlack">2nd</span>
-            <span
-              class="text-cGreen mx-auto font-roboto tracking-tighter font-bold text-3xl group-hover:text-cBlack ">$60
-              USD</span>
-          </div>
-          <div class="border border-cGreen w-full h-16 flex items-center justify-between px-4 rounded-md group hover:bg-cGreen transition-all duration-200 ease-linear">
-            <span class="text-cGreen font-roboto tracking-tighter group-hover:text-cBlack">3rd</span>
-            <span class="text-cGreen mx-auto font-roboto tracking-tighter font-bold text-3xl group-hover:text-cBlack">$40 USD</span>
-          </div>
-          
-          <div routerLink="/events/RPRewards" class="border border-cGrey w-full h-16 flex items-center justify-between px-4 rounded-md group hover:bg-cOrange hover:border-cOrange transition-all duration-200 ease-linear">
-            <span class="text-cGrey font-roboto tracking-tighter group-hover:text-cBlack">4th</span>
-            <span class="text-cGrey mx-auto font-roboto tracking-tighter font-bold text-3xl group-hover:text-cBlack">20 RP</span>
-          </div>
-          <div routerLink="/events/RPRewards" class="border border-cGrey w-full h-16 flex items-center justify-between px-4 rounded-md group hover:bg-cOrange hover:border-cOrange transition-all duration-200 ease-linear">
-            <span class="text-cGrey font-roboto tracking-tighter group-hover:text-cBlack">5th</span>
-            <span class="text-cGrey mx-auto font-roboto tracking-tighter font-bold text-3xl group-hover:text-cBlack">17 RP</span>
-          </div>
-          <div routerLink="/events/RPRewards" class="border border-cGrey w-full h-16 flex items-center justify-between px-4 rounded-md group hover:bg-cOrange hover:border-cOrange transition-all duration-200 ease-linear">
-            <span class="text-cGrey font-roboto tracking-tighter group-hover:text-cBlack">6th</span>
-            <span class="text-cGrey mx-auto font-roboto tracking-tighter font-bold text-3xl group-hover:text-cBlack">15 RP</span>
-          </div>
-          <p class="text-cWhite mt-4">If 20 racers are present in the race, the below prizes will be awarded, if less
-          racers are present it will scale accordingly.</p>
-        </div>
+    <div class="bg-cDarkBlue flex flex-col lg:flex-row">
+      <!-- Left Side -->
+      <div class="w-full lg:w-1/2 flex flex-col justify-center items-left px-4 lg:pl-48 lg:pr-20 py-8">
+        <h1 class="text-cWhite text-5xl lg:text-6xl mb-6 font-roboto-condensed tracking-tighter font-bold">
+          Cash prizes for winners
+        </h1>
+        <h2 class="text-cWhite text-lg lg:text-2xl md:mb-4 mb-0 font-roboto-condensed tracking-tighter">
+          Our weekly races offer payouts to the top finishers, rewarding your speed and skill. Whether you're aiming for
+          first
+          place or just striving to make the top 6, every race is an opportunity to earn.
+          <br>
+          With prize amounts scaled to the number of participants, racing has never been more rewarding. Join now and put
+          your
+          talent to the test!
+        </h2>
       </div>
-    <!-- Stream -->
-    <div class="p-10 bg-cDarkBlue">
-      <div class=" w-full bg-cover bg-center h-[80vh] rounded-lg" style="background-image: url('NotStreamingImageLT.jpg');">
-        <div class="flex items-center justify-center h-full bg-black bg-opacity-60 rounded-lg">
-          <div>
-            <p class="text-cWhite text-8xl font-porscha pb-7 text-center">WSRC</p>
-            <p class="text-cWhite font-roboto-condensed font-bold text-7xl tracking-tighter">We aren't streaming right now.
-            </p>
-            <p class="text-cWhite font-roboto-condensed tracking-tighter text-3xl text-center">Click here to check out our
-              twitch channel <br>
-              and follow us</p>
-          </div>
+      <!-- Right Side -->
+      <div class="w-full lg:w-1/2 flex flex-col justify-center items-start px-4 lg:px-40 md:py-8 py-0 space-y-4">
+        <div class="border border-cGreen bg-cGreen w-full h-16 flex items-center justify-between px-4 rounded-md">
+          <span class="text-cDarkBlue font-roboto tracking-tighter">1st</span>
+          <span class="text-cDarkBlue mx-auto font-roboto tracking-tighter font-bold text-2xl lg:text-3xl">$100 USD</span>
+        </div>
+        <div
+          class="border border-cGreen w-full h-16 flex items-center justify-between px-4 rounded-md group hover:bg-cGreen transition-all duration-200 ease-linear">
+          <span class="text-cGreen font-roboto tracking-tighter group-hover:text-cBlack">2nd</span>
+          <span
+            class="text-cGreen mx-auto font-roboto tracking-tighter font-bold text-2xl lg:text-3xl group-hover:text-cBlack">$60
+            USD</span>
+        </div>
+        <div
+          class="border border-cGreen w-full h-16 flex items-center justify-between px-4 rounded-md group hover:bg-cGreen transition-all duration-200 ease-linear">
+          <span class="text-cGreen font-roboto tracking-tighter group-hover:text-cBlack">3rd</span>
+          <span
+            class="text-cGreen mx-auto font-roboto tracking-tighter font-bold text-2xl lg:text-3xl group-hover:text-cBlack">$40
+            USD</span>
+        </div>
+        <div routerLink="/events/RPRewards"
+          class="border border-cGrey w-full h-16 flex items-center justify-between px-4 rounded-md group hover:bg-cOrange hover:border-cOrange transition-all duration-200 ease-linear">
+          <span class="text-cGrey font-roboto tracking-tighter group-hover:text-cBlack">4th</span>
+          <span
+            class="text-cGrey mx-auto font-roboto tracking-tighter font-bold text-2xl lg:text-3xl group-hover:text-cBlack">20
+            RP</span>
+        </div>
+        <div routerLink="/events/RPRewards"
+          class="border border-cGrey w-full h-16 flex items-center justify-between px-4 rounded-md group hover:bg-cOrange hover:border-cOrange transition-all duration-200 ease-linear">
+          <span class="text-cGrey font-roboto tracking-tighter group-hover:text-cBlack">5th</span>
+          <span
+            class="text-cGrey mx-auto font-roboto tracking-tighter font-bold text-2xl lg:text-3xl group-hover:text-cBlack">17
+            RP</span>
+        </div>
+        <div routerLink="/events/RPRewards"
+          class="border border-cGrey w-full h-16 flex items-center justify-between px-4 rounded-md group hover:bg-cOrange hover:border-cOrange transition-all duration-200 ease-linear">
+          <span class="text-cGrey font-roboto tracking-tighter group-hover:text-cBlack">6th</span>
+          <span
+            class="text-cGrey mx-auto font-roboto tracking-tighter font-bold text-2xl lg:text-3xl group-hover:text-cBlack">15
+            RP</span>
+        </div>
+        <p class="text-cWhite mt-4 font-roboto-condensed">
+          If 20 racers are present in the race, the below prizes will be awarded, if fewer racers are present it will scale
+          accordingly.
+        </p>
+      </div>
+    </div>
+
+  <!-- Stream -->
+  <div class="p-4 lg:p-10 pt-16 sm:pt-0 bg-cDarkBlue">
+    <div class="w-full aspect-[16/9] bg-cover bg-center rounded-lg"
+      style="background-image: url('NotStreamingImageLT.jpg');">
+      <div class="flex items-center justify-center h-full bg-black bg-opacity-60 rounded-lg">
+        <div class="text-center px-4">
+          <p class="text-cWhite text-4xl lg:text-8xl font-porscha pb-4 lg:pb-7">WSRC</p>
+          <p class="text-cWhite font-roboto-condensed font-bold text-3xl lg:text-7xl tracking-tighter mb-4 lg:mb-6">
+            We aren't streaming right now.
+          </p>
+          <p class="text-cWhite font-roboto-condensed tracking-tighter text-md lg:text-3xl">
+            Click here to check out our Twitch channel <br> and follow us.
+          </p>
         </div>
       </div>
     </div>
+  </div>
+
       
     <!-- Sign up -->
     <div class="bg-cDarkBlue">
       <div class="flex justify-center">
-        <div class="pb-20 pt-10 space-y-6 text-center">
-          <h1 class="text-cWhite text-6xl mb-6 font-roboto-condensed tracking-tighter font-bold">
+        <div class="pb-20 pt-10 px-10 space-y-6 text-center">
+          <h1 class="text-cWhite text-5xl lg:text-6xl mb-6 font-roboto-condensed tracking-tighter font-bold">
             Sign-Up for Free and
             <br>
             Start Racing to Win Money!
           </h1>
-          <h2 class="text-cWhite text-2xl mb-4 font-roboto-condensed tracking-tighter">
+          <h2 class="text-cWhite text-lg sm:text-2xl mb-4 font-roboto-condensed tracking-tighter">
           Sign up today and dive into the action. No team required, just your skills, the thrill of
-          <br>racing, 
+          racing, <br>
           and the chance to win cash prizes every week.
           </h2>
           <button routerLink="/races" class="bg-cBlue text-cWhite text-2xl py-3.5 px-10 rounded-md font-bold font-roboto hover:bg-cWhite hover:text-cBlack transition-all duration-300 ease-linear hover:px-14">

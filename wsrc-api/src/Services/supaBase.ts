@@ -121,19 +121,21 @@ export class Supabase {
         return this.generateRacesFromData(data);
     }
 
-    async getRace(id: string): Promise<Race | null> {
+    async getRace(id: number): Promise<Race | null> {
+        console.log('getRace', id);
         const data = await this.sb
-        .from('Races')
-        .select(`
-            *,
-            RaceWeather(*),
-            RaceDetails(*),
-            _Track(*),
-            PrizePool(*)
-        `)
-        .eq('race_id', id)
-        .single();
-        return this.generateRaceFromData(data);
+            .from('Races')
+            .select(`
+                *,
+                RaceWeather(*),
+                RaceDetails(*),
+                _Track(*),
+                PrizePool(*)
+            `)
+            .eq('race_id', id)
+            .single();
+    
+        return this.generateRaceFromData(data.data);
     }
 
     // async getTotalPrizeAmount(): Promise<Number | null>{

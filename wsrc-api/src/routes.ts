@@ -23,7 +23,7 @@ router.get('/race/next', async (_, res) => {
 router.get('/race/:id', async (req, res) => {
     const { id } = req.params;
     try {
-        const race = await service.getRace(id);
+        const race = await service.getRace(Number(id));
         if (race!==null) {
             res.json({ race: race});
         } else {

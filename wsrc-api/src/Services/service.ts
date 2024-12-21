@@ -63,8 +63,9 @@ export class Service{
         const result = await db.getFinishedRacesAfter(startAfterId, numberOfResults);
         return [];
     }
-    async getRace(id: string): Promise<Race> {
+    async getRace(id: number): Promise<Race> {
         const result = await db.getRace(id);
+        console.log(result);
         return result as Race;
     }
     getAverageLapTime(raceId: string): number{

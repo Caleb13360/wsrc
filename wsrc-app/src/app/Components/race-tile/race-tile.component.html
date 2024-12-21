@@ -7,49 +7,49 @@
       <!-- image Text -->
       <div class="absolute inset-0 flex flex-col justify-start items-center text-white pt-5">
         <div class="text-md font-roboto-condensed">Total Prize Pool</div>
-        <div class="text-5xl font-extrabold">${{ race ? ((race.entry_fee) * (race.max_racers) * 0.5) : '???' }} USD</div>
+        <div class="text-4xl sm:text-5xl font-extrabold">${{ race ? ((race.entry_fee) * (race.max_racers) * 0.5) : '???' }} USD</div>
       </div>
       
       <div class="absolute inset-0 flex flex-col justify-end items-center text-white">
         <button [routerLink]="['/race', race.race_id]"
           class="bg-cBlue text-cWhite text-1xl py-2.5 px-10 rounded-md font-roboto-condensed hover:bg-cWhite hover:text-cBlack transition-all duration-300 
           ease-linear hover:px-14">View race details</button>
-        <div class="text-md my-2">{{ race ? countdown : '?' }}</div>
+        <div class="text-sm my-2">{{ race ? countdown : '?' }}</div>
       </div>
     </div>
 
-    <div class="flex justify-between pl-5 pr-5 pt-5 ">
-      <div class="flex items-center text-[#62D1CC]">
-        <mat-icon class="text-[1.4rem]">access_time</mat-icon>
-        <span class="ml-1 font-bold text-sm">{{ race ? (race.race_time) : '?' }} Min Race</span>
+    <div class="flex justify-between sm:px-5 pl-2 pr-2 pt-5 ">
+      <div class="flex items-start justify-start text-[#62D1CC]">
+        <mat-icon class="text-[1.3rem] sm:text-[1.35rem] leading-none m-0 p-0">access_time</mat-icon>
+        <span class="ml-0 font-bold text-[0.8rem] sm:text-[0.85rem] ">{{ race ? (race.race_time) : '?' }} Min Race</span>
       </div>
-      <div class="flex items-center text-sm text-[#FBE057]">
-        <mat-icon>play_arrow</mat-icon>
-        <span class="ml-1 font-bold">{{ race ? (race.qualifier_laps) : '?' }} Quali Laps</span>
+      <div class="flex  items-start justify-start text-[0.8rem] text-[#FBE057]">
+        <mat-icon class="text-[1.3rem] sm:text-[1.35rem] leading-none m-0 p-0">play_arrow</mat-icon>
+        <span class="ml-0 font-bold text-[0.8rem] sm:text-[0.85rem]">{{ race ? (race.qualifier_laps) : '?' }} Quali Laps</span>
       </div>
-      <div class="flex items-center justify-center text-sm text-[#FFA366]">
-        <mat-icon class="text-[1.3rem]">lock</mat-icon>
-        <span class=" ml-1 font-bold">Fixed Setup</span>
+      <div class="flex items-start justify-start  text-[0.8rem] text-[#FFA366]">
+        <mat-icon class="text-[1.3rem] sm:text-[1.35rem] leading-none m-0 p-0">lock</mat-icon>
+        <span class=" ml-0 font-bold text-[0.8rem] sm:text-[0.85rem]">Fixed</span>
       </div>
-      <div class="flex items-center text-sm text-cGreen">
-        <mat-icon class="text-[1.4rem]">attach_money</mat-icon>
-        <span class=" font-bold">{{ race ? ('P1 - P'+race.cash_split.length.toString()) : '???' }}</span>
+      <div class="flex items-start justify-start text-[0.8rem] text-cGreen">
+        <mat-icon class="text-[1.3rem] sm:text-[1.35rem] leading-none m-0 p-0">attach_money</mat-icon>
+        <span class=" ml-0 font-bold text-[0.8rem] sm:text-[0.85rem]">{{ race ? ('P1 - P'+race.cash_split.length.toString()) : '???' }}</span>
       </div>
     </div>
     <!-- Race Information -->
     <div class="flex flex-col items-start p-5 space-y-2 text-cDarkGrey">
       <div class="flex items-center space-x-2">
-        <mat-icon>access_time</mat-icon>
-        <span>{{ race ? (race.launch_time | date: 'h:mm a') : '???' }} Race Start on {{ race ? (race.launch_time | date: 'MMMM d, y') : '???' }}</span>
-        <!-- <span>{{ race ? (race.launch_time) : '???' }}6:15 pm Race Start on 24th December 2024</span> -->
+        <mat-icon class="text-md">access_time</mat-icon>
+        <span class="text-sm md:text-lg">{{ race ? (race.launch_time | date: 'h:mm a') : '???' }} Race Start on {{ race ? (race.launch_time | date: 'MMMM d, y') : '???' }}</span>
+        <!-- <span>{{ race ? (race.launch_time) : '???' }}6:15 pm Race Start on 24th Dec 2024</span> -->
       </div>
       <div class="flex items-center space-x-2">
-        <mat-icon>flag</mat-icon>
-        <span>{{ race ? (race.track_name) : '???' }}</span>
+        <mat-icon class="text-md">flag</mat-icon>
+        <span class="text-sm md:text-lg">{{ race ? (race.track_name) : '???' }}</span>
       </div>
       <div class="flex items-center space-x-2">
-        <mat-icon>directions_car</mat-icon>
-        <span>{{ race ? (race.car) : '???' }}</span>
+        <mat-icon class="text-md">directions_car</mat-icon>
+        <span class="text-sm md:text-lg">{{ race ? (race.car) : '???' }}</span>
       </div>
     </div>
     </div>

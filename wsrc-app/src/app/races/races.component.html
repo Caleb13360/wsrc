@@ -148,7 +148,7 @@
 <div class="p-4 px-10 sm:px-60">
     <div class="py-6 flex justify-center">
         <!-- fix race id -->
-    <button routerLink="/race/races[0].race_id"
+    <button [routerLink]="['/race', races[0].race_id]"
         class="bg-cBlue text-white text-2xl font-roboto-condensed tracking-tighter px-14 py-2 rounded-sm hover:px-20 hover:bg-cWhite hover:text-cBlack duration-200 transition-all ease-linear font-bold ">View Details</button>
     </div>
     </div>
@@ -191,7 +191,7 @@
                     <td class="py-2 px-4 text-center">{{ race.max_racers }}</td>
                     <td class="py-2 px-4 text-center">
                     <!-- fix race id -->
-                        <button routerLink="/race/race.race_id"
+                        <button [routerLink]="['/race', race.race_id]"
                             class="text-white font-bold px-8 py-1 rounded hover:bg-cWhite bg-cBlue hover:text-cBlack duration-100 transition-all ease-linear">Details</button>
                     </td>
                 </tr>
@@ -230,7 +230,7 @@
         
         <!-- Register Button - Full Width -->
         <div class="flex mt-4">
-            <button routerLink="/details"
+            <button [routerLink]="['/race', race.race_id]"
                 class="w-full text-white font-bold px-6 py-2 rounded hover:bg-cWhite bg-cBlue hover:text-cBlack duration-100 transition-all ease-linear">
                 Register ({{ race.max_racers }})
             </button>

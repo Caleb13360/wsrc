@@ -206,25 +206,25 @@
         <div class="flex justify-center text-cWhite font-bold font-roboto-condensed text-2xl text-center mb-4">    
             <span>WSRC {{ race.car }} Challenge - Fixed</span>
         </div>
-        <div class="flex justify-between text-cWhite">
+        <!-- <div class="flex justify-between text-cWhite">
             <span class="font-bold">Date:</span>
             <span>{{ race.date }}</span>
-        </div>
+        </div> -->
         <!-- Time -->
-        <div class="flex justify-between text-cWhite mt-1">
+        <!-- <div class="flex justify-between text-cWhite mt-1">
             <span class="font-bold">Time:</span>
             <span>{{ race.start_time }}</span>
-        </div>
+        </div> -->
        
         <!-- Track -->
         <div class="flex justify-between text-cWhite mt-1">
             <span class="font-bold">Track:</span>
-            <span>{{ race.track }}</span>
+            <span>{{ race.track_name }}</span>
         </div>
         <!-- Prize Pool -->
         <div class="flex justify-between text-cGreen mt-1">
             <span class="font-bold">Prize Pool:</span>
-            <span>{{ race.prize_pool }}</span>
+            <span>${{ races[0] ? ((races[0].entry_fee) * (races[0].max_racers) * 0.5) : '???' }}</span>
         </div>
         <!-- Racers -->
         
@@ -232,7 +232,7 @@
         <div class="flex mt-4">
             <button routerLink="/details"
                 class="w-full text-white font-bold px-6 py-2 rounded hover:bg-cWhite bg-cBlue hover:text-cBlack duration-100 transition-all ease-linear">
-                Register ({{ race.racers }})
+                Register ({{ race.max_racers }})
             </button>
         </div>
     </div>

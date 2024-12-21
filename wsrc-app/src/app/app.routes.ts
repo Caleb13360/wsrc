@@ -40,7 +40,7 @@ export const routes: Routes = [
         title: 'Race Results'
     },
     {
-        path: 'details',
+        path: 'race/:id',
         component: RaceDetailsComponent,
         title: 'Race Details'
     },

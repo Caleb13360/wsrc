@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { RaceTileComponent } from './race-tile.component';
 
 describe('RaceTileComponent', () => {

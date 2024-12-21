@@ -1,39 +1,59 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterLink } from '@angular/router';
+import { Race } from '@models/race';
+import { ApiService } from './../../services/api';
 
 @Component({
   selector: 'app-races',
   imports: [CommonModule, MatIconModule, RouterLink],
   templateUrl: './races.component.html',
-  styleUrl: './races.component.css'
+  styleUrl: './races.component.css',
+  providers: [ApiService]
 })
-export class RacesComponent {
-  races = [
-    {
-      date: '2024-10-01',
-      start_time: '10:00 AM',
-      car: 'Ferrari SF90',
-      track: 'Silverstone',
-      prize_pool: '$10,000',
-      racers: '18/20'
-    },
-    {
-      date: '2024-10-05',
-      start_time: '2:00 PM',
-      car: 'Toyota GR86',
-      track: 'Spa-Francorchamps',
-      prize_pool: '$5,000',
-      racers: '15/20'
-    },
-    {
-      date: '2024-10-10',
-      start_time: '6:30 PM',
-      car: 'Porsche 911 GT3',
-      track: 'Nürburgring',
-      prize_pool: '$7,500',
-      racers: '20/20'
+export class RacesComponent implements OnInit{
+   constructor( private apiService: ApiService) {}
+   races!: Race[];
+  raceStarted = false;
+  countdown = {
+    days: '?',
+    hours: '?',
+    minutes: '?',
+    seconds: '?'
+  };
+  intervalId: any;
+
+  ngOnInit(): void {
+    this.updateCountdown();
+      this.intervalId = setInterval(() => {
+        this.updateCountdown();
+      }, 1000);
+      this.apiService.getLatestRaces(3).subscribe((data)=> {this.races=data.races});
+  }
+
+  private updateCountdown(): void {
+    if(!this.races){return;}
+    const now = new Date().getTime();
+    const launchTime = new Date(this.races[0].launch_time).getTime();
+    const distance = launchTime - now;
+
+    if (distance < 0) {
+      this.raceStarted = true;
+      clearInterval(this.intervalId);
+      return;
     }
-  ];
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    this.countdown = {
+      days: days.toString(),
+      hours: hours.toString().padStart(2, '0'),
+      minutes: minutes.toString().padStart(2, '0'),
+      seconds: seconds.toString().padStart(2, '0')
+    };
+  }
 }

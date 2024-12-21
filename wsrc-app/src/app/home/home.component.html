@@ -33,9 +33,9 @@
         
           <!-- 1x3 Grid -->
           <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-            <app-race-tile [race]="latestRace"></app-race-tile>
-            <app-race-tile [race]="latestRace"></app-race-tile>
-            <app-race-tile [race]="latestRace"></app-race-tile>
+            <div *ngFor="let race of latestRaces; let i = index">
+              <app-race-tile [race]="latestRaces[i]"></app-race-tile>
+            </div>
           </div>
           
        

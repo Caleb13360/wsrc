@@ -1,4 +1,5 @@
-import { Routes } from '@angular/router';
+import { CanActivateFn, Routes, Router} from '@angular/router';
+import { inject } from '@angular/core';
 import { HomeComponent } from './home/home.component';
 import { RacesComponent } from './races/races.component';
 import { AboutUsComponent } from './about-us/about-us.component';
@@ -16,18 +17,32 @@ import { BigBlindComponent } from './events_pages/big-blind/big-blind.component'
 import { WelcomeGiftComponent } from './events_pages/welcome-gift/welcome-gift.component';
 import { DoubleRPComponent } from './events_pages/double-rp/double-rp.component';
 import { RPRewardsComponent } from './events_pages/rpRewards/rpRewards.component';
+import { ApiService } from '../services/api';
 
+const authGuard: CanActivateFn = async () => {
+    const apiService = inject(ApiService);
+    const router = inject(Router);
+    const isLoggedIn = await apiService.loggedIn().toPromise().then((data) => data.loggedIn);
+
+    if (!isLoggedIn) {
+        router.navigate(['/login']);
+        return false;
+    }
+    return true;
+};
 
 export const routes: Routes = [
     {
         path: '',
         component: HomeComponent,
-        title: 'Home'
+        title: 'Home',
+        canActivate: [authGuard]
     },
     {
         path: 'races',
         component: RacesComponent,
-        title: 'Races'
+        title: 'Races',
+        canActivate: [authGuard]
     },
     {
         path: 'about',
@@ -37,42 +52,50 @@ export const routes: Routes = [
     {
         path: 'results',
         component: RaceResultsComponent,
-        title: 'Race Results'
+        title: 'Race Results',
+        canActivate: [authGuard]
     },
     {
         path: 'race/:id',
         component: RaceDetailsComponent,
-        title: 'Race Details'
+        title: 'Race Details',
+        canActivate: [authGuard]
     },
     { 
         path: 'profile',
         component: UserProfileComponent,
-        title: 'Profile'
+        title: 'Profile',
+        canActivate: [authGuard]
     },
     {
         path: 'wallet',
         component: WalletComponent,
-        title: 'Wallet'
+        title: 'Wallet',
+        canActivate: [authGuard]
     },
     { 
         path: 'notifications',
         component: NotificationsComponent,
-        title: 'Notifications'
+        title: 'Notifications',
+        canActivate: [authGuard]
     },
     {
         path: 'checkout',
         component: CheckoutComponent,
-        title: 'Checkout'
+        title: 'Checkout',
+        canActivate: [authGuard]
     },
     {
         path: 'withdraw',
         component: WithdrawComponent,
-        title: 'Withdraw'
+        title: 'Withdraw',
+        canActivate: [authGuard]
     },
     { 
         path: 'result-details',
         component: ResultDetailsComponent,
-        title: 'Result Details'
+        title: 'Result Details',
+        canActivate: [authGuard]
     },
     { 
         path: 'login',
@@ -81,22 +104,27 @@ export const routes: Routes = [
     },
     {
         path: 'events',
-        component: EventsComponent
+        component: EventsComponent,
+        canActivate: [authGuard]
     }, 
     {
         path: 'events/bigBlind',
-        component: BigBlindComponent
+        component: BigBlindComponent,
+        canActivate: [authGuard]
     },
     {
         path: 'events/welcomeGift',
-        component: WelcomeGiftComponent
+        component: WelcomeGiftComponent,
+        canActivate: [authGuard]
     },
     {
         path: 'events/doubleRP',
-        component: DoubleRPComponent
+        component: DoubleRPComponent,
+        canActivate: [authGuard]
     },
      { 
         path: 'events/RPRewards',
         component: RPRewardsComponent,
+        canActivate: [authGuard]
     }
 ];

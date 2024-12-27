@@ -56,10 +56,7 @@ async function iracingRequest(url:string):Promise<any>{
 // #region API
 export class IRacingService{
     getData = async ()=> await iracingRequest('https://members-ng.iracing.com/data/results/get?subsession_id=38280997');
-    handleGetData(req: Request, res: Response) {
-        const dataLink = iracingRequest('https://members-ng.iracing.com/data/results/get?subsession_id=38280997')
-        res.json({'Link': dataLink})
-    }
+    getProfile = async ()=> await iracingRequest('https://members-ng.iracing.com/data/member/get?cust_id=112184081968256326479');
     // get race results
     // get racer details
     // get track/car?

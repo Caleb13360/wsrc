@@ -2,7 +2,9 @@ import type { Race } from '@models/race.d.ts';
 import type { User } from '@models/user.d.ts';
 import { IRacingService} from './iracing.js';
 import { Supabase } from './supaBase.js';
+import { Auth } from './auth.js';
 const iRacingService: IRacingService = new IRacingService();
+const auth: Auth = new Auth();
 const db: Supabase = new Supabase();
 
 export class Service{
@@ -43,6 +45,18 @@ export class Service{
     // second_pp:80, // Prize pool amount for second place
     // third_pp: 60, // Prize pool amount for third place
     // }
+    async loginWithGoogle(credentials: string): Promise<string> {
+        const jwtToken: string = await auth.verifyIdToken(credentials);
+        return jwtToken;
+    }
+
+    checkJWT(jwtToken: string): boolean {
+        const decoded = auth.decodeToken(jwtToken);
+        console.log(decoded);
+        return decoded!==null;
+            }
+
+
     async getUserById(id: string): Promise<User> {
         return this.user;
     }

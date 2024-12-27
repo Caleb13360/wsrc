@@ -2,10 +2,35 @@ import { Router } from 'express';
 import { Service } from './Services/service.js';
 import { IRacingService} from './Services/iracing.js';
 const service: Service = new Service();
-const iRacingService: IRacingService = new IRacingService();
-//
-//#region RACES
 const router = Router();
+//#region LOGIN
+router.post('/login/google', async (req, res) => {
+    const { credential } = req.body;
+    try {
+        const result = await service.loginWithGoogle(credential);
+        res.cookie('authToken', result, {
+            httpOnly: true,
+            secure: true,
+            expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7)
+        });
+        res.json({ success: true });
+    } catch (err) {
+        res.status(500).json({ error: 'Error logging in' });
+    }
+});
+router.get('/login/check', async (req, res) => {
+    const authToken = req.cookies.authToken;
+    console.log(authToken);
+    if(authToken===null || authToken===undefined){
+        res.json({ loggedIn: false });
+    } else {
+        res.json({loggedIn: service.checkJWT(authToken)});
+    }
+   
+    
+});
+//#endregion
+//#region RACES
 // Get the next race to occur
 router.get('/race/next', async (_, res) => {
     try {
@@ -98,6 +123,7 @@ router.get('/races/finished/:numberOfResults/afterId/:id', async (req, res) => {
         res.status(500).json({ error: 'Error fetching finished races' });
     }
 });
+//#endregion
 // Get the total amount of prize money won by users
 router.get('/stats/total-prize-amount', (_, res) => {
     res.json({totalPrizeAmount: service.getTotalPrizeAmount()})

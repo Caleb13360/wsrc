@@ -1,20 +1,20 @@
 import { Request, Response } from 'express';
 import CryptoJS from 'crypto-js'
 import axios from 'axios'
-import { EMAIL, PASSWORD } from '../config.js';
+import { IRACING_EMAIL, IRACING_PASSWORD } from '../config.js';
 
 // #region Cookies
 var _cookie: string[] = [];
 async function getCookie():Promise<string>{
     if(_cookie.length < 1){
-        _cookie = await fetchCookie(hashPassword(PASSWORD, EMAIL.toLowerCase()));
+        _cookie = await fetchCookie(hashPassword(IRACING_PASSWORD, IRACING_EMAIL.toLowerCase()));
     }
     return _cookie.join('; ');
 }
 
 async function fetchCookie(password: string): Promise<string[]> {
     try {
-        const response = await axios.post('https://members-ng.iracing.com/auth', {email: EMAIL, password: password}, {
+        const response = await axios.post('https://members-ng.iracing.com/auth', {email: IRACING_EMAIL, password: password}, {
             headers: {
                 'Content-Type': 'application/json'
             }

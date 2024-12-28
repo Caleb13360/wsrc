@@ -5,8 +5,8 @@ dotenv.config()
 export const PORT = process.env.PORT || 3000;
 export const HOSTNAME = process.env.HOSTNAME || 'localhost';
 
-export const EMAIL = process.env.IRACING_EMAIL || '';
-export const PASSWORD = process.env.IRACING_PASSWORD || '';
+export const IRACING_EMAIL = process.env.IRACING_EMAIL || '';
+export const IRACING_PASSWORD = process.env.IRACING_PASSWORD || '';
 
 export const JWT_SECRET = process.env.JWT_SECRET || '';
 

@@ -41,13 +41,9 @@ router.get('/login/check', async (req, res) => {
 router.get('/login/findIracingUser/:search', async (req, res) => {
     const search = req.params.search;
     try {
-        const users = await service.lookupDriver(search);
-        if (users.length > 0) {
-            const user = users[0];
-            res.json({ name: user.display_name, id: user.cust_id });
-        } else {
-            res.status(404).json({ error: 'No users found' });
-        }
+        const user = await service.lookupDriver(search);
+        console.log(user);
+        res.json({ name: user.display_name, id: user.cust_id });
     } catch (err) {
         res.status(500).json({ error: 'Error finding driver' });
     }

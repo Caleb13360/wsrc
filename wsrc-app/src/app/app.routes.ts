@@ -18,6 +18,7 @@ import { WelcomeGiftComponent } from './events_pages/welcome-gift/welcome-gift.c
 import { DoubleRPComponent } from './events_pages/double-rp/double-rp.component';
 import { RPRewardsComponent } from './events_pages/rpRewards/rpRewards.component';
 import { ApiService } from '../services/api';
+import { AccountCreationComponent } from './account-creation/account-creation.component';
 
 const authGuard: CanActivateFn = async () => {
     const apiService = inject(ApiService);
@@ -126,5 +127,10 @@ export const routes: Routes = [
         path: 'events/RPRewards',
         component: RPRewardsComponent,
         canActivate: [authGuard]
+    },
+    { 
+        path: 'account-creation',
+        component: AccountCreationComponent,
+        title:'Account Creation'
     }
 ];

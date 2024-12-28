@@ -41,10 +41,30 @@ router.get('/login/check', async (req, res) => {
 router.get('/login/findIracingUser/:search', async (req, res) => {
     const search = req.params.search;
     try {
-        const result = await service.lookupDriver(search);
-        res.json({ result: result });
+        const user = await service.lookupDriver(search);
+        res.json({ name: user.display_name, id: user.cust_id });
     } catch (err) {
         res.status(500).json({ error: 'Error finding driver' });
+    }
+});
+
+router.post('/login/link', async (req, res) => {
+    const { accountName, promotionalEmails } = req.body;
+    const authToken = req.cookies.authToken;
+    if(authToken===null || authToken===undefined){
+        res.json({ loggedIn: false });
+        return;
+    }
+    const decoded = service.decodeJWT(authToken);
+    if(decoded===null || decoded.id===undefined){
+        res.json({ loggedIn: false });
+        return;
+    }
+    try {
+        await service.linkUser(decoded.id, accountName, promotionalEmails);
+        res.json({ success: true });
+    } catch (err) {
+        res.status(500).json({ error: 'Error linking user' });
     }
 });
 //#endregion

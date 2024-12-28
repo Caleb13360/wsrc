@@ -23,11 +23,19 @@
             placeholder="e.g. 'John Appleseed' or '1111111'"
             class="w-full px-4 py-3 rounded-md bg-gray-800 text-gray-200 placeholder-gray-500 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <div
-            *ngIf="registerForm.get('accountName')?.touched && registerForm.get('accountName')?.invalid"
-            class="text-red-500 text-sm mt-1"
-          >
-            Please enter a valid account name or ID.
+          <button type="button" (click)="verifyUsername()" class="bg-blue-500 text-white py-1 px-3 rounded-md mt-2">
+            <div *ngIf="!verifying">
+              Check User
+            </div>
+            <div *ngIf="verifying">
+              Verifing...
+            </div>
+          </button>
+          <div *ngIf="verifiedName && verifiedId && !verifying" class="text-green-500 text-sm mt-1">
+            Found user: {{ verifiedName }} ({{ verifiedId }})
+          </div>
+          <div *ngIf="noUserFound && !verifying" class="text-red-500 text-sm mt-1">
+            No user found with that name or ID
           </div>
         </div>
         <div class="mb-4 text-left text-gray-300">

@@ -29,11 +29,11 @@ const authGuard: CanActivateFn = async (route, state: RouterStateSnapshot) => {
         router.navigate(['/login'], { queryParams: { redirect_uri: intendedUrl } });
         return false;
     }
-    // if (!authData.linked) {
-    //     console.log('working');
-    //     router.navigate(['/login/create'], { queryParams: { redirect_uri: intendedUrl } });
-    //     return false;
-    // }
+    if (!authData.linked) {
+        console.log('working');
+        router.navigate(['/login/create'], { queryParams: { redirect_uri: intendedUrl } });
+        return false;
+    }
     return true;
 };
 const accountCreate: CanActivateFn = async () => {

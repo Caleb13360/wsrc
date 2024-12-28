@@ -67,9 +67,16 @@ export class Service{
         return user.iracing_id !== null;
     }
 
+    async linkUser(googleId: string, query_search: string, promotionalEmails: boolean): Promise<void> {
+        const user = await iRacingService.lookupDriver(query_search);
+        console.log(user);
+        await db.linkUser(googleId, user[0].cust_id, user[0].display_name, promotionalEmails);
+        return;
+    }
+
     async lookupDriver(searchTerm: string): Promise<any> {
         const user = await iRacingService.lookupDriver(searchTerm);
-        return user.length > 0;
+        return user.length > 0 ? user[0] : [];
     }
 
 

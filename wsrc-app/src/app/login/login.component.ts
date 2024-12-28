@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit{
   async handleCredentialResponse(response: CredentialResponse) {
     await this.apiService.loginWithGoogle(response.credential).subscribe((data) => {
       this._ngZone.run(() => {
-        this.router.navigate(['/login/create'], { queryParams: { redirect_uri: this.redirect_uri } });
+        this.router.navigate([ this.redirect_uri]);
       })}, (error) => {
         console.log(error);
       });

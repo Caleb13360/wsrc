@@ -20,6 +20,13 @@ export class ApiService {
     return this.httpClient.post(`${this.apiUrl}/login/google`, {credential: credentials}, {headers: header, withCredentials: true});
   }
 
+  checkUsername(username: string): Observable<any> {
+    return this.httpClient.get(`${this.apiUrl}/login/findIracingUser/${username}`);
+  }
+  linkUser(data: any): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/login/link`, data, {withCredentials: true});
+  }
+
   getLatestRace() {
     return this.httpClient.get<{ race: Race }>(`${this.apiUrl}/race/next`);
   }

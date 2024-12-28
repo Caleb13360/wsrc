@@ -19,6 +19,7 @@ jobs:
           echo "IRACING_PASSWORD=${{ secrets.IRACING_PASSWORD }}" >> ./wsrc-api/.env
           echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> ./wsrc-api/.env
           echo "SUPABASE_KEY=${{ secrets.SUPABASE_KEY }}" >> ./wsrc-api/.env
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> ./wsrc-api/.env
 
       - name: Login to Docker Hub
         uses: docker/login-action@v2

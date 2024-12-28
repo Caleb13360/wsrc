@@ -8,6 +8,56 @@ export class Supabase {
     constructor() {
         this.sb = createClient(SUPABASE_URL, SUPABASE_KEY);
     }
+
+    async createUser(googleId: string, email: string): Promise<void> {
+        const existingUser = await this.userExists(googleId);
+        if (!existingUser) {
+            const { error } = await this.sb
+                .from('User')
+                .insert([{ google_id: googleId, email }]);
+
+            if (error) {
+                throw error;
+            }
+        }
+        return;
+    }
+
+    async linkUser(googleId:string, iracingId: number, name: string, promotionalEmails: boolean): Promise<void> {
+        const { error } = await this.sb
+            .from('User')
+            .update({ iracing_id: iracingId, iracing_username: name, email_promotions: promotionalEmails })
+            .eq('google_id', googleId);
+        if (error) {
+            throw error;
+        }
+    }
+
+    async getUserById(googleId: string): Promise<any> {
+        const { data: user, error: selectError } = await this.sb
+            .from('User')
+            .select('*')
+            .eq('google_id', googleId)
+            .single();
+
+        if (selectError && selectError.code !== 'PGRST116') {
+            throw selectError;
+        }
+        return user;
+    }
+
+    async userExists(googleId: string): Promise<boolean> {
+        const { data: existingUser, error: selectError } = await this.sb
+            .from('User')
+            .select('*')
+            .eq('google_id', googleId)
+            .single();
+
+        if (selectError && selectError.code !== 'PGRST116') {
+            throw selectError;
+        }
+        return !!existingUser;
+    }
     generateRaceFromData(data: any){
         const race: Race = {
             race_id: data.race_id,
@@ -122,7 +172,6 @@ export class Supabase {
     }
 
     async getRace(id: number): Promise<Race | null> {
-        console.log('getRace', id);
         const data = await this.sb
             .from('Races')
             .select(`

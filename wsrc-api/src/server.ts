@@ -1,6 +1,7 @@
 import http from 'http'
 import express from 'express'
 import routes from './routes.js'
+import cookieParser from 'cookie-parser'
 
 const PORT = process.env.PORT || 3000;
 export const app = express();
@@ -12,6 +13,7 @@ export const Main = () => {
         const origin: string | undefined = req.headers.origin;
         if (origin && allowedOrigins.includes(origin)) {
             res.header('Access-Control-Allow-Origin', origin);
+            res.header('Access-Control-Allow-Credentials', 'true');
         }
         res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
         res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
@@ -19,6 +21,7 @@ export const Main = () => {
     });
     app.use(express.urlencoded({ extended: true }));
     app.use(express.json());
+    app.use(cookieParser());
     app.use('/', routes);
     httpServer = http.createServer(app);
     httpServer.listen(PORT, () => {

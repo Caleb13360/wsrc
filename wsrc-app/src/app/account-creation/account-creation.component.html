@@ -1,0 +1,75 @@
+<div
+  class="min-h-screen flex items-center justify-center bg-cover bg-center font-roboto tracking-tighter bg-cDarkBlue pt-20 sm:pt-24 md:pt-32 lg:pt-36"
+  style="background-image: url('loginBG1.jpg')"
+>
+  <div
+    class="bg-black bg-opacity-60 backdrop-blur-md p-6 sm:p-8 shadow-lg text-start w-full sm:w-2/3 md:w-1/2 lg:w-1/3 mx-4 sm:mx-0 "
+  >
+    <a class="text-cWhite text-3xl sm:text-4xl font-porscha block text-center sm:text-start mb-6 sm:mb-4">
+      WSRC
+    </a>
+    <div class="sm:mx-10 md:mx-12">
+      <h1 class="text-white text-xl sm:text-2xl font-bold mb-4 text-center sm:text-start">
+        Create an account
+      </h1>
+      <p class="text-gray-300 text-sm mb-6 text-center sm:text-start">
+        Please enter your iRacing account name or customer ID.
+      </p>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="mb-6">
+          <input
+            type="text"
+            formControlName="accountName"
+            placeholder="e.g. 'John Appleseed' or '1111111'"
+            class="w-full px-4 py-3 rounded-md bg-gray-800 text-gray-200 placeholder-gray-500 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <button type="button" (click)="verifyUsername()" class="bg-blue-500 text-white py-1 px-3 rounded-md mt-2">
+            <div *ngIf="!verifying">
+              Find User
+            </div>
+            <div *ngIf="verifying">
+              Searching...
+            </div>
+          </button>
+          <div *ngIf="verifiedName && verifiedId && !verifying" class="text-green-500 text-sm mt-1">
+            Link Account With: {{ verifiedName }} ({{ verifiedId }})
+          </div>
+          <div *ngIf="noUserFound && !verifying" class="text-red-500 text-sm mt-1">
+            No user found with that name or ID
+          </div>
+        </div>
+        <div class="mb-4 text-left text-gray-300">
+          <label class="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              formControlName="terms"
+              class="form-checkbox text-cBlue"
+            />
+            <span>
+              I confirm I have read and accept the Terms & Conditions and
+              privacy policy
+            </span>
+          </label>
+        </div>
+        <div class="mb-6 text-left text-gray-300">
+          <label class="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              formControlName="promotionalEmails"
+              class="form-checkbox text-blue-500"
+            />
+            <span>I agree to receive promotional emails from WSRC</span>
+          </label>
+        </div>
+        <button
+          type="submit"
+          [disabled]="registerForm.invalid&&verifiedId===undefined"
+          [ngClass]="registerForm.invalid || verifiedId === undefined ? 
+    'w-full bg-gray-400 text-gray-700 py-3 rounded-md cursor-not-allowed transition font-bold text-lg' : 
+    'w-full bg-cBlue text-white py-3 rounded-md hover:bg-cWhite hover:text-cBlack transition font-bold text-lg'">
+          Create Account
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

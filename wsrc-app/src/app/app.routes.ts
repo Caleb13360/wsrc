@@ -1,4 +1,5 @@
-import { Routes } from '@angular/router';
+import { CanActivateFn, Routes, Router, RouterStateSnapshot} from '@angular/router';
+import { inject } from '@angular/core';
 import { HomeComponent } from './home/home.component';
 import { RacesComponent } from './races/races.component';
 import { AboutUsComponent } from './about-us/about-us.component';
@@ -16,7 +17,55 @@ import { BigBlindComponent } from './events_pages/big-blind/big-blind.component'
 import { WelcomeGiftComponent } from './events_pages/welcome-gift/welcome-gift.component';
 import { DoubleRPComponent } from './events_pages/double-rp/double-rp.component';
 import { RPRewardsComponent } from './events_pages/rpRewards/rpRewards.component';
+import { ApiService } from '../services/api';
+import { AccountCreationComponent } from './account-creation/account-creation.component';
 
+const authGuard: CanActivateFn = async (route, state: RouterStateSnapshot) => {
+    const apiService = inject(ApiService);
+    const router = inject(Router);
+    const intendedUrl = state.url;
+    const authData = await apiService.loggedIn().toPromise();
+    if (!authData.loggedIn) {
+        router.navigate(['/login'], { queryParams: { redirect_uri: intendedUrl } });
+        return false;
+    }
+    if (!authData.linked) {
+        console.log('working');
+        router.navigate(['/login/create'], { queryParams: { redirect_uri: intendedUrl } });
+        return false;
+    }
+    return true;
+};
+const accountCreate: CanActivateFn = async () => {
+    const apiService = inject(ApiService);
+    const router = inject(Router);
+    const currentUrl = router.url;
+    const authData = await apiService.loggedIn().toPromise();
+    if (!authData.loggedIn) {
+        router.navigate(['/login'], { queryParams: { redirect_uri: currentUrl } });
+        return false;
+    }
+    if (authData.linked) {
+        router.navigate(['/home']);
+        return false;
+    }
+    return true;
+};
+const loginReady: CanActivateFn = async () => {
+    const apiService = inject(ApiService);
+    const router = inject(Router);
+    const currentUrl = router.url;
+    const authData = await apiService.loggedIn().toPromise();
+    if (authData.loggedIn) {
+        if (authData.linked) {
+            router.navigate(['/home']);
+            return false;
+        }
+        router.navigate(['/login/create'], { queryParams: { redirect_uri: currentUrl } });
+        return false;
+    }
+    return true;
+};
 
 export const routes: Routes = [
     {
@@ -47,27 +96,32 @@ export const routes: Routes = [
     { 
         path: 'profile',
         component: UserProfileComponent,
-        title: 'Profile'
+        title: 'Profile',
+        canActivate: [authGuard]
     },
     {
         path: 'wallet',
         component: WalletComponent,
-        title: 'Wallet'
+        title: 'Wallet',
+        canActivate: [authGuard]
     },
     { 
         path: 'notifications',
         component: NotificationsComponent,
-        title: 'Notifications'
+        title: 'Notifications',
+        canActivate: [authGuard]
     },
     {
         path: 'checkout',
         component: CheckoutComponent,
-        title: 'Checkout'
+        title: 'Checkout',
+        canActivate: [authGuard]
     },
     {
         path: 'withdraw',
         component: WithdrawComponent,
-        title: 'Withdraw'
+        title: 'Withdraw',
+        canActivate: [authGuard]
     },
     { 
         path: 'result-details',
@@ -77,7 +131,8 @@ export const routes: Routes = [
     { 
         path: 'login',
         component: LoginComponent,
-        title: 'Login'
+        title: 'Login',
+        canActivate: [loginReady]
     },
     {
         path: 'events',
@@ -98,5 +153,11 @@ export const routes: Routes = [
      { 
         path: 'events/RPRewards',
         component: RPRewardsComponent,
+    },
+    { 
+        path: 'login/create',
+        component: AccountCreationComponent,
+        title:'Account Creation',
+        canActivate: [accountCreate]
     }
 ];

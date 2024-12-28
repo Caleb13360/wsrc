@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from '../environments/environment';
 
 import type {Race} from '../../../models/race.d.ts';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -11,6 +12,20 @@ export class ApiService {
   private apiUrl = environment.apiUrl;
 
   constructor(private httpClient: HttpClient) {}
+  loggedIn(): Observable<any>{
+    return this.httpClient.get(`${this.apiUrl}/login/check`, {withCredentials: true});
+  }
+  loginWithGoogle(credentials: string): Observable<any> {
+    const header = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.httpClient.post(`${this.apiUrl}/login/google`, {credential: credentials}, {headers: header, withCredentials: true});
+  }
+
+  checkUsername(username: string): Observable<any> {
+    return this.httpClient.get(`${this.apiUrl}/login/findIracingUser/${username}`);
+  }
+  linkUser(data: any): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/login/link`, data, {withCredentials: true});
+  }
 
   getLatestRace() {
     return this.httpClient.get<{ race: Race }>(`${this.apiUrl}/race/next`);

@@ -2,7 +2,9 @@ import type { Race } from '@models/race.d.ts';
 import type { User } from '@models/user.d.ts';
 import { IRacingService} from './iracing.js';
 import { Supabase } from './supaBase.js';
+import { Auth } from './auth.js';
 const iRacingService: IRacingService = new IRacingService();
+const auth: Auth = new Auth();
 const db: Supabase = new Supabase();
 
 export class Service{
@@ -43,6 +45,41 @@ export class Service{
     // second_pp:80, // Prize pool amount for second place
     // third_pp: 60, // Prize pool amount for third place
     // }
+
+    async loginWithGoogle(credentials: string): Promise<string> {
+        const { userid: googleId, email } = await auth.verifyIdToken(credentials);
+        // Create account if none exists
+        await db.createUser(googleId, email);
+        const jwtToken: string = auth.generateToken(googleId);
+        return jwtToken;
+    }
+
+     decodeJWT(jwtToken: string): any  {
+        return auth.decodeToken(jwtToken);
+            }
+    
+    async checkUserLinked(googleId: string): Promise<boolean> {
+        const exists = await db.userExists(googleId);
+        if (!exists) {
+            await db.createUser(googleId, '');
+        }
+        const user = await db.getUserById(googleId);
+        return user.iracing_id !== null;
+    }
+
+    async linkUser(googleId: string, query_search: string, promotionalEmails: boolean): Promise<void> {
+        const user = await iRacingService.lookupDriver(query_search);
+        console.log(user);
+        await db.linkUser(googleId, user[0].cust_id, user[0].display_name, promotionalEmails);
+        return;
+    }
+
+    async lookupDriver(searchTerm: string): Promise<any> {
+        const user = await iRacingService.lookupDriver(searchTerm);
+        return user.length > 0 ? user[0] : [];
+    }
+
+
     async getUserById(id: string): Promise<User> {
         return this.user;
     }
@@ -56,7 +93,6 @@ export class Service{
     }
     async getFinishedRaces(startAfter: Date, numberOfResults: number): Promise<Race[]> {
         const result = await db.getFinishedRaces(startAfter, numberOfResults);
-        console.log(result)
         return [];
     }
     async getFinishedRacesAfter(startAfterId: number, numberOfResults: number): Promise<Race[]> {
@@ -65,7 +101,6 @@ export class Service{
     }
     async getRace(id: number): Promise<Race> {
         const result = await db.getRace(id);
-        console.log(result);
         return result as Race;
     }
     getAverageLapTime(raceId: string): number{

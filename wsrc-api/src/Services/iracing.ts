@@ -38,25 +38,37 @@ const hashPassword = (password: string, username: string): string => {
 
 // #region iracing Request
 
-async function iracingRequest(url:string):Promise<any>{
-    return await axios.get(url, {
-        headers: {
-            'Cookie': await getCookie()
+async function iracingRequest(url: string): Promise<any> {
+    try {
+        const response = await axios.get(url, {
+            headers: {
+                'Cookie': await getCookie()
+            }
+        });
+        console.log('Rate Limit:', response.headers['x-ratelimit-limit']);
+        console.log('Rate Limit Remaining:', response.headers['x-ratelimit-remaining']);
+        console.log('Rate Limit Reset:', response.headers['x-ratelimit-reset']);
+        if (response.data.link) {
+            const linkResponse = await axios.get(response.data.link);
+            return linkResponse.data;
         }
-    }).then(resultReponse => {
-        if(resultReponse.data.link){
-            return resultReponse.data.link
-        }
-        return '';
-    }).catch(error => {return error})
-
+        return response.data;
+    } catch (error) {
+        console.error('Error making iRacing request:', error);
+        throw error;
+    }
 }
 // #endregion
 
 // #region API
 export class IRacingService{
-    getData = async ()=> await iracingRequest('https://members-ng.iracing.com/data/results/get?subsession_id=38280997');
-    getProfile = async ()=> await iracingRequest('https://members-ng.iracing.com/data/member/get?cust_id=112184081968256326479');
+    // getData = async () => await iracingRequest('https://members-ng.iracing.com/data/results/get?subsession_id=38280997');
+    getProfile = async (cust_id: number) => await iracingRequest(`https://members-ng.iracing.com/data/member/profile?cust_id=${cust_id}`);
+    getMemberAwards = async (cust_id: number) => await iracingRequest(`https://members-ng.iracing.com/data/member/awards?cust_id=${cust_id}`);
+    getMemberChartData = async (cust_id: number, category_id: number, chart_type: number) => await iracingRequest(`https://members-ng.iracing.com/data/member/chart_data?cust_id=${cust_id}&category_id=${category_id}&chart_type=${chart_type}`);
+    getMemberInfo = async () => await iracingRequest('https://members-ng.iracing.com/data/member/info');
+    getMemberParticipationCredits = async () => await iracingRequest('https://members-ng.iracing.com/data/member/participation_credits');
+    getMemberData = async (cust_ids: number[], include_licenses: boolean = false) => await iracingRequest(`https://members-ng.iracing.com/data/member/get?cust_ids=${cust_ids.join(',')}&include_licenses=${include_licenses}`);
     // get race results
     // get racer details
     // get track/car?

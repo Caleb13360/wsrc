@@ -20,7 +20,6 @@ router.post('/login/google', async (req, res) => {
 });
 router.get('/login/check', async (req, res) => {
     const authToken = req.cookies.authToken;
-    console.log(authToken);
     if(authToken===null || authToken===undefined){
         res.json({ loggedIn: false });
     } else {

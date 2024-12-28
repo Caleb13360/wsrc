@@ -50,9 +50,9 @@ export class Service{
         return jwtToken;
     }
 
-    checkJWT(jwtToken: string): boolean {
+    async checkJWT(jwtToken: string): Promise<boolean>  {
         const decoded = auth.decodeToken(jwtToken);
-        console.log(decoded);
+        // console.log('profile', await iRacingService.getProfile(1014543));
         return decoded!==null;
             }
 

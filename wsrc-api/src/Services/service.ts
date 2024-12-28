@@ -76,6 +76,7 @@ export class Service{
 
     async lookupDriver(searchTerm: string): Promise<any> {
         const user = await iRacingService.lookupDriver(searchTerm);
+        console.log(user);
         return user.length > 0 ? user[0] : [];
     }
 

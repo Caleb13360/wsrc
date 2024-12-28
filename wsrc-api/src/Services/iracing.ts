@@ -14,6 +14,7 @@ async function getCookie():Promise<string>{
 
 async function fetchCookie(password: string): Promise<string[]> {
     try {
+        console.log(IRACING_EMAIL, IRACING_PASSWORD);
         const response = await axios.post('https://members-ng.iracing.com/auth', {email: IRACING_EMAIL, password: password}, {
             headers: {
                 'Content-Type': 'application/json'

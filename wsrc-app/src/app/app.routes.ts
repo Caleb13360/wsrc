@@ -1,4 +1,4 @@
-import { CanActivateFn, Routes, Router} from '@angular/router';
+import { CanActivateFn, Routes, Router, RouterStateSnapshot} from '@angular/router';
 import { inject } from '@angular/core';
 import { HomeComponent } from './home/home.component';
 import { RacesComponent } from './races/races.component';
@@ -20,26 +20,29 @@ import { RPRewardsComponent } from './events_pages/rpRewards/rpRewards.component
 import { ApiService } from '../services/api';
 import { AccountCreationComponent } from './account-creation/account-creation.component';
 
-const authGuard: CanActivateFn = async () => {
+const authGuard: CanActivateFn = async (route, state: RouterStateSnapshot) => {
     const apiService = inject(ApiService);
     const router = inject(Router);
+    const intendedUrl = state.url;
     const authData = await apiService.loggedIn().toPromise();
     if (!authData.loggedIn) {
-        router.navigate(['/login']);
+        router.navigate(['/login'], { queryParams: { redirect_uri: intendedUrl } });
         return false;
     }
-    if (!authData.linked) {
-        router.navigate(['/login/create']);
-        return false;
-    }
+    // if (!authData.linked) {
+    //     console.log('working');
+    //     router.navigate(['/login/create'], { queryParams: { redirect_uri: intendedUrl } });
+    //     return false;
+    // }
     return true;
 };
 const accountCreate: CanActivateFn = async () => {
     const apiService = inject(ApiService);
     const router = inject(Router);
+    const currentUrl = router.url;
     const authData = await apiService.loggedIn().toPromise();
     if (!authData.loggedIn) {
-        router.navigate(['/login']);
+        router.navigate(['/login'], { queryParams: { redirect_uri: currentUrl } });
         return false;
     }
     if (authData.linked) {
@@ -51,13 +54,14 @@ const accountCreate: CanActivateFn = async () => {
 const loginReady: CanActivateFn = async () => {
     const apiService = inject(ApiService);
     const router = inject(Router);
+    const currentUrl = router.url;
     const authData = await apiService.loggedIn().toPromise();
     if (authData.loggedIn) {
         if (authData.linked) {
             router.navigate(['/home']);
             return false;
         }
-        router.navigate(['/login/create']);
+        router.navigate(['/login/create'], { queryParams: { redirect_uri: currentUrl } });
         return false;
     }
     return true;

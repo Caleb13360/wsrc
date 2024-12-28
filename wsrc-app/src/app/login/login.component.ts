@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CredentialResponse, PromptMomentNotification } from 'google-one-tap';
 import { ApiService } from './../../services/api';
 import { NgZone } from '@angular/core';
@@ -11,8 +11,12 @@ import { NgZone } from '@angular/core';
   providers: [ApiService]
 })
 export class LoginComponent implements OnInit{
-  constructor(private apiService: ApiService, private _ngZone: NgZone, private router: Router) {}
+  constructor(private apiService: ApiService, private _ngZone: NgZone, private router: Router, private route: ActivatedRoute) {}
+  redirect_uri: string = '';
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.redirect_uri = params['redirect_uri'];
+    });
     if(window.google && window.google){
       this.loginWithGoogleInitialise();
     } else {
@@ -41,7 +45,7 @@ export class LoginComponent implements OnInit{
   async handleCredentialResponse(response: CredentialResponse) {
     await this.apiService.loginWithGoogle(response.credential).subscribe((data) => {
       this._ngZone.run(() => {
-        this.router.navigate(['/']);
+        this.router.navigate(['/login/create'], { queryParams: { redirect_uri: this.redirect_uri } });
       })}, (error) => {
         console.log(error);
       });

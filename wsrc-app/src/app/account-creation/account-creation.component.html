@@ -25,14 +25,14 @@
           />
           <button type="button" (click)="verifyUsername()" class="bg-blue-500 text-white py-1 px-3 rounded-md mt-2">
             <div *ngIf="!verifying">
-              Check User
+              Find User
             </div>
             <div *ngIf="verifying">
-              Verifing...
+              Searching...
             </div>
           </button>
           <div *ngIf="verifiedName && verifiedId && !verifying" class="text-green-500 text-sm mt-1">
-            Found user: {{ verifiedName }} ({{ verifiedId }})
+            Link Account With: {{ verifiedName }} ({{ verifiedId }})
           </div>
           <div *ngIf="noUserFound && !verifying" class="text-red-500 text-sm mt-1">
             No user found with that name or ID
@@ -63,9 +63,10 @@
         </div>
         <button
           type="submit"
-          [disabled]="registerForm.invalid"
-          class="w-full bg-cBlue text-white py-3 rounded-md hover:bg-cWhite hover:text-cBlack transition font-bold text-lg"
-        >
+          [disabled]="registerForm.invalid&&verifiedId===undefined"
+          [ngClass]="registerForm.invalid || verifiedId === undefined ? 
+    'w-full bg-gray-400 text-gray-700 py-3 rounded-md cursor-not-allowed transition font-bold text-lg' : 
+    'w-full bg-cBlue text-white py-3 rounded-md hover:bg-cWhite hover:text-cBlack transition font-bold text-lg'">
           Create Account
         </button>
       </form>

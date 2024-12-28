@@ -56,7 +56,6 @@ export class Service{
 
      decodeJWT(jwtToken: string): any  {
         return auth.decodeToken(jwtToken);
-        // console.log('profile', await iRacingService.getProfile(1014543));
             }
     
     async checkUserLinked(googleId: string): Promise<boolean> {
@@ -65,7 +64,6 @@ export class Service{
             await db.createUser(googleId, '');
         }
         const user = await db.getUserById(googleId);
-        console.log('user', user);
         return user.iracing_id !== null;
     }
 
@@ -88,7 +86,6 @@ export class Service{
     }
     async getFinishedRaces(startAfter: Date, numberOfResults: number): Promise<Race[]> {
         const result = await db.getFinishedRaces(startAfter, numberOfResults);
-        console.log(result)
         return [];
     }
     async getFinishedRacesAfter(startAfterId: number, numberOfResults: number): Promise<Race[]> {
@@ -97,7 +94,6 @@ export class Service{
     }
     async getRace(id: number): Promise<Race> {
         const result = await db.getRace(id);
-        console.log(result);
         return result as Race;
     }
     getAverageLapTime(raceId: string): number{

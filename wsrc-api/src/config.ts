@@ -8,6 +8,8 @@ export const HOSTNAME = process.env.HOSTNAME || 'localhost';
 export const EMAIL = process.env.IRACING_EMAIL || '';
 export const PASSWORD = process.env.IRACING_PASSWORD || '';
 
+export const JWT_SECRET = process.env.JWT_SECRET || '';
+
 export const SUPABASE_KEY = process.env.SUPABASE_KEY || '';
 export const SUPABASE_URL = process.env.SUPABASE_URL || '';
 

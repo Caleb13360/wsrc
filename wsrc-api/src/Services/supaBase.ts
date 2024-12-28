@@ -162,7 +162,6 @@ export class Supabase {
     }
 
     async getRace(id: number): Promise<Race | null> {
-        console.log('getRace', id);
         const data = await this.sb
             .from('Races')
             .select(`

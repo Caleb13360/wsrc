@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit{
     } else {
       //@ts-ignore
     window.onGoogleLibraryLoad = () => {
-      console.log('Google library loaded');
       this.loginWithGoogleInitialise();
     };
     }

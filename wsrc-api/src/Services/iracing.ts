@@ -45,16 +45,12 @@ async function iracingRequest(url: string): Promise<any> {
                 'Cookie': await getCookie()
             }
         });
-        console.log('Rate Limit:', response.headers['x-ratelimit-limit']);
-        console.log('Rate Limit Remaining:', response.headers['x-ratelimit-remaining']);
-        console.log('Rate Limit Reset:', response.headers['x-ratelimit-reset']);
         if (response.data.link) {
             const linkResponse = await axios.get(response.data.link);
             return linkResponse.data;
         }
         return response.data;
     } catch (error) {
-        console.error('Error making iRacing request:', error);
         throw error;
     }
 }

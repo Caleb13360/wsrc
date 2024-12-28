@@ -1,9 +1,9 @@
 import { OAuth2Client } from 'google-auth-library';
+import { JWT_SECRET } from '../config.js';
 import jwt from 'jsonwebtoken';
 
 export class Auth {
     authClient;
-    secret = '90182749wcuehgeuikcbsi7uagefd34e798qh98q32heo12bfsrkfug823b';
     constructor() {
             this.authClient = new OAuth2Client();
         };
@@ -24,16 +24,15 @@ export class Auth {
 
     generateToken(userId: any): string {
         const tokenPayload = {id: userId};
-        const token = jwt.sign(tokenPayload, this.secret, {expiresIn: '7d', algorithm: 'HS512'});
+        const token = jwt.sign(tokenPayload, JWT_SECRET, {expiresIn: '7d', algorithm: 'HS512'});
         return token;
     }
 
     decodeToken(token: string): any {
         try {
-            const decoded = jwt.verify(token, this.secret);
+            const decoded = jwt.verify(token, JWT_SECRET);
             return decoded;
         } catch (error) {
-            console.error('Token verification failed:', error);
             return null;
         }
     }

@@ -24,7 +24,6 @@ const authGuard: CanActivateFn = async () => {
     const apiService = inject(ApiService);
     const router = inject(Router);
     const authData = await apiService.loggedIn().toPromise();
-    console.log(authData);
     if (!authData.loggedIn) {
         router.navigate(['/login']);
         return false;
@@ -68,14 +67,12 @@ export const routes: Routes = [
     {
         path: '',
         component: HomeComponent,
-        title: 'Home',
-        canActivate: [authGuard]
+        title: 'Home'
     },
     {
         path: 'races',
         component: RacesComponent,
-        title: 'Races',
-        canActivate: [authGuard]
+        title: 'Races'
     },
     {
         path: 'about',
@@ -85,14 +82,12 @@ export const routes: Routes = [
     {
         path: 'results',
         component: RaceResultsComponent,
-        title: 'Race Results',
-        canActivate: [authGuard]
+        title: 'Race Results'
     },
     {
         path: 'race/:id',
         component: RaceDetailsComponent,
-        title: 'Race Details',
-        canActivate: [authGuard]
+        title: 'Race Details'
     },
     { 
         path: 'profile',
@@ -127,8 +122,7 @@ export const routes: Routes = [
     { 
         path: 'result-details',
         component: ResultDetailsComponent,
-        title: 'Result Details',
-        canActivate: [authGuard]
+        title: 'Result Details'
     },
     { 
         path: 'login',
@@ -138,23 +132,19 @@ export const routes: Routes = [
     },
     {
         path: 'events',
-        component: EventsComponent,
-        canActivate: [authGuard]
+        component: EventsComponent
     }, 
     {
         path: 'events/bigBlind',
-        component: BigBlindComponent,
-        canActivate: [authGuard]
+        component: BigBlindComponent
     },
     {
         path: 'events/welcomeGift',
-        component: WelcomeGiftComponent,
-        canActivate: [authGuard]
+        component: WelcomeGiftComponent
     },
     {
         path: 'events/doubleRP',
-        component: DoubleRPComponent,
-        canActivate: [authGuard]
+        component: DoubleRPComponent
     },
      { 
         path: 'events/RPRewards',

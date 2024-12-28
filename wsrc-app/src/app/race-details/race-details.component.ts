@@ -31,7 +31,6 @@ export class RaceDetailsComponent implements OnInit {
       }, 1000);
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
-      console.log(id);
       if(!id){return;}
       this.apiService.getRace(id).subscribe((data)=> {this.race=data.race;});
     });

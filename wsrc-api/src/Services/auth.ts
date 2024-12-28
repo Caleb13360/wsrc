@@ -8,18 +8,19 @@ export class Auth {
             this.authClient = new OAuth2Client();
         };
 
-    async verifyIdToken(token: string): Promise<string> {
-        const ticket = await  this.authClient.verifyIdToken({
-            idToken: token,
-            audience: '18247517896-34lvatidm7uj9orvsf4cc7cffhp2ujhc.apps.googleusercontent.com',
-        });
-        const payload = ticket.getPayload();
-        if (!payload) {
-            throw new Error('Payload is undefined');
+        async verifyIdToken(token: string): Promise<{ userid: string; email: string }> {
+            const ticket = await this.authClient.verifyIdToken({
+                idToken: token,
+                audience: '18247517896-34lvatidm7uj9orvsf4cc7cffhp2ujhc.apps.googleusercontent.com',
+            });
+            const payload = ticket.getPayload();
+            if (!payload) {
+                throw new Error('Payload is undefined');
+            }
+            const userid = payload['sub'];
+            const email = payload['email'] !== undefined ? payload['email'] : '';
+            return { userid, email };
         }
-        const userid = payload['sub'];
-        return this.generateToken(userid);
-    }
 
     generateToken(userId: any): string {
         const tokenPayload = {id: userId};

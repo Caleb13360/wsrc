@@ -45,16 +45,29 @@ export class Service{
     // second_pp:80, // Prize pool amount for second place
     // third_pp: 60, // Prize pool amount for third place
     // }
+
     async loginWithGoogle(credentials: string): Promise<string> {
-        const jwtToken: string = await auth.verifyIdToken(credentials);
+        const { userid: googleId, email } = await auth.verifyIdToken(credentials);
+        // Create account if none exists
+        await db.createUser(googleId, email);
+        const jwtToken: string = auth.generateToken(googleId);
         return jwtToken;
     }
 
-    async checkJWT(jwtToken: string): Promise<boolean>  {
-        const decoded = auth.decodeToken(jwtToken);
+     decodeJWT(jwtToken: string): any  {
+        return auth.decodeToken(jwtToken);
         // console.log('profile', await iRacingService.getProfile(1014543));
-        return decoded!==null;
             }
+    
+    async checkUserLinked(googleId: string): Promise<boolean> {
+        console.log('driver lookup', await iRacingService.lookupDriver('James Liousas2'));
+        const exists = await db.userExists(googleId);
+        if (!exists) {
+            await db.createUser(googleId, '');
+        }
+        const user = await db.getUserById(googleId);
+        return user.iracing_id !== '';
+    }
 
 
     async getUserById(id: string): Promise<User> {

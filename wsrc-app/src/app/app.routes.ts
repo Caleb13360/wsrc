@@ -22,9 +22,12 @@ import { ApiService } from '../services/api';
 const authGuard: CanActivateFn = async () => {
     const apiService = inject(ApiService);
     const router = inject(Router);
-    const isLoggedIn = await apiService.loggedIn().toPromise().then((data) => data.loggedIn);
-
-    if (!isLoggedIn) {
+    const authData = await apiService.loggedIn().toPromise();
+    if (!authData.isLoggedIn) {
+        router.navigate(['/login']);
+        return false;
+    }
+    if (!authData.linked) {
         router.navigate(['/login']);
         return false;
     }

@@ -8,6 +8,46 @@ export class Supabase {
     constructor() {
         this.sb = createClient(SUPABASE_URL, SUPABASE_KEY);
     }
+
+    async createUser(googleId: string, email: string): Promise<void> {
+        const existingUser = await this.userExists(googleId);
+        if (!existingUser) {
+            const { error } = await this.sb
+                .from('User')
+                .insert([{ google_id: googleId, email }]);
+
+            if (error) {
+                throw error;
+            }
+        }
+        return;
+    }
+
+    async getUserById(googleId: string): Promise<any> {
+        const { data: user, error: selectError } = await this.sb
+            .from('User')
+            .select('*')
+            .eq('google_id', googleId)
+            .single();
+
+        if (selectError && selectError.code !== 'PGRST116') {
+            throw selectError;
+        }
+        return user;
+    }
+
+    async userExists(googleId: string): Promise<boolean> {
+        const { data: existingUser, error: selectError } = await this.sb
+            .from('User')
+            .select('*')
+            .eq('google_id', googleId)
+            .single();
+
+        if (selectError && selectError.code !== 'PGRST116') {
+            throw selectError;
+        }
+        return !!existingUser;
+    }
     generateRaceFromData(data: any){
         const race: Race = {
             race_id: data.race_id,

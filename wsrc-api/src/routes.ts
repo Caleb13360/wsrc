@@ -22,11 +22,21 @@ router.get('/login/check', async (req, res) => {
     const authToken = req.cookies.authToken;
     if(authToken===null || authToken===undefined){
         res.json({ loggedIn: false });
-    } else {
-        res.json({loggedIn: service.checkJWT(authToken)});
+        return;
     }
-   
-    
+    const decoded = service.decodeJWT(authToken);
+    if(decoded===null || decoded.id===undefined){
+        res.json({ loggedIn: false });
+        return;
+    }
+    try {
+        const linked = await service.checkUserLinked(decoded.id);
+        res.json({ loggedIn: true, linked: linked });
+        return;
+    } catch (err) {
+        res.json({ loggedIn: true, linked: false });
+        return;
+    }
 });
 //#endregion
 //#region RACES

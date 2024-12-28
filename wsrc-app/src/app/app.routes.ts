@@ -24,12 +24,41 @@ const authGuard: CanActivateFn = async () => {
     const apiService = inject(ApiService);
     const router = inject(Router);
     const authData = await apiService.loggedIn().toPromise();
-    if (!authData.isLoggedIn) {
+    console.log(authData);
+    if (!authData.loggedIn) {
         router.navigate(['/login']);
         return false;
     }
     if (!authData.linked) {
+        router.navigate(['/login/create']);
+        return false;
+    }
+    return true;
+};
+const accountCreate: CanActivateFn = async () => {
+    const apiService = inject(ApiService);
+    const router = inject(Router);
+    const authData = await apiService.loggedIn().toPromise();
+    if (!authData.loggedIn) {
         router.navigate(['/login']);
+        return false;
+    }
+    if (authData.linked) {
+        router.navigate(['/home']);
+        return false;
+    }
+    return true;
+};
+const loginReady: CanActivateFn = async () => {
+    const apiService = inject(ApiService);
+    const router = inject(Router);
+    const authData = await apiService.loggedIn().toPromise();
+    if (authData.loggedIn) {
+        if (authData.linked) {
+            router.navigate(['/home']);
+            return false;
+        }
+        router.navigate(['/login/create']);
         return false;
     }
     return true;
@@ -104,7 +133,8 @@ export const routes: Routes = [
     { 
         path: 'login',
         component: LoginComponent,
-        title: 'Login'
+        title: 'Login',
+        canActivate: [loginReady]
     },
     {
         path: 'events',
@@ -129,11 +159,11 @@ export const routes: Routes = [
      { 
         path: 'events/RPRewards',
         component: RPRewardsComponent,
-        canActivate: [authGuard]
     },
     { 
-        path: 'account-creation',
+        path: 'login/create',
         component: AccountCreationComponent,
-        title:'Account Creation'
+        title:'Account Creation',
+        canActivate: [accountCreate]
     }
 ];

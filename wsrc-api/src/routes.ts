@@ -38,6 +38,15 @@ router.get('/login/check', async (req, res) => {
         return;
     }
 });
+router.get('/login/findIracingUser/:search', async (req, res) => {
+    const search = req.params.search;
+    try {
+        const result = await service.lookupDriver(search);
+        res.json({ result: result });
+    } catch (err) {
+        res.status(500).json({ error: 'Error finding driver' });
+    }
+});
 //#endregion
 //#region RACES
 // Get the next race to occur

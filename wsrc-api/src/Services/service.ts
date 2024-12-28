@@ -60,13 +60,18 @@ export class Service{
             }
     
     async checkUserLinked(googleId: string): Promise<boolean> {
-        console.log('driver lookup', await iRacingService.lookupDriver('James Liousas2'));
         const exists = await db.userExists(googleId);
         if (!exists) {
             await db.createUser(googleId, '');
         }
         const user = await db.getUserById(googleId);
-        return user.iracing_id !== '';
+        console.log('user', user);
+        return user.iracing_id !== null;
+    }
+
+    async lookupDriver(searchTerm: string): Promise<any> {
+        const user = await iRacingService.lookupDriver(searchTerm);
+        return user.length > 0;
     }
 
 

@@ -45,7 +45,7 @@ router.get('/login/findIracingUser/:search', async (req, res) => {
         console.log(user);
         res.json({ name: user.display_name, id: user.cust_id });
     } catch (err) {
-        res.status(500).json({ error: 'Error finding driver' });
+        res.status(500).json({ error: `Error finding driver: ${err}` });
     }
 });
 

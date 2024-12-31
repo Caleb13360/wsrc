@@ -42,10 +42,9 @@ router.get('/login/findIracingUser/:search', async (req, res) => {
     const search = req.params.search;
     try {
         const user = await service.lookupDriver(search);
-        console.log(user);
         res.json({ name: user.display_name, id: user.cust_id });
     } catch (err) {
-        res.status(500).json({ error: 'Error finding driver' });
+        res.status(500).json({ error: `Error finding driver: ${err}` });
     }
 });
 
@@ -66,6 +65,25 @@ router.post('/login/link', async (req, res) => {
         res.json({ success: true });
     } catch (err) {
         res.status(500).json({ error: 'Error linking user' });
+    }
+});
+router.get('/user/current', async (req, res) => {
+    const authToken = req.cookies.authToken;
+    if(authToken===null || authToken===undefined){
+        res.json({ loggedIn: false });
+        return;
+    }
+    const decoded = service.decodeJWT(authToken);
+    if(decoded===null || decoded.id===undefined){
+        res.json({ loggedIn: false });
+        return;
+    }
+    try {
+        const user = await service.getCurrentUser(decoded.id);
+        res.json({ user: user });
+        return;
+    } catch (err) {
+        return;
     }
 });
 //#endregion

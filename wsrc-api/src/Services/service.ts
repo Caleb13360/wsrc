@@ -11,9 +11,9 @@ export class Service{
     user: User = {
             id: 1,
             iracing_username: 'himmy grills',
+            iracing_id: 1,
             joined_date: new Date('2021-01-01'),
             email: '',
-            name: '',
             country: '',
             last_competed: new Date('2024-01-01'),
             
@@ -69,15 +69,17 @@ export class Service{
 
     async linkUser(googleId: string, query_search: string, promotionalEmails: boolean): Promise<void> {
         const user = await iRacingService.lookupDriver(query_search);
-        console.log(user);
         await db.linkUser(googleId, user[0].cust_id, user[0].display_name, promotionalEmails);
         return;
     }
 
     async lookupDriver(searchTerm: string): Promise<any> {
         const user = await iRacingService.lookupDriver(searchTerm);
-        console.log(user);
         return user.length > 0 ? user[0] : [];
+    }
+
+    async getCurrentUser(googleId: string): Promise<User> {
+        return await db.getUserById(googleId);
     }
 
 

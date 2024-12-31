@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from '../environments/environment';
-
+import type {User} from '../../../models/user.d.ts';
 import type {Race} from '../../../models/race.d.ts';
 import { Observable } from 'rxjs';
 
@@ -25,6 +25,10 @@ export class ApiService {
   }
   linkUser(data: any): Observable<any> {
     return this.httpClient.post(`${this.apiUrl}/login/link`, data, {withCredentials: true});
+  }
+
+  getCurrentUser() {
+    return this.httpClient.get<{ user: User }>(`${this.apiUrl}/user/current`, {withCredentials: true});
   }
 
   getLatestRace() {

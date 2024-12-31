@@ -1,4 +1,5 @@
 import { Race } from '@models/race.js';
+import type { User } from '@models/user.d.ts';
 import { SUPABASE_KEY, SUPABASE_URL } from '../config.js';
 import { createClient } from '@supabase/supabase-js'
 
@@ -7,6 +8,19 @@ export class Supabase {
 
     constructor() {
         this.sb = createClient(SUPABASE_URL, SUPABASE_KEY);
+    }
+
+    generateUserFromData(data: any): User {
+        const user: User = {
+            id: data.id,
+            iracing_id: data.iracing_id,
+            iracing_username: data.iracing_username,
+            email: data.email,
+            country: data.country,
+            last_competed: new Date(),
+            joined_date: data.joined
+        };
+        return user;
     }
 
     async createUser(googleId: string, email: string): Promise<void> {
@@ -33,7 +47,7 @@ export class Supabase {
         }
     }
 
-    async getUserById(googleId: string): Promise<any> {
+    async getUserById(googleId: string): Promise<User> {
         const { data: user, error: selectError } = await this.sb
             .from('User')
             .select('*')
@@ -43,7 +57,7 @@ export class Supabase {
         if (selectError && selectError.code !== 'PGRST116') {
             throw selectError;
         }
-        return user;
+        return this.generateUserFromData(user);
     }
 
     async userExists(googleId: string): Promise<boolean> {

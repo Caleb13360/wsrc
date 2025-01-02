@@ -43,6 +43,10 @@ export class ApiService {
     return this.httpClient.get<{races: Race[]}>(`${this.apiUrl}/races/upcoming/${numberOfResults}`)
   }
 
+  getFinishedRaces(numberOfResults: number) {
+    return this.httpClient.get<{races: Race[]}>(`${this.apiUrl}/races/finished/${numberOfResults}`)
+  }
+
   getTotalMoney() {
     return this.httpClient.get<{ totalPrizeAmount: number }>(`${this.apiUrl}/stats/total-prize-amount`);
   }

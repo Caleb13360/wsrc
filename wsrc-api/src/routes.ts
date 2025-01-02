@@ -88,7 +88,6 @@ router.get('/user/current', async (req, res) => {
 });
 //#endregion
 //#region RACES
-// Get the next race to occur
 router.get('/race/next', async (_, res) => {
     try {
         const races = await service.getUpcomingRaces(new Date(), 1);
@@ -101,7 +100,6 @@ router.get('/race/next', async (_, res) => {
         res.status(500).json({ error: 'Error fetching next race' });
     }
 });
-// Get race by ID
 router.get('/race/:id', async (req, res) => {
     const { id } = req.params;
     try {
@@ -115,7 +113,6 @@ router.get('/race/:id', async (req, res) => {
         res.status(500).json({ error: `Error fetching race ${id}`});
     }
 });
-// Get race lap statistics (average and fastest lap time)
 router.get('/race/:ID/lap_stats', (_, res) => {
     const raceId = 'ID';
     res.json({
@@ -123,7 +120,6 @@ router.get('/race/:ID/lap_stats', (_, res) => {
         fastest_time: service.getFastestLapTime(raceId)
     })
 });
-router.get('/race/:ID/fastest_lap')
 // Get the next x races to start
 router.get('/races/upcoming/:numberOfResults', async (req, res) => {
     const { numberOfResults } = req.params;

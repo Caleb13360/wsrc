@@ -96,7 +96,7 @@ export class Service{
     }
     async getFinishedRaces(startAfter: Date, numberOfResults: number): Promise<Race[]> {
         const result = await db.getFinishedRaces(startAfter, numberOfResults);
-        return [];
+        return result;
     }
     async getFinishedRacesAfter(startAfterId: number, numberOfResults: number): Promise<Race[]> {
         const result = await db.getFinishedRacesAfter(startAfterId, numberOfResults);

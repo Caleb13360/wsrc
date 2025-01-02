@@ -56,7 +56,7 @@
     <div class="mt-4 lg:mt-0">
         <button routerLink="/checkout"
             class="w-full lg:w-auto bg-cBlue text-white text-2xl font-roboto-condensed tracking-tighter px-14 py-2 rounded-sm hover:px-20 hover:bg-cWhite hover:text-cBlack duration-200 transition-all ease-linear font-bold">
-            Sign-Up for Race (18/22)
+            Sign-Up for Race (18/{{ race ? (race.max_racers) : '?' }})
         </button>
     </div>
 </div>
@@ -90,7 +90,7 @@
         </div>
         <div class="flex flex-col items-start p-5 justify-center text-cDarkGrey font-bold">
             
-            <span>{{ race ? (race.track_moisture) : '? ' }}%</span>
+            <span>{{ race ? (race.track_moisture) : '? ' }}</span>
             <span>{{ race ? (race.humidity) : '? ' }}%</span>
             <span>{{ race ? (race.wind_speed) : '? ' }}kph</span>
             <span>{{ race ? (race.wind_direction) : '? ' }}</span>
@@ -114,7 +114,7 @@
                 </div>
                 <div class="flex items-center text-cGreen">
                     <mat-icon>attach_money</mat-icon>
-                    <span class=" font-bold">P1 - P{{ race ? ('P1 - P'+race.cash_split.length.toString()) : '???' }}</span>
+                    <span class=" font-bold">{{ race ? ('P1 - P'+race.cash_split.length.toString()) : '???' }}</span>
                 </div>
             </div>
             <!-- Race Information -->

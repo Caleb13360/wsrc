@@ -6,7 +6,7 @@
     <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mt-8 mx-4 lg:mx-52">
         <div>
             <h1 class="text-3xl lg:text-5xl mb-2 font-roboto-condensed tracking-tighter font-bold">
-                Results: WSRC GR86 Challenge - Fixed
+                {{ race ? (race.race_name) : '???' }}
             </h1>
         </div>
     </div>
@@ -18,8 +18,8 @@
         <!-- First Column: Temperature -->
         <div class="flex flex-col items-center justify-center leading-none p-5">
         
-            <span class="text-cDarkGrey text-4xl xl:text-6xl mb-6 font-roboto tracking-tighter font-bold">18.6°C</span>
-            <span class="text-cDarkGrey text-1xl">Mostly Cloudy</span>
+            <span class="text-cDarkGrey text-4xl xl:text-6xl mb-6 font-roboto tracking-tighter font-bold">{{ race ? (race.temperature) : '??' }}°C</span>
+            <span class="text-cDarkGrey text-1xl">{{ race ? (race.cloud_cover) : '??' }}</span>
         </div>
         <!-- Second Column: Weather Descriptors -->
         <div class="flex flex-col items-start p-5 justify-center text-cDarkGrey">
@@ -30,10 +30,10 @@
         </div>
         <div class="flex flex-col items-start p-5 justify-center text-cDarkGrey font-bold">
         
-            <span>20%</span>
-            <span>61%</span>
-            <span>15 kph</span>
-            <span>North East</span>
+            <span>{{ race ? (race.track_moisture) : '? ' }}</span>
+            <span>{{ race ? (race.humidity) : '? ' }}%</span>
+            <span>{{ race ? (race.wind_speed) : '? ' }}kph</span>
+            <span>{{ race ? (race.wind_direction) : '? ' }}</span>
         </div>
         </div>
 
@@ -43,11 +43,11 @@
             <div class="flex flex-wrap sm:justify-between mb-4">
                 <div class="flex items-center text-[#62D1CC] mr-4 mb-2">
                     <mat-icon>access_time</mat-icon>
-                    <span class="ml-1 font-bold text-sm sm:text-base">20 Min Race</span>
+                    <span class="ml-1 font-bold text-sm sm:text-base">{{ race ? (race.race_time) : '???' }} Min Race</span>
                 </div>
                 <div class="flex items-center text-[#FBE057] mr-4 mb-2">
                     <mat-icon>play_arrow</mat-icon>
-                    <span class="ml-1 font-bold text-sm sm:text-base">2 Quali Laps</span>
+                    <span class="ml-1 font-bold text-sm sm:text-base">{{ race ? (race.qualifier_laps) : '?' }} Quali Laps</span>
                 </div>
                 <div class="flex items-center text-[#FFA366] mr-4 mb-2">
                     <mat-icon>lock</mat-icon>
@@ -55,21 +55,21 @@
                 </div>
                 <div class="flex items-center text-cGreen mb-2">
                     <mat-icon>attach_money</mat-icon>
-                    <span class="font-bold text-sm sm:text-base">P1 - P6</span>
+                    <span class="font-bold text-sm sm:text-base">{{ race ? ('P1 - P'+race.cash_split.length.toString()) : '???' }}</span>
                 </div>
             </div>
             <div class="flex flex-col space-y-2 text-cDarkGrey text-sm sm:text-base">
                 <div class="flex items-center space-x-2">
                     <mat-icon>access_time</mat-icon>
-                    <span>6:15 pm Race Start on 24th December 2024</span>
+                    <span>{{ race ? (race.launch_time | date: 'h:mm a') : '???' }} Race Start on {{ race ? (race.launch_time | date: 'MMMM d, y') : '???' }}</span>
                 </div>
                 <div class="flex items-center space-x-2">
                     <mat-icon>flag</mat-icon>
-                    <span>Circuit of Spa-Francorchamps</span>
+                    <span>{{ race ? (race.track_name) : '???' }} - {{ race ? (race.track_config) : '???' }}</span>
                 </div>
                 <div class="flex items-center space-x-2">
                     <mat-icon>directions_car</mat-icon>
-                    <span>Toyota GR86</span>
+                    <span>{{ race ? (race.car) : '???' }}</span>
                 </div>
             </div>
         </div>
@@ -102,7 +102,7 @@
             </h2>
         </div>
         <div class="text-lg lg:text-2xl hidden xl:block">
-            18/20 Racers
+            18/{{ race ? (race.max_racers) : '?' }} Racers
         </div>
     </div>
 </div>
@@ -119,10 +119,10 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let race of raceResults; let i = index" [ngClass]="{'bg-gray-800': i % 2 === 1}">
+            <tr *ngFor="let race of racers; let i = index" [ngClass]="{'bg-gray-800': i % 2 === 1}">
                
-                <td class="py-2 px-4 text-center">{{ race.pos }}</td>
-                <td class="py-2 px-4 text-center">{{ race.racer }}</td>
+                <td class="py-2 px-4 text-center">{{ i }}</td>
+                <td class="py-2 px-4 text-center">{{ race.name }}</td>
                 <td class="py-2 px-4 text-center">{{ race.country }}</td>
                 <td class="py-2 px-4 text-center  text-cGreen">{{ race.money_won }}</td>
             </tr>
@@ -146,9 +146,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let race of raceResults; let i = index" [ngClass]="{'bg-gray-800': i % 2 === 1}">
-                    <td class="py-2 px-4  text-center">{{ race.pos }}</td>
-                    <td class="py-2 px-4 text-center">{{ race.racer }}</td>
+                <tr *ngFor="let race of racers; let i = index" [ngClass]="{'bg-gray-800': i % 2 === 1}">
+                    <td class="py-2 px-4  text-center">{{ i }}</td>
+                    <td class="py-2 px-4 text-center">{{ race.name }}</td>
                     <td class="py-2 px-4  text-center">{{ race.country }}</td>
                     <td class="py-2 px-4 text-center">{{ race.interval }}</td>
                     <td class="py-2 px-4 text-center">{{ race.avg_lap_time }}</td>

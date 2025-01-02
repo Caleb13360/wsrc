@@ -122,8 +122,8 @@ export const routes: Routes = [
         title: 'Withdraw',
         canActivate: [authGuard]
     },
-    { 
-        path: 'result-details',
+    {
+        path: 'result/:id',
         component: ResultDetailsComponent,
         title: 'Result Details'
     },

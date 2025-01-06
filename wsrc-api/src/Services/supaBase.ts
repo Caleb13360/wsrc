@@ -124,6 +124,22 @@ export class Supabase {
         }
         return [];
     }
+    async getUnfetchedRaces() {
+        const raceData = await this.sb
+        .from('Races')
+        .select(`race_id, launch_time`)
+        .gt('launch_time', new Date(Date.now() - 24 * 60 * 60 * 1000 *20).toISOString())
+        .lt('launch_time', new Date().toISOString())
+        const raceIds = raceData.data ? raceData.data.map(item => item.race_id) : []
+        const { data, error } = await this.sb
+            .from('RaceResult')
+            .select('race_id')
+            .in('race_id', raceIds)
+        const existingRaceIds = data ? data.map(row => row.race_id) : []
+        const missingRaces = raceData.data ? raceData.data.filter(race => !existingRaceIds.includes(race.race_id)) : []
+        return missingRaces;
+    }
+
     async getFinishedRaces(startAfter: Date, numberOfResults: number): Promise<any> {
         const data = await this.sb
         .from('Races')
@@ -199,6 +215,25 @@ export class Supabase {
             .single();
     
         return this.generateRaceFromData(data.data);
+    }
+
+    async addRaceResult(userId: string, raceId: string, interval: number, position: number, incidents: number, avgLapTime: number, FastestLapTime: number){
+        const { error } = await this.sb
+                .from('RaceResult')
+                .insert([{
+                    iracing_id: userId,
+                    race_id: raceId,
+                    interval: interval,
+                    position: position, 
+                    incidents: incidents,
+                    average_lap_time: avgLapTime,
+                    fastest_lap_time: FastestLapTime
+                }]);
+
+            if (error) {
+                throw error;
+            }
+            return;
     }
 
     // async getTotalPrizeAmount(): Promise<Number | null>{

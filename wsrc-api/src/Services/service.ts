@@ -146,3 +146,47 @@ export class Service{
         return 'upcoming events';
     }
 }
+export async function checkRaceResults(){
+    const uncheckedRaces = await db.getUnfetchedRaces();
+    if (uncheckedRaces.length <= 0) {
+        return;
+    }
+    const raceResults = await iRacingService.getRecentlyHosted();
+    console.log(raceResults);
+    console.log(raceResults.length);
+    if (raceResults.length <= 0) {
+        return;
+    }
+    console.log(raceResults[0].subsession_id);
+    if(raceResults[0].subsession_id === null){
+        return;
+    }
+    for (const race of uncheckedRaces){
+        const raceTime = new Date(race.launch_time);
+        for (const result of raceResults){
+            const resultTime = new Date(result.start_time);
+            const timeDifference = Math.abs(raceTime.getTime() - resultTime.getTime());
+            const tenMinutesInMilliseconds = 10 * 60 * 1000;
+            if (timeDifference <= tenMinutesInMilliseconds){
+                const raceData = await iRacingService.getSessionResults(result.subsession_id);
+                console.log(raceData.session_results);
+                const sessionData = raceData.session_results.find((session: any) => session.simsession_type === 6);
+                for (const result of sessionData.results){
+                    db.addRaceResult(result.cust_id, race.race_id, result.interval, result.finish_position + 1, result.incidents, result.average_lap, result.best_lap_time);
+                }
+                break;
+            }
+        }
+
+    }
+}
+
+function formattime(time:number): string{
+    console.log(time);
+    time = Math.floor(time/10);
+    const minutes = Math.floor(time / 60000);
+    const seconds = Math.floor((time % 60000) / 1000);
+    const milliseconds = time % 1000;
+
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}:${milliseconds < 100 ? '0' : ''}${milliseconds < 10 ? '0' : ''}${milliseconds}`;
+}

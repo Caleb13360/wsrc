@@ -49,6 +49,10 @@ async function iracingRequest(url: string): Promise<any> {
             const linkResponse = await axios.get(response.data.link);
             return linkResponse.data;
         }
+        if (response.data.data.chunk_info.base_download_url) {
+            const linkResponse = await axios.get(response.data.data.chunk_info.base_download_url+response.data.data.chunk_info.chunk_file_names[0]);
+            return linkResponse.data;
+        }
         return response.data;
     } catch (error) {
         throw error;
@@ -66,6 +70,8 @@ export class IRacingService{
     memberData = async (cust_ids: number[], include_licenses: boolean = false) => await iracingRequest(`https://members-ng.iracing.com/data/member/get?cust_ids=${cust_ids.join(',')}&include_licenses=${include_licenses}`);
     
     lookupDriver = async (searchTerm: string) => await iracingRequest(`https://members-ng.iracing.com/data/lookup/drivers?search_term=${searchTerm}`);
+    getRecentlyHosted = async () => await iracingRequest(`https://members-ng.iracing.com/data/results/search_hosted?host_cust_id=1014543&start_range_begin=${new Date(Date.now() - 24 * 60 * 60 * 1000*20).toISOString()}&finish_range_begin=${new Date(Date.now() - 24 * 60 * 60 * 1000*20).toISOString()}`);
+    getSessionResults = async (subsession_id: number) => await iracingRequest(`https://members-ng.iracing.com/data/results/get?subsession_id=${subsession_id}`);
     // get race results
     // get racer details
     // get track/car?

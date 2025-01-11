@@ -56,4 +56,12 @@ export class RacesComponent implements OnInit{
       seconds: seconds.toString().padStart(2, '0')
     };
   }
+
+  sumPrize(cash_split: number[]): number {
+    let sum = 0;
+    for (let i = 0; i < cash_split.length; i++) {
+        sum += cash_split[i];
+    }
+    return sum;
+  }
 }

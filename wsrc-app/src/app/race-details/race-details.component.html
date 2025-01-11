@@ -169,7 +169,7 @@
     <div
         class="border border-cGreen w-full h-16 flex items-center justify-between px-4 rounded-sm group hover:bg-cGreen transition-all duration-200 ease-linear">
         <span class="text-cGreen font-roboto tracking-tighter group-hover:text-cBlack">3rd</span>
-        <span class="text-cGreen mx-auto font-roboto tracking-tighter font-bold text-3xl group-hover:text-cBlack">>${{ race ? ((race.entry_fee) * (race.max_racers) * 0.5 * race.cash_split[2]) : '???' }} USD</span>
+        <span class="text-cGreen mx-auto font-roboto tracking-tighter font-bold text-3xl group-hover:text-cBlack">${{ race ? ((race.entry_fee) * (race.max_racers) * 0.5 * race.cash_split[2]) : '???' }} USD</span>
     </div>
     <div routerLink="/events/RPRewards"
         class="border border-cBorderGrey w-full h-16 flex items-center justify-between px-4 rounded-sm group hover:bg-cOrange hover:border-cOrange transition-all duration-200 ease-linear">
@@ -186,7 +186,7 @@
         <span class="text-cGrey font-roboto tracking-tighter group-hover:text-cBlack">6th</span>
         <span class="text-cGrey mx-auto font-roboto tracking-tighter font-bold text-3xl group-hover:text-cBlack">{{ race ? (race.racer_points[5]) : '???' }} RP</span>
     </div>
-    <p class="text-cDarkGrey mt-4">If 20 racers are present in the race, the below prizes will be awarded, if less
+    <p class="text-cDarkGrey mt-4">If all racers are present in the race, the below prizes will be awarded, if less
         racers are present it will scale accordingly.</p>
 
 </div>

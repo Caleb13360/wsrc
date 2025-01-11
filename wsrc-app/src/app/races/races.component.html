@@ -80,7 +80,7 @@
             </div>
             <div class="flex items-center text-cGreen">
                 <mat-icon>attach_money</mat-icon>
-                <span class=" font-bold text-[0.9rem] sm:text-[0.95rem]">P1 - P{{ races[0] ? ('P1 - P'+races[0].cash_split.length.toString()) : '???' }}</span>
+                <span class=" font-bold text-[0.9rem] sm:text-[0.95rem]">{{ races[0] ? ('P1 - P'+races[0].cash_split.length.toString()) : '???' }}</span>
             </div>
         </div>
         <!-- Race Information -->
@@ -176,7 +176,7 @@
                     <th class="py-2 px-4 text-center">Car</th>
                     <th class="py-2 px-4 text-center">Track</th>
                     <th class="py-2 px-4 text-center">Prize Pool</th>
-                    <th class="py-2 px-4 text-center">Racers</th>
+                    <th class="py-2 px-4 text-center">No. Racers</th>
                     <th class="py-2 px-4 text-center">Register</th>
                 </tr>
             </thead>
@@ -186,7 +186,7 @@
                     <td class="py-2 px-4 text-center">{{ race.launch_time | date:'h:mm a' }}</td>
                     <td class="py-2 px-4 text-center">{{ race.car }}</td>
                     <td class="py-2 px-4 text-center">{{ race.track_name }}</td>
-                    <td class="py-2 px-4 text-center text-cGreen">${{ races[0] ? ((races[0].entry_fee) * (races[0].max_racers) * 0.5) : '???' }}</td>
+                    <td class="py-2 px-4 text-center text-cGreen">{{ race.entry_fee * race.max_racers * sumPrize(race.cash_split) }}</td>
                     <td class="py-2 px-4 text-center">{{ race.max_racers }}</td>
                     <td class="py-2 px-4 text-center">
                         <button [routerLink]="['/race', race.race_id]"

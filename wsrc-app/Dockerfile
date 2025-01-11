@@ -1,4 +1,4 @@
-FROM node:latest AS build
+FROM node:22-alpine AS build
 WORKDIR /app
 COPY ./models ./models
 WORKDIR /app/wsrc-app

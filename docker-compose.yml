@@ -9,6 +9,7 @@ services:
     volumes:
       - ./wsrc-app:/app/wsrc-app
       - /app/wsrc-app/node_modules
+      - ./models:/app/models
     environment:
       - CHOKIDAR_USEPOLLING=true
   wsrc-api:
@@ -18,3 +19,7 @@ services:
     image: wsrc-api:dev
     ports:
       - "3000:3000"
+    volumes:
+      - ./wsrc-api:/app/wsrc-api
+      - /app/wsrc-api/node_modules
+      - /app/wsrc-api/dist

@@ -45,7 +45,7 @@ const accountCreate: CanActivateFn = async () => {
         return false;
     }
     if (authData.linked) {
-        router.navigate(['/home']);
+        router.navigate(['/']);
         return false;
     }
     return true;
@@ -57,7 +57,7 @@ const loginReady: CanActivateFn = async () => {
     const authData = await apiService.loggedIn().toPromise();
     if (authData.loggedIn) {
         if (authData.linked) {
-            router.navigate(['/home']);
+            router.navigate(['/']);
             return false;
         }
         router.navigate(['/login/create'], { queryParams: { redirect_uri: currentUrl } });
@@ -122,8 +122,8 @@ export const routes: Routes = [
         title: 'Withdraw',
         canActivate: [authGuard]
     },
-    { 
-        path: 'result-details',
+    {
+        path: 'result/:id',
         component: ResultDetailsComponent,
         title: 'Result Details'
     },

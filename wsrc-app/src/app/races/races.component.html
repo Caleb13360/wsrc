@@ -80,7 +80,7 @@
             </div>
             <div class="flex items-center text-cGreen">
                 <mat-icon>attach_money</mat-icon>
-                <span class=" font-bold text-[0.9rem] sm:text-[0.95rem]">P1 - P{{ races[0] ? ('P1 - P'+races[0].cash_split.length.toString()) : '???' }}</span>
+                <span class=" font-bold text-[0.9rem] sm:text-[0.95rem]">{{ races[0] ? ('P1 - P'+races[0].cash_split.length.toString()) : '???' }}</span>
             </div>
         </div>
         <!-- Race Information -->
@@ -176,21 +176,19 @@
                     <th class="py-2 px-4 text-center">Car</th>
                     <th class="py-2 px-4 text-center">Track</th>
                     <th class="py-2 px-4 text-center">Prize Pool</th>
-                    <th class="py-2 px-4 text-center">Racers</th>
+                    <th class="py-2 px-4 text-center">No. Racers</th>
                     <th class="py-2 px-4 text-center">Register</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let race of races; let i = index">
-                    <!-- split into nice date and time -->
-                    <!-- <td class="py-2 px-4 text-center">{{ race.date }}</td>
-                    <td class="py-2 px-4 text-center">{{ race.time }}</td> -->
+                    <td class="py-2 px-4 text-center">{{ race.launch_time | date:'MMM d' }}</td>
+                    <td class="py-2 px-4 text-center">{{ race.launch_time | date:'h:mm a' }}</td>
                     <td class="py-2 px-4 text-center">{{ race.car }}</td>
                     <td class="py-2 px-4 text-center">{{ race.track_name }}</td>
-                    <td class="py-2 px-4 text-center text-cGreen">${{ races[0] ? ((races[0].entry_fee) * (races[0].max_racers) * 0.5) : '???' }}</td>
+                    <td class="py-2 px-4 text-center text-cGreen">{{ race.entry_fee * race.max_racers * sumPrize(race.cash_split) }}</td>
                     <td class="py-2 px-4 text-center">{{ race.max_racers }}</td>
                     <td class="py-2 px-4 text-center">
-                    <!-- fix race id -->
                         <button [routerLink]="['/race', race.race_id]"
                             class="text-white font-bold px-8 py-1 rounded hover:bg-cWhite bg-cBlue hover:text-cBlack duration-100 transition-all ease-linear">Details</button>
                     </td>
@@ -206,15 +204,18 @@
         <div class="flex justify-center text-cWhite font-bold font-roboto-condensed text-2xl text-center mb-4">    
             <span>WSRC {{ race.car }} Challenge - Fixed</span>
         </div>
-        <!-- <div class="flex justify-between text-cWhite">
+        <div class="flex justify-center text-cWhite font-bold font-roboto-condensed text-2xl text-center mb-4">    
+            <span>WSRC {{ race.car }} Challenge - Fixed</span>
+        </div>
+        <div class="flex justify-between text-cWhite">
             <span class="font-bold">Date:</span>
-            <span>{{ race.date }}</span>
-        </div> -->
+            <span>{{ race.launch_time | date:'MMM d' }}</span>
+        </div>
         <!-- Time -->
-        <!-- <div class="flex justify-between text-cWhite mt-1">
+        <div class="flex justify-between text-cWhite mt-1">
             <span class="font-bold">Time:</span>
-            <span>{{ race.start_time }}</span>
-        </div> -->
+            <span>{{ race.launch_time | date:'h:mm a' }}</span>
+        </div>
        
         <!-- Track -->
         <div class="flex justify-between text-cWhite mt-1">
@@ -227,7 +228,10 @@
             <span>${{ races[0] ? ((races[0].entry_fee) * (races[0].max_racers) * 0.5) : '???' }}</span>
         </div>
         <!-- Racers -->
-        
+        <div class="flex justify-between text-cWhite mt-1">
+            <span class="font-bold">Racers:</span>
+            <span>{{race.max_racers}}</span>
+        </div>
         <!-- Register Button - Full Width -->
         <div class="flex mt-4">
             <button [routerLink]="['/race', race.race_id]"

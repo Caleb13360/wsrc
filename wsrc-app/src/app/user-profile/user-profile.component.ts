@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ApiService } from './../../services/api';
 import type {User} from '../../../../models/user.d.ts';
 
 @Component({
   selector: 'app-user-profile',
-  imports: [RouterLink],
+  imports: [RouterLink, DatePipe],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.css',
     providers: [ApiService]

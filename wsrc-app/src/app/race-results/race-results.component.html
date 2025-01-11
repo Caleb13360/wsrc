@@ -25,17 +25,16 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let race of results; let i = index">
-                    <td class="py-2 px-4  text-center">{{ race.date }}</td>
-                    <td class="py-2 px-4 text-center">{{ race.start_time }}</td>
-                    <td class="py-2 px-4  text-center">{{ race.car }}</td>
-                    <td class="py-2 px-4 text-center">{{ race.track }}</td>
-                    <td class="py-2 px-4  text-center text-cGreen">{{ race.prize_pool }}</td>
-                    <td class="py-2 px-4 text-center">{{ race.racers }}</td>
-                    <td class="py-2 px-4  text-center">
-                        <button routerLink="/result-details" class=" text-white font-bold px-8 py-1 rounded hover:bg-cWhite bg-cBlue hover:text-cBlack duration-100 transition-all ease-linear">
-                            View Results
-                        </button>
+                <tr *ngFor="let race of races; let i = index">
+                    <td class="py-2 px-4 text-center">{{ race.launch_time | date:'MMM d' }}</td>
+                    <td class="py-2 px-4 text-center">{{ race.launch_time | date:'h:mm a' }}</td>
+                    <td class="py-2 px-4 text-center">{{ race.car }}</td>
+                    <td class="py-2 px-4 text-center">{{ race.track_name }}</td>
+                    <td class="py-2 px-4 text-center text-cGreen">${{ races[0] ? ((races[0].entry_fee) * (races[0].max_racers) * 0.5) : '???' }}</td>
+                    <td class="py-2 px-4 text-center">{{ race.max_racers }}</td>
+                    <td class="py-2 px-4 text-center">
+                        <button [routerLink]="['/result', race.race_id]"
+                            class="text-white font-bold px-8 py-1 rounded hover:bg-cWhite bg-cBlue hover:text-cBlack duration-100 transition-all ease-linear">View Results</button>
                     </td>
                 </tr>
     
@@ -43,41 +42,43 @@
         </table>
     </div>
        
-    <!-- Mobile table -->
-    <div class="lg:hidden">
-        <div *ngFor="let race of results; let i = index"
-            class="bg-cDarkBlue border border-cBorderGrey mb-4 px-4 pb-4 pt-4 rounded">
+    <!-- Mobile-Friendly Table -->
+    <div class="md:hidden">
+        <div *ngFor="let race of races; let i = index" class="bg-cDarkBlue border border-cBorderGrey mb-4 px-4 pb-4 pt-4 rounded">
             <!-- Date -->
-            <div class="flex justify-center text-cWhite font-bold font-roboto-condensed text-2xl text-center mb-4">
+            <div class="flex justify-center text-cWhite font-bold font-roboto-condensed text-2xl text-center mb-4">    
                 <span>WSRC {{ race.car }} Challenge - Fixed</span>
             </div>
             <div class="flex justify-between text-cWhite">
                 <span class="font-bold">Date:</span>
-                <span>{{ race.date }}</span>
+                <span>{{ race.launch_time | date:'MMM d' }}</span>
             </div>
             <!-- Time -->
             <div class="flex justify-between text-cWhite mt-1">
                 <span class="font-bold">Time:</span>
-                <span>{{ race.start_time }}</span>
+                <span>{{ race.launch_time | date:'h:mm a' }}</span>
             </div>
-    
+        
             <!-- Track -->
             <div class="flex justify-between text-cWhite mt-1">
                 <span class="font-bold">Track:</span>
-                <span>{{ race.track }}</span>
+                <span>{{ race.track_name }}</span>
             </div>
             <!-- Prize Pool -->
             <div class="flex justify-between text-cGreen mt-1">
                 <span class="font-bold">Prize Pool:</span>
-                <span>{{ race.prize_pool }}</span>
+                <span>${{race.entry_fee * race.max_racers * 0.5}}</span>
             </div>
             <!-- Racers -->
-    
+            <div class="flex justify-between text-cWhite mt-1">
+                <span class="font-bold">Racers:</span>
+                <span>{{race.max_racers}}</span>
+            </div>
             <!-- Register Button - Full Width -->
             <div class="flex mt-4">
-                <button routerLink="/result-details"
+                <button [routerLink]="['/result', race.race_id]"
                     class="w-full text-white font-bold px-6 py-2 rounded hover:bg-cWhite bg-cBlue hover:text-cBlack duration-100 transition-all ease-linear">
-                   View Results
+                    View Results ({{ race.max_racers }})
                 </button>
             </div>
         </div>

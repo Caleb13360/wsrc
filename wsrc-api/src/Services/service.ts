@@ -69,7 +69,8 @@ export class Service{
 
     async linkUser(googleId: string, query_search: string, promotionalEmails: boolean): Promise<void> {
         const user = await iRacingService.lookupDriver(query_search);
-        await db.linkUser(googleId, user[0].cust_id, user[0].display_name, promotionalEmails);
+        const userDetails = await iRacingService.memberProfile(user[0].cust_id);
+        await db.linkUser(googleId, user[0].cust_id, user[0].display_name, userDetails.member_info.club_name, promotionalEmails);
         return;
     }
 
@@ -96,7 +97,7 @@ export class Service{
     }
     async getFinishedRaces(startAfter: Date, numberOfResults: number): Promise<Race[]> {
         const result = await db.getFinishedRaces(startAfter, numberOfResults);
-        return [];
+        return result;
     }
     async getFinishedRacesAfter(startAfterId: number, numberOfResults: number): Promise<Race[]> {
         const result = await db.getFinishedRacesAfter(startAfterId, numberOfResults);
@@ -105,6 +106,11 @@ export class Service{
     async getRace(id: number): Promise<Race> {
         const result = await db.getRace(id);
         return result as Race;
+    }
+
+    async getRaceResults(id: number): Promise<any> {
+        const results = await db.getRaceResutls(id);
+        return results;
     }
     getAverageLapTime(raceId: string): number{
         //how do we match the last race to get average?
@@ -144,5 +150,35 @@ export class Service{
 
     getUpcomingEvents(){
         return 'upcoming events';
+    }
+}
+export async function checkRaceResults(){
+    const uncheckedRaces = await db.getUnfetchedRaces();
+    if (uncheckedRaces.length <= 0) {
+        return;
+    }
+    const raceResults = await iRacingService.getRecentlyHosted();
+    if (raceResults.length <= 0) {
+        return;
+    }
+    if(raceResults[0].subsession_id === null){
+        return;
+    }
+    for (const race of uncheckedRaces){
+        const raceTime = new Date(race.launch_time);
+        for (const result of raceResults){
+            const resultTime = new Date(result.start_time);
+            const timeDifference = Math.abs(raceTime.getTime() - resultTime.getTime());
+            const tenMinutesInMilliseconds = 10 * 60 * 1000;
+            if (timeDifference <= tenMinutesInMilliseconds){
+                const raceData = await iRacingService.getSessionResults(result.subsession_id);
+                const sessionData = raceData.session_results.find((session: any) => session.simsession_type === 6);
+                for (const result of sessionData.results){
+                    db.addRaceResult(result.cust_id, race.race_id, result.interval, result.finish_position + 1, result.incidents, result.average_lap, result.best_lap_time);
+                }
+                break;
+            }
+        }
+
     }
 }

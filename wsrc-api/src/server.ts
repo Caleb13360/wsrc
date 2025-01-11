@@ -2,6 +2,7 @@ import http from 'http'
 import express from 'express'
 import routes from './routes.js'
 import cookieParser from 'cookie-parser'
+import { checkRaceResults } from './Services/service.js'
 
 const PORT = process.env.PORT || 3000;
 export const app = express();
@@ -27,6 +28,7 @@ export const Main = () => {
     httpServer.listen(PORT, () => {
         console.log(`Server is running on http://localhost:${PORT}`);
     });
+    setInterval(checkRaceResults, 60000);
 }
 
 Main();

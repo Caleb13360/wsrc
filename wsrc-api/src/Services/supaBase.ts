@@ -37,10 +37,10 @@ export class Supabase {
         return;
     }
 
-    async linkUser(googleId:string, iracingId: number, name: string, promotionalEmails: boolean): Promise<void> {
+    async linkUser(googleId:string, iracingId: number, name: string, country: string, promotionalEmails: boolean): Promise<void> {
         const { error } = await this.sb
             .from('User')
-            .update({ iracing_id: iracingId, iracing_username: name, email_promotions: promotionalEmails })
+            .update({ iracing_id: iracingId, iracing_username: name, country: country, email_promotions: promotionalEmails })
             .eq('google_id', googleId);
         if (error) {
             throw error;
@@ -217,6 +217,20 @@ export class Supabase {
         return this.generateRaceFromData(data.data);
     }
 
+    async getRaceResutls(id: number): Promise<any>{
+        const data = await this.sb
+            .from('RaceResult')
+            .select(`
+                *,
+                User(country, iracing_username),
+                Races(prize_pool_id, entry_fee, PrizePool(cash_split))
+            `)
+            .eq('race_id', id)
+            .order('position', { ascending: true });
+        console.log(data);
+        return data.data;
+    }
+
     async addRaceResult(userId: string, raceId: string, interval: number, position: number, incidents: number, avgLapTime: number, FastestLapTime: number){
         const { error } = await this.sb
                 .from('RaceResult')
@@ -231,7 +245,7 @@ export class Supabase {
                 }]);
 
             if (error) {
-                throw error;
+                throw error; 
             }
             return;
     }

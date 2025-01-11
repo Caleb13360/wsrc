@@ -113,6 +113,19 @@ router.get('/race/:id', async (req, res) => {
         res.status(500).json({ error: `Error fetching race ${id}`});
     }
 });
+router.get('/race/:id/results', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const results = await service.getRaceResults(Number(id));
+        if (results!==null) {
+            res.json({ results: results});
+        } else {
+            res.status(404).json({ error: 'Race Results not found' });
+        }
+    } catch (err) {
+        res.status(500).json({ error: `Error fetching race ${id} results`});
+    }
+});
 router.get('/race/:ID/lap_stats', (_, res) => {
     const raceId = 'ID';
     res.json({

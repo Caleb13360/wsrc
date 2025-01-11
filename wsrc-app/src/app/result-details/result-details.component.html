@@ -102,7 +102,7 @@
             </h2>
         </div>
         <div class="text-lg lg:text-2xl hidden xl:block">
-            18/{{ race ? (race.max_racers) : '?' }} Racers
+            {{results ? results.length : '?'}}/{{ race ? (race.max_racers) : '?' }} Racers
         </div>
     </div>
 </div>
@@ -119,12 +119,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let race of racers; let i = index" [ngClass]="{'bg-gray-800': i % 2 === 1}">
+            <tr *ngFor="let result of results; let i = index" [ngClass]="{'bg-gray-800': i % 2 === 1}">
                
-                <td class="py-2 px-4 text-center">{{ i }}</td>
-                <td class="py-2 px-4 text-center">{{ race.name }}</td>
-                <td class="py-2 px-4 text-center">{{ race.country }}</td>
-                <td class="py-2 px-4 text-center  text-cGreen">{{ race.money_won }}</td>
+                <td class="py-2 px-4 text-center">{{ result.position }}</td>
+                <td class="py-2 px-4 text-center">{{ result.iracing_id }}</td>
+                <td class="py-2 px-4 text-center">{{ 'Country?' }}</td>
+                <td class="py-2 px-4 text-center  text-cGreen">{{ 'Money Won' }}</td>
             </tr>
         </tbody>
     </table>
@@ -146,16 +146,16 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let race of racers; let i = index" [ngClass]="{'bg-gray-800': i % 2 === 1}">
-                    <td class="py-2 px-4  text-center">{{ i }}</td>
-                    <td class="py-2 px-4 text-center">{{ race.name }}</td>
-                    <td class="py-2 px-4  text-center">{{ race.country }}</td>
-                    <td class="py-2 px-4 text-center">{{ race.interval }}</td>
-                    <td class="py-2 px-4 text-center">{{ race.avg_lap_time }}</td>
-                    <td class="py-2 px-4 text-center">{{ race.best_lap }}</td>
-                    <td class="py-2 px-4 text-center">{{ race.inc }}</td>
+                <tr *ngFor="let result of results; let i = index" [ngClass]="{'bg-gray-800': i % 2 === 1}">
+                    <td class="py-2 px-4  text-center">{{ result.position }}</td>
+                    <td class="py-2 px-4 text-center">{{ result.User.iracing_username }}</td>
+                    <td class="py-2 px-4  text-center">{{ result.User.country ?? '-' }}</td>
+                    <td class="py-2 px-4 text-center">{{ formattime(result.interval, true) }}</td>
+                    <td class="py-2 px-4 text-center">{{ formattime(result.average_lap_time) }}</td>
+                    <td class="py-2 px-4 text-center">{{ formattime(result.fastest_lap_time) }}</td>
+                    <td class="py-2 px-4 text-center">{{ result.incidents }}</td>
                    
-                    <td class="py-2 px-4  text-center text-cGreen">{{ race.money_won }}</td>
+                    <td class="py-2 px-4  text-center text-cGreen">{{result.Races.PrizePool.cash_split[result.position-1]? '$'+(result.Races.PrizePool.cash_split[result.position-1])*result.Races.entry_fee*results.length+' USD' : '-' }}</td>
                 </tr>
     
             </tbody>

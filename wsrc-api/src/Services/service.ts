@@ -69,7 +69,8 @@ export class Service{
 
     async linkUser(googleId: string, query_search: string, promotionalEmails: boolean): Promise<void> {
         const user = await iRacingService.lookupDriver(query_search);
-        await db.linkUser(googleId, user[0].cust_id, user[0].display_name, promotionalEmails);
+        const userDetails = await iRacingService.memberProfile(user[0].cust_id);
+        await db.linkUser(googleId, user[0].cust_id, user[0].display_name, userDetails.member_info.club_name, promotionalEmails);
         return;
     }
 
@@ -105,6 +106,11 @@ export class Service{
     async getRace(id: number): Promise<Race> {
         const result = await db.getRace(id);
         return result as Race;
+    }
+
+    async getRaceResults(id: number): Promise<any> {
+        const results = await db.getRaceResutls(id);
+        return results;
     }
     getAverageLapTime(raceId: string): number{
         //how do we match the last race to get average?
@@ -179,14 +185,4 @@ export async function checkRaceResults(){
         }
 
     }
-}
-
-function formattime(time:number): string{
-    console.log(time);
-    time = Math.floor(time/10);
-    const minutes = Math.floor(time / 60000);
-    const seconds = Math.floor((time % 60000) / 1000);
-    const milliseconds = time % 1000;
-
-    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}:${milliseconds < 100 ? '0' : ''}${milliseconds < 10 ? '0' : ''}${milliseconds}`;
 }

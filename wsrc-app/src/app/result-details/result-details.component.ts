@@ -16,20 +16,25 @@ import { interval } from 'rxjs';
 export class ResultDetailsComponent implements OnInit{
   constructor(private route: ActivatedRoute, private apiService: ApiService) {}
   race!: Race;
+  results!: any;
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if(!id){return;}
       this.apiService.getRace(id).subscribe((data)=> {this.race=data.race;});
+      this.apiService.getRaceResults(id).subscribe((data)=> {this.results=data.results; console.log(data.results)})
     });
   }
-  racers = Array.from({ length: 18 }, (_, i) => ({
-    name: `Racer ${i + 1}`,
-    country: `Country ${i + 1}`,
-    money_won: `$${200-(i*10)}`,
-    inc: `${i*2719238%3}`,
-    interval: '0:00.000',
-    best_lap: '0:00.000',
-    avg_lap_time: '0:00.000',
-  }));
+  formattime(time:number, negative: boolean = false): string{
+    if(time === -1){
+      return '-1';
+    }
+    time = Math.floor(time/10);
+    const minutes = Math.floor(time / 60000);
+    const seconds = Math.floor((time % 60000) / 1000);
+    const milliseconds = time % 1000;
+    if(negative){
+      return `-${minutes}:${seconds < 10 ? '0' : ''}${seconds}:${milliseconds < 100 ? '0' : ''}${milliseconds < 10 ? '0' : ''}${milliseconds}`;}
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}:${milliseconds < 100 ? '0' : ''}${milliseconds < 10 ? '0' : ''}${milliseconds}`;
+}
 }

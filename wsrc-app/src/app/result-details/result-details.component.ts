@@ -22,7 +22,7 @@ export class ResultDetailsComponent implements OnInit{
       const id = params.get('id');
       if(!id){return;}
       this.apiService.getRace(id).subscribe((data)=> {this.race=data.race;});
-      this.apiService.getRaceResults(id).subscribe((data)=> {this.results=data.results; console.log(data.results)})
+      this.apiService.getRaceResults(id).subscribe((data)=> this.results=data.results)
     });
   }
   formattime(time:number, negative: boolean = false): string{

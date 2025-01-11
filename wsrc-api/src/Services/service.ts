@@ -153,18 +153,14 @@ export class Service{
     }
 }
 export async function checkRaceResults(){
-    console.log('Checking');
     const uncheckedRaces = await db.getUnfetchedRaces();
     if (uncheckedRaces.length <= 0) {
         return;
     }
     const raceResults = await iRacingService.getRecentlyHosted();
-    console.log(raceResults);
-    console.log(raceResults.length);
     if (raceResults.length <= 0) {
         return;
     }
-    console.log(raceResults[0].subsession_id);
     if(raceResults[0].subsession_id === null){
         return;
     }
@@ -176,7 +172,6 @@ export async function checkRaceResults(){
             const tenMinutesInMilliseconds = 10 * 60 * 1000;
             if (timeDifference <= tenMinutesInMilliseconds){
                 const raceData = await iRacingService.getSessionResults(result.subsession_id);
-                console.log(raceData.session_results);
                 const sessionData = raceData.session_results.find((session: any) => session.simsession_type === 6);
                 for (const result of sessionData.results){
                     db.addRaceResult(result.cust_id, race.race_id, result.interval, result.finish_position + 1, result.incidents, result.average_lap, result.best_lap_time);

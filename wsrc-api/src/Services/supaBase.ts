@@ -227,7 +227,6 @@ export class Supabase {
             `)
             .eq('race_id', id)
             .order('position', { ascending: true });
-        console.log(data);
         return data.data;
     }
 

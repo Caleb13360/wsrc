@@ -153,6 +153,7 @@ export class Service{
     }
 }
 export async function checkRaceResults(){
+    console.log('Checking');
     const uncheckedRaces = await db.getUnfetchedRaces();
     if (uncheckedRaces.length <= 0) {
         return;

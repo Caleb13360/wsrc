@@ -28,8 +28,7 @@ export const Main = () => {
     httpServer.listen(PORT, () => {
         console.log(`Server is running on http://localhost:${PORT}`);
     });
-    // setInterval(checkRaceResults, 60000);
-    checkRaceResults();
+    setInterval(checkRaceResults, 60000);
 }
 
 Main();

@@ -15,7 +15,12 @@ export class LoginComponent implements OnInit{
   redirect_uri: string = '';
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.redirect_uri = params['redirect_uri'];
+      if(params['redirect_uri']===undefined){
+        this.redirect_uri = '/';
+      } else {
+        this.redirect_uri = params['redirect_uri'];
+      }
+      
     });
     if(window.google && window.google){
       this.loginWithGoogleInitialise();

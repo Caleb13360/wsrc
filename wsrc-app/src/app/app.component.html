@@ -15,10 +15,10 @@
           <p class="text-cWhite text-3xl font-porscha">WSRC</p>
         </div>
         <div class="hidden lg:flex justify-between items-center mx-2">
-          <a href="https://www.instagram.com/jimmy.grills" target="_blank">
+          <a href="https://www.instagram.com/wsrc.official/" target="_blank">
             <img src="instagram-white-icon.png" alt="Instagram" class="h-6 w-6">
           </a>
-          <a href="https://www.twitch.tv" target="_blank">
+          <a href="https://www.twitch.tv/wsrc_official" target="_blank">
             <img src="twitch-white-icon.png" alt="Twitch" class="h-6 w-6">
           </a>
           <a href="https://www.youtube.com/@JimmyGrillsRacing" target="_blank">
@@ -37,12 +37,11 @@
        class="absolute z-50 top-20 left-0 w-full bg-cBlack flex-col space-y-4 p-4 md:static md:flex md:space-y-0 md:space-x-7 md:p-0 md:flex-row md:items-center justify-center items-center hidden font-roboto-condensed">
       <a routerLink="/" (click)="toggleMenu()" class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">Home</a>
       <a routerLink="/races" (click)="toggleMenu()" class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">Races</a>
-      <a routerLink="/events" (click)="toggleMenu()" class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">Events</a>
+      <!-- <a routerLink="/events" (click)="toggleMenu()" class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">Events</a> -->
       <a routerLink="/results" (click)="toggleMenu()" class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">Results</a>
       <a routerLink="/about" (click)="toggleMenu()" class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">About</a>
     </div>
-
-      <!-- User Icons -->
+      <!-- User Icons
       <div class="flex items-center space-x-4 lg:pr-32 pr-0 md:order-none order-3">
         <span routerLink="/notifications" (click)="pressToggleMenu()" 
           class="material-icons text-cWhite text-2xl hover:text-red-500 duration-200 ease-linear">notifications</span>
@@ -50,7 +49,7 @@
           class="flex items-center justify-center bg-cBlack text-cWhite rounded-full h-8 w-8 hover:text-cBlue duration-200 ease-linear">
           <span class="material-icons text-3xl">person</span>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <!-- Dropdown Menu for Mobile -->
@@ -59,8 +58,8 @@
         class="text-cDarkGrey text-xl font-roboto-condensed hover:text-cWhite transition-all duration-200 ease-linear hover:font-bold">Home</a>
       <a routerLink="/races"
         class="text-cDarkGrey text-xl font-roboto-condensed hover:text-cWhite transition-all duration-200 ease-linear hover:font-bold">Races</a>
-      <a routerLink="/events"
-        class="text-cDarkGrey text-xl font-roboto-condensed hover:text-cWhite transition-all duration-200 ease-linear hover:font-bold">Events</a>
+      <!-- <a routerLink="/events"
+        class="text-cDarkGrey text-xl font-roboto-condensed hover:text-cWhite transition-all duration-200 ease-linear hover:font-bold">Events</a> -->
       <a routerLink="/results"
         class="text-cDarkGrey text-xl font-roboto-condensed hover:text-cWhite transition-all duration-200 ease-linear hover:font-bold">Results</a>
       <a routerLink="/about"
@@ -72,7 +71,7 @@
   <div class="flex-grow bg-cDarkBlue"><router-outlet></router-outlet></div>
 
   <!-- Footer -->
-  <div class="bg-cBlack">
+  <div *ngIf="showFooter" class="bg-cBlack">
     <p class="text-cWhite font-roboto tracking-tighter text-1xl  align-middle py-3 text-center">Copyright © 2024 WSRC.
       All Rights Reserved.</p>
   </div>

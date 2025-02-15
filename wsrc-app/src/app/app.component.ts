@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { OnInit, Component, HostListener } from '@angular/core';
+import { RouterLink, RouterOutlet, Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +9,13 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  constructor(private router: Router) {}
   title = 'wsrc-app';
      menuVisible = false;
       isHeaderHidden = false; // Tracks if the header is hidden
   lastScrollY = 0; // Tracks the last scroll position
+  showFooter: boolean = true;
 
   toggleMenu() {
     this.menuVisible = !this.menuVisible;
@@ -44,5 +47,13 @@ export class AppComponent {
     }
 
     this.lastScrollY = currentScrollY;
+  }
+  ngOnInit() {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      const regex = /^\/race\/\d+$/;
+      this.showFooter = !regex.test(event.urlAfterRedirects);
+    });
   }
 }

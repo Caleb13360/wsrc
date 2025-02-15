@@ -54,4 +54,8 @@ export class ApiService {
   getTotalMoney() {
     return this.httpClient.get<{ totalPrizeAmount: number }>(`${this.apiUrl}/stats/total-prize-amount`);
   }
+
+  isLiveStreaming(){
+    return this.httpClient.get("https://decapi.me/twitch/uptime/wsrc_official", { responseType: 'text' });
+  }
 }

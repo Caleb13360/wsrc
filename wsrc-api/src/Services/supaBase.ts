@@ -83,6 +83,7 @@ export class Supabase {
             launch_time: data.launch_time,
             server_location: data.server_location, 
             entry_fee: data.entry_fee,
+            matcherino_id: data.matcherino_id,
             
             //race details
             race_details_id: data.race_details_id,

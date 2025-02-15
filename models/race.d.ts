@@ -9,6 +9,7 @@ export interface Race {
     launch_time: Date;
     server_location: string;
     entry_fee: number;
+    matcherino_id: int;
     
     //race details
     race_details_id: number;

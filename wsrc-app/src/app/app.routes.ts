@@ -20,51 +20,51 @@ import { RPRewardsComponent } from './events_pages/rpRewards/rpRewards.component
 import { ApiService } from '../services/api';
 import { AccountCreationComponent } from './account-creation/account-creation.component';
 
-const authGuard: CanActivateFn = async (route, state: RouterStateSnapshot) => {
-    const apiService = inject(ApiService);
-    const router = inject(Router);
-    const intendedUrl = state.url;
-    const authData = await apiService.loggedIn().toPromise();
-    if (!authData.loggedIn) {
-        router.navigate(['/login'], { queryParams: { redirect_uri: intendedUrl } });
-        return false;
-    }
-    if (!authData.linked) {
-        router.navigate(['/login/create'], { queryParams: { redirect_uri: intendedUrl } });
-        return false;
-    }
-    return true;
-};
-const accountCreate: CanActivateFn = async () => {
-    const apiService = inject(ApiService);
-    const router = inject(Router);
-    const currentUrl = router.url;
-    const authData = await apiService.loggedIn().toPromise();
-    if (!authData.loggedIn) {
-        router.navigate(['/login'], { queryParams: { redirect_uri: currentUrl } });
-        return false;
-    }
-    if (authData.linked) {
-        router.navigate(['/']);
-        return false;
-    }
-    return true;
-};
-const loginReady: CanActivateFn = async () => {
-    const apiService = inject(ApiService);
-    const router = inject(Router);
-    const currentUrl = router.url;
-    const authData = await apiService.loggedIn().toPromise();
-    if (authData.loggedIn) {
-        if (authData.linked) {
-            router.navigate(['/']);
-            return false;
-        }
-        router.navigate(['/login/create'], { queryParams: { redirect_uri: currentUrl } });
-        return false;
-    }
-    return true;
-};
+// const authGuard: CanActivateFn = async (route, state: RouterStateSnapshot) => {
+//     const apiService = inject(ApiService);
+//     const router = inject(Router);
+//     const intendedUrl = state.url;
+//     const authData = await apiService.loggedIn().toPromise();
+//     if (!authData.loggedIn) {
+//         router.navigate(['/login'], { queryParams: { redirect_uri: intendedUrl } });
+//         return false;
+//     }
+//     if (!authData.linked) {
+//         router.navigate(['/login/create'], { queryParams: { redirect_uri: intendedUrl } });
+//         return false;
+//     }
+//     return true;
+// };
+// const accountCreate: CanActivateFn = async () => {
+//     const apiService = inject(ApiService);
+//     const router = inject(Router);
+//     const currentUrl = router.url;
+//     const authData = await apiService.loggedIn().toPromise();
+//     if (!authData.loggedIn) {
+//         router.navigate(['/login'], { queryParams: { redirect_uri: currentUrl } });
+//         return false;
+//     }
+//     if (authData.linked) {
+//         router.navigate(['/']);
+//         return false;
+//     }
+//     return true;
+// };
+// const loginReady: CanActivateFn = async () => {
+//     const apiService = inject(ApiService);
+//     const router = inject(Router);
+//     const currentUrl = router.url;
+//     const authData = await apiService.loggedIn().toPromise();
+//     if (authData.loggedIn) {
+//         if (authData.linked) {
+//             router.navigate(['/']);
+//             return false;
+//         }
+//         router.navigate(['/login/create'], { queryParams: { redirect_uri: currentUrl } });
+//         return false;
+//     }
+//     return true;
+// };
 
 export const routes: Routes = [
     {
@@ -92,47 +92,47 @@ export const routes: Routes = [
         component: RaceDetailsComponent,
         title: 'Race Details'
     },
-    { 
-        path: 'profile',
-        component: UserProfileComponent,
-        title: 'Profile',
-        canActivate: [authGuard]
-    },
-    {
-        path: 'wallet',
-        component: WalletComponent,
-        title: 'Wallet',
-        canActivate: [authGuard]
-    },
-    { 
-        path: 'notifications',
-        component: NotificationsComponent,
-        title: 'Notifications',
-        canActivate: [authGuard]
-    },
-    {
-        path: 'checkout',
-        component: CheckoutComponent,
-        title: 'Checkout',
-        canActivate: [authGuard]
-    },
-    {
-        path: 'withdraw',
-        component: WithdrawComponent,
-        title: 'Withdraw',
-        canActivate: [authGuard]
-    },
+    // { 
+    //     path: 'profile',
+    //     component: UserProfileComponent,
+    //     title: 'Profile',
+    //     // canActivate: [authGuard]
+    // },
+    // {
+    //     path: 'wallet',
+    //     component: WalletComponent,
+    //     title: 'Wallet',
+    //     canActivate: [authGuard]
+    // },
+    // { 
+    //     path: 'notifications',
+    //     component: NotificationsComponent,
+    //     title: 'Notifications',
+    //     // canActivate: [authGuard]
+    // },
+    // {
+    //     path: 'checkout',
+    //     component: CheckoutComponent,
+    //     title: 'Checkout',
+    //     // canActivate: [authGuard]
+    // },
+    // {
+    //     path: 'withdraw',
+    //     component: WithdrawComponent,
+    //     title: 'Withdraw',
+    //     // canActivate: [authGuard]
+    // },
     {
         path: 'result/:id',
         component: ResultDetailsComponent,
         title: 'Result Details'
     },
-    { 
-        path: 'login',
-        component: LoginComponent,
-        title: 'Login',
-        canActivate: [loginReady]
-    },
+    // { 
+    //     path: 'login',
+    //     component: LoginComponent,
+    //     title: 'Login',
+    //     canActivate: [loginReady]
+    // },
     {
         path: 'events',
         component: EventsComponent
@@ -153,10 +153,10 @@ export const routes: Routes = [
         path: 'events/RPRewards',
         component: RPRewardsComponent,
     },
-    { 
-        path: 'login/create',
-        component: AccountCreationComponent,
-        title:'Account Creation',
-        canActivate: [accountCreate]
-    }
+    // { 
+    //     path: 'login/create',
+    //     component: AccountCreationComponent,
+    //     title:'Account Creation',
+    //     canActivate: [accountCreate]
+    // }
 ];

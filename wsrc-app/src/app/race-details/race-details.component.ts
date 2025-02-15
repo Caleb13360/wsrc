@@ -4,18 +4,20 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { Race } from '@models/race';
 import { ApiService } from './../../services/api';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-race-details',
   standalone: true,
-  imports: [CommonModule, MatIconModule, RouterLink],
+  imports: [CommonModule, MatIconModule],
   templateUrl: './race-details.component.html',
   styleUrls: ['./race-details.component.css'],
-  providers: [ApiService]
+  providers: [ApiService] 
 })
 export class RaceDetailsComponent implements OnInit {
-  constructor(private route: ActivatedRoute, private apiService: ApiService) {}
+  constructor(private route: ActivatedRoute, private apiService: ApiService, private sanitizer: DomSanitizer) {}
   race!: Race;
+  safeUrl: SafeResourceUrl | undefined;
   countdown = {
     days: '?',
     hours: '?',
@@ -32,7 +34,10 @@ export class RaceDetailsComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if(!id){return;}
-      this.apiService.getRace(id).subscribe((data)=> {this.race=data.race;});
+      this.apiService.getRace(id).subscribe((data)=> {
+        this.race=data.race;
+        this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://matcherino.com/tournaments/' + this.race.matcherino_id);
+        });
     });
   }
 

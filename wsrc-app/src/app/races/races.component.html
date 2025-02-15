@@ -1,13 +1,13 @@
 <div class="flex-grow bg-cDarkBlue pt-20 sm:pt-24 md:pt-32 lg:pt-36 text-cWhite font-roboto tracking-tighter">
     <div class="flex flex-wrap justify-center">
         <div *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]" class="p-2 transform transition-transform duration-300 hover:scale-105" style="width: 400px;" [routerLink]="['/race', races[0].race_id]">
-            <div class="bg-cDarkGradientGrey p-4 rounded-lg shadow-lg transition-colors duration-300 hover:bg-orange-500" >
+            <div class="bg-cBlack p-4 rounded-lg shadow-lg transition-colors duration-300 hover:bg-orange-500" >
           <img [src]="'https://cdn.matcherino.com/' + races[0].matcherino_image_id +'/'" alt="Race Image" class="w-full h-auto mb-4">
-          <p class="text-center">{{ races[0].race_name }}</p>
-          <p class="text-center">${{ races[0].entry_fee }}</p>
-          <p class="text-center">{{ races[0].track_name }}</p>
-          <p class="text-center">{{ races[0].car }}</p>
-          <p class="text-center">{{ (races[0].launch_time | date: 'MMM yy') }} {{ ( races[0].launch_time| date: 'h:mm a') }}</p>
+          <p class="text-cWhite text-center">{{ races[0].race_name }}</p>
+          <p class="text-cWhite text-center">${{ races[0].entry_fee }}</p>
+          <p class="text-cWhite text-center">{{ races[0].track_name }}</p>
+          <p class="text-cWhite text-center">{{ races[0].car }}</p>
+          <p class="text-cWhite text-center">{{ (races[0].launch_time | date: 'MMM yy') }} {{ ( races[0].launch_time| date: 'h:mm a') }}</p>
           <div class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
             <p class="text-white">Race Now!</p>
         </div>

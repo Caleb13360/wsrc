@@ -28,15 +28,25 @@
           <!-- Title -->
           <div class="space-y-2 mb-8">
             <p class="text-cWhite text-4xl sm:text-5xl font-roboto-condensed font-bold tracking-tighter">Upcoming WSRC Races</p>
-            <p class="text-cWhite text-xl sm:text-2xl font-roboto-condensed tracking-tighter">The next 4 races are shown below.</p>
+            <p class="text-cWhite text-xl sm:text-2xl font-roboto-condensed tracking-tighter">The next races are shown below.</p>
           </div>
         
           <!-- 1x3 Grid -->
-          <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-            <div *ngFor="let race of latestRaces; let i = index">
-              <app-race-tile [race]="latestRaces[i]"></app-race-tile>
-            </div>
-          </div>
+          <div class="flex flex-wrap justify-center">
+        <div *ngFor="let i of [1,2,3,4]" class="p-2 transform transition-transform duration-300 hover:scale-105" style="width: 400px;" [routerLink]="['/race', latestRaces[0].race_id]">
+            <div class="bg-cBlack p-4 rounded-lg shadow-lg transition-colors duration-300 hover:bg-orange-500" >
+          <img [src]="'https://cdn.matcherino.com/' + latestRaces[0].matcherino_image_id +'/'" alt="Race Image" class="w-full h-auto mb-4">
+          <p class="text-cWhite text-center">{{ latestRaces[0].race_name }}</p>
+          <p class="text-cWhite text-center">${{ latestRaces[0].entry_fee }}</p>
+          <p class="text-cWhite text-center">{{ latestRaces[0].track_name }}</p>
+          <p class="text-cWhite text-center">{{ latestRaces[0].car }}</p>
+          <p class="text-cWhite text-center">{{ (latestRaces[0].launch_time | date: 'MMM yy') }} {{ ( latestRaces[0].launch_time| date: 'h:mm a') }}</p>
+          <div class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+            <p class="text-white">Race Now!</p>
+        </div>
+        </div>
+      </div>
+    </div>
           
        
         
@@ -90,7 +100,7 @@
             class="text-cGreen mx-auto font-roboto tracking-tighter font-bold text-2xl lg:text-3xl group-hover:text-cBlack">$40
             USD</span>
         </div>
-        <div routerLink="/events/RPRewards"
+        <!-- <div routerLink="/events/RPRewards"
           class="border border-cGrey w-full h-16 flex items-center justify-between px-4 rounded-md group hover:bg-cOrange hover:border-cOrange transition-all duration-200 ease-linear">
           <span class="text-cGrey font-roboto tracking-tighter group-hover:text-cBlack">4th</span>
           <span
@@ -110,35 +120,33 @@
           <span
             class="text-cGrey mx-auto font-roboto tracking-tighter font-bold text-2xl lg:text-3xl group-hover:text-cBlack">15
             RP</span>
-        </div>
-        <p class="text-cWhite mt-4 font-roboto-condensed">
+        </div> -->
+        <!-- <p class="text-cWhite mt-4 font-roboto-condensed">
           If 20 racers are present in the race, the below prizes will be awarded, if fewer racers are present it will scale
           accordingly.
-        </p>
+        </p> -->
       </div>
     </div>
 
-  <!-- Stream -->
-  <div class="p-4 lg:p-10 pt-16 sm:pt-0 bg-cDarkBlue">
-    <div class="w-full aspect-[16/9] bg-cover bg-center rounded-lg"
-      style="background-image: url('NotStreamingImageLT.jpg');">
-        <iframe *ngIf="isLive" src="https://player.twitch.tv/?channel=wsrc_official&parent=localhost" frameborder="0" allowfullscreen="true" scrolling="no" height="100%" width="100%"></iframe>
-
-      <div *ngIf="!isLive" class="flex items-center justify-center h-full bg-black bg-opacity-60 rounded-lg">
-        <div class="text-center px-4">
-          <p class="text-cWhite text-4xl lg:text-8xl font-porscha pb-4 lg:pb-7">WSRC</p>
-          <p class="text-cWhite font-roboto-condensed font-bold text-3xl lg:text-7xl tracking-tighter mb-4 lg:mb-6">
-            We aren't streaming right now.
-          </p>
-          <p class="text-cWhite font-roboto-condensed tracking-tighter text-md lg:text-3xl">
-            Click here to check out our Twitch channel <br> and follow us.
-          </p>
+    <div class="p-4 lg:p-10 pt-16 sm:pt-0 bg-cDarkBlue">
+      <div class="w-full aspect-[16/9] bg-cover bg-center rounded-lg"
+        style="background-image: url('NotStreamingImageLT.jpg');">
+          <iframe *ngIf="isLive" src="https://player.twitch.tv/?channel=wsrc_official&parent=localhost" frameborder="0" allowfullscreen="true" scrolling="no" height="100%" width="100%"></iframe>
+  
+        <div *ngIf="!isLive" class="flex items-center justify-center h-full bg-black bg-opacity-60 rounded-lg">
+          <div class="text-center px-4">
+            <p class="text-cWhite text-4xl lg:text-8xl font-porscha pb-4 lg:pb-7">WSRC</p>
+            <p class="text-cWhite font-roboto-condensed font-bold text-3xl lg:text-7xl tracking-tighter mb-4 lg:mb-6">
+              We aren't streaming right now.
+            </p>
+            <p class="text-cWhite font-roboto-condensed tracking-tighter text-md lg:text-3xl">
+              Click here to check out our Twitch channel <br> and follow us.
+            </p>
+          </div>
         </div>
-      </div>
-    </div> 
-  </div>
-
-      
+      </div> 
+    </div>
+    
     <!-- Sign up -->
     <div class="bg-cDarkBlue">
       <div class="flex justify-center">

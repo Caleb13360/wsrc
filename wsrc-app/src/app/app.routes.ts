@@ -20,6 +20,7 @@ import { RPRewardsComponent } from './events_pages/rpRewards/rpRewards.component
 import { ApiService } from '../services/api';
 import { AccountCreationComponent } from './account-creation/account-creation.component';
 import { RaceExtendedDetailsComponent } from './race-extended-details/race-extended-details.component';
+import { LiveComponent } from './live/live.component';
 
 // const authGuard: CanActivateFn = async (route, state: RouterStateSnapshot) => {
 //     const apiService = inject(ApiService);
@@ -97,6 +98,11 @@ export const routes: Routes = [
         path: 'race/details/:id',
         component: RaceExtendedDetailsComponent,
         title: 'Race Details'
+    },
+    {
+        path: 'live',
+        component: LiveComponent,
+        title: 'Live Stream'
     },
     // { 
     //     path: 'profile',

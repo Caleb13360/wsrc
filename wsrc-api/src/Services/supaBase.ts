@@ -84,6 +84,7 @@ export class Supabase {
             server_location: data.server_location, 
             entry_fee: data.entry_fee,
             matcherino_id: data.matcherino_id,
+            matcherino_image_id: data.matcherino_image_id,
             
             //race details
             race_details_id: data.race_details_id,

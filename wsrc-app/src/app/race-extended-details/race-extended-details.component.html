@@ -1,0 +1,76 @@
+
+<div class="flex-grow bg-cDarkBlue pb-20 pt-20 sm:pt-24 md:pt-32 lg:pt-36 text-cWhite font-roboto tracking-tighter">
+    <!-- Race Details -->
+    <div class="flex flex-col lg:flex-row justify-between px-4 lg:px-8 xl:mx-52">
+        <!-- Track -->
+        <div class="w-full lg:w-1/2 pt-6 lg:pt-12">
+            <div class="mb-4 border border-cBorderGrey bg-cDarkBlue">
+                <div class="flex items-center m-2 text-cDarkGrey">
+                    <mat-icon>flag</mat-icon>
+                    <h2 class="text-md md:text-xl ml-1">{{ race ? (race.track_name) : '???' }} - {{ race ? (race.track_config) : '???' }}</h2>
+                </div>
+            </div>
+    
+            <!-- Weather -->
+        <div class="flex justify-between mb-4 border border-cBorderGrey bg-cDarkBlue">
+            <!-- First Column: Temperature -->
+            <div class="flex flex-col items-center justify-center leading-none p-5">
+        
+                <span class="text-cDarkGrey text-4xl xl:text-6xl mb-6 font-roboto tracking-tighter font-bold">{{ race ? (race.temperature) : '??' }}°C</span>
+                <span class="text-cDarkGrey text-1xl">{{ race ? (race.cloud_cover) : '??' }}</span>
+            </div>
+            <!-- Second Column: Weather Descriptors -->
+            <div class="flex flex-col items-start p-5 justify-center text-cDarkGrey">
+                            <span>Track Moisture</span>
+                <span>Humidity</span>
+                <span>Wind Speed</span>
+                <span>Wind Direction</span>
+            </div>
+            <div class="flex flex-col items-start p-5 justify-center text-cDarkGrey font-bold">
+                
+                <span>{{ race ? (race.track_moisture) : '? ' }}</span>
+                <span>{{ race ? (race.humidity) : '? ' }}%</span>
+                <span>{{ race ? (race.wind_speed) : '? ' }}kph</span>
+                <span>{{ race ? (race.wind_direction) : '? ' }}</span>
+            </div>
+        </div>
+    
+            <!-- Race Setup -->
+            <div class="border border-cBorderGrey bg-cDarkBlue">
+                <div class="flex flex-wrap justify-between p-5 gap-4 lg:gap-0">
+                    <div class="flex items-center text-[#62D1CC]">
+                        <mat-icon>access_time</mat-icon>
+                        <span class="ml-1 font-bold">{{ race ? (race.race_time) : '???' }} Min Race</span>
+                    </div>
+                    <div class="flex items-center text-[#FBE057]">
+                        <mat-icon>play_arrow</mat-icon>
+                        <span class="ml-1 font-bold">{{ race ? (race.qualifier_laps) : '?' }} Quali Laps</span>
+                    </div>
+                    <div class="flex items-center text-[#FFA366]">
+                        <mat-icon>lock</mat-icon>
+                        <span class="ml-1 font-bold">Fixed Setup</span>
+                    </div>
+                    <div class="flex items-center text-cGreen">
+                        <mat-icon>attach_money</mat-icon>
+                        <span class=" font-bold">{{ race ? ('P1 - P'+race.cash_split.length.toString()) : '???' }}</span>
+                    </div>
+                </div>
+                <!-- Race Information -->
+            <div class="flex flex-col items-start p-5 space-y-2 text-cDarkGrey">
+                <div class="flex items-center space-x-2">
+                    <mat-icon>access_time</mat-icon>
+                    <span>{{ race ? (race.launch_time | date: 'h:mm a') : '???' }} Race Start on {{ race ? (race.launch_time | date: 'MMMM d, y') : '???' }}</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <mat-icon>flag</mat-icon>
+                    <span>{{ race ? (race.track_name) : '???' }}</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <mat-icon>directions_car</mat-icon>
+                    <span>{{ race ? (race.car) : '???' }}</span>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    

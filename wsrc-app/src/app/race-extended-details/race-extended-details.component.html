@@ -1,18 +1,18 @@
 
-<div class="flex-grow bg-[#030716] pb-20 pt-20 sm:pt-24 md:pt-32 lg:pt-36 text-cWhite font-roboto tracking-tighter">
+<div class="flex-grow bg-[#030716] pb-20 pt-20 sm:pt-24 md:pt-32 lg:pt-36 text-cWhite font-roboto tracking">
     <!-- Race Details -->
     <div class="flex flex-col lg:flex-row justify-between px-4 lg:px-8 xl:mx-52">
         <!-- Track -->
-        <div class="w-full lg:w-1/2 pt-6 lg:pt-12">
+        <div class="w-full lg:w-1/2 pt-6 lg:pt-12 ">
             <div class="mb-4 border-2 rounded-md border-[#1B213A] bg-[#030716] flex justify-center">
                 <div class="flex items-center m-2 text-white">
                     <mat-icon>flag</mat-icon>
-                    <h2 class="text-md md:text-xl ml-1">{{ race ? (race.track_name) : '' }} - {{ race ? (race.track_config) : '' }}</h2>
+                    <h2 class="text-xl md:text-2xl font-bold ml-1">{{ race ? (race.track_name) : '' }} - {{ race ? (race.track_config) : '' }}</h2>
                 </div>
             </div>
 
              <!-- Race Setup -->
-            <div class="border-2 rounded-md border-[#1B213A]  bg-[#030716]">
+            <div class="border-2 rounded-md border-[#1B213A] text-xl  bg-[#030716]">
                 <div class="flex flex-wrap justify-between p-5 gap-4 lg:gap-0">
                     <div class="flex items-center text-[#62D1CC]">
                         <mat-icon>access_time</mat-icon>
@@ -26,17 +26,17 @@
                         <mat-icon>lock</mat-icon>
                         <span class="ml-1 font-bold">Fixed Setup</span>
                     </div>
-                    <div class="flex items-center text-cGreen">
+                    <!-- <div class="flex items-center text-cGreen">
                         <mat-icon>attach_money</mat-icon>
                         <span class=" font-bold">{{ race ? ('P1 - P'+race.cash_split.length.toString()) : '???' }}</span>
-                    </div>
+                    </div> -->
                 </div>
                 <!-- Race Information -->
             <div class="flex flex-col items-start p-5 space-y-2 text-white">
-                <div class="flex items-center space-x-2">
+                <!-- <div class="flex items-center space-x-2">
                     <mat-icon>access_time</mat-icon>
                     <span>{{ race ? (race.launch_time | date: 'h:mm a') : '???' }} Race Start on {{ race ? (race.launch_time | date: 'MMMM d, y') : '???' }}</span>
-                </div>
+                </div> -->
                 <div class="flex items-center space-x-2">
                     <mat-icon>flag</mat-icon>
                     <span>{{ race ? (race.track_name) : '???' }}- {{ race ? (race.track_config) : '' }}</span>
@@ -50,7 +50,7 @@
        
     
             <!-- Weather -->
-        <div class="flex justify-between mt-4 border-2 rounded-md  border-[#1B213A] bg-[#030716]">
+        <div class="flex justify-between mt-4 border-2 rounded-md text-xl  border-[#1B213A] bg-[#030716]">
             <!-- First Column: Temperature -->
             <div class="flex flex-col items-center justify-center leading-none p-5">
         

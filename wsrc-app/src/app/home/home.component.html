@@ -24,19 +24,94 @@
     <!-- Upcoming Races -->
     
         <!-- Race Cards -->
-        <div class="bg-cDarkBlue py-6 lg:py-10 px-4  sm:py-6 lg:px-40">
+        <div class="bg-cDarkBlue py-6 lg:py-10 px-4  sm:py-6 ">
           <!-- Title -->
-          <div class="space-y-2 mb-8">
+          <div class="space-y-2 mb-8 lg:px-40">
             <p class="text-cWhite text-4xl sm:text-5xl font-roboto-condensed font-bold tracking-tighter">Upcoming WSRC Races</p>
-            <p class="text-cWhite text-xl sm:text-2xl font-roboto-condensed tracking-tighter">The next 4 races are shown below.</p>
+            <p class="text-cWhite text-xl sm:text-2xl font-roboto-condensed tracking-tighter">The next races are shown below.</p>
           </div>
         
           <!-- 1x3 Grid -->
-          <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-            <div *ngFor="let race of latestRaces; let i = index">
-              <app-race-tile [race]="latestRaces[i]"></app-race-tile>
-            </div>
+           <div class="flex-grow bg-cDarkBlue  text-cWhite font-roboto">
+  <div class="flex flex-wrap justify-center">
+    <div *ngFor="let i of [1, 2, 3]" class="p-4" style="width: 400px;"  [routerLink]="['/race', latestRaces[0].race_id]">
+      <div class="relative group cursor-pointer">
+        <!-- Solid Background -->
+        <div class="absolute inset-0 bg-[#EA3039] rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+        <!-- Card -->
+        <div class="relative z-10 max-w-sm mx-auto rounded-lg shadow-lg transform transition-transform duration-300 group-hover:translate-x-[7px] group-hover:translate-y-[-7px]">
+          <!-- Top Image Section -->
+          <div class="relative overflow-hidden rounded-t-lg">
+            <img [src]="'https://cdn.matcherino.com/' + latestRaces[0].matcherino_image_id + '/'"
+              alt="Race Image"
+              class="w-full h-auto object-cover" />
           </div>
+
+          <!-- Event Details Section -->
+          <div class="bg-[#0F1325] text-white">
+            <div class="text-lg font-semibold mb-2 pt-4 pb-4 bg-[#1B213A] flex items-center">
+              <mat-icon class="mr-2 ml-2 text-[#EA3039]">sports_score</mat-icon>
+              <span>{{ latestRaces[0].race_name }}</span>
+            </div>
+
+            <div class="space-y-1 text-sm p-4">
+              <div class="flex justify-between">
+                <div class="flex items-center">
+                  <mat-icon class="text-[#848CB4] mr-2">access_time</mat-icon>
+                  <span class="font-bold">Event Start:</span>
+                </div>
+                <span class="ml-2 font-medium">{{ latestRaces[0].launch_time | date : "MMM yy" }}
+                  {{ latestRaces[0].launch_time | date : "h:mm a" }}</span>
+              </div>
+
+              <div class="flex justify-between">
+                <div class="flex items-center">
+                  <mat-icon class="text-[#848CB4] mr-2">flag</mat-icon>
+                  <span class="font-bold">Track:</span>
+                </div>
+                <span class="ml-2 font-medium">{{ latestRaces[0].track_name }}</span>
+              </div>
+
+              <div class="flex justify-between">
+                <div class="flex items-center">
+                  <mat-icon class="text-[#848CB4] mr-2">directions_car</mat-icon>
+                  <span class="font-bold">Car:</span>
+                </div>
+                <span class="ml-2 font-medium">{{ latestRaces[0].car }}</span>
+              </div>
+
+              <div class="flex justify-between">
+                <div class="flex items-center">
+                  <mat-icon class="text-[#848CB4] mr-2">group</mat-icon>
+                  <span class="font-bold">Racers:</span>
+                </div>
+                <span class="ml-2 font-medium">2/20</span>
+              </div>
+
+               <div class="flex justify-between">
+                <div class="flex items-center">
+                  <mat-icon class="text-[#848CB4] mr-2">sell</mat-icon>
+                  <span class="font-bold">Entry:</span>
+                </div>
+                <span class="ml-2 font-medium">${{latestRaces[0].entry_fee}}</span>
+              </div>
+            </div>
+            
+          </div>
+
+          <!-- Entry Fee Section -->
+          <div class="p-1 flex-auto bg-[#C3903B] text-white text-center font-bold rounded-b-lg flex items-center justify-center">
+            <mat-icon class="mr-2">emoji_events</mat-icon>
+            $250
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+           
           
        
         
@@ -90,7 +165,7 @@
             class="text-cGreen mx-auto font-roboto tracking-tighter font-bold text-2xl lg:text-3xl group-hover:text-cBlack">$40
             USD</span>
         </div>
-        <div routerLink="/events/RPRewards"
+        <!-- <div routerLink="/events/RPRewards"
           class="border border-cGrey w-full h-16 flex items-center justify-between px-4 rounded-md group hover:bg-cOrange hover:border-cOrange transition-all duration-200 ease-linear">
           <span class="text-cGrey font-roboto tracking-tighter group-hover:text-cBlack">4th</span>
           <span
@@ -110,35 +185,33 @@
           <span
             class="text-cGrey mx-auto font-roboto tracking-tighter font-bold text-2xl lg:text-3xl group-hover:text-cBlack">15
             RP</span>
-        </div>
-        <p class="text-cWhite mt-4 font-roboto-condensed">
+        </div> -->
+        <!-- <p class="text-cWhite mt-4 font-roboto-condensed">
           If 20 racers are present in the race, the below prizes will be awarded, if fewer racers are present it will scale
           accordingly.
-        </p>
+        </p> -->
       </div>
     </div>
 
-  <!-- Stream -->
-  <div class="p-4 lg:p-10 pt-16 sm:pt-0 bg-cDarkBlue">
-    <div class="w-full aspect-[16/9] bg-cover bg-center rounded-lg"
-      style="background-image: url('NotStreamingImageLT.jpg');">
-        <iframe *ngIf="isLive" src="https://player.twitch.tv/?channel=wsrc_official&parent=localhost" frameborder="0" allowfullscreen="true" scrolling="no" height="100%" width="100%"></iframe>
-
-      <div *ngIf="!isLive" class="flex items-center justify-center h-full bg-black bg-opacity-60 rounded-lg">
-        <div class="text-center px-4">
-          <p class="text-cWhite text-4xl lg:text-8xl font-porscha pb-4 lg:pb-7">WSRC</p>
-          <p class="text-cWhite font-roboto-condensed font-bold text-3xl lg:text-7xl tracking-tighter mb-4 lg:mb-6">
-            We aren't streaming right now.
-          </p>
-          <p class="text-cWhite font-roboto-condensed tracking-tighter text-md lg:text-3xl">
-            Click here to check out our Twitch channel <br> and follow us.
-          </p>
+    <div class="p-4 lg:p-10 pt-16 sm:pt-0 bg-cDarkBlue">
+      <div class="w-full aspect-[16/9] bg-cover bg-center rounded-lg"
+        style="background-image: url('NotStreamingImageLT.jpg');">
+          <iframe *ngIf="isLive" src="https://player.twitch.tv/?channel=wsrc_official&parent=localhost" frameborder="0" allowfullscreen="true" scrolling="no" height="100%" width="100%"></iframe>
+  
+        <div *ngIf="!isLive" class="flex items-center justify-center h-full bg-black bg-opacity-60 rounded-lg">
+          <div class="text-center px-4">
+            <p class="text-cWhite text-4xl lg:text-8xl font-porscha pb-4 lg:pb-7">WSRC</p>
+            <p class="text-cWhite font-roboto-condensed font-bold text-3xl lg:text-7xl tracking-tighter mb-4 lg:mb-6">
+              We aren't streaming right now.
+            </p>
+            <p class="text-cWhite font-roboto-condensed tracking-tighter text-md lg:text-3xl">
+              Click here to check out our Twitch channel <br> and follow us.
+            </p>
+          </div>
         </div>
-      </div>
-    </div> 
-  </div>
-
-      
+      </div> 
+    </div>
+    
     <!-- Sign up -->
     <div class="bg-cDarkBlue">
       <div class="flex justify-center">

@@ -3,12 +3,11 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import type {Race} from '../../../../models/race.d.ts';
 import { RouterLink } from '@angular/router';
-import { RaceTileComponent } from "../Components/race-tile/race-tile.component";
 import { ApiService } from './../../services/api';
 
 @Component({
   selector: 'app-home',
-  imports: [MatIconModule, RouterLink, RaceTileComponent, CommonModule],
+  imports: [MatIconModule, RouterLink, CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
   providers: [ApiService]

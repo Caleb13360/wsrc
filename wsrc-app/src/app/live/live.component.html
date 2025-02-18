@@ -1,0 +1,21 @@
+<div class="flex-grow bg-cDarkBlue pt-14"></div>
+  <!-- Stream -->
+<div class="lg:pt-30 sm:pt-0 bg-cDarkBlue flex items-center justify-center min-h-screen">
+  <div class="w-9/12 aspect-[16/9] bg-cover bg-center rounded-lg pt"
+    style="background-image: url('NotStreamingImageLT.jpg');">
+    <iframe *ngIf="isLive" src="https://player.twitch.tv/?channel=wsrc_official&parent=localhost" 
+      frameborder="0" allowfullscreen="true" scrolling="no" height="100%" width="100%"></iframe>
+
+    <div *ngIf="!isLive" class="flex items-center justify-center h-full bg-black bg-opacity-60 rounded-lg">
+      <div class="text-center px-4">
+        <p class="text-cWhite text-4xl lg:text-8xl font-porscha pb-4 lg:pb-7">WSRC</p>
+        <p class="text-cWhite font-roboto-condensed font-bold text-3xl lg:text-7xl tracking-tighter mb-4 lg:mb-6">
+          We aren't streaming right now.
+        </p>
+        <p class="text-cWhite font-roboto-condensed tracking-tighter text-md lg:text-3xl">
+          Click here to check out our Twitch channel <br> and follow us.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

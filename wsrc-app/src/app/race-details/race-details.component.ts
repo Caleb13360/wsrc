@@ -17,6 +17,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 export class RaceDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private apiService: ApiService, private sanitizer: DomSanitizer) {}
   race!: Race;
+  showLoading: boolean = true;
   safeUrl: SafeResourceUrl | undefined;
   countdown = {
     days: '?',

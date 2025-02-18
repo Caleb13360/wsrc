@@ -1,7 +1,7 @@
 
 <div class="flex-grow bg-cDarkBlue pt-20 sm:pt-24 md:pt-32 lg:pt-40 text-cWhite font-roboto">
   <div class="flex flex-wrap justify-center">
-    <div *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" class="p-4" style="width: 400px;"  [routerLink]="['/race', races[0].race_id]">
+    <div *ngFor="let race of races" class="p-4" style="width: 400px;"  [routerLink]="['/race', race.race_id]">
       <div class="relative group cursor-pointer">
         <!-- Solid Background -->
         <div class="absolute inset-0 bg-[#EA3039] rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -10,7 +10,7 @@
         <div class="relative z-10 max-w-sm mx-auto rounded-lg shadow-lg transform transition-transform duration-300 group-hover:translate-x-[7px] group-hover:translate-y-[-7px]">
           <!-- Top Image Section -->
           <div class="relative overflow-hidden rounded-t-lg">
-            <img [src]="'https://cdn.matcherino.com/' + races[0].matcherino_image_id + '/'"
+            <img [src]="'https://cdn.matcherino.com/' + race.matcherino_image_id + '/'"
               alt="Race Image"
               class="w-full h-auto object-cover" />
           </div>
@@ -19,7 +19,7 @@
           <div class="bg-[#0F1325] text-white">
             <div class="text-lg font-semibold mb-2 pt-4 pb-4 bg-[#1B213A] flex items-center">
               <mat-icon class="mr-2 ml-2 text-[#EA3039]">sports_score</mat-icon>
-              <span>{{ races[0].race_name }}</span>
+              <span>{{ race.race_name }}</span>
             </div>
 
             <div class="space-y-1 text-sm p-4">
@@ -28,8 +28,8 @@
                   <mat-icon class="text-[#848CB4] mr-2">access_time</mat-icon>
                   <span class="font-bold">Event Start:</span>
                 </div>
-                <span class="ml-2 font-medium">{{ races[0].launch_time | date : "MMM yy" }}
-                  {{ races[0].launch_time | date : "h:mm a" }}</span>
+                <span class="ml-2 font-medium">{{ race.launch_time | date : "MMM d" }}
+                  {{ race.launch_time | date : "h:mm a" }}</span>
               </div>
 
               <div class="flex justify-between">
@@ -37,7 +37,7 @@
                   <mat-icon class="text-[#848CB4] mr-2">flag</mat-icon>
                   <span class="font-bold">Track:</span>
                 </div>
-                <span class="ml-2 font-medium">{{ races[0].track_name }}</span>
+                <span class="ml-2 font-medium">{{ race.track_name }}</span>
               </div>
 
               <div class="flex justify-between">
@@ -45,7 +45,7 @@
                   <mat-icon class="text-[#848CB4] mr-2">directions_car</mat-icon>
                   <span class="font-bold">Car:</span>
                 </div>
-                <span class="ml-2 font-medium">{{ races[0].car }}</span>
+                <span class="ml-2 font-medium">{{ race.car }}</span>
               </div>
 
               <div class="flex justify-between">
@@ -53,7 +53,7 @@
                   <mat-icon class="text-[#848CB4] mr-2">group</mat-icon>
                   <span class="font-bold">Racers:</span>
                 </div>
-                <span class="ml-2 font-medium">2/20</span>
+                <span class="ml-2 font-medium">?/20</span>
               </div>
 
               
@@ -62,7 +62,7 @@
                   <mat-icon class="text-[#848CB4] mr-2">sell</mat-icon>
                   <span class="font-bold">Entry:</span>
                 </div>
-                <span class="ml-2 font-medium">${{races[0].entry_fee}}</span>
+                <span class="ml-2 font-medium">${{race.entry_fee}}</span>
               </div>
             </div>
           </div>
@@ -70,7 +70,7 @@
           <!-- Entry Fee Section -->
           <div class="p-1 flex-auto bg-[#C3903B] text-white text-center font-bold rounded-b-lg flex items-center justify-center">
             <mat-icon class="mr-2">emoji_events</mat-icon>
-            $250
+            $?
           </div>
         </div>
       </div>

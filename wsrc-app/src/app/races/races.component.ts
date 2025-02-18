@@ -29,7 +29,7 @@ export class RacesComponent implements OnInit{
       this.intervalId = setInterval(() => {
         this.updateCountdown();
       }, 1000);
-      this.apiService.getLatestRaces(3).subscribe((data)=> {this.races=data.races});
+      this.apiService.getLatestRaces(3).subscribe((data)=> {this.races=data.races; console.log(data.races)});
   }
 
   private updateCountdown(): void {

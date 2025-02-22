@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ApiService } from './../../services/api';
-import type {User} from '../../../../models/user.d.ts';
+// import type {User} from '../../../../models/user.d.ts';
 
 @Component({
   selector: 'app-user-profile',
@@ -13,7 +13,7 @@ import type {User} from '../../../../models/user.d.ts';
 })
 export class UserProfileComponent implements OnInit{
   constructor(private apiService: ApiService) {}
-  user!: User;
+  // user!: User;
   ngOnInit(): void {
     this.apiService.getCurrentUser().subscribe((data)=> {this.user=data.user});
   }

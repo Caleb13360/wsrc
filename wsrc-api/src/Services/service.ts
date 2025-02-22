@@ -1,5 +1,5 @@
 import type { Race } from '@models/race.d.ts';
-import type { User } from '@models/user.d.ts';
+// import type { User } from '@models/user.d.ts';
 import { IRacingService} from './iracing.js';
 import { Supabase } from './supaBase.js';
 import { Auth } from './auth.js';
@@ -8,16 +8,16 @@ const auth: Auth = new Auth();
 const db: Supabase = new Supabase();
 
 export class Service{
-    user: User = {
-            id: 1,
-            iracing_username: 'himmy grills',
-            iracing_id: 1,
-            joined_date: new Date('2021-01-01'),
-            email: '',
-            country: '',
-            last_competed: new Date('2024-01-01'),
+    // user: User = {
+    //         id: 1,
+    //         iracing_username: 'himmy grills',
+    //         iracing_id: 1,
+    //         joined_date: new Date('2021-01-01'),
+    //         email: '',
+    //         country: '',
+    //         last_competed: new Date('2024-01-01'),
             
-    };
+    // };
     // race: Race = {
     //         id: 1,
     //         racers: ['Racer1', 'Racer2', 'Racer3'],
@@ -79,14 +79,14 @@ export class Service{
         return user.length > 0 ? user[0] : [];
     }
 
-    async getCurrentUser(googleId: string): Promise<User> {
-        return await db.getUserById(googleId);
-    }
+    // async getCurrentUser(googleId: string): Promise<User> {
+    //     return await db.getUserById(googleId);
+    // }
 
 
-    async getUserById(id: string): Promise<User> {
-        return this.user;
-    }
+    // async getUserById(id: string): Promise<User> {
+    //     return this.user;
+    // }
     async getUpcomingRaces(startAfter: Date, numberOfResults: number): Promise<Race[]> {
         const result = await db.getUpcomingRaces(startAfter, numberOfResults);
         return result;

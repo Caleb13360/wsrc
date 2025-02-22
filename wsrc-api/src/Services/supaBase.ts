@@ -1,5 +1,5 @@
 import { Race } from '@models/race.js';
-import type { User } from '@models/user.d.ts';
+// import type { User } from '@models/user.d.ts';
 import { SUPABASE_KEY, SUPABASE_URL } from '../config.js';
 import { createClient } from '@supabase/supabase-js'
 
@@ -10,18 +10,18 @@ export class Supabase {
         this.sb = createClient(SUPABASE_URL, SUPABASE_KEY);
     }
 
-    generateUserFromData(data: any): User {
-        const user: User = {
-            id: data.id,
-            iracing_id: data.iracing_id,
-            iracing_username: data.iracing_username,
-            email: data.email,
-            country: data.country,
-            last_competed: new Date(),
-            joined_date: data.joined
-        };
-        return user;
-    }
+    // generateUserFromData(data: any): User {
+    //     const user: User = {
+    //         id: data.id,
+    //         iracing_id: data.iracing_id,
+    //         iracing_username: data.iracing_username,
+    //         email: data.email,
+    //         country: data.country,
+    //         last_competed: new Date(),
+    //         joined_date: data.joined
+    //     };
+    //     return user;
+    // }
 
     async createUser(googleId: string, email: string): Promise<void> {
         const existingUser = await this.userExists(googleId);
@@ -47,18 +47,18 @@ export class Supabase {
         }
     }
 
-    async getUserById(googleId: string): Promise<User> {
-        const { data: user, error: selectError } = await this.sb
-            .from('User')
-            .select('*')
-            .eq('google_id', googleId)
-            .single();
+    // async getUserById(googleId: string): Promise<User> {
+    //     const { data: user, error: selectError } = await this.sb
+    //         .from('User')
+    //         .select('*')
+    //         .eq('google_id', googleId)
+    //         .single();
 
-        if (selectError && selectError.code !== 'PGRST116') {
-            throw selectError;
-        }
-        return this.generateUserFromData(user);
-    }
+    //     if (selectError && selectError.code !== 'PGRST116') {
+    //         throw selectError;
+    //     }
+    //     return this.generateUserFromData(user);
+    // }
 
     async userExists(googleId: string): Promise<boolean> {
         const { data: existingUser, error: selectError } = await this.sb
@@ -111,11 +111,6 @@ export class Supabase {
             track_id: data.track_id, 
             track_name: data._Track.track_name,
             track_config: data._Track.track_config,
-
-            //prize pool
-            prize_pool_id: data.prize_pool_id,
-            cash_split: data.PrizePool.cash_split,
-            racer_points: data.PrizePool.racer_points
         };
         return race;
     }
@@ -149,8 +144,7 @@ export class Supabase {
             *,
             RaceWeather(*),
             RaceDetails(*),
-            _Track(*),
-            PrizePool(*)
+            _Track(*)
         `)
         .lt('launch_time',  startAfter.toISOString())
         .order('launch_time', { ascending: false })
@@ -164,8 +158,7 @@ export class Supabase {
             *,
             RaceWeather(*),
             RaceDetails(*),
-            _Track(*),
-            PrizePool(*)
+            _Track(*)
         `)
         // .lt('launch_time',  startAfter.toISOString())
         .order('launch_time', { ascending: false })
@@ -179,8 +172,7 @@ export class Supabase {
             *,
             RaceWeather(*),
             RaceDetails(*),
-            _Track(*),
-            PrizePool(*)
+            _Track(*)
         `)
         .gt('launch_time',  startAfter.toISOString())
         .order('launch_time', { ascending: true })
@@ -194,8 +186,7 @@ export class Supabase {
             *,
             RaceWeather(*),
             RaceDetails(*),
-            _Track(*),
-            PrizePool(*)
+            _Track(*)
         `)
         // .gt('launch_time',  startAfter.toISOString())
         .order('launch_time', { ascending: true })
@@ -210,8 +201,7 @@ export class Supabase {
                 *,
                 RaceWeather(*),
                 RaceDetails(*),
-                _Track(*),
-                PrizePool(*)
+                _Track(*)
             `)
             .eq('race_id', id)
             .single();
@@ -225,7 +215,7 @@ export class Supabase {
             .select(`
                 *,
                 User(country, iracing_username),
-                Races(prize_pool_id, entry_fee, PrizePool(cash_split))
+                Races(entry_fee)
             `)
             .eq('race_id', id)
             .order('position', { ascending: true });

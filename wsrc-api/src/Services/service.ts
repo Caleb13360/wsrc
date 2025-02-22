@@ -170,7 +170,7 @@ export async function checkRaceResults(){
         for (const result of raceResults){
             const resultTime = new Date(result.start_time);
             const timeDifference = Math.abs(raceTime.getTime() - resultTime.getTime());
-            const tenMinutesInMilliseconds = 600 * 60 * 1000;
+            const tenMinutesInMilliseconds = 10 * 60 * 1000;
             if (timeDifference <= tenMinutesInMilliseconds){
                 const raceData = await iRacingService.getSessionResults(result.subsession_id);
                 const sessionData = raceData.session_results.find((session: any) => session.simsession_type === 6);

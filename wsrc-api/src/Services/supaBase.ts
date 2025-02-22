@@ -23,29 +23,29 @@ export class Supabase {
     //     return user;
     // }
 
-    async createUser(googleId: string, email: string): Promise<void> {
-        const existingUser = await this.userExists(googleId);
-        if (!existingUser) {
-            const { error } = await this.sb
-                .from('User')
-                .insert([{ google_id: googleId, email }]);
+    // async createUser(googleId: string, email: string): Promise<void> {
+    //     const existingUser = await this.userExists(googleId);
+    //     if (!existingUser) {
+    //         const { error } = await this.sb
+    //             .from('User')
+    //             .insert([{ google_id: googleId, email }]);
 
-            if (error) {
-                throw error;
-            }
-        }
-        return;
-    }
+    //         if (error) {
+    //             throw error;
+    //         }
+    //     }
+    //     return;
+    // }
 
-    async linkUser(googleId:string, iracingId: number, name: string, country: string, promotionalEmails: boolean): Promise<void> {
-        const { error } = await this.sb
-            .from('User')
-            .update({ iracing_id: iracingId, iracing_username: name, country: country, email_promotions: promotionalEmails })
-            .eq('google_id', googleId);
-        if (error) {
-            throw error;
-        }
-    }
+    // async linkUser(googleId:string, iracingId: number, name: string, country: string, promotionalEmails: boolean): Promise<void> {
+    //     const { error } = await this.sb
+    //         .from('User')
+    //         .update({ iracing_id: iracingId, iracing_username: name, country: country, email_promotions: promotionalEmails })
+    //         .eq('google_id', googleId);
+    //     if (error) {
+    //         throw error;
+    //     }
+    // }
 
     // async getUserById(googleId: string): Promise<User> {
     //     const { data: user, error: selectError } = await this.sb
@@ -60,18 +60,18 @@ export class Supabase {
     //     return this.generateUserFromData(user);
     // }
 
-    async userExists(googleId: string): Promise<boolean> {
-        const { data: existingUser, error: selectError } = await this.sb
-            .from('User')
-            .select('*')
-            .eq('google_id', googleId)
-            .single();
+    // async userExists(googleId: string): Promise<boolean> {
+    //     const { data: existingUser, error: selectError } = await this.sb
+    //         .from('User')
+    //         .select('*')
+    //         .eq('google_id', googleId)
+    //         .single();
 
-        if (selectError && selectError.code !== 'PGRST116') {
-            throw selectError;
-        }
-        return !!existingUser;
-    }
+    //     if (selectError && selectError.code !== 'PGRST116') {
+    //         throw selectError;
+    //     }
+    //     return !!existingUser;
+    // }
     generateRaceFromData(data: any){
         const race: Race = {
             race_id: data.race_id,
@@ -214,7 +214,6 @@ export class Supabase {
             .from('RaceResult')
             .select(`
                 *,
-                User(country, iracing_username),
                 Races(entry_fee)
             `)
             .eq('race_id', id)
@@ -241,11 +240,18 @@ export class Supabase {
             return;
     }
 
-    // async getTotalPrizeAmount(): Promise<Number | null>{
-    //     const data = await this.sb
-    //     .from('Transactions')
-    //     // sum all transacations of type prize money
-    // }
+    async getTotalPrizeAmount(): Promise<Number>{
+        const { data, error } = await this.sb
+        .from('RaceResult')
+        .select('sum:prize.sum()');
+
+    if (error) {
+        console.error('Error fetching total prize amount:', error);
+        return 0;
+    }
+    console.log(data);
+    return data[0]?.sum || 0;
+    }
 
     // async getTransactions
 

@@ -3,10 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Race } from '@models/race';
 import { ApiService } from './../../services/api';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-race-results',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, MatIconModule],
   templateUrl: './race-results.component.html',
   styleUrl: './race-results.component.css',
     providers: [ApiService]

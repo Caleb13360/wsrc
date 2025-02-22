@@ -38,8 +38,8 @@ export interface Race {
     track_name: string;
     track_config: string;
 
-    //prize pool
-    prize_pool_id: number;
-    cash_split: number[];
-    racer_points: number[];
+    // //prize pool
+    // prize_pool_id: number;
+    // cash_split: number[];
+    // racer_points: number[];
 }

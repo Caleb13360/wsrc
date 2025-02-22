@@ -6,7 +6,7 @@ import { ApiService } from './../../services/api';
 
 @Component({
   selector: 'app-user-profile',
-  imports: [RouterLink, DatePipe],
+  imports: [],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.css',
     providers: [ApiService]
@@ -15,6 +15,6 @@ export class UserProfileComponent implements OnInit{
   constructor(private apiService: ApiService) {}
   // user!: User;
   ngOnInit(): void {
-    this.apiService.getCurrentUser().subscribe((data)=> {this.user=data.user});
+    // this.apiService.getCurrentUser().subscribe((data)=> {this.user=data.user});
   }
 }

@@ -1,23 +1,23 @@
 import type { Race } from '@models/race.d.ts';
-import type { User } from '@models/user.d.ts';
+// import type { User } from '@models/user.d.ts';
 import { IRacingService} from './iracing.js';
 import { Supabase } from './supaBase.js';
-import { Auth } from './auth.js';
+// import { Auth } from './auth.js';
 const iRacingService: IRacingService = new IRacingService();
-const auth: Auth = new Auth();
+// const auth: Auth = new Auth();
 const db: Supabase = new Supabase();
 
 export class Service{
-    user: User = {
-            id: 1,
-            iracing_username: 'himmy grills',
-            iracing_id: 1,
-            joined_date: new Date('2021-01-01'),
-            email: '',
-            country: '',
-            last_competed: new Date('2024-01-01'),
+    // user: User = {
+    //         id: 1,
+    //         iracing_username: 'himmy grills',
+    //         iracing_id: 1,
+    //         joined_date: new Date('2021-01-01'),
+    //         email: '',
+    //         country: '',
+    //         last_competed: new Date('2024-01-01'),
             
-    };
+    // };
     // race: Race = {
     //         id: 1,
     //         racers: ['Racer1', 'Racer2', 'Racer3'],
@@ -46,47 +46,47 @@ export class Service{
     // third_pp: 60, // Prize pool amount for third place
     // }
 
-    async loginWithGoogle(credentials: string): Promise<string> {
-        const { userid: googleId, email } = await auth.verifyIdToken(credentials);
-        // Create account if none exists
-        await db.createUser(googleId, email);
-        const jwtToken: string = auth.generateToken(googleId);
-        return jwtToken;
-    }
+    // async loginWithGoogle(credentials: string): Promise<string> {
+    //     const { userid: googleId, email } = await auth.verifyIdToken(credentials);
+    //     // Create account if none exists
+    //     await db.createUser(googleId, email);
+    //     const jwtToken: string = auth.generateToken(googleId);
+    //     return jwtToken;
+    // }
 
-     decodeJWT(jwtToken: string): any  {
-        return auth.decodeToken(jwtToken);
-            }
+    //  decodeJWT(jwtToken: string): any  {
+    //     return auth.decodeToken(jwtToken);
+    //         }
     
-    async checkUserLinked(googleId: string): Promise<boolean> {
-        const exists = await db.userExists(googleId);
-        if (!exists) {
-            await db.createUser(googleId, '');
-        }
-        const user = await db.getUserById(googleId);
-        return user.iracing_id !== null;
-    }
+    // async checkUserLinked(googleId: string): Promise<boolean> {
+    //     const exists = await db.userExists(googleId);
+    //     if (!exists) {
+    //         await db.createUser(googleId, '');
+    //     }
+    //     const user = await db.getUserById(googleId);
+    //     return user.iracing_id !== null;
+    // }
 
-    async linkUser(googleId: string, query_search: string, promotionalEmails: boolean): Promise<void> {
-        const user = await iRacingService.lookupDriver(query_search);
-        const userDetails = await iRacingService.memberProfile(user[0].cust_id);
-        await db.linkUser(googleId, user[0].cust_id, user[0].display_name, userDetails.member_info.club_name, promotionalEmails);
-        return;
-    }
+    // async linkUser(googleId: string, query_search: string, promotionalEmails: boolean): Promise<void> {
+    //     const user = await iRacingService.lookupDriver(query_search);
+    //     const userDetails = await iRacingService.memberProfile(user[0].cust_id);
+    //     await db.linkUser(googleId, user[0].cust_id, user[0].display_name, userDetails.member_info.club_name, promotionalEmails);
+    //     return;
+    // }
 
     async lookupDriver(searchTerm: string): Promise<any> {
         const user = await iRacingService.lookupDriver(searchTerm);
         return user.length > 0 ? user[0] : [];
     }
 
-    async getCurrentUser(googleId: string): Promise<User> {
-        return await db.getUserById(googleId);
-    }
+    // async getCurrentUser(googleId: string): Promise<User> {
+    //     return await db.getUserById(googleId);
+    // }
 
 
-    async getUserById(id: string): Promise<User> {
-        return this.user;
-    }
+    // async getUserById(id: string): Promise<User> {
+    //     return this.user;
+    // }
     async getUpcomingRaces(startAfter: Date, numberOfResults: number): Promise<Race[]> {
         const result = await db.getUpcomingRaces(startAfter, numberOfResults);
         return result;
@@ -121,9 +121,10 @@ export class Service{
         return 89.520;
     }
 
-    getTotalPrizeAmount(): number{
+    async getTotalPrizeAmount(): Promise<Number>{
         // sum all transactions that are of type prize money
-        return 102168;
+        const results = await db.getTotalPrizeAmount();
+        return results;
     }
 
     getTransactions(userId: string){
@@ -131,26 +132,26 @@ export class Service{
         return 'transaction';
     }
 
-    getNotifications(userId: string){
-        // get all notifications for a user
-        return 'notification';
-    }
+    // getNotifications(userId: string){
+    //     // get all notifications for a user
+    //     return 'notification';
+    // }
 
-    getUserRacerPoints(userId: string){
-        // sum current racer points across transactions
-        return 'user points';
-    }
-    getAllRacerPoints(){
-        return 'all racer points';
-    }
+    // getUserRacerPoints(userId: string){
+    //     // sum current racer points across transactions
+    //     return 'user points';
+    // }
+    // getAllRacerPoints(){
+    //     return 'all racer points';
+    // }
 
-    getCurrentEvents(){
-        return 'current events';
-    }
+    // getCurrentEvents(){
+    //     return 'current events';
+    // }
 
-    getUpcomingEvents(){
-        return 'upcoming events';
-    }
+    // getUpcomingEvents(){
+    //     return 'upcoming events';
+    // }
 }
 export async function checkRaceResults(){
     const uncheckedRaces = await db.getUnfetchedRaces();
@@ -174,7 +175,7 @@ export async function checkRaceResults(){
                 const raceData = await iRacingService.getSessionResults(result.subsession_id);
                 const sessionData = raceData.session_results.find((session: any) => session.simsession_type === 6);
                 for (const result of sessionData.results){
-                    db.addRaceResult(result.cust_id, race.race_id, result.interval, result.finish_position + 1, result.incidents, result.average_lap, result.best_lap_time);
+                    db.addRaceResult(result.display_name, race.race_id, result.interval, result.finish_position + 1, result.incidents, result.average_lap, result.best_lap_time);
                 }
                 break;
             }

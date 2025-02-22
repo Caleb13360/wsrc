@@ -86,7 +86,7 @@
                   <mat-icon class="text-[#848CB4] mr-2">group</mat-icon>
                   <span class="font-bold">Racers:</span>
                 </div>
-                <span class="ml-2 font-medium">?/20</span>
+                <span class="ml-2 font-medium">{{race.participants}}/20</span>
               </div>
 
                <div class="flex justify-between">
@@ -94,7 +94,7 @@
                   <mat-icon class="text-[#848CB4] mr-2">sell</mat-icon>
                   <span class="font-bold">Entry:</span>
                 </div>
-                <span class="ml-2 font-medium">${{race.entry_fee}}</span>
+                <span class="ml-2 font-medium">{{race.entry_fee==0 ? 'Free' : '$'+race.entry_fee}}</span>
               </div>
             </div>
             
@@ -103,7 +103,7 @@
           <!-- Entry Fee Section -->
           <div class="p-1 flex-auto bg-[#C3903B] text-white text-center font-bold rounded-b-lg flex items-center justify-center">
             <mat-icon class="mr-2">emoji_events</mat-icon>
-            $?
+            ${{race.prize_pool}}
           </div>
         </div>
       </div>
@@ -122,14 +122,14 @@
         </div>
     </div>
     <!-- Total Won -->
-    <div class="bg-cGreen w-full h-78 flex items-center justify-center">
+    <div class="bg-cGreen w-full h-78  flex items-center justify-center">
       <div class="flex flex-col justify-center items-center ">
         <div class="text-10xl font-bold font-roboto-condensed tracking-tighter">${{totalPrizeAmount}}</div>
         <div class="text-2xl mb-8 font-roboto tracking-tighter">Total Cash Prizes Won By Racers</div>
       </div>
     </div>
     <!-- Cash Prizes -->
-    <div class="bg-cDarkBlue flex flex-col lg:flex-row">
+    <div class="bg-cDarkBlue flex flex-col lg:flex-row my-12">
       <!-- Left Side -->
       <div class="w-full lg:w-1/2 flex flex-col justify-center items-left px-4 lg:pl-48 lg:pr-20 py-8">
         <h1 class="text-cWhite text-5xl lg:text-6xl mb-6 font-roboto-condensed tracking-tighter font-bold">
@@ -193,7 +193,7 @@
       </div>
     </div>
 
-    <div class="p-4 lg:p-10 pt-16 sm:pt-0 bg-cDarkBlue">
+    <!-- <div class="p-4 lg:p-10 pt-16 sm:pt-0 bg-cDarkBlue">
       <div class="w-full aspect-[16/9] bg-cover bg-center rounded-lg"
         style="background-image: url('NotStreamingImageLT.jpg');">
           <iframe *ngIf="isLive" src="https://player.twitch.tv/?channel=wsrc_official&parent=localhost" frameborder="0" allowfullscreen="true" scrolling="no" height="100%" width="100%"></iframe>
@@ -210,19 +210,17 @@
           </div>
         </div>
       </div> 
-    </div>
+    </div> -->
     
     <!-- Sign up -->
     <div class="bg-cDarkBlue">
       <div class="flex justify-center">
         <div class="pb-20 pt-10 px-10 space-y-6 text-center">
           <h1 class="text-cWhite text-5xl lg:text-6xl mb-6 font-roboto-condensed tracking-tighter font-bold">
-            Sign-Up for Free and
-            <br>
             Start Racing to Win Money!
           </h1>
           <h2 class="text-cWhite text-lg sm:text-2xl mb-4 font-roboto-condensed tracking-tighter">
-          Sign up today and dive into the action. No team required, just your skills, the thrill of
+          Dive straight into the action. No team required, just your skills, the thrill of
           racing, <br>
           and the chance to win cash prizes every week.
           </h2>

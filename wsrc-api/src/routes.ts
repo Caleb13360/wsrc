@@ -4,88 +4,88 @@ import { IRacingService} from './Services/iracing.js';
 const service: Service = new Service();
 const router = Router();
 //#region LOGIN
-router.post('/login/google', async (req, res) => {
-    const { credential } = req.body;
-    try {
-        const result = await service.loginWithGoogle(credential);
-        res.cookie('authToken', result, {
-            httpOnly: true,
-            secure: true,
-            expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7)
-        });
-        res.json({ success: true });
-    } catch (err) {
-        res.status(500).json({ error: 'Error logging in' });
-    }
-});
-router.get('/login/check', async (req, res) => {
-    const authToken = req.cookies.authToken;
-    if(authToken===null || authToken===undefined){
-        res.json({ loggedIn: false });
-        return;
-    }
-    const decoded = service.decodeJWT(authToken);
-    if(decoded===null || decoded.id===undefined){
-        res.json({ loggedIn: false });
-        return;
-    }
-    try {
-        const linked = await service.checkUserLinked(decoded.id);
-        res.json({ loggedIn: true, linked: linked });
-        return;
-    } catch (err) {
-        res.json({ loggedIn: true, linked: false });
-        return;
-    }
-});
-router.get('/login/findIracingUser/:search', async (req, res) => {
-    const search = req.params.search;
-    try {
-        const user = await service.lookupDriver(search);
-        res.json({ name: user.display_name, id: user.cust_id });
-    } catch (err) {
-        res.status(500).json({ error: `Error finding driver: ${err}` });
-    }
-});
+// router.post('/login/google', async (req, res) => {
+//     const { credential } = req.body;
+//     try {
+//         const result = await service.loginWithGoogle(credential);
+//         res.cookie('authToken', result, {
+//             httpOnly: true,
+//             secure: true,
+//             expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7)
+//         });
+//         res.json({ success: true });
+//     } catch (err) {
+//         res.status(500).json({ error: 'Error logging in' });
+//     }
+// });
+// router.get('/login/check', async (req, res) => {
+//     const authToken = req.cookies.authToken;
+//     if(authToken===null || authToken===undefined){
+//         res.json({ loggedIn: false });
+//         return;
+//     }
+//     const decoded = service.decodeJWT(authToken);
+//     if(decoded===null || decoded.id===undefined){
+//         res.json({ loggedIn: false });
+//         return;
+//     }
+//     try {
+//         const linked = await service.checkUserLinked(decoded.id);
+//         res.json({ loggedIn: true, linked: linked });
+//         return;
+//     } catch (err) {
+//         res.json({ loggedIn: true, linked: false });
+//         return;
+//     }
+// });
+// router.get('/login/findIracingUser/:search', async (req, res) => {
+//     const search = req.params.search;
+//     try {
+//         const user = await service.lookupDriver(search);
+//         res.json({ name: user.display_name, id: user.cust_id });
+//     } catch (err) {
+//         res.status(500).json({ error: `Error finding driver: ${err}` });
+//     }
+// });
 
-router.post('/login/link', async (req, res) => {
-    const { accountName, promotionalEmails } = req.body;
-    const authToken = req.cookies.authToken;
-    if(authToken===null || authToken===undefined){
-        res.json({ loggedIn: false });
-        return;
-    }
-    const decoded = service.decodeJWT(authToken);
-    if(decoded===null || decoded.id===undefined){
-        res.json({ loggedIn: false });
-        return;
-    }
-    try {
-        await service.linkUser(decoded.id, accountName, promotionalEmails);
-        res.json({ success: true });
-    } catch (err) {
-        res.status(500).json({ error: 'Error linking user' });
-    }
-});
-router.get('/user/current', async (req, res) => {
-    const authToken = req.cookies.authToken;
-    if(authToken===null || authToken===undefined){
-        res.json({ loggedIn: false });
-        return;
-    }
-    const decoded = service.decodeJWT(authToken);
-    if(decoded===null || decoded.id===undefined){
-        res.json({ loggedIn: false });
-        return;
-    }
-    try {
-        const user = await service.getCurrentUser(decoded.id);
-        res.json({ user: user });
-        return;
-    } catch (err) {
-        return;
-    }
-});
+// router.post('/login/link', async (req, res) => {
+//     const { accountName, promotionalEmails } = req.body;
+//     const authToken = req.cookies.authToken;
+//     if(authToken===null || authToken===undefined){
+//         res.json({ loggedIn: false });
+//         return;
+//     }
+//     const decoded = service.decodeJWT(authToken);
+//     if(decoded===null || decoded.id===undefined){
+//         res.json({ loggedIn: false });
+//         return;
+//     }
+//     try {
+//         await service.linkUser(decoded.id, accountName, promotionalEmails);
+//         res.json({ success: true });
+//     } catch (err) {
+//         res.status(500).json({ error: 'Error linking user' });
+//     }
+// });
+// router.get('/user/current', async (req, res) => {
+//     const authToken = req.cookies.authToken;
+//     if(authToken===null || authToken===undefined){
+//         res.json({ loggedIn: false });
+//         return;
+//     }
+//     const decoded = service.decodeJWT(authToken);
+//     if(decoded===null || decoded.id===undefined){
+//         res.json({ loggedIn: false });
+//         return;
+//     }
+//     try {
+//         const user = await service.getCurrentUser(decoded.id);
+//         res.json({ user: user });
+//         return;
+//     } catch (err) {
+//         return;
+//     }
+// });
 //#endregion
 //#region RACES
 router.get('/race/next', async (_, res) => {
@@ -191,35 +191,40 @@ router.get('/races/finished/:numberOfResults/afterId/:id', async (req, res) => {
 });
 //#endregion
 // Get the total amount of prize money won by users
-router.get('/stats/total-prize-amount', (_, res) => {
-    res.json({totalPrizeAmount: service.getTotalPrizeAmount()})
+router.get('/stats/total-prize-amount', async (_, res) => {
+    try {
+        const totalPrizeAmount = await service.getTotalPrizeAmount();
+            res.json({totalPrizeAmount: totalPrizeAmount})
+    } catch (err) {
+        res.status(500).json({ error: 'Error fetching next race' });
+    }
 });
 // Gets user by id
-router.get('/user/:ID', (_, res) => {
-    const id = 'ID';
-    res.json({user: service.getUserById(id)});
-});
+// router.get('/user/:ID', (_, res) => {
+//     const id = 'ID';
+//     res.json({user: service.getUserById(id)});
+// });
 // Gets transacations for a user
-router.get('/user/:ID/transactions', (_, res) => {
-    const id = 'ID';
-    res.json({transactions: service.getTransactions(id)})
-});
-// Gets notifications for a user
-router.get('/user/:ID/notifications', (_, res) => {
-    const id = 'ID';
-    res.json({notifcations: service.getNotifications(id)})
-});
-// Gets the racerpoints leaderboard
-router.get('/racerpoints', (_, res) => {
-    res.json({racerPointStandings: service.getAllRacerPoints()})
-});
-// Gets the current events
-router.get('/events/current', (_, res) => {
-    res.json({events: service.getCurrentEvents()});
-});
-// Gets upcoming events
-router.get('/events/upcoming', (_,res) => {
-    res.json({events: service.getUpcomingEvents()});
-});
+// router.get('/user/:ID/transactions', (_, res) => {
+//     const id = 'ID';
+//     res.json({transactions: service.getTransactions(id)})
+// });
+// // Gets notifications for a user
+// router.get('/user/:ID/notifications', (_, res) => {
+//     const id = 'ID';
+//     res.json({notifcations: service.getNotifications(id)})
+// });
+// // Gets the racerpoints leaderboard
+// router.get('/racerpoints', (_, res) => {
+//     res.json({racerPointStandings: service.getAllRacerPoints()})
+// });
+// // Gets the current events
+// router.get('/events/current', (_, res) => {
+//     res.json({events: service.getCurrentEvents()});
+// });
+// // Gets upcoming events
+// router.get('/events/upcoming', (_,res) => {
+//     res.json({events: service.getUpcomingEvents()});
+// });
 
 export default router;

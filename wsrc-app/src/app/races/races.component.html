@@ -1,5 +1,14 @@
 
 <div class="flex-grow bg-cDarkBlue pt-20 sm:pt-24 md:pt-32 lg:pt-40 text-cWhite font-roboto">
+  <div class="p-6 w-full ">
+    <!-- Header and Sub-header -->
+    <div class="flex justify-between items-center mb-6 mt-4 mx-0 lg:mx-52">
+        <div>
+            <h1 class=" text-5xl mb-2 font-roboto-condensed tracking-tighter font-bold ">Upcoming WSRC Races</h1>
+            <h2 class="text-cWhite text-lg md:text-2xl mb-4 font-roboto-condensed tracking-tighterl">All upcoming races can be found here.</h2>
+        </div>
+    
+    </div>
   <div class="flex flex-wrap justify-center">
     <div *ngFor="let race of races" class="p-4" style="width: 400px;"  [routerLink]="['/race', race.race_id]">
       <div class="relative group cursor-pointer">
@@ -53,7 +62,7 @@
                   <mat-icon class="text-[#848CB4] mr-2">group</mat-icon>
                   <span class="font-bold">Racers:</span>
                 </div>
-                <span class="ml-2 font-medium">?/20</span>
+                <span class="ml-2 font-medium">{{race.participants}}/20</span>
               </div>
 
               
@@ -62,7 +71,7 @@
                   <mat-icon class="text-[#848CB4] mr-2">sell</mat-icon>
                   <span class="font-bold">Entry:</span>
                 </div>
-                <span class="ml-2 font-medium">${{race.entry_fee}}</span>
+                <span class="ml-2 font-medium">{{race.entry_fee==0 ? 'Free' : '$'+race.entry_fee}}</span>
               </div>
             </div>
           </div>
@@ -70,7 +79,7 @@
           <!-- Entry Fee Section -->
           <div class="p-1 flex-auto bg-[#C3903B] text-white text-center font-bold rounded-b-lg flex items-center justify-center">
             <mat-icon class="mr-2">emoji_events</mat-icon>
-            $?
+            ${{race.prize_pool}}
           </div>
         </div>
       </div>

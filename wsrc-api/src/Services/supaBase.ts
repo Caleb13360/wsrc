@@ -1,7 +1,8 @@
 import { Race } from '@models/race.js';
-import type { User } from '@models/user.d.ts';
+// import type { User } from '@models/user.d.ts';
 import { SUPABASE_KEY, SUPABASE_URL } from '../config.js';
 import { createClient } from '@supabase/supabase-js'
+import axios from 'axios';
 
 export class Supabase {
     sb;
@@ -10,69 +11,79 @@ export class Supabase {
         this.sb = createClient(SUPABASE_URL, SUPABASE_KEY);
     }
 
-    generateUserFromData(data: any): User {
-        const user: User = {
-            id: data.id,
-            iracing_id: data.iracing_id,
-            iracing_username: data.iracing_username,
-            email: data.email,
-            country: data.country,
-            last_competed: new Date(),
-            joined_date: data.joined
-        };
-        return user;
-    }
+    // generateUserFromData(data: any): User {
+    //     const user: User = {
+    //         id: data.id,
+    //         iracing_id: data.iracing_id,
+    //         iracing_username: data.iracing_username,
+    //         email: data.email,
+    //         country: data.country,
+    //         last_competed: new Date(),
+    //         joined_date: data.joined
+    //     };
+    //     return user;
+    // }
 
-    async createUser(googleId: string, email: string): Promise<void> {
-        const existingUser = await this.userExists(googleId);
-        if (!existingUser) {
-            const { error } = await this.sb
-                .from('User')
-                .insert([{ google_id: googleId, email }]);
+    // async createUser(googleId: string, email: string): Promise<void> {
+    //     const existingUser = await this.userExists(googleId);
+    //     if (!existingUser) {
+    //         const { error } = await this.sb
+    //             .from('User')
+    //             .insert([{ google_id: googleId, email }]);
 
-            if (error) {
-                throw error;
-            }
+    //         if (error) {
+    //             throw error;
+    //         }
+    //     }
+    //     return;
+    // }
+
+    // async linkUser(googleId:string, iracingId: number, name: string, country: string, promotionalEmails: boolean): Promise<void> {
+    //     const { error } = await this.sb
+    //         .from('User')
+    //         .update({ iracing_id: iracingId, iracing_username: name, country: country, email_promotions: promotionalEmails })
+    //         .eq('google_id', googleId);
+    //     if (error) {
+    //         throw error;
+    //     }
+    // }
+
+    // async getUserById(googleId: string): Promise<User> {
+    //     const { data: user, error: selectError } = await this.sb
+    //         .from('User')
+    //         .select('*')
+    //         .eq('google_id', googleId)
+    //         .single();
+
+    //     if (selectError && selectError.code !== 'PGRST116') {
+    //         throw selectError;
+    //     }
+    //     return this.generateUserFromData(user);
+    // }
+
+    // async userExists(googleId: string): Promise<boolean> {
+    //     const { data: existingUser, error: selectError } = await this.sb
+    //         .from('User')
+    //         .select('*')
+    //         .eq('google_id', googleId)
+    //         .single();
+
+    //     if (selectError && selectError.code !== 'PGRST116') {
+    //         throw selectError;
+    //     }
+    //     return !!existingUser;
+    // }
+    async getMatcherinoRaceData(matcherinoId: string): Promise<any> {
+        try {
+          const response = await axios.get(`https://api.matcherino.com/__api/bounties/findById?id=${matcherinoId}`);
+          return response.data;
+        } catch (error) {
+          console.error('Error fetching Matcherino race data:', error);
+          throw error;
         }
-        return;
-    }
-
-    async linkUser(googleId:string, iracingId: number, name: string, country: string, promotionalEmails: boolean): Promise<void> {
-        const { error } = await this.sb
-            .from('User')
-            .update({ iracing_id: iracingId, iracing_username: name, country: country, email_promotions: promotionalEmails })
-            .eq('google_id', googleId);
-        if (error) {
-            throw error;
-        }
-    }
-
-    async getUserById(googleId: string): Promise<User> {
-        const { data: user, error: selectError } = await this.sb
-            .from('User')
-            .select('*')
-            .eq('google_id', googleId)
-            .single();
-
-        if (selectError && selectError.code !== 'PGRST116') {
-            throw selectError;
-        }
-        return this.generateUserFromData(user);
-    }
-
-    async userExists(googleId: string): Promise<boolean> {
-        const { data: existingUser, error: selectError } = await this.sb
-            .from('User')
-            .select('*')
-            .eq('google_id', googleId)
-            .single();
-
-        if (selectError && selectError.code !== 'PGRST116') {
-            throw selectError;
-        }
-        return !!existingUser;
-    }
-    generateRaceFromData(data: any){
+      } 
+    async generateRaceFromData(data: any){
+        const matcherinoData = await this.getMatcherinoRaceData(data.matcherino_id);
         const race: Race = {
             race_id: data.race_id,
             race_name: data.race_name,
@@ -85,6 +96,8 @@ export class Supabase {
             entry_fee: data.entry_fee,
             matcherino_id: data.matcherino_id,
             matcherino_image_id: data.matcherino_image_id,
+            participants: matcherinoData['body']['playerPoolSize'],
+            prize_pool: matcherinoData['body']['balance']/100,
             
             //race details
             race_details_id: data.race_details_id,
@@ -111,17 +124,12 @@ export class Supabase {
             track_id: data.track_id, 
             track_name: data._Track.track_name,
             track_config: data._Track.track_config,
-
-            //prize pool
-            prize_pool_id: data.prize_pool_id,
-            cash_split: data.PrizePool.cash_split,
-            racer_points: data.PrizePool.racer_points
         };
         return race;
     }
-    generateRacesFromData(data: any){
+    async generateRacesFromData(data: any): Promise<Race[]> {
         if (data.data) {
-            const races: Race[] = data.data.map(this.generateRaceFromData);
+            const races: Race[] = await Promise.all(data.data.map(async (item: any) => await this.generateRaceFromData(item)));
             return races;
         }
         return [];
@@ -130,7 +138,7 @@ export class Supabase {
         const raceData = await this.sb
         .from('Races')
         .select(`race_id, launch_time`)
-        .gt('launch_time', new Date(Date.now() - 24 * 60 * 60 * 1000 *20).toISOString())
+        .gt('launch_time', new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString())
         .lt('launch_time', new Date().toISOString())
         const raceIds = raceData.data ? raceData.data.map(item => item.race_id) : []
         const { data, error } = await this.sb
@@ -149,8 +157,7 @@ export class Supabase {
             *,
             RaceWeather(*),
             RaceDetails(*),
-            _Track(*),
-            PrizePool(*)
+            _Track(*)
         `)
         .lt('launch_time',  startAfter.toISOString())
         .order('launch_time', { ascending: false })
@@ -164,8 +171,7 @@ export class Supabase {
             *,
             RaceWeather(*),
             RaceDetails(*),
-            _Track(*),
-            PrizePool(*)
+            _Track(*)
         `)
         // .lt('launch_time',  startAfter.toISOString())
         .order('launch_time', { ascending: false })
@@ -179,8 +185,7 @@ export class Supabase {
             *,
             RaceWeather(*),
             RaceDetails(*),
-            _Track(*),
-            PrizePool(*)
+            _Track(*)
         `)
         .gt('launch_time',  startAfter.toISOString())
         .order('launch_time', { ascending: true })
@@ -194,8 +199,7 @@ export class Supabase {
             *,
             RaceWeather(*),
             RaceDetails(*),
-            _Track(*),
-            PrizePool(*)
+            _Track(*)
         `)
         // .gt('launch_time',  startAfter.toISOString())
         .order('launch_time', { ascending: true })
@@ -210,13 +214,12 @@ export class Supabase {
                 *,
                 RaceWeather(*),
                 RaceDetails(*),
-                _Track(*),
-                PrizePool(*)
+                _Track(*)
             `)
             .eq('race_id', id)
             .single();
     
-        return this.generateRaceFromData(data.data);
+        return await this.generateRaceFromData(data.data);
     }
 
     async getRaceResutls(id: number): Promise<any>{
@@ -224,8 +227,7 @@ export class Supabase {
             .from('RaceResult')
             .select(`
                 *,
-                User(country, iracing_username),
-                Races(prize_pool_id, entry_fee, PrizePool(cash_split))
+                Races(entry_fee)
             `)
             .eq('race_id', id)
             .order('position', { ascending: true });
@@ -251,11 +253,18 @@ export class Supabase {
             return;
     }
 
-    // async getTotalPrizeAmount(): Promise<Number | null>{
-    //     const data = await this.sb
-    //     .from('Transactions')
-    //     // sum all transacations of type prize money
-    // }
+    async getTotalPrizeAmount(): Promise<Number>{
+        const { data, error } = await this.sb
+        .from('RaceResult')
+        .select('sum:prize.sum()');
+
+    if (error) {
+        console.error('Error fetching total prize amount:', error);
+        return 0;
+    }
+    console.log(data);
+    return data[0]?.sum || 0;
+    }
 
     // async getTransactions
 

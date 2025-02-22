@@ -86,7 +86,7 @@
                   <mat-icon class="text-[#848CB4] mr-2">group</mat-icon>
                   <span class="font-bold">Racers:</span>
                 </div>
-                <span class="ml-2 font-medium">?/20</span>
+                <span class="ml-2 font-medium">{{race.participants}}/20</span>
               </div>
 
                <div class="flex justify-between">
@@ -94,7 +94,7 @@
                   <mat-icon class="text-[#848CB4] mr-2">sell</mat-icon>
                   <span class="font-bold">Entry:</span>
                 </div>
-                <span class="ml-2 font-medium">${{race.entry_fee}}</span>
+                <span class="ml-2 font-medium">{{race.entry_fee==0 ? 'Free' : '$'+race.entry_fee}}</span>
               </div>
             </div>
             
@@ -103,7 +103,7 @@
           <!-- Entry Fee Section -->
           <div class="p-1 flex-auto bg-[#C3903B] text-white text-center font-bold rounded-b-lg flex items-center justify-center">
             <mat-icon class="mr-2">emoji_events</mat-icon>
-            $?
+            ${{race.prize_pool}}
           </div>
         </div>
       </div>

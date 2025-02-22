@@ -175,7 +175,7 @@ export async function checkRaceResults(){
                 const raceData = await iRacingService.getSessionResults(result.subsession_id);
                 const sessionData = raceData.session_results.find((session: any) => session.simsession_type === 6);
                 for (const result of sessionData.results){
-                    db.addRaceResult(result.cust_id, race.race_id, result.interval, result.finish_position + 1, result.incidents, result.average_lap, result.best_lap_time);
+                    db.addRaceResult(result.display_name, race.race_id, result.interval, result.finish_position + 1, result.incidents, result.average_lap, result.best_lap_time);
                 }
                 break;
             }

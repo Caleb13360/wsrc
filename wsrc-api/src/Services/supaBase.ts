@@ -2,6 +2,7 @@ import { Race } from '@models/race.js';
 // import type { User } from '@models/user.d.ts';
 import { SUPABASE_KEY, SUPABASE_URL } from '../config.js';
 import { createClient } from '@supabase/supabase-js'
+import axios from 'axios';
 
 export class Supabase {
     sb;
@@ -72,7 +73,17 @@ export class Supabase {
     //     }
     //     return !!existingUser;
     // }
-    generateRaceFromData(data: any){
+    async getMatcherinoRaceData(matcherinoId: string): Promise<any> {
+        try {
+          const response = await axios.get(`https://api.matcherino.com/__api/bounties/findById?id=${matcherinoId}`);
+          return response.data;
+        } catch (error) {
+          console.error('Error fetching Matcherino race data:', error);
+          throw error;
+        }
+      } 
+    async generateRaceFromData(data: any){
+        const matcherinoData = await this.getMatcherinoRaceData(data.matcherino_id);
         const race: Race = {
             race_id: data.race_id,
             race_name: data.race_name,
@@ -85,6 +96,8 @@ export class Supabase {
             entry_fee: data.entry_fee,
             matcherino_id: data.matcherino_id,
             matcherino_image_id: data.matcherino_image_id,
+            participants: matcherinoData['body']['playerPoolSize'],
+            prize_pool: matcherinoData['body']['balance']/100,
             
             //race details
             race_details_id: data.race_details_id,
@@ -114,9 +127,9 @@ export class Supabase {
         };
         return race;
     }
-    generateRacesFromData(data: any){
+    async generateRacesFromData(data: any): Promise<Race[]> {
         if (data.data) {
-            const races: Race[] = data.data.map(this.generateRaceFromData);
+            const races: Race[] = await Promise.all(data.data.map(async (item: any) => await this.generateRaceFromData(item)));
             return races;
         }
         return [];
@@ -125,7 +138,7 @@ export class Supabase {
         const raceData = await this.sb
         .from('Races')
         .select(`race_id, launch_time`)
-        .gt('launch_time', new Date(Date.now() - 24 * 60 * 60 * 1000 *20).toISOString())
+        .gt('launch_time', new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString())
         .lt('launch_time', new Date().toISOString())
         const raceIds = raceData.data ? raceData.data.map(item => item.race_id) : []
         const { data, error } = await this.sb
@@ -206,7 +219,7 @@ export class Supabase {
             .eq('race_id', id)
             .single();
     
-        return this.generateRaceFromData(data.data);
+        return await this.generateRaceFromData(data.data);
     }
 
     async getRaceResutls(id: number): Promise<any>{

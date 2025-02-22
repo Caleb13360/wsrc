@@ -1,6 +1,6 @@
-<div class="flex-grow bg-cDarkBlue pt-14"></div>
+<div class="flex-grow bg-cDarkBlue lg:pt-14"></div>
   <!-- Stream -->
-<div class="lg:pt-30 sm:pt-0 bg-cDarkBlue flex items-center justify-center min-h-screen">
+<div class="pt-0 lg:pt-30 bg-cDarkBlue flex items-center justify-center min-h-screen">
   <div class="w-9/12 aspect-[16/9] bg-cover bg-center rounded-lg pt"
     style="background-image: url('NotStreamingImageLT.jpg');">
     <iframe *ngIf="isLive" src="https://player.twitch.tv/?channel=wsrc_official&parent=localhost" 
@@ -13,7 +13,12 @@
           We aren't streaming right now.
         </p>
         <p class="text-cWhite font-roboto-condensed tracking-tighter text-md lg:text-3xl">
-          Click here to check out our Twitch channel <br> and follow us.
+          Follow our <a href="https://www.twitch.tv/wsrc_official" target="_blank" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Twitch channel</a> to get notified when we go live.
+          <br>
+          <br>
+          Check out the <a [routerLink]="['/race/', race.race_id]" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+            Next Race
+          </a>in {{countdown.days}}d {{countdown.hours}}h {{countdown.minutes}}m {{countdown.seconds}}s
         </p>
       </div>
     </div>

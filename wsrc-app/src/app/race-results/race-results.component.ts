@@ -16,6 +16,6 @@ export class RaceResultsComponent implements OnInit{
   constructor( private apiService: ApiService) {}
   races!: Race[];
   ngOnInit(): void {
-    this.apiService.getFinishedRaces(3).subscribe((data)=> {this.races=data.races;});
+    this.apiService.getFinishedRaces(20).subscribe((data)=> {this.races=data.races;});
   }
 }

@@ -169,6 +169,7 @@ export async function checkRaceResults(){
         const raceTime = new Date(race.launch_time);
         for (const result of raceResults){
             const resultTime = new Date(result.start_time);
+            resultTime.setTime(resultTime.getTime() + 15 * 60 * 1000);
             const timeDifference = Math.abs(raceTime.getTime() - resultTime.getTime());
             const tenMinutesInMilliseconds = 10 * 60 * 1000;
             if (timeDifference <= tenMinutesInMilliseconds){

@@ -2,6 +2,7 @@ import type { Race } from '@models/race.d.ts';
 // import type { User } from '@models/user.d.ts';
 import { IRacingService} from './iracing.js';
 import { Supabase } from './supaBase.js';
+import { RaceResult } from '@models/raceResults.js';
 // import { Auth } from './auth.js';
 const iRacingService: IRacingService = new IRacingService();
 // const auth: Auth = new Auth();
@@ -108,7 +109,7 @@ export class Service{
         return result as Race;
     }
 
-    async getRaceResults(id: number): Promise<any> {
+    async getRaceResults(id: number): Promise<RaceResult[]> {
         const results = await db.getRaceResutls(id);
         return results;
     }

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from '../environments/environment';
 // import type {User} from '../../../models/user.d.ts';
 import type {Race} from '../../../models/race.d.ts';
+import type {RaceResult} from '../../../models/raceResults.d.ts';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -40,7 +41,7 @@ export class ApiService {
   }
 
   getRaceResults(id: string){
-    return this.httpClient.get<{results: any}>(`${this.apiUrl}/race/${id}/results`)
+    return this.httpClient.get<{results: RaceResult[]}>(`${this.apiUrl}/race/${id}/results`)
   }
 
   getLatestRaces(numberOfResults: number) {

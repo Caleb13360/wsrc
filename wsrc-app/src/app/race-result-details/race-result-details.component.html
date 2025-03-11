@@ -1,0 +1,36 @@
+<div class="flex-grow bg-cDarkBlue pt-20 sm:pt-24 md:pt-32 lg:pt-36 text-cWhite font-roboto tracking-tighter">
+    <div class="max-w-full bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="bg-gray-800 text-white px-4 py-3">
+        <h3 class="text-xl font-semibold">Race Results</h3>
+        </div>
+        
+        <div class="overflow-x-auto">
+        <table class="w-full border-collapse">
+            <thead>
+            <tr class="bg-gray-800 text-white">
+                <th class="px-4 py-3 text-left">Pos</th>
+                <th class="px-4 py-3 text-left">Driver</th>
+                <th class="px-4 py-3 text-left">Avg Lap</th>
+                <th class="px-4 py-3 text-left">Fast Lap</th>
+                <th class="px-4 py-3 text-left">Inc</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let result of results" class=" text-black">
+                <td class="px-4 py-3 border-b border-gray-200">
+                {{result.pos}}
+                </td>
+                <td class="px-4 py-3 border-b border-gray-200">{{result.iracing_id}}</td>
+                <td class="px-4 py-3 border-b border-gray-200">{{result.avg_lap_time}}</td>
+                <td class="px-4 py-3 border-b border-gray-200">{{result.best_lap_time}}</td>
+                <td class="px-4 py-3 border-b border-gray-200">{{result.incident_count}}</td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+        
+        <div *ngIf="results?.length === 0" class="p-8 text-center text-gray-500">
+        No race results available.
+        </div>
+    </div>
+<div>

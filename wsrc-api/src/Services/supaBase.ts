@@ -1,4 +1,5 @@
 import { Race } from '@models/race.js';
+import { RaceResult } from '@models/raceResults.js';
 // import type { User } from '@models/user.d.ts';
 import { SUPABASE_KEY, SUPABASE_URL } from '../config.js';
 import { createClient } from '@supabase/supabase-js'
@@ -144,6 +145,26 @@ export class Supabase {
         }
         return [];
     }
+    async generateRaceResultFromData(data: any){
+        const raceResult: RaceResult = {
+            id: data.id,
+            iracing_id: data.iracing_id,
+            pos: data.position,
+            interval: data.interval,
+            avg_lap_time: data.average_lap_time,
+            best_lap_time: data.fastest_lap_time,
+            incident_count: data.incidents,
+            race_id: data.race_id
+        };
+            return raceResult;
+    }
+    async generateRaceResultsFromData(data: any): Promise<RaceResult[]> {
+        if (data) {
+            const races: RaceResult[] = await Promise.all(data.map(async (item: any) => await this.generateRaceResultFromData(item)));
+            return races;
+        }
+        return [];
+    }
     async getUnfetchedRaces() {
         const raceData = await this.sb
         .from('Races')
@@ -237,16 +258,15 @@ export class Supabase {
         return await this.generateRaceFromData(data.data);
     }
 
-    async getRaceResutls(id: number): Promise<any>{
+    async getRaceResutls(id: number): Promise<RaceResult[]>{
         const data = await this.sb
             .from('RaceResult')
             .select(`
-                *,
-                Races(entry_fee)
+                *
             `)
             .eq('race_id', id)
             .order('position', { ascending: true });
-        return data.data;
+        return await this.generateRaceResultsFromData(data.data);
     }
 
     async addRaceResult(userId: string, raceId: string, interval: number, position: number, incidents: number, avgLapTime: number, FastestLapTime: number){

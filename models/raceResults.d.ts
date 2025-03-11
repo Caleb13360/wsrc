@@ -1,4 +1,4 @@
-export interface User_Race_Result {
+export interface RaceResult {
     id: number;
     pos: number;
     interval:number;

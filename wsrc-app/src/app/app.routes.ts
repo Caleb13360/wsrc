@@ -10,7 +10,6 @@ import { WalletComponent } from './wallet/wallet.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { WithdrawComponent } from './withdraw/withdraw.component';
-import { ResultDetailsComponent } from './result-details/result-details.component';
 import { LoginComponent } from './login/login.component';
 import { EventsComponent } from './events_pages/events/events.component';
 import { BigBlindComponent } from './events_pages/big-blind/big-blind.component';
@@ -21,6 +20,7 @@ import { ApiService } from '../services/api';
 import { AccountCreationComponent } from './account-creation/account-creation.component';
 import { RaceExtendedDetailsComponent } from './race-extended-details/race-extended-details.component';
 import { LiveComponent } from './live/live.component';
+import { RaceResultDetailsComponent } from './race-result-details/race-result-details.component';
 
 // const authGuard: CanActivateFn = async (route, state: RouterStateSnapshot) => {
 //     const apiService = inject(ApiService);
@@ -136,7 +136,7 @@ export const routes: Routes = [
     // },
     {
         path: 'result/:id',
-        component: ResultDetailsComponent,
+        component: RaceResultDetailsComponent,
         title: 'Result Details'
     },
     // { 

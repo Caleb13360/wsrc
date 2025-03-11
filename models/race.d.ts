@@ -9,10 +9,12 @@ export interface Race {
     launch_time: Date;
     server_location: string;
     entry_fee: number;
+    entry_cut: number;
     participants: number;
     prize_pool: number;
     matcherino_id: number;
     matcherino_image_id: string;
+    prize_pool_pot: number;
     
     //race details
     race_details_id: number;
@@ -39,6 +41,12 @@ export interface Race {
     track_id: number;
     track_name: string;
     track_config: string;
+
+    //wsrc detials
+    race_series_id: number;
+    race_series_name: string;
+    race_irating_min: number;
+    race_irating_max: number;
 
     // //prize pool
     // prize_pool_id: number;

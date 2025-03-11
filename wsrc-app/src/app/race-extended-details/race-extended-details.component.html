@@ -76,5 +76,15 @@
             </div>
         </div>
     </div>
+    <div>
+        <span>Entry Fee: {{ race ? (race.entry_fee) : '? ' }}</span><br>
+        <span>Entry Cut: {{ race ? (race.entry_cut) : '? ' }}</span><br>
+        <span>Pot: {{ race ? (race.prize_pool_pot) : '? ' }}</span><br>
+        <span>Final Prize Pool: {{ race ? (race.prize_pool) : '? ' }}</span><br>
+        <span>Result: {{ race ? ((race.participants*race.entry_cut)-race.prize_pool_pot | number:'1.2-2')  : '? ' }}</span><br>
+        <span>Series: {{ race ? (race.race_series_name) : '? ' }}</span><br>
+        <span>Minimum iRating: {{ race ? (race.race_irating_min) : '? ' }}</span><br>
+        <span>Maximum iRating: {{ race ? (race.race_irating_max) : '? ' }}</span><br>
+    </div>
 </div>
 

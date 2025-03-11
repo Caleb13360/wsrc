@@ -36,14 +36,24 @@
       </div>
 
       <!-- Links (hidden on small screens, shown on larger screens) -->
-    <div [ngClass]="{ 'hidden': !menuVisible, 'flex': menuVisible }"
+    <div *ngIf="!menuVisible" [ngClass]="{ 'hidden': !menuVisible, 'flex': menuVisible }"
        class="absolute z-50 top-20 left-0 w-full bg-cBlack flex-col space-y-4 p-4 md:static md:flex md:space-y-0 md:space-x-7 md:p-0 md:flex-row md:items-center justify-center items-center hidden font-roboto-condensed">
-      <a routerLink="/" (click)="toggleMenu()" class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">Home</a>
-      <a routerLink="/races" (click)="toggleMenu()" class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">Races</a>
-      <!-- <a routerLink="/events" (click)="toggleMenu()" class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">Events</a> -->
-      <a routerLink="/results" (click)="toggleMenu()" class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">Results</a>
-      <a routerLink="/about" (click)="toggleMenu()" class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">About</a>
-      <a *ngIf="menuVisible" href="https://discord.gg/FTgXdAtae8" target="_blank" (click)="toggleMenu()"  class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">Join Discord</a>
+      <a routerLink="/" class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">Home</a>
+      <a routerLink="/races" class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">Races</a>
+      <!-- <a routerLink="/events" class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">Events</a> -->
+      <a routerLink="/results" class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">Results</a>
+      <a routerLink="/about" class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">About</a>
+      
+    </div>
+    <!-- Dropdown Menu for Mobile -->
+    <div *ngIf="menuVisible" [ngClass]="{ 'hidden': !menuVisible, 'flex': menuVisible }"
+       class="absolute z-50 top-20 left-0 w-full bg-cBlack flex-col space-y-4 p-4 md:static md:flex md:space-y-0 md:space-x-7 md:p-0 md:flex-row md:items-center justify-center items-center hidden font-roboto-condensed">
+      <a routerLink="/" (click)="pressToggleMenu()" class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">Home</a>
+      <a routerLink="/races" (click)="pressToggleMenu()"  class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">Races</a>
+      <!-- <a routerLink="/events" (click)="pressToggleMenu()"  class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">Events</a> -->
+      <a routerLink="/results" (click)="pressToggleMenu()"  class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">Results</a>
+      <a routerLink="/about" (click)="pressToggleMenu()"  class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">About</a>
+      <a (click)="pressToggleMenu()"  href="https://discord.gg/FTgXdAtae8" target="_blank" class="text-cDarkGrey  text-xl hover:text-cWhite  transition-all duration-300 ease-linear hover:font-bold">Join Discord</a>
     </div>
       <!-- User Icons
       <div class="flex items-center space-x-4 lg:pr-32 pr-0 md:order-none order-3">
@@ -91,20 +101,6 @@
     </div>
   </a> 
 </div>
-
-    <!-- Dropdown Menu for Mobile -->
-    <div *ngIf="menuVisible" class="md:hidden bg-cBlack flex flex-col space-y-2 p-4">
-      <a routerLink="/"
-        class="text-cDarkGrey text-xl font-roboto-condensed hover:text-cWhite transition-all duration-200 ease-linear hover:font-bold">Home</a>
-      <a routerLink="/races"
-        class="text-cDarkGrey text-xl font-roboto-condensed hover:text-cWhite transition-all duration-200 ease-linear hover:font-bold">Races</a>
-      <!-- <a routerLink="/events"
-        class="text-cDarkGrey text-xl font-roboto-condensed hover:text-cWhite transition-all duration-200 ease-linear hover:font-bold">Events</a> -->
-      <a routerLink="/results"
-        class="text-cDarkGrey text-xl font-roboto-condensed hover:text-cWhite transition-all duration-200 ease-linear hover:font-bold">Results</a>
-      <a routerLink="/about"
-        class="text-cDarkGrey text-xl font-roboto-condensed hover:text-cWhite transition-all duration-200 ease-linear hover:font-bold">About</a>
-    </div>
   </div>
 
   <!-- Page Content -->

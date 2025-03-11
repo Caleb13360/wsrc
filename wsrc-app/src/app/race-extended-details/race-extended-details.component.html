@@ -1,4 +1,3 @@
-
 <div class="flex-grow bg-[#030716] pb-20 pt-20 sm:pt-24 md:pt-32 lg:pt-36 text-cWhite font-roboto tracking">
     <!-- Race Details -->
     <div class="flex flex-col lg:flex-row justify-between px-4 lg:px-8 xl:mx-52">
@@ -7,7 +6,7 @@
             <div class="mb-4 border-2 rounded-md border-[#1B213A] bg-[#030716] flex justify-center">
                 <div class="flex items-center m-2 text-white">
                     <mat-icon>flag</mat-icon>
-                    <h2 class="text-xl md:text-2xl font-bold ml-1">{{ race ? (race.track_name) : '' }} - {{ race ? (race.track_config) : '' }}</h2>
+                    <h2 class="text-xl md:text-2xl font-bold ml-1">{{ race ? (race.track_name) : '' }}{{ race ? (race.track_config==''?'': ' - ' + race.track_config) : '' }}</h2>
                 </div>
             </div>
 
@@ -39,7 +38,7 @@
                 </div> -->
                 <div class="flex items-center space-x-2">
                     <mat-icon>flag</mat-icon>
-                    <span>{{ race ? (race.track_name) : '???' }}- {{ race ? (race.track_config) : '' }}</span>
+                    <span>{{ race ? (race.track_name) : '???' }}</span>
                 </div>
                 <div class="flex items-center space-x-2">
                     <mat-icon>directions_car</mat-icon>
@@ -59,10 +58,12 @@
             </div>
             <!-- Second Column: Weather Descriptors -->
             <div class="flex flex-col items-start p-5 justify-center text-white">
+                
                             <span>Track Moisture</span>
                 <span>Humidity</span>
                 <span>Wind Speed</span>
                 <span>Wind Direction</span>
+                <span>In-Game Time</span>
             </div>
             <div class="flex flex-col items-start p-5 justify-center text-white font-bold">
                 
@@ -70,9 +71,10 @@
                 <span>{{ race ? (race.humidity) : '? ' }}%</span>
                 <span>{{ race ? (race.wind_speed) : '? ' }}kph</span>
                 <span>{{ race ? (race.wind_direction) : '? ' }}</span>
+                <span>{{ race ? (race.race_time_of_day) : '???' }}</span>
+            </div>
             </div>
         </div>
-    
-            </div>
     </div>
-    
+</div>
+

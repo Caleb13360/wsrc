@@ -93,11 +93,15 @@ export class Supabase {
             car: data.car,
             launch_time: data.launch_time,
             server_location: data.server_location, 
+
+            //financial
             entry_fee: data.entry_fee,
+            entry_cut: data.entry_cut,
             matcherino_id: data.matcherino_id,
             matcherino_image_id: data.matcherino_image_id,
             participants: matcherinoData['body']['playerPoolSize'],
             prize_pool: matcherinoData['body']['balance']/100,
+            prize_pool_pot: data.prize_pool_pot,
             
             //race details
             race_details_id: data.race_details_id,
@@ -124,6 +128,12 @@ export class Supabase {
             track_id: data.track_id, 
             track_name: data._Track.track_name,
             track_config: data._Track.track_config,
+
+            //series
+            race_series_id: data.series_id,
+            race_series_name: data.Series.name,
+            race_irating_min: data.Series.irating_min,
+            race_irating_max: data.Series.irating_max
         };
         return race;
     }
@@ -157,7 +167,8 @@ export class Supabase {
             *,
             RaceWeather(*),
             RaceDetails(*),
-            _Track(*)
+            _Track(*),
+            Series(*)
         `)
         .lt('launch_time',  startAfter.toISOString())
         .order('launch_time', { ascending: false })
@@ -171,7 +182,8 @@ export class Supabase {
             *,
             RaceWeather(*),
             RaceDetails(*),
-            _Track(*)
+            _Track(*),
+            Series(*)
         `)
         // .lt('launch_time',  startAfter.toISOString())
         .order('launch_time', { ascending: false })
@@ -185,7 +197,8 @@ export class Supabase {
             *,
             RaceWeather(*),
             RaceDetails(*),
-            _Track(*)
+            _Track(*),
+            Series(*)
         `)
         .gt('launch_time',  startAfter.toISOString())
         .order('launch_time', { ascending: true })
@@ -199,7 +212,8 @@ export class Supabase {
             *,
             RaceWeather(*),
             RaceDetails(*),
-            _Track(*)
+            _Track(*),
+            Series(*)
         `)
         // .gt('launch_time',  startAfter.toISOString())
         .order('launch_time', { ascending: true })
@@ -214,7 +228,8 @@ export class Supabase {
                 *,
                 RaceWeather(*),
                 RaceDetails(*),
-                _Track(*)
+                _Track(*),
+                Series(*)
             `)
             .eq('race_id', id)
             .single();

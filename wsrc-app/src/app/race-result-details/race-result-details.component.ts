@@ -48,4 +48,23 @@ export class RaceResultDetailsComponent implements OnInit{
     console.log(url);
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
+  convertToLapTime(time: number): string {
+    if(time <- 0){
+      return '-';
+    }
+    // Divide by 10 to get milliseconds
+  const ms = Math.floor(time / 10);
+  
+  // Calculate components
+  const minutes = Math.floor(ms / 60000);
+  const seconds = Math.floor((ms % 60000) / 1000);
+  const milliseconds = ms % 1000;
+  
+  // Format with padding
+  const formattedMinutes = minutes.toString();
+  const formattedSeconds = seconds.toString().padStart(2, '0');
+  const formattedMilliseconds = milliseconds.toString().padStart(3, '0');
+  
+  return `${formattedMinutes}:${formattedSeconds}:${formattedMilliseconds}`;
+}
 }

@@ -7,4 +7,5 @@ export interface RaceResult {
     incident_count: number;
     iracing_id: number;
     race_id: number;
+    prize_money: number;
 }

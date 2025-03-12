@@ -1,5 +1,6 @@
 import { Race } from '@models/race.js';
 import { RaceResult } from '@models/raceResults.js';
+import { Video } from '@models/video.js';
 // import type { User } from '@models/user.d.ts';
 import { SUPABASE_KEY, SUPABASE_URL } from '../config.js';
 import { createClient } from '@supabase/supabase-js'
@@ -154,7 +155,8 @@ export class Supabase {
             avg_lap_time: data.average_lap_time,
             best_lap_time: data.fastest_lap_time,
             incident_count: data.incidents,
-            race_id: data.race_id
+            race_id: data.race_id,
+            prize_money: data.prize
         };
             return raceResult;
     }
@@ -286,6 +288,32 @@ export class Supabase {
                 throw error; 
             }
             return;
+    }
+    generateVideoFromData(data: any): Video{
+        const video: Video = {
+            url: data.url,
+            race_id: data.race_id,
+            replay: data.isReplay,
+            short: data.isShort
+        }
+        return video;
+    }
+
+    generateVideosFromData(data: any): Video[]{
+        if (data) {
+            const videos: Video[] = data.map(async (item: any) => this.generateVideoFromData(item));
+            console.log(videos[0]);
+            return videos;
+        }
+        return [];
+    }
+
+    async getRaceVideos(id: number){
+        const {error, data} = await this.sb.from('Content').select(`
+                *
+            `).eq('race_id', id);
+        console.log(data);
+        return this.generateVideosFromData(data);
     }
 
     async getTotalPrizeAmount(): Promise<Number>{

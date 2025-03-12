@@ -1,36 +1,69 @@
 <div class="flex-grow bg-cDarkBlue pt-20 sm:pt-24 md:pt-32 lg:pt-36 text-cWhite font-roboto tracking-tighter">
-    <div class="max-w-full bg-white rounded-lg shadow-md overflow-hidden">
-        <div class="bg-gray-800 text-white px-4 py-3">
-        <h3 class="text-xl font-semibold">Race Results</h3>
+    <div class="max-w-full bg-white rounded shadow overflow-hidden">
+        <div class="bg-gray-800 text-white p-3">
+            <h3 class="text-lg font-semibold">Race Results</h3>
         </div>
-        
+
         <div class="overflow-x-auto">
-        <table class="w-full border-collapse">
-            <thead>
-            <tr class="bg-gray-800 text-white">
-                <th class="px-4 py-3 text-left">Pos</th>
-                <th class="px-4 py-3 text-left">Driver</th>
-                <th class="px-4 py-3 text-left">Avg Lap</th>
-                <th class="px-4 py-3 text-left">Fast Lap</th>
-                <th class="px-4 py-3 text-left">Inc</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let result of results" class=" text-black">
-                <td class="px-4 py-3 border-b border-gray-200">
-                {{result.pos}}
-                </td>
-                <td class="px-4 py-3 border-b border-gray-200">{{result.iracing_id}}</td>
-                <td class="px-4 py-3 border-b border-gray-200">{{result.avg_lap_time}}</td>
-                <td class="px-4 py-3 border-b border-gray-200">{{result.best_lap_time}}</td>
-                <td class="px-4 py-3 border-b border-gray-200">{{result.incident_count}}</td>
-            </tr>
-            </tbody>
-        </table>
+            <table class="w-full border-collapse">
+                <thead>
+                    <tr class="bg-gray-800">
+                        <th class="p-2 text-left">Pos</th>
+                        <th class="p-2 text-left">Driver</th>
+                        <th class="p-2 text-left">Avg Lap</th>
+                        <th class="p-2 text-left">Fast Lap</th>
+                        <th class="p-2 text-left">Inc</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-700">
+                    <tr *ngFor="let result of results">
+                        <td class="p-2 border-b">{{result.pos}}</td>
+                        <td class="p-2 border-b">{{result.iracing_id}}</td>
+                        <td class="p-2 border-b">{{result.avg_lap_time}}</td>
+                        <td class="p-2 border-b">{{result.best_lap_time}}</td>
+                        <td class="p-2 border-b">{{result.incident_count}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        
-        <div *ngIf="results?.length === 0" class="p-8 text-center text-gray-500">
-        No race results available.
+
+        <div *ngIf="results?.length === 0" class="p-4 text-center text-gray-500">
+            No race results available.
         </div>
     </div>
+    <div class="max-w-full bg-white rounded shadow overflow-hidden mt-8">
+        <div class="bg-gray-800 text-white p-3">
+            <h3 class="text-lg font-semibold">Racers with Prize Money</h3>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full border-collapse">
+                <thead>
+                    <tr class="bg-gray-800">
+                        <th class="p-2 text-left">Driver</th>
+                        <th class="p-2 text-left">Prize Money</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-700">
+                    <tr *ngFor="let result of winners">
+                        <td class="p-2 border-b">{{result.iracing_id}}</td>
+                        <td class="p-2 border-b">{{result.prize_money | currency}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="relative w-full max-w-md mx-auto">
+        <!-- Carousel Container -->
+        <!-- <div class="flex overflow-x-auto snap-x snap-mandatory space-x-4 p-2 scrollbar-hide">
+          <div *ngFor="let video of videos" class="flex-shrink-0 w-60 snap-center">
+            <iframe
+              class="w-full h-96 rounded-lg"
+              [src]="sanitizeUrl(video.url)"
+              frameborder="0"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div> -->
+      </div>
 <div>

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from '../environments/environment';
 // import type {User} from '../../../models/user.d.ts';
 import type {Race} from '../../../models/race.d.ts';
+import type {Video} from '../../../models/video.d.ts';
 import type {RaceResult} from '../../../models/raceResults.d.ts';
 import { Observable } from 'rxjs';
 
@@ -58,5 +59,9 @@ export class ApiService {
 
   isLiveStreaming(){
     return this.httpClient.get("https://decapi.me/twitch/uptime/wsrc_official", { responseType: 'text' });
+  }
+
+  getRaceVideos(id: string){
+    return this.httpClient.get<{videos: Video[]}>(`${this.apiUrl}/race/${id}/videos`)
   }
 }

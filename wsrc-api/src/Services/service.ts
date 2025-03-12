@@ -3,6 +3,7 @@ import type { Race } from '@models/race.d.ts';
 import { IRacingService} from './iracing.js';
 import { Supabase } from './supaBase.js';
 import { RaceResult } from '@models/raceResults.js';
+import { Video } from '@models/video.js';
 // import { Auth } from './auth.js';
 const iRacingService: IRacingService = new IRacingService();
 // const auth: Auth = new Auth();
@@ -126,6 +127,11 @@ export class Service{
         // sum all transactions that are of type prize money
         const results = await db.getTotalPrizeAmount();
         return results;
+    }
+
+    async getRaceVideos(id: number): Promise<Video[]>{
+        const videos = await db.getRaceVideos(id);
+        return videos;
     }
 
     getTransactions(userId: string){

@@ -49,7 +49,7 @@ export class RaceResultDetailsComponent implements OnInit{
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
   convertToLapTime(time: number): string {
-    if(time <- 0){
+    if(time <= 0){
       return '-';
     }
     // Divide by 10 to get milliseconds

@@ -1,5 +1,6 @@
 <div class="flex-grow bg-cDarkBlue pt-20 sm:pt-24 md:pt-32 lg:pt-36 text-cWhite font-roboto tracking-tighter">
-    <span [routerLink]="['/race', race.race_id]">View Race Details Button #you can click this i promise#</span>
+    <div *ngIf="race"> <span [routerLink]="['/race', race.race_id]">View Race Details Button #you can click this i promise#</span></div>
+   
     <div class="max-w-full bg-white rounded shadow overflow-hidden">
         <div class="bg-gray-800 text-white p-3">
             <h3 class="text-lg font-semibold">Race Results</h3>

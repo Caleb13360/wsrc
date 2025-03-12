@@ -21,6 +21,7 @@ import { AccountCreationComponent } from './account-creation/account-creation.co
 import { RaceExtendedDetailsComponent } from './race-extended-details/race-extended-details.component';
 import { LiveComponent } from './live/live.component';
 import { RaceResultDetailsComponent } from './race-result-details/race-result-details.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 
 // const authGuard: CanActivateFn = async (route, state: RouterStateSnapshot) => {
 //     const apiService = inject(ApiService);
@@ -88,6 +89,11 @@ export const routes: Routes = [
         path: 'results',
         component: RaceResultsComponent,
         title: 'Race Results'
+    },
+    {
+        path: 'leaderboard',
+        component: LeaderboardComponent,
+        title: 'Leaderboard'
     },
     {
         path: 'race/:id',

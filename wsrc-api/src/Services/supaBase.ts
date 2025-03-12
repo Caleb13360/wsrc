@@ -5,6 +5,7 @@ import { Video } from '@models/video.js';
 import { SUPABASE_KEY, SUPABASE_URL } from '../config.js';
 import { createClient } from '@supabase/supabase-js'
 import axios from 'axios';
+import { SeriesResult } from '@models/seriesResult.js';
 
 export class Supabase {
     sb;
@@ -308,12 +309,64 @@ export class Supabase {
     }
 
     async getRaceVideos(id: number){
+        this.getSeriesResults('Rookie');
         const {error, data} = await this.sb.from('Content').select(`
                 *
             `).eq('race_id', id);
-        console.log(data);
         return this.generateVideosFromData(data);
     }
+    async getSeriesResults(series: string): Promise<SeriesResult[]> {
+        // Single query with direct join to Series table
+        const { data, error } = await this.sb
+            .from('RaceResult')
+            .select(`
+                iracing_id,
+                position,
+                prize,
+                race_id,
+                Races!inner(
+                    series_id, 
+                    Series!inner(name)
+                )
+            `).eq('Races.Series.name', series);
+    
+        if (!data || data.length === 0) {
+            return [];
+        }
+    
+        // Process the results more efficiently
+        const raceParticipantCounts: { [key: string]: number } = {};
+        const driverResults: { [key: string]: { name: string, points: number, prize_money: number, races: number } } = {};
+    
+        // First pass: count participants per race
+        for (const result of data) {
+            raceParticipantCounts[result.race_id] = (raceParticipantCounts[result.race_id] || 0) + 1;
+        }
+    
+        // Second pass: calculate standings in one go
+        for (const result of data) {
+            const driverId = result.iracing_id;
+            const points = 1 + raceParticipantCounts[result.race_id] - result.position;
+            const prize = result.prize || 0;
+            const races = 1;
+    
+            if (!driverResults[driverId]) {
+                driverResults[driverId] = {
+                    name: driverId,
+                    points: points,
+                    prize_money: prize,
+                    races: races
+                };
+            } else {
+                driverResults[driverId].points += points;
+                driverResults[driverId].prize_money += prize;
+                driverResults[driverId].races+=races;
+            }
+        }
+    
+        return Object.values(driverResults).sort((a, b) => b.points - a.points);
+    }
+    
 
     async getTotalPrizeAmount(): Promise<Number>{
         const { data, error } = await this.sb

@@ -21,6 +21,8 @@ export class RaceResultDetailsComponent implements OnInit{
   results!: RaceResult[];
   videos!: Video[];
   winners!: RaceResult[];
+  shorts!: Video[];
+  replay!:  Video[];
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
@@ -33,12 +35,17 @@ export class RaceResultDetailsComponent implements OnInit{
           this.winners = this.results.filter((result)=> result.prize_money > 0);
       });
       this.apiService.getRaceVideos(id).subscribe((data)=> {
-        console.log(data);
-        this.videos=data.videos;
+        this.videos = data.videos.map(video => ({
+          ...video,
+          url: this.sanitizer.bypassSecurityTrustResourceUrl(video.url)
+        }));
+        this.shorts = this.videos.filter(video => video.short);
+        this.replay = this.videos.filter(video => video.replay);
     });
     });
   }
   sanitizeUrl(url: string): SafeResourceUrl {
+    console.log(url);
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 }

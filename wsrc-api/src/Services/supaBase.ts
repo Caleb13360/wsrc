@@ -301,8 +301,7 @@ export class Supabase {
 
     generateVideosFromData(data: any): Video[]{
         if (data) {
-            const videos: Video[] = data.map(async (item: any) => this.generateVideoFromData(item));
-            console.log(videos[0]);
+            const videos: Video[] = data.map((item: any) => this.generateVideoFromData(item));
             return videos;
         }
         return [];

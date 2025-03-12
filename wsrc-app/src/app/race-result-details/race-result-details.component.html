@@ -53,17 +53,39 @@
             </table>
         </div>
     </div>
-    <div class="relative w-full max-w-md mx-auto">
+    <div *ngIf="shorts!=null && shorts.length>0" class="relative w-full mx-auto">
         <!-- Carousel Container -->
-        <!-- <div class="flex overflow-x-auto snap-x snap-mandatory space-x-4 p-2 scrollbar-hide">
-          <div *ngFor="let video of videos" class="flex-shrink-0 w-60 snap-center">
-            <iframe
-              class="w-full h-96 rounded-lg"
-              [src]="sanitizeUrl(video.url)"
-              frameborder="0"
-              allowfullscreen>
-            </iframe>
-          </div>
-        </div> -->
-      </div>
+         <span>Shorts</span>
+        <div class="flex overflow-x-auto snap-x snap-mandatory space-x-4 p-2 scrollbar-thin">
+            <div *ngFor="let video of shorts" class="flex-shrink-0 w-80 snap-center">
+                <div class="relative" style="padding-bottom: 177.78%"> <!-- 9:16 aspect ratio -->
+                    <iframe 
+                        class="absolute inset-0 w-full h-full rounded-lg"
+                        [src]="video.url"
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div *ngIf="replay!=null&&replay.length>0" class="relative w-full mx-auto p-4">
+        <!-- Full Width Video Container -->
+        <span class="block mb-2">Full replay</span>
+        <div class="w-full p-2 bg-gray-100 rounded-lg">
+            <div class="relative" style="padding-bottom: 56.25%"> <!-- 16:9 aspect ratio -->
+                <iframe 
+                    class="absolute inset-0 w-full h-full rounded-lg shadow-md"
+                    [src]="replay[0].url"
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
 <div>

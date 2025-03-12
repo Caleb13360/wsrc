@@ -1,5 +1,5 @@
 export interface Video {
-    url: string;
+    url: string | SafeResourceUrl;
     race_id: number;
     replay:boolean;
     short: boolean;

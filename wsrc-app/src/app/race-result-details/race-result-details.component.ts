@@ -23,6 +23,8 @@ export class RaceResultDetailsComponent implements OnInit{
   winners!: RaceResult[];
   shorts!: Video[];
   replay!:  Video[];
+  bestLapTime!: number;
+
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
@@ -33,6 +35,8 @@ export class RaceResultDetailsComponent implements OnInit{
       this.apiService.getRaceResults(id).subscribe((data)=> {
           this.results=data.results;
           this.winners = this.results.filter((result)=> result.prize_money > 0);
+          this.bestLapTime = this.findBestLapTime();
+          console.log(this.bestLapTime);
       });
       this.apiService.getRaceVideos(id).subscribe((data)=> {
         this.videos = data.videos.map(video => ({
@@ -47,6 +51,12 @@ export class RaceResultDetailsComponent implements OnInit{
   sanitizeUrl(url: string): SafeResourceUrl {
     console.log(url);
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+  findBestLapTime(): number {
+    const validLapTimes = this.results
+      .map(result => result.best_lap_time)
+      .filter(time => time > 1);
+    return validLapTimes.length > 0 ? Math.min(...validLapTimes) : 0;
   }
   convertToLapTime(time: number): string {
     if(time <= 0){

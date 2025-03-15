@@ -24,7 +24,6 @@ export class RaceResultDetailsComponent implements OnInit{
   shorts!: Video[];
   replay!:  Video[];
   bestLapTime!: number;
-
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
@@ -77,4 +76,61 @@ export class RaceResultDetailsComponent implements OnInit{
   
   return `${formattedMinutes}:${formattedSeconds}:${formattedMilliseconds}`;
 }
+convertToInterval(time: number): string {
+  if(time <= 0){
+    return '-';
+  }
+  // Divide by 10 to get milliseconds
+const ms = Math.floor(time / 10);
+
+// Calculate components
+const minutes = Math.floor(ms / 60000);
+const seconds = (Math.floor((ms % 60000) / 1000)) + minutes * 60;
+const milliseconds = ms % 1000;
+
+// Format with padding
+const formattedSeconds = seconds.toString().padStart(2, '0');
+const formattedMilliseconds = milliseconds.toString().padStart(3, '0');
+
+return `${formattedSeconds}:${formattedMilliseconds}`;
+}
+convertToIrating(min: number, max: number): string {
+  if(min== -1 && max == -1){
+    return 'OPEN';
+  }
+  if(min == -1){
+    return `0 - ${max}`;
+  }
+  if(max == -1){
+    return `${min}+`;
+  }
+  return `${min} - ${max}`;
+}
+getSeriesColor(series: string) {
+  if(series === 'Rookie'){
+    return 'bg-green-500';
+  }
+  if(series === 'Amateur'){
+    return 'bg-blue-500';
+  }
+  return 'bg-purple-500'; 
+  }
+  getSeriesButton(series: string): string {
+    if(series === 'Rookie'){
+      return 'bg-green-600 hover:bg-green-500';
+    }
+    if(series === 'Amateur'){
+      return 'bg-blue-600 hover:bg-blue-500';
+    }
+    return 'bg-purple-600 hover:bg-purple-500';
+  }
+  getSeriesGradient(series: string): string {
+    if(series === 'Rookie'){
+      return '#15803d'; // darker green hex color (green-700)
+    }
+    if(series === 'Amateur'){
+      return '#1d4ed8'; // darker blue hex color (blue-700)
+    }
+    return '#a855f7'; // purple hex color
+  }
 }

@@ -1,113 +1,227 @@
-<div class="flex-grow bg-cDarkBlue pt-20 sm:pt-24 md:pt-32 lg:pt-36 text-cWhite font-roboto tracking-tighter"></div>
-    <div class="flex-grow bg-gray-900 text-white font-roboto tracking-tighter">
+<div class="flex-grow bg-cDarkBlue pt-20 sm:pt-24 md:pt-32 lg:pt-36 text-cWhite font-roboto tracking-tighter">
+
     <!-- Top Banner with Background Image -->
-    <div class="bg-[url('/assets/LandingPageBanner.jpg')] bg-cover bg-center relative">
-        <!-- Series Header -->
-        <div class="mx-auto">
-            <div class="bg-purple-600 py-2 px-4 text-center mx-auto" style="clip-path: polygon(0 0, 100% 0, 92% 100%, 8% 100%);">
-                <h1 class="text-2xl font-bold uppercase">Challenger Series</h1>
+        <div *ngIf="race!=null" class="relative">
+            <!-- Background Image -->
+            <div class="absolute inset-0 z-10" [style]="'background: radial-gradient(circle, #000000, ' + getSeriesGradient(race.race_series_name) + ');'">
+            <img src="/RP5.jpg" class="absolute inset-0 w-full h-full object-cover z-0  opacity-25 mix-blend-luminosity" />
             </div>
-        </div>
-
-        <!-- Race Info -->
-        <div class="text-center p-4">
-            <h2 class="text-xl">2023 WSRC SEASON 1 - Race Results</h2>
-            <h3 class="text-lg mt-1">Rudskogen Motorsenter - Toyota GR86</h3>
-            <p class="text-sm mt-1 text-gray-300">Sat, Mar 8, 2023 2:00PM GMT-5</p>
-        </div>
-
-        <!-- Winners Section - Center aligned -->
-        <div class="max-w-lg mx-auto p-4">
-            <!-- Race Winner -->
-            <div class="bg-green-500 grid grid-cols-3 p-3 rounded mb-2">
-                <div class="text-center font-semibold">WSRC Race Winner</div>
-                <div class="text-center font-bold">Eldar Noohi</div>
-                <div class="text-center font-bold">$700 USD</div>
+            <!-- Banner Content -->
+            <div class="max-w-7xl mx-auto relative z-10 ">
+            <!-- Race Header with Track and Car Info -->
+            <div class="text-center mb-10 pt-6">
+                <h2 class="text-3xl md:text-4xl font-bold">Rudskogen Motorsenter - Toyota GR86</h2>
+                 <!-- Race info bar - grouped items -->
+                 <div class="text-center my-3">
+                    <span [ngClass]="getSeriesColor(race.race_series_name)" class=" p-3 px-6 rounded-lg inline-block text-xl">
+                        {{race.race_series_name}} Series - iRating {{convertToIrating(race.race_irating_min, race.race_irating_max)}}
+                    </span>
+                </div>
+                <div class="text-lg text-gray-300 font-bold">WSRC SEASON 1 - Race Results</div>
+                <p class="text-m mt-2 text-gray-300">{{ race.launch_time | date:'EEE, MMM d, y h:mma z' }}</p>
             </div>
             
-            <!-- 2nd Place -->
-            <div class="bg-green-900 border border-green-500 grid grid-cols-3 p-3 rounded mb-2">
-                <div class="text-center font-semibold">2nd Place</div>
-                <div class="text-center font-bold">Juan Jaras</div>
-                <div class="text-center font-bold">$200 USD</div>
+            <!-- Race Results Section -->
+            <div class="mb-10">
+                
+                <!-- Winners Podium -->
+                <div *ngIf="winners!=null" class="flex flex-wrap -mx-4">
+                    <!-- Second Place -->
+                    <div class="w-full md:w-1/3 px-4 mb-6 md:mb-0">
+                        <div *ngIf="winners!=null&&winners.length>1" class="bg-black bg-opacity-30 border border-[#62D1CC] rounded-lg h-full flex flex-col">
+                            <div class="p-4 text-center flex flex-col justify-center h-full">
+                                <div class="text-3xl font-bold text-[#C3C3C3] mb-1">2nd</div>
+                                <div class="text-xl font-bold mb-1">{{winners[1].iracing_id}}</div>
+                                <div class="text-[#C3C3C3] text-3xl font-bold">${{winners[1].prize_money}}</div>
+                            </div>
+                            <div class="mt-auto bg-black bg-opacity-30 p-2 text-center rounded-b-lg">
+                                <div class="flex justify-center space-x-3">
+                                    <span class="text-gray-300">+{{convertToInterval(winners[1].interval)}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- First Place - Taller -->
+                    <div class="w-full md:w-1/3 px-4 mb-6 md:mb-0 md:-mt-6">
+                        <div class="bg-black bg-opacity-40 border-2 border-[#FFD700] rounded-lg h-full flex flex-col">
+                            <div class="bg-[#FFD700] text-center p-2 rounded-t-lg">
+                                <span class="text-black font-bold">RACE WINNER</span>
+                            </div>
+                            <div class="p-6 text-center flex flex-col justify-center h-full">
+                                <div class="text-4xl font-bold text-[#FFD700] mb-2">1st</div>
+                                <div class="text-2xl font-bold mb-2">{{winners[0].iracing_id}}</div>
+                                <div class="text-[#FFD700] text-3xl font-bold">${{winners[0].prize_money}}</div>
+                            </div>
+                            <div class="mt-auto bg-black bg-opacity-40 p-2 text-center rounded-b-lg">
+                                <div class="flex justify-center space-x-3">
+                                    <span class="text-gray-300">{{convertToLapTime(winners[0].avg_lap_time)}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Third Place -->
+                    <div class="w-full md:w-1/3 px-4">
+                        <div *ngIf="winners!=null&&winners.length>2" class="bg-black bg-opacity-30 border border-[#CD7F32] rounded-lg h-full flex flex-col">
+                            <div class="p-4 text-center flex flex-col justify-center h-full">
+                                <div class="text-3xl font-bold text-[#CD7F32] mb-1">3rd</div>
+                                <div class="text-xl font-bold mb-1">{{winners[2].iracing_id}}</div>
+                                <div class="text-[#CD7F32] text-3xl font-bold">${{winners[2].prize_money}}</div>
+                            </div>
+                            <div class="mt-auto bg-black bg-opacity-30 p-2 text-center rounded-b-lg">
+                                <div class="flex justify-center space-x-3">
+                                    <span class="text-gray-300">+{{convertToInterval(winners[2].interval)}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             
-            <!-- 3rd Place -->
-            <div class="bg-green-900 border border-green-500 grid grid-cols-3 p-3 rounded mb-2">
-                <div class="text-center font-semibold">3rd Place</div>
-                <div class="text-center font-bold">Conor Cadle</div>
-                <div class="text-center font-bold">$200 USD</div>
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap justify-center gap-5 mt-8 pb-8">
+                <button [ngClass]="getSeriesButton(race.race_series_name)" class=" text-white py-3 px-6 rounded-md shadow-md flex items-center">
+                    <span class="mr-2">▶</span> Watch Race Replay
+                </button>
+                <button [ngClass]="getSeriesButton(race.race_series_name)" class= " text-white py-3 px-6 rounded-md shadow-md flex items-center">
+                    <span class="mr-2">🎬</span> Watch Highlights
+                </button>
+                <button [ngClass]="getSeriesButton(race.race_series_name)" class=" text-white py-3 px-6 rounded-md shadow-md flex items-center">
+                    <span class="mr-2">📋</span> View Race Details
+                </button>
             </div>
-        </div>
-
-        <!-- Action Buttons -->
-        <div class="flex flex-wrap justify-center gap-4 p-4">
-            <button class="bg-purple-800 hover:bg-purple-700 text-white py-2 px-6 rounded flex items-center">
-                <span class="mr-2">▶</span> Watch Race Replay
-            </button>
-            <button class="bg-purple-800 hover:bg-purple-700 text-white py-2 px-6 rounded flex items-center">
-                <span class="mr-2">🎬</span> Watch Highlights
-            </button>
-            <button class="bg-purple-800 hover:bg-purple-700 text-white py-2 px-6 rounded flex items-center">
-                <span class="mr-2">📋</span> View Race Details
-            </button>
         </div>
     </div>
 
     <!-- Race Details Section -->
-    <!-- <div class="p-4">
-        <h2 class="text-2xl font-bold mb-1">Race Details</h2>
+    <!-- Race Summary Section -->
+    <!-- <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        <h2 class="text-2xl font-bold mb-1">Race Summary</h2>
         <p class="text-sm text-gray-400 mb-4">Race weather, track, car details and more</p>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="bg-purple-600 p-0 rounded overflow-hidden">
-                <div class="w-full h-48 bg-purple-500 flex items-center justify-center">
-                    <div class="text-xl font-bold">WSRC</div>
-                </div>
-                <div class="p-4">
-                    <div class="text-3xl font-bold">$200+</div>
-                    <div class="text-sm uppercase">GRID CHAMPIONSHIP</div>
-                    <div class="text-xl font-bold mt-2">$50</div>
-                    <div class="text-sm uppercase mb-2">POT BONUS!</div>
-                </div>
-                <div class="flex justify-between px-4 py-2 bg-purple-700">
-                    <div>Challenger Series</div>
-                    <div>iRating: 2000+</div>
+        <div class="flex flex-wrap">
+            <div *ngIf="race!=null" class="p-4" style="width: 400px;">
+                <div class="relative group cursor-pointer">
+                    <div class="absolute inset-0 bg-[#EA3039] rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            
+                    <div class="relative z-10 max-w-sm mx-auto rounded-lg shadow-lg transform transition-transform duration-300 group-hover:translate-x-[7px] group-hover:translate-y-[-7px]">
+                      
+                        <div class="relative overflow-hidden rounded-t-lg">
+                            <img [src]="'https://cdn.matcherino.com/' + race.matcherino_image_id + '/'"
+                                alt="Race Image"
+                                class="w-full h-auto object-cover" />
+                        </div>
+            
+          
+                        <div class="bg-[#0F1325] text-white">
+                            <div class="text-lg font-semibold mb-2 pt-4 pb-4 bg-[#1B213A] flex items-center">
+                                <mat-icon class="mr-2 ml-2 text-[#EA3039]">sports_score</mat-icon>
+                                <span>{{ race.race_name }}</span>
+                            </div>
+            
+                            <div class="space-y-1 text-sm p-4">
+                                <div class="flex justify-between">
+                                    <div class="flex items-center">
+                                        <mat-icon class="text-[#848CB4] mr-2">access_time</mat-icon>
+                                        <span class="font-bold">Event Start:</span>
+                                    </div>
+                                    <span class="ml-2 font-medium">{{ race.launch_time | date : "MMM d" }}
+                                        {{ race.launch_time | date : "h:mm a" }}</span>
+                                </div>
+            
+                                <div class="flex justify-between">
+                                    <div class="flex items-center">
+                                        <mat-icon class="text-[#848CB4] mr-2">flag</mat-icon>
+                                        <span class="font-bold">Track:</span>
+                                    </div>
+                                    <span class="ml-2 font-medium">{{ race.track_name }}</span>
+                                </div>
+            
+                                <div class="flex justify-between">
+                                    <div class="flex items-center">
+                                        <mat-icon class="text-[#848CB4] mr-2">directions_car</mat-icon>
+                                        <span class="font-bold">Car:</span>
+                                    </div>
+                                    <span class="ml-2 font-medium">{{ race.car }}</span>
+                                </div>
+            
+                                <div class="flex justify-between">
+                                    <div class="flex items-center">
+                                        <mat-icon class="text-[#848CB4] mr-2">group</mat-icon>
+                                        <span class="font-bold">Racers:</span>
+                                    </div>
+                                    <span class="ml-2 font-medium">{{race.participants}}/20</span>
+                                </div>
+            
+                                <div class="flex justify-between">
+                                    <div class="flex items-center">
+                                        <mat-icon class="text-[#848CB4] mr-2">sell</mat-icon>
+                                        <span class="font-bold">Entry:</span>
+                                    </div>
+                                    <span class="ml-2 font-medium">{{race.entry_fee==0 ? 'Free' : '$'+race.entry_fee}}</span>
+                                </div>
+                            </div>
+                        </div>
+            
+               
+                        <div class="p-1 flex-auto bg-[#C3903B] text-white text-center font-bold rounded-b-lg flex items-center justify-center">
+                            <mat-icon class="mr-2">emoji_events</mat-icon>
+                            ${{race.prize_pool}}
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="bg-gray-800 p-4 rounded">
-                <div class="flex justify-between items-center mb-2">
-                    <div class="flex items-center">
-                        <span class="bg-blue-500 text-white rounded-full p-1 mr-2">🕒</span>
-                        <span>20 Min Race</span>
+            <div class="flex-1 p-4 rounded">
+                <div class="w-full flex flex-col justify-center space-y-4">
+                    <div class="border border-cGreen bg-cGreen w-full h-16 flex items-center justify-between px-4 rounded-md">
+                        <span class="text-cDarkBlue mx-auto font-roboto tracking-tighter">WSRC Race Winner</span>
+                        <span class="text-cDarkBlue mx-auto font-roboto tracking-tighter font-bold text-2xl lg:text-3xl">{{winners[0].iracing_id}}</span>
+                        <span class="text-cDarkBlue mx-auto font-roboto tracking-tighter font-bold text-2xl lg:text-3xl">${{winners[0].prize_money}}</span>
                     </div>
-                    <div class="flex items-center">
-                        <span class="mr-2">2 Qualifying Laps</span>
-                        <span class="text-yellow-500">▶</span>
-                    </div>
-                    <div class="flex items-center">
-                        <span class="text-orange-500 mr-2">🔒</span>
-                        <span>Fixed Setup</span>
+                    <div *ngFor="let winner of winners | slice:1; let i = index" class="border border-cGreen w-full h-16 flex items-center justify-between px-4 rounded-md group hover:bg-cGreen transition-all duration-200 ease-linear">
+                        <span class="text-cGreen mx-auto font-roboto tracking-tighter group-hover:text-cBlack">{{i==0?'2nd':'3rd'}}</span>
+                        <span class="text-cGreen mx-auto font-roboto tracking-tighter font-bold text-2xl lg:text-3xl group-hover:text-cBlack">{{winners[i+1].iracing_id}}</span>
+                        <span class="text-cGreen mx-auto font-roboto tracking-tighter font-bold text-2xl lg:text-3xl group-hover:text-cBlack">${{winners[i+1].prize_money}}</span>
                     </div>
                 </div>
-                
-                <div class="space-y-3 mt-4">
-                    <div class="flex items-center">
-                        <span class="mr-2">📍</span>
-                        <span>Circuit of Spa-Francorchamps</span>
+                <div class="w-full">
+                    <div class="border-2 rounded-md border-[#1B213A] text-xl bg-[#030716]">
+                        <div class="flex flex-wrap justify-between p-5 gap-4 lg:gap-0">
+                            <div class="flex items-center text-[#62D1CC]">
+                                <mat-icon>access_time</mat-icon>
+                                <span class="ml-1 font-bold">{{ race ? (race.race_time) : '???' }} Min Race</span>
+                            </div>
+                            <div class="flex items-center text-[#FBE057]">
+                                <mat-icon>play_arrow</mat-icon>
+                                <span class="ml-1 font-bold">{{ race ? (race.qualifier_laps) : '?' }} Quali Laps</span>
+                            </div>
+                            <div class="flex items-center text-[#FFA366]">
+                                <mat-icon>lock</mat-icon>
+                                <span class="ml-1 font-bold">Fixed Setup</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex items-center">
-                        <span class="mr-2">🚗</span>
-                        <span>Toyota GR86</span>
-                    </div>
-                    <div class="flex items-center">
-                        <span class="mr-2">👤</span>
-                        <span>11/20 Racers</span>
-                    </div>
-                    <div class="flex items-center">
-                        <span class="mr-2">💰</span>
-                        <span>$5 Entry</span>
+                    <div class="flex justify-between border-2 rounded-md text-xl border-[#1B213A] bg-[#030716]">
+                        <div class="flex flex-col items-center justify-center leading-none p-5">
+                            <span class="text-white text-4xl xl:text-6xl mb-6 font-roboto tracking-tighter font-bold">{{ race ? (race.temperature) : '??' }}°C</span>
+                            <span class="text-white text-1xl">{{ race ? (race.cloud_cover) : '??' }}</span>
+                        </div>
+                        <div class="flex flex-col items-start p-5 justify-center text-white">
+                            <span>Track Moisture</span>
+                            <span>Humidity</span>
+                            <span>Wind Speed</span>
+                            <span>Wind Direction</span>
+                            <span>In-Game Time</span>
+                        </div>
+                        <div class="flex flex-col items-start p-5 justify-center text-white font-bold">
+                            <span>{{ race ? (race.track_moisture) : '? ' }}</span>
+                            <span>{{ race ? (race.humidity) : '? ' }}%</span>
+                            <span>{{ race ? (race.wind_speed) : '? ' }}kph</span>
+                            <span>{{ race ? (race.wind_direction) : '? ' }}</span>
+                            <span>{{ race ? (race.race_time_of_day) : '???' }}</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -136,9 +250,8 @@
                         <td class="p-2">{{result.pos}}</td>
                         <td class="p-2">{{result.iracing_id}}</td>
                         <td class="p-2 text-right">{{convertToLapTime(result.avg_lap_time)}}</td>
-                        <!-- <td class="p-2 text-right" [ngClass]="{'text-purple-500': result.best_lap_time === bestLapTime}"> -->
-                        <td class="p-2 text-right">
-                            {{result.best_lap_time === bestLapTime ? '🔥' : ''}}{{convertToLapTime(result.best_lap_time)}}
+                        <td class="p-2 text-right" [ngClass]="{'text-purple-500': result.best_lap_time === bestLapTime}">
+                            {{convertToLapTime(result.best_lap_time)}}
                           </td>
                         <td class="p-2 text-center">{{result.incident_count}}</td>
                         <td class="p-2 text-right">+{{1 + results.length - result.pos}}</td>

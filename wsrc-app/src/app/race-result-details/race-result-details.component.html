@@ -10,14 +10,14 @@
             <div class="max-w-7xl mx-auto relative z-10 ">
             <!-- Race Header with Track and Car Info -->
             <div class="text-center mb-10 pt-6">
-                <h2 class="text-3xl md:text-4xl font-bold">Rudskogen Motorsenter - Toyota GR86</h2>
+                <h2 class="text-3xl md:text-4xl font-bold italic">{{race.race_name}}</h2>
                  <!-- Race info bar - grouped items -->
-                 <div class="text-center my-3">
-                    <span [ngClass]="getSeriesColor(race.race_series_name)" class=" p-3 px-6 rounded-lg inline-block text-xl">
-                        {{race.race_series_name}} Series - iRating {{convertToIrating(race.race_irating_min, race.race_irating_max)}}
+                 <div class="text-center my-4">
+                    <span [ngClass]="getSeriesColor(race.race_series_name)" class=" p-2 px-20 rounded-lg inline-block text-2xl font-bold italic">
+                        {{race.race_series_name}} Series: iRating {{convertToIrating(race.race_irating_min, race.race_irating_max)}}
                     </span>
                 </div>
-                <div class="text-lg text-gray-300 font-bold">WSRC SEASON 1 - Race Results</div>
+                <div class="text-lg text-gray-300 font-bold">2025 WSRC SEASON 1 - Race Results</div>
                 <p class="text-m mt-2 text-gray-300">{{ race.launch_time | date:'EEE, MMM d, y h:mma z' }}</p>
             </div>
             
@@ -27,35 +27,42 @@
                 <!-- Winners Podium -->
                 <div *ngIf="winners!=null" class="flex flex-wrap -mx-4">
                     <!-- Second Place -->
-                    <div class="w-full md:w-1/3 px-4 mb-6 md:mb-0">
-                        <div *ngIf="winners!=null&&winners.length>1" class="bg-black bg-opacity-30 border border-[#62D1CC] rounded-lg h-full flex flex-col">
-                            <div class="p-4 text-center flex flex-col justify-center h-full">
-                                <div class="text-3xl font-bold text-[#C3C3C3] mb-1">2nd</div>
-                                <div class="text-xl font-bold mb-1">{{winners[1].iracing_id}}</div>
-                                <div class="text-[#C3C3C3] text-3xl font-bold">${{winners[1].prize_money}}</div>
+                     <div class="w-full md:w-1/3 px-4">
+                        <div *ngIf="winners!=null&&winners.length>2" class="bg-black bg-opacity-20 backdrop-blur-md rounded-lg h-full flex flex-col">
+                            <div class="p-4 text-center flex flex-col justify-center h-full pb-6">
+                                 <div class="bg-black  text-center p-2 rounded-lg">
+                                <span class="text-white font-bold">Second Place</span>
+                            </div>
+                              
+                                <div class="text-2xl font-bold mb-1 py-3">{{winners[1].iracing_id}}</div>
+                                <div class="flex justify-center">
+                                    <div class="bg-[#16BC17] py-2 px-6 rounded-md text-black text-1xl font-bold w-auto inline-block">${{winners[1].prize_money}} USD</div>
+                                </div>
                             </div>
                             <div class="mt-auto bg-black bg-opacity-30 p-2 text-center rounded-b-lg">
                                 <div class="flex justify-center space-x-3">
-                                    <span class="text-gray-300">+{{convertToInterval(winners[1].interval)}}</span>
+                                    <span class="text-gray-300 italic">Interval: +{{convertToInterval(winners[1].interval)}}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
+                    
                     <!-- First Place - Taller -->
-                    <div class="w-full md:w-1/3 px-4 mb-6 md:mb-0 md:-mt-6">
-                        <div class="bg-black bg-opacity-40 border-2 border-[#FFD700] rounded-lg h-full flex flex-col">
-                            <div class="bg-[#FFD700] text-center p-2 rounded-t-lg">
-                                <span class="text-black font-bold">RACE WINNER</span>
+                   <div class="w-full md:w-1/3 px-4 mb-6 md:mb-0 md:-mt-6">
+                        <div class="bg-black bg-opacity-20 backdrop-blur-md rounded-lg h-full flex flex-col">
+                            <div class="bg-cGreen  text-center p-4 rounded-t-lg">
+                                <span class="text-black font-bold ">RACE WINNER</span>
                             </div>
                             <div class="p-6 text-center flex flex-col justify-center h-full">
-                                <div class="text-4xl font-bold text-[#FFD700] mb-2">1st</div>
-                                <div class="text-2xl font-bold mb-2">{{winners[0].iracing_id}}</div>
-                                <div class="text-[#FFD700] text-3xl font-bold">${{winners[0].prize_money}}</div>
+                                <div class="text-4xl font-bold mb-2">{{winners[0].iracing_id}}</div>
+                                <div class="flex justify-center">
+                                    <div class="bg-cGreen py-2 px-6 rounded-md text-black text-1xl font-bold w-auto inline-block">${{winners[0].prize_money}} USD</div>
+                                </div>
                             </div>
-                            <div class="mt-auto bg-black bg-opacity-40 p-2 text-center rounded-b-lg">
+                            <div class="mt-auto bg-black bg-opacity-30   p-2 text-center rounded-b-lg">
                                 <div class="flex justify-center space-x-3">
-                                    <span class="text-gray-300">{{convertToLapTime(winners[0].avg_lap_time)}}</span>
+                                    <span class="text-gray-300 italic">Avg Lap Time: {{convertToLapTime(winners[0].avg_lap_time)}}</span>
                                 </div>
                             </div>
                         </div>
@@ -63,15 +70,20 @@
                     
                     <!-- Third Place -->
                     <div class="w-full md:w-1/3 px-4">
-                        <div *ngIf="winners!=null&&winners.length>2" class="bg-black bg-opacity-30 border border-[#CD7F32] rounded-lg h-full flex flex-col">
-                            <div class="p-4 text-center flex flex-col justify-center h-full">
-                                <div class="text-3xl font-bold text-[#CD7F32] mb-1">3rd</div>
-                                <div class="text-xl font-bold mb-1">{{winners[2].iracing_id}}</div>
-                                <div class="text-[#CD7F32] text-3xl font-bold">${{winners[2].prize_money}}</div>
+                        <div *ngIf="winners!=null&&winners.length>2" class="bg-black bg-opacity-20 backdrop-blur-md rounded-lg h-full flex flex-col">
+                            <div class="p-4 text-center flex flex-col justify-center h-full pb-6">
+                                 <div class="bg-black  text-center p-2 rounded-lg">
+                                <span class="text-white font-bold">Third Place</span>
+                            </div>
+                              
+                                <div class="text-2xl font-bold mb-1 py-3">{{winners[2].iracing_id}}</div>
+                                <div class="flex justify-center">
+                                    <div class="bg-[#16BC17] py-2 px-6 rounded-md text-black text-1xl font-bold w-auto inline-block">${{winners[2].prize_money}} USD</div>
+                                </div>
                             </div>
                             <div class="mt-auto bg-black bg-opacity-30 p-2 text-center rounded-b-lg">
                                 <div class="flex justify-center space-x-3">
-                                    <span class="text-gray-300">+{{convertToInterval(winners[2].interval)}}</span>
+                                    <span class="text-gray-300 italic">Interval: +{{convertToInterval(winners[2].interval)}}</span>
                                 </div>
                             </div>
                         </div>
@@ -80,17 +92,25 @@
             </div>
             
             <!-- Action Buttons -->
-            <div class="flex flex-wrap justify-center gap-5 mt-8 pb-8">
-                <button [ngClass]="getSeriesButton(race.race_series_name)" class=" text-white py-3 px-6 rounded-md shadow-md flex items-center">
-                    <span class="mr-2">▶</span> Watch Race Replay
-                </button>
-                <button [ngClass]="getSeriesButton(race.race_series_name)" class= " text-white py-3 px-6 rounded-md shadow-md flex items-center">
-                    <span class="mr-2">🎬</span> Watch Highlights
-                </button>
-                <button [ngClass]="getSeriesButton(race.race_series_name)" class=" text-white py-3 px-6 rounded-md shadow-md flex items-center">
-                    <span class="mr-2">📋</span> View Race Details
-                </button>
-            </div>
+           <div class="flex flex-wrap justify-center gap-5 mt-8 pb-8">
+  <button [ngClass]="getSeriesButton(race.race_series_name)" 
+    class="group bg-opacity-70 hover:bg-opacity-100 duration-300 backdrop-blur-md text-white hover:text-black py-3 px-6 rounded-md shadow-md flex items-center">
+    <mat-icon class="mr-2 ml-2 text-white group-hover:text-black">replay</mat-icon> 
+    Watch Race Replay
+  </button>
+  
+  <button [ngClass]="getSeriesButton(race.race_series_name)" 
+    class="group bg-opacity-70 hover:bg-opacity-100 duration-300 backdrop-blur-md text-white hover:text-black py-3 px-6 rounded-md shadow-md flex items-center">
+    <mat-icon class="mr-2 ml-2 text-white group-hover:text-black">star_shine</mat-icon> 
+    Watch Highlights
+  </button>
+  
+  <button [ngClass]="getSeriesButton(race.race_series_name)" 
+    class="group bg-opacity-70 hover:bg-opacity-100 duration-300 backdrop-blur-md text-white hover:text-black py-3 px-6 rounded-md shadow-md flex items-center">
+    <mat-icon class="mr-2 ml-2 text-white group-hover:text-black">info</mat-icon> 
+    View Race Details
+  </button>
+</div>
         </div>
     </div>
 

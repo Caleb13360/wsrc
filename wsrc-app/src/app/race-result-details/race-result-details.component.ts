@@ -108,28 +108,28 @@ convertToIrating(min: number, max: number): string {
 }
 getSeriesColor(series: string) {
   if(series === 'Rookie'){
-    return 'bg-green-500';
+    return 'bg-[#00BF20]';
   }
   if(series === 'Amateur'){
-    return 'bg-blue-500';
+    return 'bg-[#0074BA]';
   }
   return 'bg-purple-500'; 
   }
   getSeriesButton(series: string): string {
     if(series === 'Rookie'){
-      return 'bg-green-600 hover:bg-green-500';
+      return 'bg-black hover:bg-white'; //bg-[#497D4B]
     }
     if(series === 'Amateur'){
-      return 'bg-blue-600 hover:bg-blue-500';
+      return 'bg-black hover:bg-white';
     }
-    return 'bg-purple-600 hover:bg-purple-500';
+    return 'bg-black hover:bg-white';
   }
   getSeriesGradient(series: string): string {
     if(series === 'Rookie'){
       return '#15803d'; // darker green hex color (green-700)
     }
     if(series === 'Amateur'){
-      return '#1d4ed8'; // darker blue hex color (blue-700)
+      return '#0074BA'; // darker blue hex color (blue-700)
     }
     return '#a855f7'; // purple hex color
   }

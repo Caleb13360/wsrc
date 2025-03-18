@@ -3,7 +3,10 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from '../environments/environment';
 // import type {User} from '../../../models/user.d.ts';
 import type {Race} from '../../../models/race.d.ts';
+import type {Video} from '../../../models/video.d.ts';
+import type {RaceResult} from '../../../models/raceResults.d.ts';
 import { Observable } from 'rxjs';
+import { SeriesResult } from '@models/seriesResult';
 
 @Injectable({
     providedIn: 'root'
@@ -40,7 +43,7 @@ export class ApiService {
   }
 
   getRaceResults(id: string){
-    return this.httpClient.get<{results: any}>(`${this.apiUrl}/race/${id}/results`)
+    return this.httpClient.get<{results: RaceResult[]}>(`${this.apiUrl}/race/${id}/results`)
   }
 
   getLatestRaces(numberOfResults: number) {
@@ -58,4 +61,10 @@ export class ApiService {
   isLiveStreaming(){
     return this.httpClient.get("https://decapi.me/twitch/uptime/wsrc_official", { responseType: 'text' });
   }
+
+  getRaceVideos(id: string){
+    return this.httpClient.get<{videos: Video[]}>(`${this.apiUrl}/race/${id}/videos`)
+  }
+  getSeriesResults(series: string){
+    return this.httpClient.get<{results: SeriesResult[]}>(`${this.apiUrl}/series/${series}/results`)  }
 }

@@ -5,7 +5,7 @@
         <div class="flex justify-between items-center mb-6 mt-4 mx-0 lg:mx-52">
             <div>
                 <h1 class=" text-5xl mb-2 font-roboto-condensed tracking-tighter font-bold ">WSRC Race Results</h1>
-                <h2 class="text-cWhite text-lg md:text-2xl mb-4 font-roboto-condensed tracking-tighterl">All past races can be found here.</h2>
+                <h2 class="text-cWhite text-lg md:text-2xl mb-4 font-roboto-condensed tracking-tighter">All past races can be found here.</h2>
             </div>
         
         </div>
@@ -13,7 +13,7 @@
             <div class="w-12 h-12 border-4 border-t-4 border-gray-200 border-t-blue-500 rounded-full animate-spin"></div>
         </div>
         <div class="flex flex-wrap justify-center">
-            <div *ngFor="let race of races" class="p-4" style="width: 400px;"  [routerLink]="['/race', race.race_id]">
+            <div *ngFor="let race of races" class="p-4" style="width: 400px;"  [routerLink]="['/result', race.race_id]">
               <div class="relative group cursor-pointer">
                 <!-- Solid Background -->
                 <div class="absolute inset-0 bg-[#EA3039] rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -25,7 +25,7 @@
                     <img [src]="'https://cdn.matcherino.com/' + race.matcherino_image_id + '/'"
                       alt="Race Image"
                       class="w-full h-auto object-cover"
-                      style="filter: grayscale(80%);" />
+                      style="filter: grayscale(70%);" />
                   </div>
         
                   <!-- Event Details Section -->

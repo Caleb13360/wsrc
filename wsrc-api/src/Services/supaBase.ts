@@ -1,8 +1,11 @@
 import { Race } from '@models/race.js';
+import { RaceResult } from '@models/raceResults.js';
+import { Video } from '@models/video.js';
 // import type { User } from '@models/user.d.ts';
 import { SUPABASE_KEY, SUPABASE_URL } from '../config.js';
 import { createClient } from '@supabase/supabase-js'
 import axios from 'axios';
+import { SeriesResult } from '@models/seriesResult.js';
 
 export class Supabase {
     sb;
@@ -83,7 +86,11 @@ export class Supabase {
         }
       } 
     async generateRaceFromData(data: any){
-        const matcherinoData = await this.getMatcherinoRaceData(data.matcherino_id);
+        var matcherinoData;
+        if(data.prize_money==null||data.participants==null){
+            matcherinoData = await this.getMatcherinoRaceData(data.matcherino_id);
+            console.log('fetch');
+        }
         const race: Race = {
             race_id: data.race_id,
             race_name: data.race_name,
@@ -99,9 +106,9 @@ export class Supabase {
             entry_cut: data.entry_cut,
             matcherino_id: data.matcherino_id,
             matcherino_image_id: data.matcherino_image_id,
-            participants: matcherinoData['body']['playerPoolSize'],
-            prize_pool: matcherinoData['body']['balance']/100,
-            prize_pool_pot: data.prize_pool_pot,
+            participants: data.participants?? matcherinoData['body']['playerPoolSize'],
+            prize_pool: data.prize_money ?? matcherinoData['body']['balance']/100,
+            prize_pool_pot: data.prize_pool_pot,    
             
             //race details
             race_details_id: data.race_details_id,
@@ -144,10 +151,32 @@ export class Supabase {
         }
         return [];
     }
+    async generateRaceResultFromData(data: any){
+        const raceResult: RaceResult = {
+            id: data.id,
+            iracing_id: data.iracing_id,
+            pos: data.position,
+            interval: data.interval,
+            avg_lap_time: data.average_lap_time,
+            best_lap_time: data.fastest_lap_time,
+            incident_count: data.incidents,
+            race_id: data.race_id,
+            prize_money: data.prize,
+            series_points: data.series_points
+        };
+            return raceResult;
+    }
+    async generateRaceResultsFromData(data: any): Promise<RaceResult[]> {
+        if (data) {
+            const races: RaceResult[] = await Promise.all(data.map(async (item: any) => await this.generateRaceResultFromData(item)));
+            return races;
+        }
+        return [];
+    }
     async getUnfetchedRaces() {
         const raceData = await this.sb
         .from('Races')
-        .select(`race_id, launch_time`)
+        .select(`race_id, launch_time, matcherino_id`)
         .gt('launch_time', new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString())
         .lt('launch_time', new Date().toISOString())
         const raceIds = raceData.data ? raceData.data.map(item => item.race_id) : []
@@ -237,19 +266,35 @@ export class Supabase {
         return await this.generateRaceFromData(data.data);
     }
 
-    async getRaceResutls(id: number): Promise<any>{
+    async getRaceResutls(id: number): Promise<RaceResult[]>{
         const data = await this.sb
             .from('RaceResult')
             .select(`
-                *,
-                Races(entry_fee)
+                *
             `)
             .eq('race_id', id)
             .order('position', { ascending: true });
-        return data.data;
+        return await this.generateRaceResultsFromData(data.data);
     }
-
-    async addRaceResult(userId: string, raceId: string, interval: number, position: number, incidents: number, avgLapTime: number, FastestLapTime: number){
+    async updateRaceAfterResult(race: {race_id: any;
+        launch_time: any;
+        matcherino_id: any;}, participants: number): Promise<void> {
+        const matcherinoData = await this.getMatcherinoRaceData(race.matcherino_id.toString());
+        const { error } = await this.sb
+            .from('Races')
+            .update({
+                participants: participants,
+                prize_pool: matcherinoData['body']['balance']/100
+            })
+            .eq('race_id', race.race_id);
+        
+        if (error) {
+            console.error('Error updating race after result:', error);
+            throw error;
+        }
+        return;
+    }
+    async addRaceResult(userId: string, raceId: string, interval: number, position: number, incidents: number, avgLapTime: number, FastestLapTime: number, seriesPoints: number): Promise<void> {
         const { error } = await this.sb
                 .from('RaceResult')
                 .insert([{
@@ -259,7 +304,9 @@ export class Supabase {
                     position: position, 
                     incidents: incidents,
                     average_lap_time: avgLapTime,
-                    fastest_lap_time: FastestLapTime
+                    fastest_lap_time: FastestLapTime,
+                    season: 1,
+                    series_points: seriesPoints
                 }]);
 
             if (error) {
@@ -267,6 +314,78 @@ export class Supabase {
             }
             return;
     }
+    generateVideoFromData(data: any): Video{
+        const video: Video = {
+            url: data.url,
+            race_id: data.race_id,
+            replay: data.isReplay,
+            short: data.isShort
+        }
+        return video;
+    }
+
+    generateVideosFromData(data: any): Video[]{
+        if (data) {
+            const videos: Video[] = data.map((item: any) => this.generateVideoFromData(item));
+            return videos;
+        }
+        return [];
+    }
+
+    async getRaceVideos(id: number){
+        this.getSeriesResults('Rookie');
+        const {error, data} = await this.sb.from('Content').select(`
+                *
+            `).eq('race_id', id);
+        return this.generateVideosFromData(data);
+    }
+    async getSeriesResults(series: string): Promise<SeriesResult[]> {
+        // Single query with direct join to Series table
+        const { data, error } = await this.sb
+            .from('RaceResult')
+            .select(`
+                iracing_id,
+                position,
+                prize,
+                race_id,
+                series_points,
+                Races!inner(
+                    series_id, 
+                    Series!inner(name)
+                )
+            `).eq('Races.Series.name', series);
+    
+        if (!data || data.length === 0) {
+            return [];
+        }
+    
+        const driverResults: { [key: string]: { name: string, points: number, prize_money: number, races: number } } = {};
+    
+    
+        // Second pass: calculate standings in one go
+        for (const result of data) {
+            const driverId = result.iracing_id;
+            const points = result.series_points;
+            const prize = result.prize || 0;
+            const races = 1;
+    
+            if (!driverResults[driverId]) {
+                driverResults[driverId] = {
+                    name: driverId,
+                    points: points,
+                    prize_money: prize,
+                    races: races
+                };
+            } else {
+                driverResults[driverId].points += points;
+                driverResults[driverId].prize_money += prize;
+                driverResults[driverId].races+=races;
+            }
+        }
+    
+        return Object.values(driverResults).sort((a, b) => b.points - a.points);
+    }
+    
 
     async getTotalPrizeAmount(): Promise<Number>{
         const { data, error } = await this.sb

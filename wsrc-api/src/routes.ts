@@ -199,6 +199,33 @@ router.get('/stats/total-prize-amount', async (_, res) => {
         res.status(500).json({ error: 'Error fetching next race' });
     }
 });
+router.get('/race/:id/videos', async (req, res) => {
+    const { id } = req.params;
+    try{
+        const videos = await service.getRaceVideos(Number(id));
+        if(videos.length > 0){
+            res.json({videos: videos});
+        }else{
+            res.status(404).json({error: 'No videos found'});
+        }
+    } catch (err){
+        res.status(500).json({error: 'Error fetching race videos'}); 
+    }
+})
+router.get('/series/:series/results', async (req, res) => {
+    const { series } = req.params;
+    try{
+        const results = await service.getSeriesResults(series);
+        if(results.length > 0){
+            res.json({results: results});
+        }else{
+            res.status(404).json({error: 'No series results found'});
+        }
+    } catch (err){
+        res.status(500).json({error: 'Error fetching series results'});
+    }
+})
+
 // Gets user by id
 // router.get('/user/:ID', (_, res) => {
 //     const id = 'ID';

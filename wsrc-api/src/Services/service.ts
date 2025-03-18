@@ -187,8 +187,20 @@ export async function checkRaceResults(){
             if (timeDifference <= tenMinutesInMilliseconds){
                 const raceData = await iRacingService.getSessionResults(result.subsession_id);
                 const sessionData = raceData.session_results.find((session: any) => session.simsession_type === 6);
+                if(sessionData.length > 0){
+                    db.updateRaceAfterResult(race, sessionData.results.length);
+                }                
                 for (const result of sessionData.results){
-                    db.addRaceResult(result.display_name, race.race_id, result.interval, result.finish_position + 1, result.incidents, result.average_lap, result.best_lap_time);
+                    var seriesPoints = 1 + sessionData.results.length - result.finish_position;
+                    if(result.best_lap_time === Math.min(...sessionData.results.map((r: any) => r.best_lap_time).filter((time: number) => time > 1))){
+                        seriesPoints++;
+                    }
+                    if(result.incidents === Math.min(...sessionData.results
+                        .filter((r: any) => r.average_lap > 1)
+                        .map((r: any) => r.incidents))){
+                        seriesPoints++;
+                    }
+                    db.addRaceResult(result.display_name, race.race_id, result.interval, result.finish_position + 1, result.incidents, result.average_lap, result.best_lap_time, seriesPoints);
                 }
                 break;
             }

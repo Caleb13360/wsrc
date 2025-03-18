@@ -8,4 +8,5 @@ export interface RaceResult {
     iracing_id: number;
     race_id: number;
     prize_money: number;
+    series_points: number;
 }

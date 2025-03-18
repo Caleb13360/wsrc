@@ -24,6 +24,7 @@ export class RaceResultDetailsComponent implements OnInit{
   shorts!: Video[];
   replay!:  Video[];
   bestLapTime!: number;
+  bestIncidentCount!: number;
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
@@ -35,7 +36,9 @@ export class RaceResultDetailsComponent implements OnInit{
           this.results=data.results;
           this.winners = this.results.filter((result)=> result.prize_money > 0);
           this.bestLapTime = this.findBestLapTime();
+          this.bestIncidentCount = this.findBestIncidentCount();
           console.log(this.bestLapTime);
+          console.log(this.bestIncidentCount);
       });
       this.apiService.getRaceVideos(id).subscribe((data)=> {
         this.videos = data.videos.map(video => ({
@@ -56,6 +59,12 @@ export class RaceResultDetailsComponent implements OnInit{
       .map(result => result.best_lap_time)
       .filter(time => time > 1);
     return validLapTimes.length > 0 ? Math.min(...validLapTimes) : 0;
+  }
+  findBestIncidentCount(): number {
+    const incidentCounts = this.results.filter(result => result.avg_lap_time > 1)
+      .map(result => result.incident_count);
+      console.log(incidentCounts[0])
+    return incidentCounts.length > 0 ? Math.min(...incidentCounts) : 0;
   }
   convertToLapTime(time: number): string {
     if(time <= 0){
@@ -132,5 +141,14 @@ getSeriesColor(series: string) {
       return '#1d4ed8'; // darker blue hex color (blue-700)
     }
     return '#a855f7'; // purple hex color
+  }
+  openInNewTab(url: string): void {
+    window.open(url, '_blank');
+  }
+  scrollToElement(elementId: string): void {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 }

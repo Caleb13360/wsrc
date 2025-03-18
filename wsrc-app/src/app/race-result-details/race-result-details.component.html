@@ -21,13 +21,13 @@
                 <p class="text-m mt-2 text-gray-300">{{ race.launch_time | date:'EEE, MMM d, y h:mma z' }}</p>
             </div>
             
-            <!-- Race Results Section -->
+            <!-- Race Results Section --> 
             <div class="mb-10">
                 
                 <!-- Winners Podium -->
-                <div *ngIf="winners!=null" class="flex flex-wrap -mx-4">
+                <div *ngIf="winners!=null" class="flex flex-wrap mx-4">
                     <!-- Second Place -->
-                    <div class="w-full md:w-1/3 px-4 mb-6 md:mb-0">
+                    <div class="w-full md:w-1/3 px-4 mb-6 md:mb-0 order-2 md:order-1">
                         <div *ngIf="winners!=null&&winners.length>1" class="bg-black bg-opacity-30 border border-[#62D1CC] rounded-lg h-full flex flex-col">
                             <div class="p-4 text-center flex flex-col justify-center h-full">
                                 <div class="text-3xl font-bold text-[#C3C3C3] mb-1">2nd</div>
@@ -43,7 +43,7 @@
                     </div>
                     
                     <!-- First Place - Taller -->
-                    <div class="w-full md:w-1/3 px-4 mb-6 md:mb-0 md:-mt-6">
+                    <div class="w-full md:w-1/3 px-4 mb-6 md:mb-0 md:-mt-6 order-1 md:order-2">
                         <div class="bg-black bg-opacity-40 border-2 border-[#FFD700] rounded-lg h-full flex flex-col">
                             <div class="bg-[#FFD700] text-center p-2 rounded-t-lg">
                                 <span class="text-black font-bold">RACE WINNER</span>
@@ -62,7 +62,7 @@
                     </div>
                     
                     <!-- Third Place -->
-                    <div class="w-full md:w-1/3 px-4">
+                    <div class="w-full md:w-1/3 px-4 order-3">
                         <div *ngIf="winners!=null&&winners.length>2" class="bg-black bg-opacity-30 border border-[#CD7F32] rounded-lg h-full flex flex-col">
                             <div class="p-4 text-center flex flex-col justify-center h-full">
                                 <div class="text-3xl font-bold text-[#CD7F32] mb-1">3rd</div>

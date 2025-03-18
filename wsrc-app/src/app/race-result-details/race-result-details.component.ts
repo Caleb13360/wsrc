@@ -10,7 +10,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-race-results',
-  imports: [CommonModule, RouterLink, MatIconModule],
+  imports: [CommonModule, MatIconModule],
   templateUrl: './race-result-details.component.html',
   styleUrl: './race-result-details.component.css',
     providers: [ApiService]

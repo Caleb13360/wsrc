@@ -3,7 +3,7 @@
 <div class="pt-0 lg:pt-30 bg-cDarkBlue flex items-center justify-center min-h-screen">
   <div class="w-9/12 aspect-[16/9] bg-cover bg-center rounded-lg pt"
     style="background-image: url('NotStreamingImageLT.jpg');">
-    <iframe *ngIf="isLive" src="https://player.twitch.tv/?channel=wsrc_official&parent=localhost" 
+    <iframe *ngIf="isLive" src="https://player.twitch.tv/?channel=wsrc_official&parent=wsrc.live" 
       frameborder="0" allowfullscreen="true" scrolling="no" height="100%" width="100%"></iframe>
 
     <div *ngIf="!isLive" class="flex items-center justify-center h-full bg-black bg-opacity-60 rounded-lg">

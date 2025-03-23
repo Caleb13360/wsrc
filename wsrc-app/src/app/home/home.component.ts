@@ -21,10 +21,17 @@ export class HomeComponent implements OnInit {
   loading: boolean = true;
   ngOnInit(): void {
     this.loading = true;
-    this.apiService.getLatestRaces(3).subscribe((data)=> {
+    this.apiService.getLatestRaces(3).subscribe(
+      (data)=> {
       this.latestRaces=data.races;  
       this.loading = false;  // Set loading to false when data is received
-    });
+    },
+  (error) => {
+        console.error('Error fetching races:', error);
+        this.latestRaces = [];  // Set to empty array on error
+        this.loading = false;   // Set loading to false on error
+      }
+  );
     this.apiService.getTotalMoney().subscribe((data)=> {this.totalPrizeAmount=data.totalPrizeAmount});
     this.apiService.isLiveStreaming().subscribe((data)=> {this.isLive=!data.includes("offline")});
   }

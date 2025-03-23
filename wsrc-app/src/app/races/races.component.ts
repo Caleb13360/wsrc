@@ -31,8 +31,15 @@ export class RacesComponent implements OnInit{
       this.intervalId = setInterval(() => {
         this.updateCountdown();
       }, 1000);
-      this.apiService.getLatestRaces(20).subscribe((data)=> {this.races=data.races;
-         this.loading = false; console.log(data.races)});
+      this.apiService.getLatestRaces(20).subscribe(
+        (data)=> {this.races=data.races;
+         this.loading = false; console.log(data.races)},
+         (error) => {
+        console.error('Error fetching races:', error);
+        this.races = [];  // Set to empty array on error
+        this.loading = false;   // Set loading to false on error
+      }
+        );
   }
 
   private updateCountdown(): void {

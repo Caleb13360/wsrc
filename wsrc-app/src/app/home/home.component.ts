@@ -18,8 +18,13 @@ export class HomeComponent implements OnInit {
   totalPrizeAmount: number = 0;
   remainingTime: string = '';
   isLive: boolean = false;
+  loading: boolean = true;
   ngOnInit(): void {
-    this.apiService.getLatestRaces(3).subscribe((data)=> {this.latestRaces=data.races});
+    this.loading = true;
+    this.apiService.getLatestRaces(3).subscribe((data)=> {
+      this.latestRaces=data.races;  
+      this.loading = false;  // Set loading to false when data is received
+    });
     this.apiService.getTotalMoney().subscribe((data)=> {this.totalPrizeAmount=data.totalPrizeAmount});
     this.apiService.isLiveStreaming().subscribe((data)=> {this.isLive=!data.includes("offline")});
   }

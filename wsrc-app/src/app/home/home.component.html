@@ -34,8 +34,15 @@
           <!-- 1x3 Grid -->
            <div class="flex-grow bg-cDarkBlue  text-cWhite font-roboto">
   <div class="flex flex-wrap justify-center">
-    <div *ngIf='!latestRaces' class=" inset-0 flex items-center justify-center bg-opacity-75">
+    <div *ngIf='loading' class=" inset-0 flex items-center justify-center bg-opacity-75">
       <div class="w-12 h-12 border-4 border-t-4 border-gray-200 border-t-blue-500 rounded-full animate-spin"></div>
+  </div>
+  <div *ngIf="!loading && latestRaces.length === 0" class="text-center">
+   <a href="https://discord.gg/FTgXdAtae8" target="_blank">
+  <button class="bg-cBlue text-cWhite text-1xl sm:text-2xl py-4 px-20 sm:px-28 rounded-md font-semibold font-roboto tracking-tighter hover:bg-cWhite hover:text-cBlack transition-all duration-300 ease-linear hover:px-36">
+    Join Discord for New Races
+  </button>
+</a>
   </div>
     <div *ngFor="let race of latestRaces" class="p-4" style="width: 400px;"  [routerLink]="['/race', race.race_id]">
       <div class="relative group cursor-pointer">
@@ -119,7 +126,7 @@
        
         
         <!-- View More Races Button -->
-        <div class="flex justify-center mt-6">
+        <div  *ngIf="!loading && latestRaces.length !== 0" class="flex justify-center mt-6">
           <button routerLink="/races" class="bg-cBlue text-cWhite text-1xl sm:text-2xl py-4 px-20 sm:px-28 rounded-md font-semibold font-roboto tracking-tighter hover:bg-cWhite hover:text-cBlack transition-all duration-300 
                           ease-linear hover:px-36">Show more races</button>
         </div>

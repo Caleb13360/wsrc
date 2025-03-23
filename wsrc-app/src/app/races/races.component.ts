@@ -23,13 +23,16 @@ export class RacesComponent implements OnInit{
     seconds: '?'
   };
   intervalId: any;
+  loading: boolean = true;
 
   ngOnInit(): void {
+     this.loading = true;
     this.updateCountdown();
       this.intervalId = setInterval(() => {
         this.updateCountdown();
       }, 1000);
-      this.apiService.getLatestRaces(20).subscribe((data)=> {this.races=data.races; console.log(data.races)});
+      this.apiService.getLatestRaces(20).subscribe((data)=> {this.races=data.races;
+         this.loading = false; console.log(data.races)});
   }
 
   private updateCountdown(): void {

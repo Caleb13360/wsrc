@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   loading: boolean = true;
   ngOnInit(): void {
     this.loading = true;
-    this.apiService.getLatestRaces(3).subscribe(
+    this.apiService.getLatestRaces(2).subscribe(
       (data)=> {
       this.latestRaces=data.races;  
       this.loading = false;  // Set loading to false when data is received

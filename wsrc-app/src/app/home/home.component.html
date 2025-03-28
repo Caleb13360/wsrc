@@ -76,7 +76,8 @@
     
         <!-- Race Cards -->
         <div class="bg-cDarkBlue py-6 lg:py-10 mx-10 md:mx-40 ">
-          <div class="py-8 bg-[#272730] rounded-lg"> <!-- Title -->
+          <div class="py-8 bg-[#272730] rounded-xl"> 
+            <!-- Title -->
           <div class="space-y-2 mb-8 px-6 lg:px-20 ">
             <p class="text-cWhite text-3xl sm:text-5xl font-roboto-condensed font-bold tracking-tighter">Upcoming WSRC Races</p>
             <p class="text-cWhite text-md sm:text-2xl font-roboto-condensed tracking-tighter">To view upcoming races become a member of our community and join
@@ -182,49 +183,67 @@ the official WSRC discord server!</p>
     </div>
     
     <!-- Total Won -->
-    <div class="bg-cGreen w-full h-78  flex items-center justify-center">
+     <div class="  mx-10 md:mx-40 pt-6 ">
+      <div class=" border-cGreen border-solid border-2 rounded-xl">
       <div class="flex flex-col justify-center items-center ">
-        <div class="lg:text-10xl text-8xl mt-8 font-bold font-roboto-condensed tracking-tighter">${{totalPrizeAmount}}</div>
-        <div class="text-2xl mb-8 font-roboto tracking-tighter">Total Cash Prizes Won By Racers</div>
+        <div class="lg:text-10xl text-7xl text-cGreen mt-4 font-bold font-roboto-condensed tracking-tighter">${{totalPrizeAmount}}</div>
+        <div class="text-1xl lg:text-2xl mb-4 font-roboto text-cGreen tracking-tighter">Total Cash Prizes Won By Racers</div>
       </div>
-    </div>
+      </div>
+     </div>
+
+     <div class="flex w-full px-10 md:px-40 justify-center py-2 gap-2">
+  <div class="w-1/2 border-2 rounded-xl border-white p-4 text-white text-center">
+      <div class="text-white text-4xl font-bold">12</div>
+        <div class="text-white text-sm mt-1">Completed Races</div>
+  </div>
+  <div class="w-1/2 border-2 rounded-xl border-white p-4 text-white text-center">
+   <div class="text-white text-4xl font-bold">860</div>
+        <div class="text-white text-sm mt-1">WSRC Discord Members</div>
+  </div>
+</div>
+
+    
+    
+     
     <!-- Cash Prizes -->
-    <div class="bg-cDarkBlue flex flex-col lg:flex-row my-12">
+     <div class="bg-[#272730] flex flex-col my-10 mx-10 md:mx-40 rounded-xl">
+ <div class="flex flex-col lg:flex-row my-10 rounded-xl">
+
+       
       <!-- Left Side -->
-      <div class="w-full lg:w-1/2 flex flex-col justify-center items-left px-4 lg:pl-48 lg:pr-20 py-8">
-        <h1 class="text-cWhite text-5xl lg:text-6xl mb-6 font-roboto-condensed tracking-tighter font-bold">
+      <div class="w-full lg:w-1/2 flex flex-col justify-center items-left px-6 lg:pl-20 lg:pr-20 py-6">
+        <h1 class="text-cWhite text-4xl lg:text-6xl mb-6 font-roboto-condensed tracking-tighter font-bold">
           Cash prizes for winners
         </h1>
-        <h2 class="text-cWhite text-lg lg:text-2xl md:mb-4 mb-0 font-roboto-condensed tracking-tighter">
-          Our weekly races offer payouts to the top finishers, rewarding your speed and skill. Whether you're aiming for
-          first
-          place or just striving to make the top 6, every race is an opportunity to earn.
+        <h2 class="text-cWhite text-md lg:text-2xl md:mb-4 mb-0 font-roboto-condensed tracking-tighter">
+          Our weekly races offer payouts to the top finishers, rewarding your speed and skill. 
           <br>
-          With prize amounts scaled to the number of participants, racing has never been more rewarding. Join now and put
-          your
-          talent to the test!
+          With prize amounts scaled to the number of participants, racing has never been more rewarding. 
         </h2>
       </div>
       <!-- Right Side -->
-      <div class="w-full lg:w-1/2 flex flex-col justify-center items-start px-4 lg:px-40 md:py-8 py-0 space-y-4">
-        <div class="border border-cGreen bg-cGreen w-full h-16 flex items-center justify-between px-4 rounded-md">
-          <span class="text-cDarkBlue font-roboto tracking-tighter">1st</span>
-          <span class="text-cDarkBlue mx-auto font-roboto tracking-tighter font-bold text-2xl lg:text-3xl">$100 USD</span>
+      <div class="w-full lg:w-1/2 flex flex-col justify-center items-start px-6 lg:px-20 md:py-8 pb-6 space-y-2">
+        <div class="border border-cGreen w-full h-16 flex items-center justify-between px-4 rounded-md group ">
+          <span class="text-cGreen font-roboto tracking-tighter ">1st</span>
+          <span class="text-cGreen mx-auto font-roboto tracking-tighter font-bold text-2xl lg:text-3xl ">$100 USD</span>
         </div>
         <div
-          class="border border-cGreen w-full h-16 flex items-center justify-between px-4 rounded-md group hover:bg-cGreen transition-all duration-200 ease-linear">
-          <span class="text-cGreen font-roboto tracking-tighter group-hover:text-cBlack">2nd</span>
+          class="border border-white w-full h-16 flex items-center justify-between px-4 rounded-md group ">
+          <span class="text-white font-roboto tracking-tighter ">2nd</span>
           <span
-            class="text-cGreen mx-auto font-roboto tracking-tighter font-bold text-2xl lg:text-3xl group-hover:text-cBlack">$60
+            class="text-white mx-auto font-roboto tracking-tighter font-bold text-2xl lg:text-3xl ">$60
             USD</span>
         </div>
         <div
-          class="border border-cGreen w-full h-16 flex items-center justify-between px-4 rounded-md group hover:bg-cGreen transition-all duration-200 ease-linear">
-          <span class="text-cGreen font-roboto tracking-tighter group-hover:text-cBlack">3rd</span>
+          class="border border-white w-full h-16 flex items-center justify-between px-4 rounded-md group ">
+          <span class="text-white font-roboto tracking-tighter ">3rd</span>
           <span
-            class="text-cGreen mx-auto font-roboto tracking-tighter font-bold text-2xl lg:text-3xl group-hover:text-cBlack">$40
+            class="text-white mx-auto font-roboto tracking-tighter font-bold text-2xl lg:text-3xl ">$40
             USD</span>
         </div>
+       
+       
         <!-- <div routerLink="/events/RPRewards"
           class="border border-cGrey w-full h-16 flex items-center justify-between px-4 rounded-md group hover:bg-cOrange hover:border-cOrange transition-all duration-200 ease-linear">
           <span class="text-cGrey font-roboto tracking-tighter group-hover:text-cBlack">4th</span>
@@ -251,7 +270,18 @@ the official WSRC discord server!</p>
           accordingly.
         </p> -->
       </div>
+      
     </div>
+     <div class="w-full flex justify-center pb-12">  
+          <a href="https://discord.gg/FTgXdAtae8" target="_blank">
+          <button class="bg-white text-black text-1xl sm:text-2xl py-3 px-12 sm:px-28 rounded-sm font-semibold font-roboto tracking-tighter hover:bg-black hover:text-white transition-all duration-300 ease-linear ">
+            Join Discord to Start Racing!
+          </button>
+          </a>
+        </div>
+     </div>
+   
+    
 
     <!-- <div class="p-4 lg:p-10 pt-16 sm:pt-0 bg-cDarkBlue">
       <div class="w-full aspect-[16/9] bg-cover bg-center rounded-lg"
@@ -272,7 +302,7 @@ the official WSRC discord server!</p>
       </div> 
     </div> -->
     <!-- Conor Testimonial -->
-<div class="flex flex-col md:flex-row bg-black text-white p-6 py-16 ">
+<div class="flex flex-col md:flex-row bg-cDarkBlue text-white p-6 py-6 ">
   <div class="w-full md:w-1/2 flex items-center justify-center">
     <video class="w-full max-w-md h-auto aspect-square object-cover rounded-lg" controls>
       <source src="/conor.mov" type="video/mp4" />
@@ -291,7 +321,7 @@ the official WSRC discord server!</p>
   </div>
 </div>
 <!-- Elder Testimonial -->
-<div class="flex flex-col md:flex-row bg-black text-white p-6 py-16 ">
+<div class="flex flex-col md:flex-row bg-cDarkBlue text-white p-6 py-6 ">
   <div class="w-full md:w-1/2 flex items-center justify-center">
       <img class="w-full max-w-md h-auto aspect-square object-cover rounded-lg"
     src="/elderSquare.jpg" 
@@ -299,7 +329,7 @@ the official WSRC discord server!</p>
    
      />
   </div>
-  <div class="w-full md:w-1/2 flex flex-col justify-center p-6 pr-16">
+  <div class="w-full md:w-1/2 flex flex-col justify-center p-6 py-6">
     <blockquote class="italic text-xl border-l-4 border-[#C3903B] pl-4">
       "Winning $100 at WSRC was an incredible experience! The racing was fast, fair, and full of adrenaline. Whether you're here for fun or looking to test your skills against top competition, there’s something for everyone.
        <br><br>
@@ -313,7 +343,7 @@ the official WSRC discord server!</p>
   </div>
 </div>
    <!-- Juan Testimonial -->
-   <div class="flex flex-col md:flex-row bg-black text-white p-6 py-16 ">
+   <div class="flex flex-col md:flex-row bg-cDarkBlue text-white p-6 ">
     <div class="w-full md:w-1/2 flex items-center justify-center">
       <video class="w-full max-w-md h-auto aspect-square object-contain rounded-lg" controls>
         <source src="/juanjuan.mp4" type="video/mp4" />
@@ -336,7 +366,7 @@ the official WSRC discord server!</p>
     </div>
   </div>
   <!-- Montaranella Testimonial -->
-<div class="flex flex-col md:flex-row bg-black text-white p-6 py-16 ">
+<div class="flex flex-col md:flex-row bg-cDarkBlue text-white p-6 py-16 ">
   <div class="w-full md:w-1/2 flex items-center justify-center">
       <img class="w-full max-w-md h-auto aspect-square object-cover rounded-lg"
     src="/Paolo.png" 

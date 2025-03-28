@@ -191,7 +191,7 @@ export async function checkRaceResults(){
                     db.updateRaceAfterResult(race, sessionData.results.length);
                 }                
                 for (const result of sessionData.results){
-                    var seriesPoints = 1 + sessionData.results.length - result.finish_position;
+                    var seriesPoints = sessionData.results.length - result.finish_position;
                     if(result.best_lap_time === Math.min(...sessionData.results.map((r: any) => r.best_lap_time).filter((time: number) => time > 1))){
                         seriesPoints++;
                     }

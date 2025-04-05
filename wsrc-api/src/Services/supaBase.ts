@@ -340,7 +340,8 @@ export class Supabase {
     }
     async getSeriesResults(series: string): Promise<SeriesResult[]> {
         // Single query with direct join to Series table
-        const { data, error } = await this.sb
+        let data, error;
+        const query = this.sb
             .from('RaceResult')
             .select(`
                 iracing_id,
@@ -352,7 +353,13 @@ export class Supabase {
                     series_id, 
                     Series!inner(name)
                 )
-            `).eq('Races.Series.name', series);
+            `);
+        if (series === 'all') {
+            ({ data, error } = await query);
+        } else {
+            ({ data, error } = await query.eq('Races.Series.name', series));
+        }
+        
     
         if (!data || data.length === 0) {
             return [];

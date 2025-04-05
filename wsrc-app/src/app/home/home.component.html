@@ -144,8 +144,7 @@
             <!-- Title -->
           <div class="space-y-2 mb-8 px-4 md:px-10 lg:px-20 ">
             <p class="text-cWhite text-4xl lg:text-5xl font-roboto-condensed font-bold tracking-tighter">Upcoming WSRC Races</p>
-            <p class="text-cWhite text-md sm:text-2xl font-roboto-condensed tracking-tighter">To view upcoming races become a member of our community and join
-the official WSRC discord server!</p>
+            <p class="text-cWhite text-md sm:text-2xl font-roboto-condensed tracking-tighter">Ready to race? Click a race to view event details and secure your seat on the grid!</p>
           </div>
         
           <!-- 1x3 Grid -->
@@ -257,14 +256,30 @@ the official WSRC discord server!</p>
      </div>
 
      <div class="flex w-full px-4 md:px-20 lg:px-40 justify-center py-2 gap-2">
-  <div class="w-1/2 border-2 rounded-xl border-white p-4 text-white text-center">
-      <div class="text-white text-4xl font-bold">{{totalRaces==0?'?':totalRaces}}</div>
-        <div class="text-white text-sm mt-1">Completed Races</div>
-  </div>
-  <div class="w-1/2 border-2 rounded-xl border-white p-4 text-white text-center">
-   <div class="text-white text-4xl font-bold">{{discordMembers==0?'?':discordMembers}}</div>
-        <div class="text-white text-sm mt-1">WSRC Members</div>
-  </div>
+ 
+  <button routerLink="/results" target="_blank" class="w-1/2 border-2 rounded-xl border-white p-4 text-white text-center cursor-pointer group flex flex-col items-center justify-center transition-all duration-300 ease-linear hover:bg-white hover:text-black">
+    <div class="text-white text-4xl font-bold group-hover:hidden">
+      {{ totalRaces == 0 ? '?' : totalRaces }}
+    </div>
+    <div class="text-white text-sm mt-1 group-hover:hidden">Completed Races</div>
+    <div class="hidden group-hover:flex flex-col items-center justify-center text-white text-2xl font-semibold">
+      <button class=" text-black text-1xl lg:text-2xl py-3 px-12 sm:px-28 rounded-sm font-semibold font-roboto tracking-tighter">
+        View Past Races
+      </button>
+    </div>
+  </button>
+  <a href="https://discord.gg/FTgXdAtae8" target="_blank" class="w-1/2 border-2 rounded-xl border-white p-4 text-white text-center cursor-pointer group flex flex-col items-center justify-center transition-all duration-300 ease-linear hover:bg-white hover:text-black">
+    <div class="text-white text-4xl font-bold group-hover:hidden">
+      {{ discordMembers == 0 ? '?' : discordMembers }}
+    </div>
+    <div class="text-white text-sm mt-1 group-hover:hidden">WSRC Members</div>
+    <div class="hidden group-hover:flex flex-col items-center justify-center text-white text-2xl font-semibold">
+      <button class=" text-black text-1xl lg:text-2xl py-3 px-12 sm:px-28 rounded-sm font-semibold font-roboto tracking-tighter">
+        Join Our Discord
+      </button>
+    </div>
+  </a>
+ 
 </div>
 
     

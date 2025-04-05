@@ -225,6 +225,31 @@ router.get('/series/:series/results', async (req, res) => {
         res.status(500).json({error: 'Error fetching series results'});
     }
 })
+router.get('/totalRaces', async (req, res) => {
+    try{
+        const totalRaces = await service.getTotalRaces();
+        if(totalRaces!=0){
+            res.json({totalRaces: totalRaces});
+        }else{
+            res.status(404).json({error: 'Total number of races not found'});
+        }
+    } catch (err){
+        res.status(500).json({error: 'Error fetching total number of races'});
+    }
+})
+
+router.get('/discordMemberCount', async (req, res) => {
+    try {
+        const memberCount = await service.getDiscordMemberCount();
+        if(memberCount!=0){
+            res.json({discordMemberCount: memberCount});
+        }else{
+            res.status(404).json({error: 'Discord member count not found'});
+        }
+    } catch(err){
+        res.status(500).json({error: 'Error discord member count'});
+    }
+})
 
 // Gets user by id
 // router.get('/user/:ID', (_, res) => {

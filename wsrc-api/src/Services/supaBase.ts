@@ -89,7 +89,6 @@ export class Supabase {
         var matcherinoData;
         if(data.prize_money==null||data.participants==null){
             matcherinoData = await this.getMatcherinoRaceData(data.matcherino_id);
-            console.log('fetch');
         }
         const race: Race = {
             race_id: data.race_id,
@@ -396,10 +395,29 @@ export class Supabase {
         console.error('Error fetching total prize amount:', error);
         return 0;
     }
-    console.log(data);
     return data[0]?.sum || 0;
     }
 
-    // async getTransactions
+    async getTotalRaces(): Promise<Number>{
+        const { data, count, error } = await this.sb
+            .from('Races')
+            .select('*', { count: 'exact', head: true })
+            .not('participants', 'is', null);
+            if (error || count==null) {
+                console.error('Error fetching total prize amount:', error);
+                return 0;
+            }
+            return count;
+    }
+
+    async getDiscordMemberCount(): Promise<Number>{
+        try {
+            const response = await axios.get(`https://discord.com/api/v9/invites/FTgXdAtae8?with_counts=true&with_expiration=true`);
+            return response.data['approximate_member_count'];
+          } catch (error) {
+            console.error('Error fetching discord data:', error);
+            return 0;
+          }
+    }
 
 }

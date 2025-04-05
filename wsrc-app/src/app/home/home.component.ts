@@ -19,9 +19,11 @@ export class HomeComponent implements OnInit {
   remainingTime: string = '';
   isLive: boolean = false;
   loading: boolean = true;
+  totalRaces: Number = 0;
+  discordMembers: Number = 0;
   ngOnInit(): void {
     this.loading = true;
-    this.apiService.getLatestRaces(3).subscribe(
+    this.apiService.getLatestRaces(2).subscribe(
       (data)=> {
       this.latestRaces=data.races;  
       this.loading = false;  // Set loading to false when data is received
@@ -34,6 +36,8 @@ export class HomeComponent implements OnInit {
   );
     this.apiService.getTotalMoney().subscribe((data)=> {this.totalPrizeAmount=data.totalPrizeAmount});
     this.apiService.isLiveStreaming().subscribe((data)=> {this.isLive=!data.includes("offline")});
+    this.apiService.getTotalRaces().subscribe((data)=> this.totalRaces=data.totalRaces);
+    this.apiService.getTotalDiscordMembers().subscribe((data)=> this.discordMembers=data.discordMemberCount);
   }
 }
  

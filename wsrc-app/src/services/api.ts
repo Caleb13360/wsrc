@@ -66,5 +66,13 @@ export class ApiService {
     return this.httpClient.get<{videos: Video[]}>(`${this.apiUrl}/race/${id}/videos`)
   }
   getSeriesResults(series: string){
-    return this.httpClient.get<{results: SeriesResult[]}>(`${this.apiUrl}/series/${series}/results`)  }
+    return this.httpClient.get<{results: SeriesResult[]}>(`${this.apiUrl}/series/${series}/results`)  
+  }
+  getTotalRaces(){
+    return this.httpClient.get<{totalRaces: number}>(`${this.apiUrl}/totalRaces`)
+  }
+  getTotalDiscordMembers(){
+    return this.httpClient.get<{discordMemberCount: number}>(`${this.apiUrl}/discordMemberCount`)
+  }
 }
+

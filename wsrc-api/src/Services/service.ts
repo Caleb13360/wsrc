@@ -130,6 +130,16 @@ export class Service{
         return results;
     }
 
+    async getTotalRaces(): Promise<Number>{
+        const totalRaces = await db.getTotalRaces();
+        return totalRaces;
+    }
+
+    async getDiscordMemberCount(): Promise<Number>{
+        const memberCount = db.getDiscordMemberCount();
+        return memberCount
+    }
+
     async getRaceVideos(id: number): Promise<Video[]>{
         const videos = await db.getRaceVideos(id);
         return videos;

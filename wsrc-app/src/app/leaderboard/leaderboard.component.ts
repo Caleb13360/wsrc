@@ -18,18 +18,15 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class LeaderboardComponent implements OnInit{
   constructor(private route: ActivatedRoute, private apiService: ApiService, private sanitizer: DomSanitizer) {}
-  SeriesResults: SeriesResult[][] = [[],[],[]];
+  SeriesResults: SeriesResult[] = [];
   selectedSeries: number = 0;
   ngOnInit(): void {
-    this.apiService.getSeriesResults('Rookie').subscribe((data)=> {
-      this.SeriesResults[0]=data.results;
+    this.apiService.getSeriesResults('all').subscribe((data)=> {
+      this.SeriesResults=data.results;
     });
-    this.apiService.getSeriesResults('Amateur').subscribe((data)=> {
-      this.SeriesResults[1]=data.results;
-    });
-    this.apiService.getSeriesResults('Challenger').subscribe((data)=> {
-      this.SeriesResults[2]=data.results;
-    });
+    // this.apiService.getSeriesResults('Challenger').subscribe((data)=> {
+    //   this.SeriesResults[2]=data.results;
+    // });
   }
   selectSeries(series: number){
     this.selectedSeries = series;

@@ -174,6 +174,33 @@ export class Service{
     // getUpcomingEvents(){
     //     return 'upcoming events';
     // }
+
+    //ADMIN FUNCTIONS
+    async getAllRaces(): Promise<Race[]> {
+        return await db.getAllRaces();
+    }
+
+    // Get all race results
+    async getAllResults(): Promise<RaceResult[]> {
+        return await db.getAllResults();
+    }
+
+    // Create a new race
+    async createRace(race: Race): Promise<Race> {
+        const created = await db.createRace(race);
+        return created;
+    }
+
+    // Update a race
+    async updateRace(race: Race): Promise<void> {
+        const updated = await db.updateRace(race);
+        return;
+    }
+
+    // Delete a race
+    async deleteRace(id: number): Promise<void> {
+        await db.deleteRace(id);
+    }
 }
 export async function checkRaceResults(){
     const uncheckedRaces = await db.getUnfetchedRaces();

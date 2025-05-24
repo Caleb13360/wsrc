@@ -47,6 +47,7 @@ export interface Race {
     race_series_name: string;
     race_irating_min: number;
     race_irating_max: number;
+    race_status: string;
 
     // //prize pool
     // prize_pool_id: number;

@@ -1,0 +1,153 @@
+<p-table
+    [value]="apiService.races()"
+>
+    <ng-template #caption>
+        <div class="flex items-center justify-between">
+            <h5 class="m-0">Manage Races</h5>
+            <p-button label="Add Race" icon="pi pi-plus" severity="secondary" class="mr-2" (click)="createRace()"/>
+        </div>
+    </ng-template>
+    <ng-template #header>
+        <tr>
+            <th pSortableColumn="race_id" style="min-width:4rem">
+                ID
+                <p-sortIcon field="race_id" />
+            </th>
+            <th pSortableColumn="track_name" style="min-width: 12rem">
+                Track
+                <p-sortIcon field="track_name" />
+            </th>
+            <th pSortableColumn="car" style="min-width: 12rem">
+                Car
+                <p-sortIcon field="car" />
+            </th>
+            <th pSortableColumn="launch_time" style="min-width: 6rem">
+                Date
+                <p-sortIcon field="launch_time" />
+            </th>
+            <th style="min-width: 6rem">
+                Time
+            </th>
+            <th pSortableColumn="participants" style="min-width: 8rem">
+                Participants
+                <p-sortIcon field="participants" />
+            </th>
+            <th pSortableColumn="entry_fee" style="min-width: 10rem">
+                Entry Fee
+                <p-sortIcon field="entry_fee" />
+            </th>
+            <th pSortableColumn="prize_pool" style="min-width: 12rem">
+                Prize Pool
+                <p-sortIcon field="prize_pool" />
+            </th>
+            <th pSortableColumn="race_status" style="min-width: 12rem">
+                Status
+                <p-sortIcon field="race_status" />
+            </th>
+            <th style="min-width: 6rem"></th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-race>
+        <tr>
+            <td>{{ race.race_id }}</td>
+            <td>{{ race.track_name }}</td>
+            <td>{{ race.car }}</td>
+            <td>{{ race.launch_time | date:' MMM d' }}</td>
+            <td>{{ race.launch_time | date:' h:mma' }}</td>
+            <td>{{ race.participants }}</td>
+            <td>
+                {{ race.entry_fee === 0 ? '_' : (race.entry_fee | currency:'USD':'symbol':'1.0-0') }}
+            </td>
+            <td>{{ (race.prize_pool | number:'1.0-0') | currency:'USD':'symbol':'1.0-0' }}</td>
+            <td>
+                <p-tag [value]="race.race_status" [severity]="getSeverity(race.race_status)" />
+            </td>
+            <td>
+                <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editRace(race)" />
+                <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deleteRace(race)" />
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-dialog [(visible)]="raceDialog" [style]="{ width: '450px' }" header="Race Details" [modal]="true">
+    <ng-template #content>
+        <div class="flex flex-col gap-6">
+            <div>{{race.race_name}}</div>
+            <div>
+                <label for="launch_time" class="block font-bold mb-3">Start Time</label>
+                <div *ngIf="race.race_status=='Scheduled'; else showTime">
+                    <p-datepicker inputId="launch_time" [(ngModel)]="race.launch_time" [showTime]="true" [hourFormat]="'12'" />
+                </div>
+                <ng-template #showTime>
+                    <input pInputText [value]="race.launch_time | date:'MMM d, y h:mma'" readonly/>
+                </ng-template>
+            </div>
+            <div>
+                <label for="name" class="block font-bold mb-3">Race Name</label>
+                <input type="text" pInputText id="name" [(ngModel)]="race.race_name" required autofocus fluid />
+                <small class="text-red-500" *ngIf="!race.race_name">Race Name is required.</small>
+            </div>
+            <div>
+                <label for="name" class="block font-bold mb-3">Race Name</label>
+                <input type="text" pInputText id="name" [(ngModel)]="race.race_name" required autofocus fluid />
+                <small class="text-red-500" *ngIf="!race.race_name">Race Name is required.</small>
+            </div>
+            <!-- 
+            <div>
+                <label for="inventoryStatus" class="block font-bold mb-3">Inventory Status</label>
+                <p-select [(ngModel)]="product.inventoryStatus" inputId="inventoryStatus" [options]="statuses" optionLabel="label" optionValue="label" placeholder="Select a Status" fluid />
+            </div>
+
+            <div>
+                <span class="block font-bold mb-4">Category</span>
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="flex items-center gap-2 col-span-6">
+                        <p-radiobutton id="category1" name="category" value="Accessories" [(ngModel)]="product.category" />
+                        <label for="category1">Accessories</label>
+                    </div>
+                    <div class="flex items-center gap-2 col-span-6">
+                        <p-radiobutton id="category2" name="category" value="Clothing" [(ngModel)]="product.category" />
+                        <label for="category2">Clothing</label>
+                    </div>
+                    <div class="flex items-center gap-2 col-span-6">
+                        <p-radiobutton id="category3" name="category" value="Electronics" [(ngModel)]="product.category" />
+                        <label for="category3">Electronics</label>
+                    </div>
+                    <div class="flex items-center gap-2 col-span-6">
+                        <p-radiobutton id="category4" name="category" value="Fitness" [(ngModel)]="product.category" />
+                        <label for="category4">Fitness</label>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-6">
+                    <label for="price" class="block font-bold mb-3">Entry Fee</label>
+                    <p-inputnumber id="price" [(ngModel)]="race.entry_fee" mode="currency" currency="USD" locale="en-US" fluid [disabled]="race.race_status!='Scheduled'" />
+                </div>
+                <div class="col-span-6">
+                    <label for="quantity" class="block font-bold mb-3">Entry Cut</label>
+                    <p-inputnumber id="quantity" [(ngModel)]="race.entry_cut" mode="currency" currency="USD" locale="en-US" fluid [disabled]="race.race_status!='Scheduled'"/>
+                </div>
+            </div>
+            <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-6">
+                    <label for="price" class="block font-bold mb-3">Pot Bonus</label>
+                    <p-inputnumber id="price" [(ngModel)]="race.prize_pool_pot" mode="currency" currency="USD" locale="en-US" fluid [disabled]="race.race_status!='Scheduled'"/>
+                </div>
+                <div class="col-span-6">
+                    <label for="quantity" class="block font-bold mb-3">Current Prize Pool</label>
+                    <p-inputnumber id="quantity" [(ngModel)]="race.prize_pool" mode="currency" currency="USD" locale="en-US" fluid [disabled]="true"/>
+                </div>
+            </div>  
+        </div>
+    </ng-template>
+
+    <ng-template #footer>
+        <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
+        <p-button label="Save" icon="pi pi-check" (click)="saveRace()" />
+    </ng-template>
+</p-dialog>
+<p-toast></p-toast>
+<p-confirmdialog [style]="{ width: '450px' }" />

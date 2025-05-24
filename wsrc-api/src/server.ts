@@ -9,7 +9,7 @@ export const app = express();
 export let httpServer: ReturnType<typeof http.createServer>;
 
 export const Main = () => {
-    const allowedOrigins = ['http://localhost:4200', 'http://170.64.251.251:8080'];
+    const allowedOrigins = ['http://localhost:4200', 'http://localhost:4300', 'http://170.64.251.251:8080'];
     app.use((req, res, next) => {
         const origin: string | undefined = req.headers.origin;
         if (origin && allowedOrigins.includes(origin)) {

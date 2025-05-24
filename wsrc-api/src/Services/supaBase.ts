@@ -87,8 +87,21 @@ export class Supabase {
       } 
     async generateRaceFromData(data: any){
         var matcherinoData;
+        var raceStatus = 'Completed';
+        const now = new Date();
+        const launchTime = new Date(data.launch_time);
+        const duration = 60 * data.RaceDetails.event_duration;
+
+        if (now < launchTime) {
+            raceStatus ='Scheduled';
+        } else if (now < new Date(launchTime.getTime() + duration)) {
+            raceStatus = 'In Progress';
+        }
         if(data.prize_money==null||data.participants==null){
             matcherinoData = await this.getMatcherinoRaceData(data.matcherino_id);
+            if (raceStatus === 'Completed' && matcherinoData['body']['playerPoolSize'] < 3) {
+                raceStatus = 'Cancelled';
+            }
         }
         const race: Race = {
             race_id: data.race_id,
@@ -139,7 +152,8 @@ export class Supabase {
             race_series_id: data.series_id,
             race_series_name: data.Series.name,
             race_irating_min: data.Series.irating_min,
-            race_irating_max: data.Series.irating_max
+            race_irating_max: data.Series.irating_max,
+            race_status: raceStatus
         };
         return race;
     }
@@ -425,6 +439,103 @@ export class Supabase {
             console.error('Error fetching discord data:', error);
             return 0;
           }
+    }
+
+    async getAllRaces(): Promise<Race[]> {
+        const { data, error } = await this.sb
+            .from('Races')
+            .select(`
+                *,
+                RaceWeather(*),
+                RaceDetails(*),
+                _Track(*),
+                Series(*)
+            `);
+
+        if (error) {
+            console.error('Error fetching all races:', error);
+            return [];
+        }
+        return this.generateRacesFromData({ data });
+    }
+
+    async getAllResults(): Promise<RaceResult[]> {
+        const { data, error } = await this.sb
+            .from('RaceResult')
+            .select(`*`);
+
+        if (error) {
+            console.error('Error fetching all results:', error);
+            return [];
+        }
+        return this.generateRaceResultsFromData(data);
+    }
+
+    async createRace(race: Race): Promise<Race> {
+        const { data, error } = await this.sb
+            .from('Races')
+            .insert([race])
+            .select(`
+                *,
+                RaceWeather(*),
+                RaceDetails(*),
+                _Track(*),
+                Series(*)
+            `)
+            .single();
+
+        if (error) {
+            console.error('Error creating race:', error);
+            throw error;
+        }
+        return this.generateRaceFromData(data);
+    }
+
+    async updateRace(race: Race): Promise<void> {
+        const {
+            race_id,
+            race_name,
+            launch_time,
+            entry_fee,
+            entry_cut,
+            matcherino_id,
+            matcherino_image_id,
+            prize_pool_pot,
+        } = race;
+        console.log(race_id, race_name)
+        
+        const { data, error } = await this.sb
+            .from('Races')
+            .update({
+                race_name
+                // launch_time,
+                // entry_fee,
+                // entry_cut,
+                // matcherino_id,
+                // matcherino_image_id,
+                // prize_pool_pot
+            })
+            .eq('race_id', race_id)
+            .select(`*`);
+        console.log('Data after update:', data);
+        console.log('Error after update:', error);
+        if (error) {
+            console.error('Error updating race:', error);
+            throw error;
+        }
+        return;
+    }
+
+    async deleteRace(id: number): Promise<void> {
+        const { error } = await this.sb
+            .from('Races')
+            .delete()
+            .eq('race_id', id);
+
+        if (error) {
+            console.error('Error deleting race:', error);
+            throw error;
+        }
     }
 
 }

@@ -279,4 +279,45 @@ router.get('/discordMemberCount', async (req, res) => {
 //     res.json({events: service.getUpcomingEvents()});
 // });
 
+///ADMIN ROUTES
+router.get('/admin/race/all', async (req, res) => {
+    try {
+        const races = await service.getAllRaces();
+        res.json({ races });
+    } catch (err) {
+        res.status(500).json({ error: 'Error fetching all races' });
+    }
+});
+router.get('/admin/race/results/all', async (req, res) => {
+    try {
+        const results = await service.getAllResults();
+        res.json({ results });
+    } catch (err) {
+        res.status(500).json({ error: 'Error fetching all results' });
+    }
+});
+router.post('/admin/race/create', async (req, res) => {
+    try {
+        const race = await service.createRace(req.body);
+        res.status(201).json(race);
+    } catch (err) {
+        res.status(500).json({ error: 'Error creating race' });
+    }
+});
+router.put('/admin/race/update/:id', async (req, res) => {
+    try {
+        await service.updateRace(req.body);
+        res.json({ success: true });
+    } catch (err) {
+        res.status(500).json({ error: 'Error updating race' });
+    }
+});
+router.delete('/admin/race/delete/:id', async (req, res) => {
+    try {
+        await service.deleteRace(Number(req.params.id));
+        res.json({ success: true });
+    } catch (err) {
+        res.status(500).json({ error: 'Error deleting race' });
+    }
+});
 export default router;

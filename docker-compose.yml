@@ -23,3 +23,15 @@ services:
       - ./wsrc-api:/app/wsrc-api
       - /app/wsrc-api/node_modules
       - /app/wsrc-api/dist
+  wsrc-admin:
+    build:
+      context: .
+      dockerfile: ./wsrc-admin/Dockerfile.dev
+    image: wsrc-admin:dev
+    ports:
+      - "4300:4200"
+    volumes:
+      - ./wsrc-admin:/app/wsrc-admin
+      - /app/wsrc-admin/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true

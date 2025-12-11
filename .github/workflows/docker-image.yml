@@ -1,8 +1,9 @@
-name: Build and Push Docker Images to Docker Hub
+# DISABLED - Old VPS deployment workflow
+# To re-enable, change workflow_dispatch to push trigger on production branch
+name: Build and Push Docker Images to Docker Hub (DISABLED)
+
 on:
-  push:
-    branches:
-      - production
+  workflow_dispatch:  # Manual trigger only
 
 jobs:
   build:
@@ -36,7 +37,7 @@ jobs:
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/wsrc:api -f ./wsrc-api/Dockerfile .
           docker push ${{ secrets.DOCKER_USERNAME }}/wsrc:api
-          
+
       - name: Build and push wsrc-nginx
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/wsrc:nginx -f ./wsrc-nginx/Dockerfile .
